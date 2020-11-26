@@ -3,27 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>three，three，three~~ | baba童鞋的博客</title>
+  <title>basic.rce2 | baba童鞋的博客</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天，我的课有点多，从早上八点上到晚上六点半，还有高数作业没有写完。。。所以只做了道简单的web题  我是在bugku上做的一道题 —— 快让他停下来。。。。  具体wp如下  我打开网址，发现它一直在加载，加载好又重新接着加载下一个页面，没完没了！    灵机一动，bp抓包，点击send    额，啥也没有。。根据情况，他应该有好几个页面，那就再多点几下send    果然，flag出现了！">
+  <meta name="description" content="今天写了rce基础题，题目如下    根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。  那我们就要绕过cat等内容  我们通过构造？Rem&#x3D;system(“Is”)查看目录文件（i是大写，因为结尾的i是不区分大小写，可以执行此命令，得到文件名    我们可通过编码绕过，输入以下get命令：index.php?Rem&#x3D;system(“\x63">
 <meta property="og:type" content="article">
-<meta property="og:title" content="three，three，three~~">
-<meta property="og:url" content="http://example.com/2020/11/25/bibibi/index.html">
+<meta property="og:title" content="basic.rce2">
+<meta property="og:url" content="http://example.com/2020/11/26/aiaiai/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="今天，我的课有点多，从早上八点上到晚上六点半，还有高数作业没有写完。。。所以只做了道简单的web题  我是在bugku上做的一道题 —— 快让他停下来。。。。  具体wp如下  我打开网址，发现它一直在加载，加载好又重新接着加载下一个页面，没完没了！    灵机一动，bp抓包，点击send    额，啥也没有。。根据情况，他应该有好几个页面，那就再多点几下send    果然，flag出现了！">
+<meta property="og:description" content="今天写了rce基础题，题目如下    根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。  那我们就要绕过cat等内容  我们通过构造？Rem&#x3D;system(“Is”)查看目录文件（i是大写，因为结尾的i是不区分大小写，可以执行此命令，得到文件名    我们可通过编码绕过，输入以下get命令：index.php?Rem&#x3D;system(“\x63">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2020/11/25/bibibi/ting2.png">
-<meta property="og:image" content="http://example.com/2020/11/25/bibibi/ting1.png">
-<meta property="og:image" content="http://example.com/2020/11/25/bibibi/ting3.png">
-<meta property="article:published_time" content="2020-11-25T13:01:25.000Z">
-<meta property="article:modified_time" content="2020-11-25T13:31:27.402Z">
+<meta property="og:image" content="http://example.com/2020/11/26/aiaiai/rce1.png">
+<meta property="og:image" content="http://example.com/2020/11/26/aiaiai/rce2.png">
+<meta property="og:image" content="http://example.com/2020/11/26/aiaiai/rce3.png">
+<meta property="article:published_time" content="2020-11-26T14:14:08.000Z">
+<meta property="article:modified_time" content="2020-11-26T15:05:18.011Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/11/25/bibibi/ting2.png">
+<meta name="twitter:image" content="http://example.com/2020/11/26/aiaiai/rce1.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -175,11 +175,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-bibibi" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-aiaiai" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/25/bibibi/" class="article-date">
-  	<time datetime="2020-11-25T13:01:25.000Z" itemprop="datePublished">2020-11-25</time>
+      <a href="/2020/11/26/aiaiai/" class="article-date">
+  	<time datetime="2020-11-26T14:14:08.000Z" itemprop="datePublished">2020-11-26</time>
 </a>
     </div>
   
@@ -192,7 +192,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      three，three，three~~
+      basic.rce2
       
     </h1>
   
@@ -210,7 +210,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  今天，我的课有点多，从早上八点上到晚上六点半，还有高数作业没有写完。。。所以只做了道简单的web题<br>  我是在bugku上做的一道题 —— 快让他停下来。。。。<br>  具体wp如下<br>  我打开网址，发现它一直在加载，加载好又重新接着加载下一个页面，没完没了！<br>  <img src="/2020/11/25/bibibi/ting2.png"><br>  灵机一动，bp抓包，点击send<br>  <img src="/2020/11/25/bibibi/ting1.png"><br>  额，啥也没有。。根据情况，他应该有好几个页面，那就再多点几下send<br>  <img src="/2020/11/25/bibibi/ting3.png"><br>  果然，flag出现了！<br>  yiya又是被摧残的一天，拜嘞个拜~</p>
+        <p>  今天写了rce基础题，题目如下<br>  <img src="/2020/11/26/aiaiai/rce1.png"><br>  根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。<br>  那我们就要绕过cat等内容<br>  我们通过构造？Rem=system(“Is”)查看目录文件（i是大写，因为结尾的i是不区分大小写，可以执行此命令，得到文件名<br>  <img src="/2020/11/26/aiaiai/rce2.png"><br>  我们可通过编码绕过，输入以下get命令：index.php?Rem=system(“\x63\x61\x74\x20\x66\x6c\x61\x67”);<br>  <img src="/2020/11/26/aiaiai/rce3.png"><br>  成功得到flag~<br>  ————————<br>  注：<br>  命令执行的函数有很多，如下：<br>  system()<br>  passthru()<br>  exec()<br>  shell_exec()<br>  popen()<br>  proc_open()<br>  pcntl_exec()</p>
+<p>  反引号 同shell_exec()<br>  其中，只有system函数是有回显的，其他的函数可以通过echo等显示。<br>  ————————<br>  其他的一些绕过<br>  ————————<br>空格绕过：<br>  1，&gt; &lt; &lt;&gt; 重定向符<br>  2，%09(需要php环境)<br>  3，${IFS}<br>  4，$IFS$9<br>  5，{cat,flag.php} //用逗号实现了空格功能<br>  6，%20<br>  7，%09<br>  ————————<br>cat被过滤：<br>  1，more:一页一页的显示档案内容<br>  2，less:与 more 类似<br>  3，head:查看头几行<br>  4，tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>  5，tail:查看尾几行<br>  6，nl：显示的时候，顺便输出行号<br>  7，od:以二进制的方式读取档案内容<br>  8，vi:一种编辑器，这个也可以查看<br>  9，vim:一种编辑器，这个也可以查看<br>  10，sort:可以查看<br>  11，uniq:可以查看<br>  12，file -f:报错出具体内容<br>  ————————<br>  （具体内容可访问：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/NPFS/p/13797436.html">https://www.cnblogs.com/NPFS/p/13797436.html</a> )</p>
 
       
     </div>
@@ -220,18 +221,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/11/26/aiaiai/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          basic.rce2
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/11/24/bianliang/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">被摧残的第二天</div>
+    <a href="/2020/11/25/bibibi/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">three，three，three~~</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -241,7 +233,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="bibibi" data-title="three，three，three~~" data-url="http://example.com/2020/11/25/bibibi/"  data-images="/img/huahua.jpg" data-content="three，three，three~~">
+<div class="ds-share share" data-thread-key="aiaiai" data-title="basic.rce2" data-url="http://example.com/2020/11/26/aiaiai/"  data-images="/img/huahua.jpg" data-content="basic.rce2">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
