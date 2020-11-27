@@ -3,23 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | baba童鞋的博客</title>
+  <title>php变量覆盖2 | baba童鞋的博客</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="今天写了本周web小分队的最后一次web题，题目如下：由题可知，这是一道$$导致的变量覆盖问题。————————题目分析：————————源码包含了flag.php文件，并且需要满足3个if里的条件才能获取flag，题目中使用了两个foreach并且也使用了$$.两个foreach中对 $$key的处理是不一样的，满足条件后会将$flag里面的值打印出来，所以$flag是在flag.php文件文件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2020/11/17/hello-world/index.html">
+<meta property="og:title" content="php变量覆盖2">
+<meta property="og:url" content="http://example.com/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="今天写了本周web小分队的最后一次web题，题目如下：由题可知，这是一道$$导致的变量覆盖问题。————————题目分析：————————源码包含了flag.php文件，并且需要满足3个if里的条件才能获取flag，题目中使用了两个foreach并且也使用了$$.两个foreach中对 $$key的处理是不一样的，满足条件后会将$flag里面的值打印出来，所以$flag是在flag.php文件文件">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-11-17T07:24:28.744Z">
-<meta property="article:modified_time" content="2020-11-17T07:24:28.744Z">
+<meta property="og:image" content="http://example.com/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl1.png">
+<meta property="og:image" content="http://example.com/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl2.png">
+<meta property="article:published_time" content="2020-11-27T11:13:59.000Z">
+<meta property="article:modified_time" content="2020-11-27T11:55:38.378Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl1.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -177,11 +180,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-php变量覆盖2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/17/hello-world/" class="article-date">
-  	<time datetime="2020-11-17T07:24:28.744Z" itemprop="datePublished">2020-11-17</time>
+      <a href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" class="article-date">
+  	<time datetime="2020-11-27T11:13:59.000Z" itemprop="datePublished">2020-11-27</time>
 </a>
     </div>
   
@@ -194,7 +197,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      php变量覆盖2
       
     </h1>
   
@@ -208,8 +211,8 @@
         
           
 <div class="counter-tag counter">
-    <span id="/2020/11/17/hello-world/" class="leancloud_visitors post-title-link"
-          style="font-size: 12px" data-flag-title="Hello World">
+    <span id="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="php变量覆盖2">
          &nbsp;
         view
     </span>
@@ -222,19 +225,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <p>今天写了本周web小分队的最后一次web题，题目如下：<br><img src="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl1.png"><br>由题可知，这是一道$$导致的变量覆盖问题。<br>————————<br>题目分析：<br>————————<br>源码包含了flag.php文件，并且需要满足3个if里的条件才能获取flag，题目中使用了两个foreach并且也使用了$$.两个foreach中对 $$key的处理是不一样的，满足条件后会将$flag里面的值打印出来，所以$flag是在flag.php文件文件中的。<br>由于flag值被覆盖掉了，所以要先将flag值赋给变量_200或变量_403,然后利用die（200）或die（403）将flag显示出来。</p>
+<p>————————<br>解题方法：<br>————————<br>由于flag的值被覆盖掉，所以只能将$flag得知赋给$_200,通过die（_200）将flag输出来。<br>————————<br>最终payload如下：<br>GET：?_200=flag<br>POST：flag=hahaha（flag=任意字符）<br><img src="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl2.png"><br>成功得到flag~<br>注；<br>$$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出现，使用foreach来遍历数组中的值，然后再将获取到的数组键名作为变量，数组中的键值作为变量的值。因此就产生了变量覆盖漏洞。如：get ?name=test 会将$name的值覆盖，变为test。<br>（aha<del>又是正经的一天</del>）</p>
 
       
     </div>
@@ -244,15 +236,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/11/18/%E6%88%90%E4%B8%BA%E9%9C%B8%E9%9C%B8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          今天的菜鸟，明天的霸霸
-        
-      </div>
-    </a>
   
+    <a href="/2020/11/26/basic-rce2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">basic.rce2</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
   
 </nav>
 
@@ -260,7 +248,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="hello-world" data-title="Hello World" data-url="http://example.com/2020/11/17/hello-world/"  data-images="/img/huahua.jpg" data-content="Hello World">
+<div class="ds-share share" data-thread-key="php变量覆盖2" data-title="php变量覆盖2" data-url="http://example.com/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/"  data-images="/img/huahua.jpg" data-content="php变量覆盖2">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>

