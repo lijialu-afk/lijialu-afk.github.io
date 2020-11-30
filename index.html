@@ -169,6 +169,65 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-bugku" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/11/30/bugku/" class="article-date">
+  	<time datetime="2020-11-30T13:01:25.000Z" itemprop="datePublished">2020-11-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/30/bugku/">
+        日常小练
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  bughu1：<br>  我是在bugku上做的一道题 —— 快让他停下来。。。。<br>  具体wp如下<br>  我打开网址，发现它一直在加载，加载好又重新接着加载下一个页面，没完没了！<br>  <img src="/2020/11/30/bugku/ting2.png"><br>  灵机一动，bp抓包，点击send<br>  <img src="/2020/11/30/bugku/ting1.png"><br>  额，啥也没有。。根据情况，他应该有好几个页面，那就再多点几下send<br>  <img src="/2020/11/30/bugku/ting3.png"><br>  果然，flag出现了！<br>  bugku2：<br>  点击题目地址，看到了这样的画面<br>  <img src="/2020/11/30/bugku/ctf1.png"><br>  emmmm不停点，还是找不到flag，那直接f12，到调试器界面（火狐浏览器）<br>  <img src="/2020/11/30/bugku/ctf2.png"><br>  看到了极像flag的可疑编码，瞄准他。应该是个unicode编码，百度搜索解码器，开始解码。<br>  <img src="/2020/11/30/bugku/ctf3.png"><br>  成功拿到flag！biu~<br>  攻防世界backup：<br>  做过bugku的两道题后，我又做了攻防世界的几道题<br>  打开题目地址后，看到如下画面<br>  <img src="/2020/11/30/bugku/beifen.png"><br>  这道题目主要考察是否清楚index.php备份文件的文件名格式<br>  一般备份文件的格式后缀为.bak<br>  因此访问URL+/index.php.bak即可<br>  然后通过记事本打开文件<br>  <img src="/2020/11/30/bugku/beifen1.png"><br>  aha~成功得到flag<br>  攻防世界simple php<br>  打开题目地址，题目如下<br>  <img src="/2020/11/30/bugku/php.png"><br>  代码很简单，就是以GET方式获得两个参数a和b，如果a和b满足一定条件，则打印flag1和flag2，猜测将flag1和flag2拼接就能够得到完整flag<br>  接下来看代码，注意到：</p>
+<p>1、if($a==0 and $a){<br>2、    echo $flag1;<br>3、} </p>
+<p>  这是一段简单代码，对于a我们可以直接传入a，即？a=a<br>  另一段：</p>
+<p>1、if(is_numeric($b)){<br>2、    exit();<br>3、}<br>4、if($b&gt;1234){<br>5、    echo $flag2;<br>6、}<br>   对于b的话，我们可以给他传1235a，这样b就不是数字串了，而1235a会自动转换成1235再去和1234来比较为true。<br>   <img src="/2020/11/30/bugku/php2.png"><br>   dingdong!成功得到flag！<br>   注：<br>    松散比较：使用两个等号 == 比较，只比较值，不比较类型。<br>    严格比较：用三个等号 === 比较，除了比较值，也比较类型。</p>
+<p>  yiya又是被摧残的一天，拜嘞个拜~</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-html" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -356,61 +415,6 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
 
 
   
-    <article id="post-bugku" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/11/25/bugku/" class="article-date">
-  	<time datetime="2020-11-25T13:01:25.000Z" itemprop="datePublished">2020-11-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/25/bugku/">
-        three，three，three~~
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  今天，我的课有点多，从早上八点上到晚上六点半，还有高数作业没有写完。。。所以只做了道简单的web题<br>  我是在bugku上做的一道题 —— 快让他停下来。。。。<br>  具体wp如下<br>  我打开网址，发现它一直在加载，加载好又重新接着加载下一个页面，没完没了！<br>  <img src="/2020/11/25/bugku/ting2.png"><br>  灵机一动，bp抓包，点击send<br>  <img src="/2020/11/25/bugku/ting1.png"><br>  额，啥也没有。。根据情况，他应该有好几个页面，那就再多点几下send<br>  <img src="/2020/11/25/bugku/ting3.png"><br>  果然，flag出现了！<br>  yiya又是被摧残的一天，拜嘞个拜~</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
     <article id="post-php变量覆盖1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -440,7 +444,7 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  今天，我在bugku上写了到简单的web题，做了学长给的一道php变量覆盖题。<br>  bugku：<br>  点击题目地址，看到了这样的画面<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/ctf1.png"><br>  emmmm不停点，还是找不到flag，那直接f12，到调试器界面（火狐浏览器）<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/ctf2.png"><br>  看到了极像flag的可疑编码，瞄准他。应该是个unicode编码，百度搜索解码器，开始解码。<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/ctf3.png"><br>  成功拿到flag！biu~<br>  学长给的web题<br>  打开熟悉的henuctf网站，点开题目网址，你会看到以下内容。<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl1.png"><br>  emmm，一副看不懂的亚子。。那根据提示ctrl+u，果然出现了变化！<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl2.png"><br>  仔细一看，就，变整齐了？<br>  再一看，根据学长所说，这是一道php变量覆盖题，借助百度，了解一下，就是让两变量相等<br>  输入payload：【get】？liwu=&amp;content 开始执行<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl3.png"><br>  duang成功得到flag~<br>  注：extract()语法： extract(array,extract_rules,prefix)<br>  </p><h2>(一)</h2><br>  extract() 函数从数组中将变量导入到当前的符号表。<br>  该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。<br>  第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。<br>  该函数返回成功导入到符号表中的变量数目。<br>  如果变量liwu和变量content的值相同，就会输出flag<br>  所以构造  ?liwu=&amp;content flag就可以出来。<br>  <h2>(二）</h2><br>  题目使用了extract($_GET)接收了GET请求中的数据，并将键名和键值转换为变量名和变量的值，然后再进行两个if 的条件判断，所以可以使用GET提交参数和值，利用extract()对变量进行覆盖，从而满足各个条件。<br>  解题方法：<br>  GET请求 ?flag=&amp;gift=，extract()会将flag和flag和gift的值覆盖了，将变量的值设置为空或者不存在的文件就满足gift==gift==content。<br>  最终PAYLOAD：GET DATA： ?flag=&amp;gift=  也可以得到flag。<br>  （又是正经的一天~~）<p></p>
+        <p>  今天做了学长给的一道php变量覆盖题。学长给的web题<br>  打开熟悉的henuctf网站，点开题目网址，你会看到以下内容。<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl1.png"><br>  emmm，一副看不懂的亚子。。那根据提示ctrl+u，果然出现了变化！<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl2.png"><br>  仔细一看，就，变整齐了？<br>  再一看，根据学长所说，这是一道php变量覆盖题，借助百度，了解一下，就是让两变量相等<br>  输入payload：【get】？liwu=&amp;content 开始执行<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl3.png"><br>  duang成功得到flag~<br>  注：extract()语法： extract(array,extract_rules,prefix)<br>  </p><h2>(一)</h2><br>  extract() 函数从数组中将变量导入到当前的符号表。<br>  该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。<br>  第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。<br>  该函数返回成功导入到符号表中的变量数目。<br>  如果变量liwu和变量content的值相同，就会输出flag<br>  所以构造  ?liwu=&amp;content flag就可以出来。<br>  <h2>(二）</h2><br>  题目使用了extract($_GET)接收了GET请求中的数据，并将键名和键值转换为变量名和变量的值，然后再进行两个if 的条件判断，所以可以使用GET提交参数和值，利用extract()对变量进行覆盖，从而满足各个条件。<br>  解题方法：<br>  GET请求 ?flag=&amp;gift=，extract()会将flag和flag和gift的值覆盖了，将变量的值设置为空或者不存在的文件就满足gift==gift==content。<br>  最终PAYLOAD：GET DATA： ?flag=&amp;gift=  也可以得到flag。<br>  （又是正经的一天~~）<p></p>
 
       
     </div>
