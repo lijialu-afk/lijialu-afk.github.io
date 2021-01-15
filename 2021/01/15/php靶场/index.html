@@ -3,27 +3,31 @@
 <head>
   <meta charset="utf-8">
   
-  <title>basic.rce2 | baba童鞋的博客</title>
+  <title>sqlilabs靶场的搭建 | baba童鞋的博客</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天写了rce基础题，题目如下    根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。  那我们就要绕过cat等内容  我们通过构造?Rem&#x3D;?&gt;&lt;?&#x3D;ls;查看目录文件，得到文件名    我们可通过编码绕过，输入以下get命令：index.php?Rem&#x3D;system(“\x63\x61\x74\x20\x66\x6c\x61\">
+  <meta name="description" content="下载PHPstudy（具体步骤见本霸霸上一篇博客）之后，配置如下环境然后访问网址：（https:&#x2F;&#x2F;github.com&#x2F;Audi-1&#x2F;sqli-labs） 如下图下载zip文件下载过后将文件复制到如下路径中，并将文件名修改为sql然后再浏览器上访问：（https:&#x2F;&#x2F;localhost&#x2F;sql&#x2F;） 会出现以下界面点击第一个出现以下界面则sqlilabs靶场搭建成功 注： sqli-labs靶场需">
 <meta property="og:type" content="article">
-<meta property="og:title" content="basic.rce2">
-<meta property="og:url" content="http://example.com/2020/11/26/basic-rce2/index.html">
+<meta property="og:title" content="sqlilabs靶场的搭建">
+<meta property="og:url" content="http://example.com/2021/01/15/php%E9%9D%B6%E5%9C%BA/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="今天写了rce基础题，题目如下    根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。  那我们就要绕过cat等内容  我们通过构造?Rem&#x3D;?&gt;&lt;?&#x3D;ls;查看目录文件，得到文件名    我们可通过编码绕过，输入以下get命令：index.php?Rem&#x3D;system(“\x63\x61\x74\x20\x66\x6c\x61\">
+<meta property="og:description" content="下载PHPstudy（具体步骤见本霸霸上一篇博客）之后，配置如下环境然后访问网址：（https:&#x2F;&#x2F;github.com&#x2F;Audi-1&#x2F;sqli-labs） 如下图下载zip文件下载过后将文件复制到如下路径中，并将文件名修改为sql然后再浏览器上访问：（https:&#x2F;&#x2F;localhost&#x2F;sql&#x2F;） 会出现以下界面点击第一个出现以下界面则sqlilabs靶场搭建成功 注： sqli-labs靶场需">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2020/11/26/basic-rce2/rce1.png">
-<meta property="og:image" content="http://example.com/2020/11/26/basic-rce2/rce2.png">
-<meta property="og:image" content="http://example.com/2020/11/26/basic-rce2/rce3.png">
-<meta property="article:published_time" content="2020-11-26T14:14:08.000Z">
-<meta property="article:modified_time" content="2020-11-28T11:34:13.408Z">
+<meta property="og:image" content="http://example.com/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql0.png">
+<meta property="og:image" content="http://example.com/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql3.png">
+<meta property="og:image" content="http://example.com/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql4.png">
+<meta property="og:image" content="http://example.com/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql5.png">
+<meta property="og:image" content="http://example.com/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql1.png">
+<meta property="og:image" content="http://example.com/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql2.png">
+<meta property="og:image" content="http://example.com/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql7.png">
+<meta property="article:published_time" content="2021-01-15T12:33:57.000Z">
+<meta property="article:modified_time" content="2021-01-15T14:26:23.553Z">
 <meta property="article:author" content="Jialu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/11/26/basic-rce2/rce1.png">
+<meta name="twitter:image" content="http://example.com/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql0.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -175,11 +179,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-basic-rce2" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-php靶场" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/26/basic-rce2/" class="article-date">
-  	<time datetime="2020-11-26T14:14:08.000Z" itemprop="datePublished">2020-11-26</time>
+      <a href="/2021/01/15/php%E9%9D%B6%E5%9C%BA/" class="article-date">
+  	<time datetime="2021-01-15T12:33:57.000Z" itemprop="datePublished">2021-01-15</time>
 </a>
     </div>
   
@@ -192,7 +196,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      basic.rce2
+      sqlilabs靶场的搭建
       
     </h1>
   
@@ -210,8 +214,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  今天写了rce基础题，题目如下<br>  <img src="/2020/11/26/basic-rce2/rce1.png"><br>  根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。<br>  那我们就要绕过cat等内容<br>  我们通过构造?Rem=?&gt;&lt;?=<code>ls</code>;查看目录文件，得到文件名<br>  <img src="/2020/11/26/basic-rce2/rce2.png"><br>  我们可通过编码绕过，输入以下get命令：index.php?Rem=system(“\x63\x61\x74\x20\x66\x6c\x61\x67”);<br>  <img src="/2020/11/26/basic-rce2/rce3.png"><br>  成功得到flag~<br>  注：<br>  命令执行的函数有很多，如下：<br>  system()<br>  passthru()<br>  exec()<br>  shell_exec()<br>  popen()<br>  proc_open()<br>  pcntl_exec()</p>
-<p>  反引号 同shell_exec()<br>  其中，只有system函数是有回显的，其他的函数可以通过echo等显示。<br>  </p><h1>其他的一些绕过</h1><br>  <h2>空格绕过：</h2><br>  1，&gt; &lt; &lt;&gt; 重定向符<br>  2，%09(需要php环境)<br>  3，${IFS}<br>  4，$IFS$9<br>  5，{cat,flag.php} //用逗号实现了空格功能<br>  6，%20<br>  7，%09<br>  <h2>cat被过滤：</h2><br>  1，more:一页一页的显示档案内容<br>  2，less:与 more 类似<br>  3，head:查看头几行<br>  4，tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>  5，tail:查看尾几行<br>  6，nl：显示的时候，顺便输出行号<br>  7，od:以二进制的方式读取档案内容<br>  8，vi:一种编辑器，这个也可以查看<br>  9，vim:一种编辑器，这个也可以查看<br>  10，sort:可以查看<br>  11，uniq:可以查看<br>  12，file -f:报错出具体内容<br>  （具体内容可访问：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/NPFS/p/13797436.html">https://www.cnblogs.com/NPFS/p/13797436.html</a> )<p></p>
+        <p>下载PHPstudy（具体步骤见本霸霸上一篇博客）之后，配置如下环境<br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql0.png"><br><br>然后访问网址：（<a target="_blank" rel="noopener" href="https://github.com/Audi-1/sqli-labs%EF%BC%89">https://github.com/Audi-1/sqli-labs）</a> 如下图<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql3.png"><br><br>下载zip文件<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql4.png"><br><br>下载过后将文件复制到如下路径中，并将文件名修改为sql<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql5.png"><br><br>然后再浏览器上访问：（<a target="_blank" rel="noopener" href="https://localhost/sql/%EF%BC%89">https://localhost/sql/）</a> 会出现以下界面<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql1.png"><br><br>点击第一个出现以下界面<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql2.png"><br><br>则sqlilabs靶场搭建成功<br></p>
+<h3>注：</h3>
+<p>sqli-labs靶场需要php环境。而且对php7不兼容，当初写这个靶场印度程序员使用的版本不是php7，当时的一些函数在php7中被删除了。所以，使用此靶场请下载5.5或之前的版本，如下图</p>
+<img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql7.png">
+<br>如果未成功显示successfully页面。可能存在两种原因:<br>
+
+<ul>
+<li>1.访问路径不正确。
+</li><li>2.php版本不兼容
+</li></ul>
+<b>解决方法：</b>
+<ul>
+<li>1 http://localhost/sql/ 这个sql文件夹是自己创建的，如果没有创建该文件夹，而是在解压sql-labs压缩包时直接将其解压到WWW目录下，则直接访问http://localhost/。
+</li><li>2 将php版本换到5.5及以下。
+</li></ul>
 
       
     </div>
@@ -221,18 +238,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          php变量覆盖2
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">被摧残的第二天</div>
+    <a href="/2020/12/04/php/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">phpstudy的使用-站点的创建</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -242,7 +250,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="basic-rce2" data-title="basic.rce2" data-url="http://example.com/2020/11/26/basic-rce2/"  data-images="/img/huahua.jpg" data-content="basic.rce2">
+<div class="ds-share share" data-thread-key="php靶场" data-title="sqlilabs靶场的搭建" data-url="http://example.com/2021/01/15/php%E9%9D%B6%E5%9C%BA/"  data-images="/img/huahua.jpg" data-content="sqlilabs靶场的搭建">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
