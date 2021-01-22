@@ -3,30 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>7-buu练习[极客大挑战 2019]Http | baba童鞋的博客</title>
+  <title>8-buu练习[ACTF2020 新生赛]BackupFile | baba童鞋的博客</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="知识点 1.Referer HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器该网页是从哪个页面链接过来的，服务器因此可以获得一些信息用于处理。Referer 常用在防盗链和防恶意请求中。传输referer需要在页面内添加相关的代码。 2.User-Agent 用来传输用户使用的是什么样的浏览器。有些网站为了防止爬虫，会检验U">
+  <meta name="description" content="打开题目地址，如下：  f12查看源代码，代码不在里面。 尝试了robots.txt，也没有 猜测www.zip、.tar.gz、rar，但依然没有 最后灵机一动查看index.php.bak，代码竟真的现在这里   代码如下：get传入key，与一串开头为123的字符串比较，【&#x3D;&#x3D;】 为弱比较，直接令key&#x3D;123，如下：bujiu~得到flag！ 知识点总结： “&#x3D;&#x3D;”和“&#x3D;&#x3D;&#x3D;”:  PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="7-buu练习[极客大挑战 2019]Http">
-<meta property="og:url" content="http://example.com/2021/01/21/hhh/index.html">
+<meta property="og:title" content="8-buu练习[ACTF2020 新生赛]BackupFile">
+<meta property="og:url" content="http://example.com/2021/01/22/bak/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="知识点 1.Referer HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器该网页是从哪个页面链接过来的，服务器因此可以获得一些信息用于处理。Referer 常用在防盗链和防恶意请求中。传输referer需要在页面内添加相关的代码。 2.User-Agent 用来传输用户使用的是什么样的浏览器。有些网站为了防止爬虫，会检验U">
+<meta property="og:description" content="打开题目地址，如下：  f12查看源代码，代码不在里面。 尝试了robots.txt，也没有 猜测www.zip、.tar.gz、rar，但依然没有 最后灵机一动查看index.php.bak，代码竟真的现在这里   代码如下：get传入key，与一串开头为123的字符串比较，【&#x3D;&#x3D;】 为弱比较，直接令key&#x3D;123，如下：bujiu~得到flag！ 知识点总结： “&#x3D;&#x3D;”和“&#x3D;&#x3D;&#x3D;”:  PHP">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/01/21/hhh/eeee1.png">
-<meta property="og:image" content="http://example.com/2021/01/21/hhh/eeee2.png">
-<meta property="og:image" content="http://example.com/2021/01/21/hhh/eeee3.png">
-<meta property="og:image" content="http://example.com/2021/01/21/hhh/eeee4.png">
-<meta property="og:image" content="http://example.com/2021/01/21/hhh/eeee5.png">
-<meta property="og:image" content="http://example.com/2021/01/21/hhh/eeee6.png">
-<meta property="article:published_time" content="2021-01-21T03:16:38.000Z">
-<meta property="article:modified_time" content="2021-01-21T05:06:09.846Z">
+<meta property="og:image" content="http://example.com/2021/01/22/bak/bak1.png">
+<meta property="og:image" content="http://example.com/2021/01/22/bak/bak2.png">
+<meta property="og:image" content="http://example.com/2021/01/22/bak/bak3.png">
+<meta property="article:published_time" content="2021-01-22T08:41:25.000Z">
+<meta property="article:modified_time" content="2021-01-22T08:56:29.333Z">
 <meta property="article:author" content="Jialu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/01/21/hhh/eeee1.png">
+<meta name="twitter:image" content="http://example.com/2021/01/22/bak/bak1.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -178,11 +175,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-hhh" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-bak" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/21/hhh/" class="article-date">
-  	<time datetime="2021-01-21T03:16:38.000Z" itemprop="datePublished">2021-01-21</time>
+      <a href="/2021/01/22/bak/" class="article-date">
+  	<time datetime="2021-01-22T08:41:25.000Z" itemprop="datePublished">2021-01-22</time>
 </a>
     </div>
   
@@ -195,7 +192,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      7-buu练习[极客大挑战 2019]Http
+      8-buu练习[ACTF2020 新生赛]BackupFile
       
     </h1>
   
@@ -213,35 +210,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>知识点</h1>
-<h3>1.Referer</h3>
-HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器该网页是从哪个页面链接过来的，服务器因此可以获得一些信息用于处理。Referer 常用在防盗链和防恶意请求中。传输referer需要在页面内添加相关的代码。
-<h3>2.User-Agent</h3>
-用来传输用户使用的是什么样的浏览器。有些网站为了防止爬虫，会检验User-Agent，只有当是用户访问的时候才会传输数据。
-<h3>3.X-Forwaeded-For</h3>
-X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连接到Web服务器的客户端最原始的IP地址的HTTP请求头字段。当今多数缓存服务器的用户为大型ISP，为了通过缓存的方式来降低他们的外部带宽，他们常常通过鼓励或强制用户使用代理服务器来接入互联网。有些情况下，这些代理服务器是透明代理，用户甚至不知道自己正在使用代理上网。
-如果没有XFF或者另外一种相似的技术，所有通过代理服务器的连接只会显示代理服务器的IP地址，而非连接发起的原始IP地址，这样的代理服务器实际上充当了匿名服务提供者的角色，如果连接的原始IP地址不可得，恶意访问的检测与预防的难度将大大增加。
-如果你使用透明代理上网，那么在透明代理发送给服务器端的HTTP请求中会包含x-forward-for信息
-简单来说就是用来传输最原始ip地址的,阻止匿名请求的，但是可以通过抓包来修改。
-<h1>题目</h1>
-<br>打开题目链接，查看源代码，如下：<br>
-<img src="/2021/01/21/hhh/eeee1.png">
-<br>存在Secret.php文件，访问该文件如下：<br>
-
-<p><img src="/2021/01/21/hhh/eeee2.png"></p>
-<p><br>采用burp抓包，如下：<br><br><img src="/2021/01/21/hhh/eeee3.png"><br><br>根据提示可知，要来自<a target="_blank" rel="noopener" href="https://www.sycsecret.com/">https://www.Sycsecret.com</a><br><br>采用Referer头：</p>
+        <p>打开题目地址，如下：<br><img src="/2021/01/22/bak/bak1.png"></p>
 <ul>
-<li>Referer:https://www.Sycsecret.com
+<li>f12查看源代码，代码不在里面。
+</li><li>尝试了robots.txt，也没有
+</li><li>猜测www.zip、.tar.gz、rar，但依然没有
+</li><li>最后灵机一动查看index.php.bak，代码竟真的现在这里
 </li></ul>
-<img src="/2021/01/21/hhh/eeee4.png">
-<br>根据提示，要使用Syclover浏览器，将User-Agent头中的Firefox改成Syclover，如下图：<br>
-<img src="/2021/01/21/hhh/eeee5.png">
-<br>发现到现在还是没有出来，我们只能在本地访问，那么意思就是要我们使用127.0.0.1来访问，那么我们来添加一行：
-<ul>
-<li>X-Forwarded-For:127.0.0.1
- </li></ul>
-<img src="/2021/01/21/hhh/eeee6.png">
-<br>成功拿到flag~~
+
+<p>代码如下：<br><img src="/2021/01/22/bak/bak2.png"><br>get传入key，与一串开头为123的字符串比较，【==】 为弱比较，直接令<b>key=123</b>，如下：<br><img src="/2021/01/22/bak/bak3.png"><br>bujiu~得到flag！</p>
+<h2>知识点总结：</h2>
+<h3>“==”和“===”:</h3>
+
+<p>PHP中有两种比较符号，“==”与“===”。“==”我们称之为等值符，当等号两边为相同类型时，直接比较值是否相等；当等号两边类型不同时，先转换为相同的类型，再对转换后的值进行比较，如果比较一个数字和字符串或者涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照常数值进行比较。</p>
+<h3>ctf题得到源码的方法：</h3>
+<li>1.请求头或者响应头中有一些类似showsource:0的部分，改成showsource:1即可.
+</li><li>2.一些缓存或者备份文件,.bak  .swo  .swp  .backup  .txt
+</li><li>3.一些文件下载漏洞，直接修改文件下载路径即可下载任意文件源码
+</li><li>4.用php://filter得到源码   谈一谈php://filter的妙用   php://filter技术分享
+</li><li>5.目录遍历漏洞
+</li>
       
     </div>
     
@@ -250,18 +238,9 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     
 <nav id="article-nav">
   
-    <a href="/2021/01/22/bak/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          8-buu练习[ACTF2020 新生赛]BackupFile
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/01/20/exec/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">6-buu练习[ACTF2020 新生赛]Exec</div>
+    <a href="/2021/01/21/hhh/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">7-buu练习[极客大挑战 2019]Http</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -271,7 +250,7 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
 </article>
 
 
-<div class="ds-share share" data-thread-key="hhh" data-title="7-buu练习[极客大挑战 2019]Http" data-url="http://example.com/2021/01/21/hhh/"  data-images="/img/huahua.jpg" data-content="7-buu练习[极客大挑战 2019]Http">
+<div class="ds-share share" data-thread-key="bak" data-title="8-buu练习[ACTF2020 新生赛]BackupFile" data-url="http://example.com/2021/01/22/bak/"  data-images="/img/huahua.jpg" data-content="8-buu练习[ACTF2020 新生赛]BackupFile">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>

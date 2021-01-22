@@ -169,6 +169,83 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-weixieyi" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/12/04/weixieyi/" class="article-date">
+  	<time datetime="2020-12-04T05:25:48.000Z" itemprop="datePublished">2020-12-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/04/weixieyi/">
+        伪协议wp
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>伪协议1</h1>
+<p>伪协议1题目代码如下：</p>
+<img src="/2020/12/04/weixieyi/a.png">
+<br>根据题意，这应该是一道伪协议题目
+<br>这种情况，采用没有任何条件限制的php://filer，（具体可见霸霸童鞋博客：PHP伪协议笔记）来得到源码，找到可以的到源码base64编码的payload如下：
+<br>【get】?file=php://filter/read=convert.base64-encode/resource=flag。。得到flag，但由于preg_match函数的存在，会绕过php和base，又看到后面没有i，表明区分大小写，那我们可以把payload中的php和base换成大写，便可以过滤掉改正则，得到base64编码值
+<br>具体payload：?file=PHP://filter/read=convert.BASE64-encode/resource=flag  或 ?file=pHp://filter/read=convert.bAse64-encode/resource=flag 等
+<br>见下图：<br>
+<img src="/2020/12/04/weixieyi/weixieyi1.png">
+<br>成功得到base64编码值，进行base64解码<br>
+<img src="/2020/12/04/weixieyi/weixieyi2.png">
+<br>成功得到flag~giao
+<h1>伪协议2</h1>
+<br>题目代码如下：<br>
+<img src="/2020/12/04/weixieyi/b.png">
+<br>这道题目比第一道题目多了个i，不区分大小写，大写小写都会被正则绕过，仔细一看后面还有个str_replace函数，（该函数具体可见霸霸童鞋博客PHP伪协议笔记）该函数会将file变量中的“roye”转换成“ ”，正好为我们提供思路，既然php，base等过滤不了，那我们就在里面加入troye，由于str_replace函数的存在，最终会输出php，base等，（执行结果会将“troye”替换成“ ”）可以成功得到base64编码值
+<br>具体payload：?file=ptroyehp://filter/read=convert.bastroyee64-encode/resource=flag
+<br>见下图：<br>
+<img src="/2020/12/04/weixieyi/weixieyi3.png">
+<br>成功得到base64编码值，进行base64解码<br>
+<img src="/2020/12/04/weixieyi/weixieyi2.png">
+<br>成功得到flag~giao*★,°*:.☆(￣▽￣)/$:*.°★* 。
+<s>又是正经的一天heihei~</s>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-php伪协议" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -755,76 +832,9 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/11/17/hello-world/" class="article-date">
-  	<time datetime="2020-11-17T07:24:28.744Z" itemprop="datePublished">2020-11-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/17/hello-world/">
-        Hello World
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 </div>
