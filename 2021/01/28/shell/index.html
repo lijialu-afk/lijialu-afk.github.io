@@ -3,33 +3,29 @@
 <head>
   <meta charset="utf-8">
   
-  <title>13-buu练习easy_tornado | baba童鞋的博客</title>
+  <title>14-buu练习Knife | baba童鞋的博客</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="打开题目地址，出现以下界面：分别访问txt文件如下：告诉我们flag位于系统得根目录发现render关键字render是一个渲染函数，进行服务器渲染，实质就是生成template模板，也就是说可能存在ssti模板注入漏洞URL中的filehash参数的值为md5(cookie_secret+md5(filename))接下来render()函数可以联想到模板注入，测试一下：  url + &#x2F;err">
+  <meta name="description" content="这道题是一个简单的shell题，需要用到“中国蚁剑” 一、中国蚁剑的下载  中国蚁剑下载地址：https:&#x2F;&#x2F;github.com&#x2F;AntSwordProject&#x2F;我们下载的时候需要下载两个部分，一个是项目核心源码”antSword“，另一个是加载器;加载器则分为三个版本：Mac、Windows、Linux。 二、中国蚁剑的安装  我下载的是“AntSword-Loader-v4.0.3-win3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="13-buu练习easy_tornado">
-<meta property="og:url" content="http://example.com/2021/01/27/txt/index.html">
+<meta property="og:title" content="14-buu练习Knife">
+<meta property="og:url" content="http://example.com/2021/01/28/shell/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="打开题目地址，出现以下界面：分别访问txt文件如下：告诉我们flag位于系统得根目录发现render关键字render是一个渲染函数，进行服务器渲染，实质就是生成template模板，也就是说可能存在ssti模板注入漏洞URL中的filehash参数的值为md5(cookie_secret+md5(filename))接下来render()函数可以联想到模板注入，测试一下：  url + &#x2F;err">
+<meta property="og:description" content="这道题是一个简单的shell题，需要用到“中国蚁剑” 一、中国蚁剑的下载  中国蚁剑下载地址：https:&#x2F;&#x2F;github.com&#x2F;AntSwordProject&#x2F;我们下载的时候需要下载两个部分，一个是项目核心源码”antSword“，另一个是加载器;加载器则分为三个版本：Mac、Windows、Linux。 二、中国蚁剑的安装  我下载的是“AntSword-Loader-v4.0.3-win3">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/01/27/txt/txt0.png">
-<meta property="og:image" content="http://example.com/2021/01/27/txt/txt1.png">
-<meta property="og:image" content="http://example.com/2021/01/27/txt/txt2.png">
-<meta property="og:image" content="http://example.com/2021/01/27/txt/txt3.png">
-<meta property="og:image" content="http://example.com/2021/01/27/txt/txt4.png">
-<meta property="og:image" content="http://example.com/2021/01/27/txt/txt5.png">
-<meta property="og:image" content="http://example.com/2021/01/27/txt/txt6.png">
-<meta property="og:image" content="http://example.com/2021/01/27/txt/txt8.png">
-<meta property="og:image" content="http://example.com/2021/01/27/txt/txt7.png">
-<meta property="article:published_time" content="2021-01-27T05:46:21.000Z">
-<meta property="article:modified_time" content="2021-01-28T05:52:02.731Z">
+<meta property="og:image" content="http://example.com/2021/01/28/shell/shell1.png">
+<meta property="og:image" content="http://example.com/2021/01/28/shell/shell2.png">
+<meta property="og:image" content="http://example.com/2021/01/28/shell/shell3.png">
+<meta property="og:image" content="http://example.com/2021/01/28/shell/shell4.png">
+<meta property="og:image" content="http://example.com/2021/01/28/shell/shell5.png">
+<meta property="article:published_time" content="2021-01-28T04:49:36.000Z">
+<meta property="article:modified_time" content="2021-01-28T05:43:23.333Z">
 <meta property="article:author" content="Jialu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/01/27/txt/txt0.png">
+<meta name="twitter:image" content="http://example.com/2021/01/28/shell/shell1.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -181,11 +177,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-txt" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-shell" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/27/txt/" class="article-date">
-  	<time datetime="2021-01-27T05:46:21.000Z" itemprop="datePublished">2021-01-27</time>
+      <a href="/2021/01/28/shell/" class="article-date">
+  	<time datetime="2021-01-28T04:49:36.000Z" itemprop="datePublished">2021-01-28</time>
 </a>
     </div>
   
@@ -198,7 +194,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      13-buu练习easy_tornado
+      14-buu练习Knife
       
     </h1>
   
@@ -216,61 +212,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>打开题目地址，出现以下界面：<br><img src="/2021/01/27/txt/txt0.png"><br>分别访问txt文件如下：<br><img src="/2021/01/27/txt/txt1.png"><br>告诉我们flag位于系统得根目录<br><img src="/2021/01/27/txt/txt2.png"><br>发现render关键字<br>render是一个渲染函数，进行服务器渲染，实质就是生成template模板，也就是说可能存在ssti模板注入漏洞<br><img src="/2021/01/27/txt/txt3.png"><br>URL中的filehash参数的值为md5(cookie_secret+md5(filename))<br>接下来render()函数可以联想到模板注入，测试一下：</p>
+        <p>这道题是一个简单的shell题，需要用到“中国蚁剑”</p>
+<p style="color:yellow">一、中国蚁剑的下载</p>
+
+<p>中国蚁剑下载地址：<a target="_blank" rel="noopener" href="https://github.com/AntSwordProject/">https://github.com/AntSwordProject/</a><br>我们下载的时候需要下载两个部分，一个是项目核心源码”antSword“，另一个是加载器;加载器则分为三个版本：Mac、Windows、Linux。<br><img src="/2021/01/28/shell/shell1.png"></p>
+<p style="color:yellow">二、中国蚁剑的安装</p>
+
+<p>我下载的是“AntSword-Loader-v4.0.3-win32-x64.zip”，安装步骤如下；<br><b style="color:red">1、</b>我们解压“AntSword-Loader-v4.0.3-win32-x64.zip”后，双击“AntSword.exe”；</p>
+<p>第一次安装项目需要先初始化，如果你已经下载了核心源码，就选择项目源码的文件夹。（如果只下载了加载器，选择一个空文件夹，加载器会自动帮你下载核心项目源码）。<br>这个项目文件夹就是你以后需要备份的，存储着你的shell和shell内的资料。<br><b>注意：</b>安装中国蚁剑时，选择工作目录后，会出现解压代码出错问题，这个问题是安装步骤不正确，我是新建了一个文件夹作为蚁剑的工作目录，才出现了这个问题，应该选择antSword-master.zip加压后的文件，这样才能正确的安装。<br><b style="color:red">2、</b>等初始化完成后，再双击“AntSword.exe”即可正常启动！</p>
+<p style="color:yellow">三、中国蚁剑的使用</p>
+
+<p><b style="color:red">1、</b>添加一个shell<br>首先：右键单击 - 添加数据；<br>其次：输入URL地址，连接密码以及编码设置。PHP语言推荐编辑器使用chr加密；<br>从次：还可以配置shell的请求信息和post内容；<br>最后：还可以配置全局代理；<br><b style="color:red">2、</b>关于编码器<br>编码器是这个程序的过人之处，用编码器加密可以轻松绕过WAF。<br><b style="color:red">3、</b>user-agent修改<br>要注意的是，软件默认的user-agent是：User-Agent: antSword/v2.0；而且大部分人都不会去自定义useragent，这就给waf和蜜罐白白送了一个特征，所以我们要修改一下源代码：<br>修改项目路径：<br>antSword\modules\request.js （修改const USER_AGENT = ‘antSword/v2.1’;这一行代码！）<br>antSword\modules\update.js （有两处要修改；可搜索“antSword/v2.0”来找到这两行代码！）</p>
+<h2>题目：</h2>
+
+<p>打开题目链接，界面如下：<br><img src="/2021/01/28/shell/shell2.png"><br>这是一个典型的后门程序</p>
 <ul>
-<li>url + /error?msg=1
+<li>//eval — 把字符串bai作为PHP代码执行 
+</li><li>eval('echo 123;');//输出123
 </li></ul>
 
-<p><img src="/2021/01/27/txt/txt4.png"></p>
-<p>可以显示</p>
-<ul>
-<li>url + /error?msg=1
-</li></ul>
-
-<p><img src="/2021/01/27/txt/txt5.png"><br>发现被过滤了<br>render是python中的一个渲染函数，也就是一种模板，通过调用的参数不同，生成不同的网页 render配合Tornado使用</p>
-<ul>
-<li>Tornado是一种 Web 服务器软件的开源版本。Tornado 和现在的主流 Web 服务器框架（包括大多数 Python 的框架）有着明显的区别：它是非阻塞式服务器，而且速度相当快。
-</li></ul>
-
-<p>然后就是这段代码md5(cookie_secret+md5(filename))  我们根据之前打开文件的url参数分析这个就是filehash的值 想获得flag只要我们在url中传入/fllllllllllllag文件和filehash 经过这段代码处理的值即可关键就在这cookie_secret这块 我们得想办法获得cookie_secret<br>构造：url + /error?msg=</p>
-<p><img src="/2021/01/27/txt/txt6.png"></p>
-<p>得到cookie_secret的值</p>
-<p style="color:yellow">该payload可以获得cookie_secret的原因：</p>
-在tornado模板中，存在一些可以访问的快速对象,这里用到的是handler.settings，handler 指向RequestHandler，而RequestHandler.settings又指向self.application.settings，所以handler.settings就指向RequestHandler.application.settings了，这里面就是我们的一些环境变量
-
-<p style="color:yellow">结合之前访问/flag.txt、/welcome.txt、/hints.txt页面时后头都带了md5值，和/hints.txt给的信息可知：</p>
-<ul>
-<li>cookie_secret为7c60754a-4491-4a1d-b2b9-fd6e679387ea
-</li><li>filename为/fllllllllllllag
-</li></ul>
-
-<p style="color:yellow">根据获得的cookie_secret用python脚本构造md5(cookie_secret+md5(filename))：</p>
-<ul>
-<li>import hashlib
-</li><li>filename='/fllllllllllllag'
-</li><li>cookie_secret='3edd4d3c-190e-415f-9a7b-c6e4520f8249'
-</li><li>m=hashlib.md5()
-</li><li>m.update(filename.encode("utf-8"))
-</li><li>n=m.hexdigest()
-</li><li>    
-</li><li>v=cookie_secret+n
-</li><li>m=hashlib.md5()
-</li><li>m.update(v.encode("utf-8"))
-</li><li>n=m.hexdigest()
-</li><li>print(n)
-</li></ul>
-
-<p><img src="/2021/01/27/txt/txt8.png"></p>
-<p>得到filehash的值<br>于是</p>
-<ul>
-<li>filename=“/fllllllllllllag”；
-</li><li>filehash=“6c58f259b42875c42c3bb9481c96c1bd”
-</li></ul>
-
-<p>构造payload：</p>
-<p style="color:red">url + /file?filename=/fllllllllllllag&filehash=6c58f259b42875c42c3bb9481c96c1bd</p>
-
-<p><img src="/2021/01/27/txt/txt7.png"><br>得到flag！</p>
+<p>有的字符串放入到eval当中，eval会把字符串解析为php代码来进行执行，那么结合$_POST[‘posha’]的话，只要使用post传输时在name为posha的值中写入任何字符串，都可以当做php代码来执行。<br>用蚁剑<br>复制URL<br>并填入密码<br><img src="/2021/01/28/shell/shell3.png"><br>添加<br>右键文件管理,在“/”目录下的最底层有个flag文件：<br><img src="/2021/01/28/shell/shell4.png"><br>点开后得到flag<br><img src="/2021/01/28/shell/shell5.png"></p>
 
       
     </div>
@@ -280,18 +241,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/01/28/shell/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/01/29/cat/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          14-buu练习Knife
+          15-buu练习have fun
         
       </div>
     </a>
   
   
-    <a href="/2021/01/26/clac/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">12-buu练习Easy clac</div>
+    <a href="/2021/01/27/txt/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">13-buu练习easy_tornado</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -301,7 +262,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="txt" data-title="13-buu练习easy_tornado" data-url="http://example.com/2021/01/27/txt/"  data-images="/img/huahua.jpg" data-content="13-buu练习easy_tornado">
+<div class="ds-share share" data-thread-key="shell" data-title="14-buu练习Knife" data-url="http://example.com/2021/01/28/shell/"  data-images="/img/huahua.jpg" data-content="14-buu练习Knife">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
