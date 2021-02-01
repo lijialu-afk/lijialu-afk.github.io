@@ -169,6 +169,79 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-bak" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/22/bak/" class="article-date">
+  	<time datetime="2021-01-22T08:41:25.000Z" itemprop="datePublished">2021-01-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/22/bak/">
+        8-buu练习[ACTF2020 新生赛]BackupFile
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打开题目地址，如下：<br><img src="/2021/01/22/bak/bak1.png"></p>
+<ul>
+<li>f12查看源代码，代码不在里面。
+</li><li>尝试了robots.txt，也没有
+</li><li>猜测www.zip、.tar.gz、rar，但依然没有
+</li><li>最后灵机一动查看index.php.bak，代码竟真的现在这里
+</li></ul>
+
+<p>代码如下：<br><img src="/2021/01/22/bak/bak2.png"><br>get传入key，与一串开头为123的字符串比较，【==】 为弱比较，直接令<b>key=123</b>，如下：<br><img src="/2021/01/22/bak/bak3.png"><br>bujiu~得到flag！</p>
+<h2>知识点总结：</h2>
+<h3>“==”和“===”:</h3>
+
+<p>PHP中有两种比较符号，“==”与“===”。“==”我们称之为等值符，当等号两边为相同类型时，直接比较值是否相等；当等号两边类型不同时，先转换为相同的类型，再对转换后的值进行比较，如果比较一个数字和字符串或者涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照常数值进行比较。</p>
+<h3>ctf题得到源码的方法：</h3>
+<li>1.请求头或者响应头中有一些类似showsource:0的部分，改成showsource:1即可.
+</li><li>2.一些缓存或者备份文件,.bak  .swo  .swp  .backup  .txt
+</li><li>3.一些文件下载漏洞，直接修改文件下载路径即可下载任意文件源码
+</li><li>4.用php://filter得到源码   谈一谈php://filter的妙用   php://filter技术分享
+</li><li>5.目录遍历漏洞
+</li>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-hhh" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -792,86 +865,9 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
 
 
   
-    <article id="post-weixieyi" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/12/04/weixieyi/" class="article-date">
-  	<time datetime="2020-12-04T05:25:48.000Z" itemprop="datePublished">2020-12-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/04/weixieyi/">
-        伪协议wp
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1>伪协议1</h1>
-<p>伪协议1题目代码如下：</p>
-<img src="/2020/12/04/weixieyi/a.png">
-<br>根据题意，这应该是一道伪协议题目
-<br>这种情况，采用没有任何条件限制的php://filer，（具体可见霸霸童鞋博客：PHP伪协议笔记）来得到源码，找到可以的到源码base64编码的payload如下：
-<br>【get】?file=php://filter/read=convert.base64-encode/resource=flag。。得到flag，但由于preg_match函数的存在，会绕过php和base，又看到后面没有i，表明区分大小写，那我们可以把payload中的php和base换成大写，便可以过滤掉改正则，得到base64编码值
-<br>具体payload：?file=PHP://filter/read=convert.BASE64-encode/resource=flag  或 ?file=pHp://filter/read=convert.bAse64-encode/resource=flag 等
-<br>见下图：<br>
-<img src="/2020/12/04/weixieyi/weixieyi1.png">
-<br>成功得到base64编码值，进行base64解码<br>
-<img src="/2020/12/04/weixieyi/weixieyi2.png">
-<br>成功得到flag~giao
-<h1>伪协议2</h1>
-<br>题目代码如下：<br>
-<img src="/2020/12/04/weixieyi/b.png">
-<br>这道题目比第一道题目多了个i，不区分大小写，大写小写都会被正则绕过，仔细一看后面还有个str_replace函数，（该函数具体可见霸霸童鞋博客PHP伪协议笔记）该函数会将file变量中的“roye”转换成“ ”，正好为我们提供思路，既然php，base等过滤不了，那我们就在里面加入troye，由于str_replace函数的存在，最终会输出php，base等，（执行结果会将“troye”替换成“ ”）可以成功得到base64编码值
-<br>具体payload：?file=ptroyehp://filter/read=convert.bastroyee64-encode/resource=flag
-<br>见下图：<br>
-<img src="/2020/12/04/weixieyi/weixieyi3.png">
-<br>成功得到base64编码值，进行base64解码<br>
-<img src="/2020/12/04/weixieyi/weixieyi2.png">
-<br>成功得到flag~giao*★,°*:.☆(￣▽￣)/$:*.°★* 。
-<s>又是正经的一天heihei~</s>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 </div>

