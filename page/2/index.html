@@ -169,6 +169,81 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-mdwu" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/23/mdwu/" class="article-date">
+  	<time datetime="2021-01-23T05:10:12.000Z" itemprop="datePublished">2021-01-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/23/mdwu/">
+        9-buu练习Easy MD5
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打开题目地址，界面如下：<br><img src="/2021/01/23/mdwu/md1.png"><br>采用burp抓包，如下；<br><img src="/2021/01/23/mdwu/md2.png"><br>【select * from ‘admin’ where password=md5($pass,true)】，我们提交ffifdyop（下面会有详解）,并查看源代码，出现以下界面：<br><img src="/2021/01/23/mdwu/md3.png"><br>get传入：?a[]=1&amp;b[]=2<br>出现以下界面<br><img src="/2021/01/23/mdwu/md4.png"><br>post传入：?param1[]=1&amp;param2[]=2<br><img src="/2021/01/23/mdwu/md5.png"><br>得到flag~</p>
+<h2>知识点</h2>
+<h3>md5($pass,true)</h3>
+<br>当我们将下面这个十进制传入mysql数据库的时候，mysql会自动将这些值转为十六进程并且转为一个字符串，用这个字符串来进行闭合前面的，相当于我们执行了 ' or 'xxxxx 那么就是一个永真的条件。
+<ul>
+<li>content: ffifdyop
+</li><li>hex: 276f722736c95d99e921722cf9ed621c
+</li><li>raw: 'or'6\xc9]\x99\xe9!r,\xf9\xedb\x1c
+</li><li>string: 'or'6]!r,b
+</li></ul>
+
+<p><b>语法：</b></p>
+<p>md5(string,raw)：<br><img src="/2021/01/23/mdwu/md6.png"></p>
+<h3>常见php-MD5()函数漏洞</h3>
+<ul>
+<li>1.数字与字符串之间的比较
+</li><li>2.MD5函数漏洞
+</li><li>3.php特性
+</li><li>4.MD5碰撞
+</li></ul>
+（详情参见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19980431/article/details/83018232">霸霸童鞋的学习之旅~</a> ）
+<br>又是正经的一天~
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-bak" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -785,61 +860,6 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
 <li>1 http://localhost/sql/ 这个sql文件夹是自己创建的，如果没有创建该文件夹，而是在解压sql-labs压缩包时直接将其解压到WWW目录下，则直接访问http://localhost/。
 </li><li>2 将php版本换到5.5及以下。
 </li></ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-php" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/12/04/php/" class="article-date">
-  	<time datetime="2020-12-04T10:05:07.000Z" itemprop="datePublished">2020-12-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/04/php/">
-        phpstudy的使用-站点的创建
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>打开软件首页，开启apache，FIP和MySQL<br><img src="/2020/12/04/php/phps1.png"><br>然后点击网站的创建网站，如图<br><img src="/2020/12/04/php/phps2.png"><br>然后建立网站的基本配置，创建FTP和数据库<br><img src="/2020/12/04/php/phps3.png"><br>点击确认创建成功后，点击网站-管理-打开网站<br><img src="/2020/12/04/php/phps4.png"><br>出现以下界面<br><img src="/2020/12/04/php/phps5.png"><br>站点建立成功，我们也可以通过输入网址：babatongxie来访问网站<br>然后点击管理-打开根目录，将已有的文件删除<br>然后打开sublime编辑器<br>如下图<br><img src="/2020/12/04/php/phps6.png"><br>然后找到安装目录，选择文件夹<br><img src="/2020/12/04/php/phps7.png"><br>然后创建一个php文件如下图<br><img src="/2020/12/04/php/phps8.png"><br>输入以下代码：<br><img src="/2020/12/04/php/phps9.png"><br>ctrl+s快捷键保存<br>刷新网址，便会看到以下界面<br><img src="/2020/12/04/php/phps10.png"><br>成功改变网站内容！<br>（又是正经的一天！giao！）</p>
 
       
     </div>
