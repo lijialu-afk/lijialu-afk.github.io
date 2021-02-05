@@ -9,12 +9,12 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="知识点1.php中的strcmp漏洞说明：int strcmp ( string $str1 , string $str2 )参数 str1第一个字符串。str2第二个字符串。如果 str1 小于 str2 返回 &lt; 0； 如果 str1 大于 str2 返回 &gt; 0；如果两者相等，返回 0。可知，传入的期望类型是字符串类型的数据，但是如果我们传入非字符串类型的数据的时候，这个函数将会">
+  <meta name="description" content="知识点 1.php中的strcmp漏洞说明：int strcmp ( string $str1 , string $str2 )参数 str1第一个字符串。str2第二个字符串。如果 str1 小于 str2 返回 &lt; 0； 如果 str1 大于 str2 返回 &gt; 0；如果两者相等，返回 0。可知，传入的期望类型是字符串类型的数据，但是如果我们传入非字符串类型的数据的时候，这个函数将">
 <meta property="og:type" content="article">
 <meta property="og:title" content="18-buu练习[极客大挑战 2019]BuyFlag">
 <meta property="og:url" content="http://example.com/2021/02/03/buy/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="知识点1.php中的strcmp漏洞说明：int strcmp ( string $str1 , string $str2 )参数 str1第一个字符串。str2第二个字符串。如果 str1 小于 str2 返回 &lt; 0； 如果 str1 大于 str2 返回 &gt; 0；如果两者相等，返回 0。可知，传入的期望类型是字符串类型的数据，但是如果我们传入非字符串类型的数据的时候，这个函数将会">
+<meta property="og:description" content="知识点 1.php中的strcmp漏洞说明：int strcmp ( string $str1 , string $str2 )参数 str1第一个字符串。str2第二个字符串。如果 str1 小于 str2 返回 &lt; 0； 如果 str1 大于 str2 返回 &gt; 0；如果两者相等，返回 0。可知，传入的期望类型是字符串类型的数据，但是如果我们传入非字符串类型的数据的时候，这个函数将">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/02/03/buy/buy0.png">
 <meta property="og:image" content="http://example.com/2021/02/03/buy/buy1.png">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://example.com/2021/02/03/buy/buy5.png">
 <meta property="og:image" content="http://example.com/2021/02/03/buy/buy6.png">
 <meta property="article:published_time" content="2021-02-03T05:25:32.000Z">
-<meta property="article:modified_time" content="2021-02-03T06:22:15.942Z">
+<meta property="article:modified_time" content="2021-02-05T05:29:06.590Z">
 <meta property="article:author" content="Jialu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2021/02/03/buy/buy0.png">
@@ -214,7 +214,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><b style="color:pink">知识点</b><br><b style="color:bule">1.php中的strcmp漏洞</b><br>说明：<br>int strcmp ( string $str1 , string $str2 )<br>参数 str1第一个字符串。str2第二个字符串。如果 str1 小于 str2 返回 &lt; 0； 如果 str1 大于 str2 返回 &gt; 0；如果两者相等，返回 0。<br>可知，传入的期望类型是字符串类型的数据，但是如果我们传入非字符串类型的数据的时候，这个函数将会有怎么样的行为呢？实际上，当这个函数接受到了不符合的类型，这个函数将发生错误，但是在5.3之前的php中，显示了报错的警告信息后，将return 0 ，也就是虽然报了错，但却判定其相等。<br><b style="color:bule">2.php中的is_numeric()漏洞</b><br>is_numeric() 函数用于检测变量是否为数字或数字字符串。<br>is_numeric函数对于空字符%00，无论是%00放在前后都可以判断为非数值，而%20空格字符只能放在数值后。所以，查看函数发现该函数对对于第一个空格字符会跳过空格字符判断，接着后面的判断！<br><b style="color:pink">题目</b><br>打开靶场：<br><img src="/2021/02/03/buy/buy0.png"><br>点击右上角的menu payflag，查看源代码如下：<br><img src="/2021/02/03/buy/buy1.png"><br>bp抓包：<br><img src="/2021/02/03/buy/buy2.png"><br>既然这样，我们把user的0改成1试试：<br><img src="/2021/02/03/buy/buy3.png"><br>buy.php代码如下（前面有找的方法）：<br>if (isset($_POST[‘password’])) {<br>    $password = $_POST[‘password’];<br>    if (is_numeric($password)) {<br>        echo “password can’t be number<br>“;<br>    }elseif ($password == 404) {<br>        echo “Password Right!<br>“;<br>    }<br>}<br>意思是说要经过post传输密码要等于404，但是404又不能被is_numeric函数检测出来，所以我们需要绕开它，使用在后面加上a跳过<br>输入：password=404%20<br><img src="/2021/02/03/buy/buy4.png"><br>you are Cuiter<br>Password Right!<br>Pay for the flag!!!hacker!!!<br>那我们传入money=100000000：<br><img src="/2021/02/03/buy/buy5.png"><br>提示说：Nember lenth is too long<br>直接money[]=1，或者改用科学计数法：money=1e10<br><img src="/2021/02/03/buy/buy6.png"><br>得到flag！</p>
+        <p><b style="color:pink">知识点</b></p>
+<p><b style="color:blue">1.php中的strcmp漏洞</b><br>说明：<br>int strcmp ( string $str1 , string $str2 )<br>参数 str1第一个字符串。str2第二个字符串。如果 str1 小于 str2 返回 &lt; 0； 如果 str1 大于 str2 返回 &gt; 0；如果两者相等，返回 0。<br>可知，传入的期望类型是字符串类型的数据，但是如果我们传入非字符串类型的数据的时候，这个函数将会有怎么样的行为呢？实际上，当这个函数接受到了不符合的类型，这个函数将发生错误，但是在5.3之前的php中，显示了报错的警告信息后，将return 0 ，也就是虽然报了错，但却判定其相等。<br><b style="color:blue">2.php中的is_numeric()漏洞</b><br>is_numeric() 函数用于检测变量是否为数字或数字字符串。<br>is_numeric函数对于空字符%00，无论是%00放在前后都可以判断为非数值，而%20空格字符只能放在数值后。所以，查看函数发现该函数对对于第一个空格字符会跳过空格字符判断，接着后面的判断！<br><b style="color:pink">题目</b><br>打开靶场：<br><img src="/2021/02/03/buy/buy0.png"><br>点击右上角的menu payflag，查看源代码如下：<br><img src="/2021/02/03/buy/buy1.png"><br>bp抓包：<br><img src="/2021/02/03/buy/buy2.png"><br>既然这样，我们把user的0改成1试试：<br><img src="/2021/02/03/buy/buy3.png"><br>buy.php代码如下（前面有找的方法）：<br>if (isset($_POST[‘password’])) {<br>    $password = $_POST[‘password’];<br>    if (is_numeric($password)) {<br>        echo “password can’t be number<br>“;<br>    }elseif ($password == 404) {<br>        echo “Password Right!<br>“;<br>    }<br>}<br>意思是说要经过post传输密码要等于404，但是404又不能被is_numeric函数检测出来，所以我们需要绕开它，使用在后面加上a跳过<br>输入：password=404%20<br><img src="/2021/02/03/buy/buy4.png"><br>you are Cuiter<br>Password Right!<br>Pay for the flag!!!hacker!!!<br>那我们传入money=100000000：<br><img src="/2021/02/03/buy/buy5.png"><br>提示说：Nember lenth is too long<br>直接money[]=1，或者改用科学计数法：money=1e10<br><img src="/2021/02/03/buy/buy6.png"><br>得到flag！</p>
 
       
     </div>
@@ -223,6 +224,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2021/02/05/nizhuansiwei/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          19-buu练习[ZJCTF 2019]NiZhuanSiWei
+        
+      </div>
+    </a>
   
   
     <a href="/2021/02/01/bachang/" id="article-nav-older" class="article-nav-link-wrap">
