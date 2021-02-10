@@ -169,6 +169,62 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-buu" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/17/buu/" class="article-date">
+  	<time datetime="2021-01-17T08:52:10.000Z" itemprop="datePublished">2021-01-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/17/buu/">
+        3-buu练习Secret File
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打开题目链接，查看源代码，会看到以下界面：<br><img src="/2021/01/17/buu/buu1.png"></p>
+<p>如上图点击<b>Archive_room.php</b>，会看到以下代码<br><img src="/2021/01/17/buu/buu2.png"><br>根据提示访问action.php，会看到以下界面<br><img src="/2021/01/17/buu/buu3.png"><br>可以看出action.php访问的时间很短，直接跳到了end.php文件中，那我们就采用BurpSuite抓包，结果如下：<br><img src="/2021/01/17/buu/buu4.png"><br><b>secr3t.php</b>被着重强调，那我们访问该文件，得到的代码如下；<br><img src="/2021/01/17/buu/buu5.png"><br>通过查看代码发现并没有将flag写出来。根据提示我们可以肯定flag确实是在这里，但是前端却看不到，那么flag应该是写在了php代码里面，需要获得完整的flag.php文件。获取完整的flag.php文件的方法便是secr3t.php的文件包含漏洞，那我们就直接采用php://filer伪协议来绕过漏洞<br>使用经典payload：php://filter/convert.base64-encode/resource=flag.php<br><img src="/2021/01/17/buu/buu6.png"><br>得到base64编码，解码如下<br><img src="/2021/01/17/buu/buu7.png"><br>在代码中找到flag~<br>（duang！又是正经的一天）</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-include1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -765,62 +821,6 @@ html文件存放在D盘里的images文件里的css文件中，那么就使用父
 注；
 $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出现，使用foreach来遍历数组中的值，然后再将获取到的数组键名作为变量，数组中的键值作为变量的值。因此就产生了变量覆盖漏洞。如：get ?name=test 会将$name的值覆盖，变为test。
 （aha~又是正经的一天~）
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-basic-rce2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/11/26/basic-rce2/" class="article-date">
-  	<time datetime="2020-11-26T14:14:08.000Z" itemprop="datePublished">2020-11-26</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/26/basic-rce2/">
-        basic.rce2
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  今天写了rce基础题，题目如下<br>  <img src="/2020/11/26/basic-rce2/rce1.png"><br>  根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。<br>  那我们就要绕过cat等内容<br>  我们通过构造?Rem=?&gt;&lt;?=<code>ls</code>;查看目录文件，得到文件名<br>  <img src="/2020/11/26/basic-rce2/rce2.png"><br>  我们可通过编码绕过，输入以下get命令：index.php?Rem=system(“\x63\x61\x74\x20\x66\x6c\x61\x67”);<br>  <img src="/2020/11/26/basic-rce2/rce3.png"><br>  成功得到flag~<br>  注：<br>  命令执行的函数有很多，如下：<br>  system()<br>  passthru()<br>  exec()<br>  shell_exec()<br>  popen()<br>  proc_open()<br>  pcntl_exec()</p>
-<p>  反引号 同shell_exec()<br>  其中，只有system函数是有回显的，其他的函数可以通过echo等显示。<br>  </p><h1>其他的一些绕过</h1><br>  <h2>空格绕过：</h2><br>  1，&gt; &lt; &lt;&gt; 重定向符<br>  2，%09(需要php环境)<br>  3，${IFS}<br>  4，$IFS$9<br>  5，{cat,flag.php} //用逗号实现了空格功能<br>  6，%20<br>  7，%09<br>  <h2>cat被过滤：</h2><br>  1，more:一页一页的显示档案内容<br>  2，less:与 more 类似<br>  3，head:查看头几行<br>  4，tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>  5，tail:查看尾几行<br>  6，nl：显示的时候，顺便输出行号<br>  7，od:以二进制的方式读取档案内容<br>  8，vi:一种编辑器，这个也可以查看<br>  9，vim:一种编辑器，这个也可以查看<br>  10，sort:可以查看<br>  11，uniq:可以查看<br>  12，file -f:报错出具体内容<br>  （具体内容可访问：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/NPFS/p/13797436.html">https://www.cnblogs.com/NPFS/p/13797436.html</a> )<p></p>
-
       
     </div>
     
