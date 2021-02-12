@@ -169,6 +169,73 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-php变量覆盖2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" class="article-date">
+  	<time datetime="2020-11-27T11:13:59.000Z" itemprop="datePublished">2020-11-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/">
+        php变量覆盖2
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天写了本周web小分队的最后一次web题，题目如下：<br><img src="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl1.png"><br>由题可知，这是一道$$导致的变量覆盖问题。</p>
+<h2>题目分析：</h2>
+源码包含了flag.php文件，并且需要满足3个if里的条件才能获取flag，题目中使用了两个foreach并且也使用了$$.两个foreach中对 $$key的处理是不一样的，满足条件后会将$flag里面的值打印出来，所以$flag是在flag.php文件文件中的。 
+由于flag值被覆盖掉了，所以要先将flag值赋给变量_200或变量_403,然后利用die（200）或die（403）将flag显示出来。
+<h2>解题方法：</h2>
+由于flag的值被覆盖掉，所以只能将$flag得知赋给$_200,通过die（_200）将flag输出来。
+<p>最终payload如下：</p>
+<p>GET：?_200=flag </p>
+<p>POST：flag=hahaha（flag=任意字符）</p>
+<img src="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl2.png">
+<p>成功得到flag~</p>
+注；
+$$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出现，使用foreach来遍历数组中的值，然后再将获取到的数组键名作为变量，数组中的键值作为变量的值。因此就产生了变量覆盖漏洞。如：get ?name=test 会将$name的值覆盖，变为test。
+（aha~又是正经的一天~）
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-basic-rce2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
