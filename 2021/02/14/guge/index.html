@@ -3,28 +3,31 @@
 <head>
   <meta charset="utf-8">
   
-  <title>23-buu练习[GYCTF2020]Blacklist | baba童鞋的博客</title>
+  <title>24-buu练习[BJDCTF 2nd]fake google 1 | baba童鞋的博客</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="知识点  一、堆叠注入查表名、列名、字段名  show databases; show tables; show columns from &#96;table_name&#96;;   二、本题使用HANDLER查看flag  1&#39;; handler FlagHere open; handler FlagHere read first; handler FlagHere close;#   三、HANDLERH">
+  <meta name="description" content="知识点  Tornado和Jinja2，这两个都是以两组花括号作为变量包裹标识符：  利用漏洞命令执行或者信息泄露，信息泄露有一些敏感的配置信息，而命令执行就能很直观的进行操作。例如文件读写。 然后是确定如何操作，查看可用模块里可执行函数，比如os.system可以执行系统命令，os.popen()可以读取文件等。 再就是对题目的过滤进行绕过。可能会对某些危险函数禁用或者过滤函数名。可用编码、拼接">
 <meta property="og:type" content="article">
-<meta property="og:title" content="23-buu练习[GYCTF2020]Blacklist">
-<meta property="og:url" content="http://example.com/2021/02/12/list/index.html">
+<meta property="og:title" content="24-buu练习[BJDCTF 2nd]fake google 1">
+<meta property="og:url" content="http://example.com/2021/02/14/guge/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="知识点  一、堆叠注入查表名、列名、字段名  show databases; show tables; show columns from &#96;table_name&#96;;   二、本题使用HANDLER查看flag  1&#39;; handler FlagHere open; handler FlagHere read first; handler FlagHere close;#   三、HANDLERH">
+<meta property="og:description" content="知识点  Tornado和Jinja2，这两个都是以两组花括号作为变量包裹标识符：  利用漏洞命令执行或者信息泄露，信息泄露有一些敏感的配置信息，而命令执行就能很直观的进行操作。例如文件读写。 然后是确定如何操作，查看可用模块里可执行函数，比如os.system可以执行系统命令，os.popen()可以读取文件等。 再就是对题目的过滤进行绕过。可能会对某些危险函数禁用或者过滤函数名。可用编码、拼接">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/02/12/list/q1.png">
-<meta property="og:image" content="http://example.com/2021/02/12/list/q2.png">
-<meta property="og:image" content="http://example.com/2021/02/12/list/q3.png">
-<meta property="og:image" content="http://example.com/2021/02/12/list/q4.png">
-<meta property="article:published_time" content="2021-02-12T09:17:13.000Z">
-<meta property="article:modified_time" content="2021-02-12T10:05:38.657Z">
+<meta property="og:image" content="http://example.com/2021/02/14/guge/g3.png">
+<meta property="og:image" content="http://example.com/2021/02/14/guge/g7.png">
+<meta property="og:image" content="http://example.com/2021/02/14/guge/g1.png">
+<meta property="og:image" content="http://example.com/2021/02/14/guge/g2.png">
+<meta property="og:image" content="http://example.com/2021/02/14/guge/g4.png">
+<meta property="og:image" content="http://example.com/2021/02/14/guge/g5.png">
+<meta property="og:image" content="http://example.com/2021/02/14/guge/g6.png">
+<meta property="article:published_time" content="2021-02-14T07:45:30.000Z">
+<meta property="article:modified_time" content="2021-02-14T08:30:56.017Z">
 <meta property="article:author" content="Jialu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/02/12/list/q1.png">
+<meta name="twitter:image" content="http://example.com/2021/02/14/guge/g3.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -176,11 +179,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-list" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-guge" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/02/12/list/" class="article-date">
-  	<time datetime="2021-02-12T09:17:13.000Z" itemprop="datePublished">2021-02-12</time>
+      <a href="/2021/02/14/guge/" class="article-date">
+  	<time datetime="2021-02-14T07:45:30.000Z" itemprop="datePublished">2021-02-14</time>
 </a>
     </div>
   
@@ -193,7 +196,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      23-buu练习[GYCTF2020]Blacklist
+      24-buu练习[BJDCTF 2nd]fake google 1
       
     </h1>
   
@@ -213,76 +216,25 @@
       
         <h2>知识点</h2>
 
-<p>一、堆叠注入<br>查表名、列名、字段名</p>
-<ol>
-<li>show databases;
-</li><li>show tables;
-</li><li>show columns from `table_name`;
-</li></ol>
-
-<p>二、本题使用HANDLER查看flag</p>
-<ol>
-<li>1';
-</li><li>handler FlagHere open;
-</li><li>handler FlagHere read first;
-</li><li>handler FlagHere close;#
-</li></ol>
-
-<p>三、HANDLER<br>HANDLER … OPEN语句打开一个表，使其可以使用后续HANDLER … READ语句访问，该表对象未被其他会话共享，并且在会话调用HANDLER … CLOSE或会话终止之前不会关闭</p>
+<p><b style="color:pink">Tornado和Jinja2</b>，这两个都是以两组花括号作为变量包裹标识符：<br><img src="/2021/02/14/guge/g3.png"></p>
 <ul>
-<li>HANDLER tbl_name OPEN [ [AS] alias]
-</li><li>HANDLER tbl_name READ index_name { = | <= |>= | < | > } (value1,value2,...)
-<li>    [ WHERE where_condition ] [LIMIT ... ]
-</li><li>HANDLER tbl_name READ index_name { FIRST | NEXT | PREV | LAST }
-</li><li>    [ WHERE where_condition ] [LIMIT ... ]
-</li><li>HANDLER tbl_name READ { FIRST | NEXT }
-</li><li>    [ WHERE where_condition ] [LIMIT ... ]
-</li><li>HANDLER tbl_name CLOSE 
-</li><li>//其中  HANDLER tbl_name OPEN AS example
-</li><li>//其后  HANDLER example READ index_name="example2"
-</li></=></li></ul>
+<li>利用漏洞命令执行或者信息泄露，信息泄露有一些敏感的配置信息，而命令执行就能很直观的进行操作。例如文件读写。
+</li><li>然后是确定如何操作，查看可用模块里可执行函数，比如os.system可以执行系统命令，os.popen()可以读取文件等。
+</li><li>再就是对题目的过滤进行绕过。可能会对某些危险函数禁用或者过滤函数名。可用编码、拼接，替换等方式绕过。
+</li></ul>
 
-<p>四、预处理语句使用方法</p>
-<ol>
-<li>PREPARE name from '[my sql sequece]';   //预定义SQL语句
-</li><li>EXECUTE name;  //执行预定义SQL语句
-</li><li>(DEALLOCATE || DROP) PREPARE name;  //删除预定义SQL语句
-</li></ol>
-<ol>
-<li>SET @tn = 'hahaha';  //存储表名
-</li><li>SET @sql = concat('select * from ', @tn);  //存储SQL语句
-</li><li>PREPARE name from @sql;   //预定义SQL语句
-</li><li>EXECUTE name;  //执行预定义SQL语句
-</li><li>(DEALLOCATE || DROP) PREPARE sqla;  //删除预定义SQL语句
-</li></ol>
-
+<p>有关ssti的payload：<br><img src="/2021/02/14/guge/g7.png"><br>相关函数的解释:</p>
+<ul>
+<li>__class__ 返回类型所属的对象
+</li><li>__subclasses__ 每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的的引用的列表
+</li><li>__init__ 类的初始化方法
+</li><li>__globals__ 对包含函数全局变量的字典的引用
+</li><li>__mro__ 返回一个包含对象所继承的基类元组，方法在解析时按照元组的顺序解析。
+<li.__bases__ 返回该对象所继承的基类 __builtins__是做为默认初始模块 < ul>
 <h2>题目</h2>
 
-<p>提交 1’ 报错确定存在sql注入<br>提交 1’# 返回正常<br>提交 1’select# 返回黑名单:<br><img src="/2021/02/12/list/q1.png"><br>禁用了select和where等关键字<br>采用堆叠注入<br>首先查询列数：</p>
-<ul>
-<li>1' order by 2#]
-</li></ul>
-
-<p>列数为2</p>
-<p>union等关键词被过滤 正常注入无法进行<br>考虑堆叠注入——使用分号结束上一个语句再叠加其他语句一起执行；</p>
-<ul>
-<li>1' and 1=2;show databases#
-</li><li>1' and 1=2;show tables#
-</li></ul>
-
-<p><img src="/2021/02/12/list/q2.png"><br>然后</p>
-<ul>
-<li>1' and 1=2;desc `FlagHere`#
-</li></ul>
-
-<p><img src="/2021/02/12/list/q3.png"><br>HANDLER … OPEN语句打开一个表，使其可以使用后续HANDLER … READ语句访问，该表对象未被其他会话共享，并且在会话调用HANDLER … CLOSE或会话终止之前不会关闭<br>payload如下：</p>
-<ul>
-<li>1';
-HANDLER FlagHere OPEN;HANDLER FlagHere READ FIRST;HANDLER FlagHere CLOSE;#
-</li></ul>
-
-<p><img src="/2021/02/12/list/q4.png"><br>得到flag~~</p>
-
+<p>题目出来后，是一个搜索页面，f12也没什么发现，在搜索框输入1：<br><img src="/2021/02/14/guge/g1.png"><br>搜索后出现以下内容：<br><img src="/2021/02/14/guge/g2.png"><br>ssti模板注入，又是崭新的东西=……=|||，虽然前面做过了一题tornado模板的，但是差别很大，我太难了||||<br>既然是ssti模板注入，尝试一下，比如说，在搜索框中输入4，会显示4 ，说明后端有处理渲染。<br>用下面的流程图测试一下，看看是什么模板引擎：<br><img src="/2021/02/14/guge/g4.png"><br>用Payload测试之后发现是jinjia2的模板引擎，然后构造jinjia2 ssti的命令执行payload：<br><img src="/2021/02/14/guge/g5.png"><br><img src="/2021/02/14/guge/g6.png"><br>的到flag！~<br>这道题是真的不知道是个什么情况=….=，看大佬博客也搞不清楚状况，只能这样了<br>参考：<br>SSTI模板注入参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/aef2ae0498df">https://www.jianshu.com/p/aef2ae0498df</a><br>ssti/沙盒逃逸详细总结：<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/188172#h2-13">https://www.anquanke.com/post/id/188172#h2-13</a><br>服务段模板注入攻击：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28823933">https://zhuanlan.zhihu.com/p/28823933</a></p>
+</li.__bases__></li></ul>
       
     </div>
     
@@ -291,18 +243,9 @@ HANDLER FlagHere OPEN;HANDLER FlagHere READ FIRST;HANDLER FlagHere CLOSE;#
     
 <nav id="article-nav">
   
-    <a href="/2021/02/14/guge/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          24-buu练习[BJDCTF 2nd]fake google 1
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/02/10/baby-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">22-buu练习[GXYCTF2019]BabySQli</div>
+    <a href="/2021/02/12/list/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">23-buu练习[GYCTF2020]Blacklist</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -312,7 +255,7 @@ HANDLER FlagHere OPEN;HANDLER FlagHere READ FIRST;HANDLER FlagHere CLOSE;#
 </article>
 
 
-<div class="ds-share share" data-thread-key="list" data-title="23-buu练习[GYCTF2020]Blacklist" data-url="http://example.com/2021/02/12/list/"  data-images="/img/huahua.jpg" data-content="23-buu练习[GYCTF2020]Blacklist">
+<div class="ds-share share" data-thread-key="guge" data-title="24-buu练习[BJDCTF 2nd]fake google 1" data-url="http://example.com/2021/02/14/guge/"  data-images="/img/huahua.jpg" data-content="24-buu练习[BJDCTF 2nd]fake google 1">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
