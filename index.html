@@ -169,6 +169,98 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-fan" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/03/10/fan/" class="article-date">
+  	<time datetime="2021-03-10T11:59:14.000Z" itemprop="datePublished">2021-03-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/10/fan/">
+        反序列化知识点总结
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><b style="color:red">反序列化定义：</b><br>（反）序列化给我们传递对象提供了一种简单的方法。serialize()将一个对象转换成一个字符串，unserialize()将字符串还原为一个对象，在PHP应用中，序列化和反序列化一般用做缓存，比如session缓存，cookie等。在php序列化格式（即数据在传输时防止格式类型丢失,先进行打包即序列化,完成传输后解包即反序列化）<br><b style="color:yellow">反序列化原型：</b>string serialize ( mixed $value )<br><b style="color:pink">例子：</b><br>输入内容：<br><img src="/2021/03/10/fan/q1.png"><br>输出结果：<br><img src="/2021/03/10/fan/q2.png"><br>序列化对不同格式字符串结果不同，如下：</p>
+<ul>
+<li>
+string:s:size:value
+</li><li>
+integer:i:value
+</li><li>
+boolean:b:value(即0或1)
+</li><li>
+array:a:size:{key:value;key:value}
+</li><li>
+object:o:strlen(object name):object name:object size:{s:strlen(property name):property name:property definition;}
+</li></ul>
+
+<p>注：序列化对象时，不会保存常量的值。对于父类中的变量，则会保留。<br><b style="color:blue">反序列化函数：</b>mixed unserialize ( string $str )<br>unserialize()反序列化函数用于将单一的已序列化的变量转换回 PHP 的值。</p>
+<ul>
+<li>如果传递的字符串不可解序列化，则返回 FALSE，并产生一个E_NOTICE
+</li><li>返回的是转换之后的值，可为integer``float、string、array或object
+</li><li>若被反序列化的变量是一个对象，在成功重新构造对象之后，PHP会自动地试图去调用__wakeup()成员函数（如果存在的话）
+</li></ul>
+
+<p><b style="color:pink">例子：</b><br>输入内容：<br><img src="/2021/03/10/fan/q3.png"><br>输出结果：<br><img src="/2021/03/10/fan/q4.png"><br>__wakeup()函数在对象被构建以后执行，所以$this-&gt;username的值不为空(为空则会绕过此函数，或反序列化时数据被改动也会绕过）<br>会尽量将变量值进行匹配并复制给序列化后的对象<br><b style="color:yellow">&gt;常见的PHP魔术方法：</b></p>
+<ul>
+<li>__construct： 在创建对象时候初始化对象，一般用于对变量赋初值。
+</li><li>__destruct： 和构造函数相反，当对象所在函数调用完毕后执行。
+</li><li>__toString：当对象被当做一个字符串使用时调用。
+</li><li>__sleep:序列化对象之前就调用此方法(其返回需要一个数组)
+</li><li>__wakeup:反序列化恢复对象之前调用该方法
+</li><li>__call:当调用对象中不存在的方法会自动调用该方法。
+</li><li>__get:在调用私有属性的时候会自动执行
+</li><li>__isset()在不可访问的属性上调用isset()或empty()触发
+</li><li>__unset()在不可访问的属性上使用unset()时触发
+</li></ul>
+
+<p><b style="color:red">php反序列化漏洞：</b><br>php反序列化漏洞又称对象注入，可能会导致注入，远程代码执行等安全问题的发生。</p>
+<p>PHP反序列化漏洞产生的原因：</p>
+<p>如果一个php代码使用了unserialize函数去调用某一类，该类中会自动执行一些<br>自定义的magic method，这些magicmethod中如果包含了一些危险操作，或者这<br>些magic method会去调用类中其他危险操作的函数，如果这些危险操作是我们可<br>控的，那么久可以进行一些不可描述的操作了。</p>
+<p><b style="color:green">总结：</b><br>当存在php反序列化漏洞时，找一个可控的反序列化函数，通过这个函数去调用一些类，在这些类中可能存在一些魔法函数，在这些魔法函数中可能有一些我们可控的危险操作，我们利用这些危险操作，让程序执行反序列化函数时触发这些的危险操作。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-mz" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1023,62 +1115,6 @@ highlight_file(__FILE__);
 </li></ul>
 
 <p>查看源代码，flag在源代码中：<br><img src="/2021/02/05/nizhuansiwei/a4.png"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-buy" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/02/03/buy/" class="article-date">
-  	<time datetime="2021-02-03T05:25:32.000Z" itemprop="datePublished">2021-02-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/03/buy/">
-        18-buu练习[极客大挑战 2019]BuyFlag
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><b style="color:pink">知识点</b></p>
-<p><b style="color:blue">1.php中的strcmp漏洞</b><br>说明：<br>int strcmp ( string $str1 , string $str2 )<br>参数 str1第一个字符串。str2第二个字符串。如果 str1 小于 str2 返回 &lt; 0； 如果 str1 大于 str2 返回 &gt; 0；如果两者相等，返回 0。<br>可知，传入的期望类型是字符串类型的数据，但是如果我们传入非字符串类型的数据的时候，这个函数将会有怎么样的行为呢？实际上，当这个函数接受到了不符合的类型，这个函数将发生错误，但是在5.3之前的php中，显示了报错的警告信息后，将return 0 ，也就是虽然报了错，但却判定其相等。<br><b style="color:blue">2.php中的is_numeric()漏洞</b><br>is_numeric() 函数用于检测变量是否为数字或数字字符串。<br>is_numeric函数对于空字符%00，无论是%00放在前后都可以判断为非数值，而%20空格字符只能放在数值后。所以，查看函数发现该函数对对于第一个空格字符会跳过空格字符判断，接着后面的判断！<br><b style="color:pink">题目</b><br>打开靶场：<br><img src="/2021/02/03/buy/buy0.png"><br>点击右上角的menu payflag，查看源代码如下：<br><img src="/2021/02/03/buy/buy1.png"><br>bp抓包：<br><img src="/2021/02/03/buy/buy2.png"><br>既然这样，我们把user的0改成1试试：<br><img src="/2021/02/03/buy/buy3.png"><br>buy.php代码如下（前面有找的方法）：<br>if (isset($_POST[‘password’])) {<br>    $password = $_POST[‘password’];<br>    if (is_numeric($password)) {<br>        echo “password can’t be number<br>“;<br>    }elseif ($password == 404) {<br>        echo “Password Right!<br>“;<br>    }<br>}<br>意思是说要经过post传输密码要等于404，但是404又不能被is_numeric函数检测出来，所以我们需要绕开它，使用在后面加上a跳过<br>输入：password=404%20<br><img src="/2021/02/03/buy/buy4.png"><br>you are Cuiter<br>Password Right!<br>Pay for the flag!!!hacker!!!<br>那我们传入money=100000000：<br><img src="/2021/02/03/buy/buy5.png"><br>提示说：Nember lenth is too long<br>直接money[]=1，或者改用科学计数法：money=1e10<br><img src="/2021/02/03/buy/buy6.png"><br>得到flag！</p>
 
       
     </div>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>反序列化知识点总结 | baba童鞋的博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="反序列化定义：（反）序列化给我们传递对象提供了一种简单的方法。serialize()将一个对象转换成一个字符串，unserialize()将字符串还原为一个对象，在PHP应用中，序列化和反序列化一般用做缓存，比如session缓存，cookie等。在php序列化格式（即数据在传输时防止格式类型丢失,先进行打包即序列化,完成传输后解包即反序列化）反序列化原型：string serialize ( m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="反序列化知识点总结">
+<meta property="og:url" content="http://example.com/2021/03/10/fan/index.html">
+<meta property="og:site_name" content="baba童鞋的博客">
+<meta property="og:description" content="反序列化定义：（反）序列化给我们传递对象提供了一种简单的方法。serialize()将一个对象转换成一个字符串，unserialize()将字符串还原为一个对象，在PHP应用中，序列化和反序列化一般用做缓存，比如session缓存，cookie等。在php序列化格式（即数据在传输时防止格式类型丢失,先进行打包即序列化,完成传输后解包即反序列化）反序列化原型：string serialize ( m">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/03/10/fan/q1.png">
+<meta property="og:image" content="http://example.com/2021/03/10/fan/q2.png">
+<meta property="og:image" content="http://example.com/2021/03/10/fan/q3.png">
+<meta property="og:image" content="http://example.com/2021/03/10/fan/q4.png">
+<meta property="article:published_time" content="2021-03-10T11:59:14.000Z">
+<meta property="article:modified_time" content="2021-03-10T12:34:13.196Z">
+<meta property="article:author" content="Jialu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/03/10/fan/q1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/huahua.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/"></a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/huahua.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-fan" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/03/10/fan/" class="article-date">
+  	<time datetime="2021-03-10T11:59:14.000Z" itemprop="datePublished">2021-03-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      反序列化知识点总结
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><b style="color:red">反序列化定义：</b><br>（反）序列化给我们传递对象提供了一种简单的方法。serialize()将一个对象转换成一个字符串，unserialize()将字符串还原为一个对象，在PHP应用中，序列化和反序列化一般用做缓存，比如session缓存，cookie等。在php序列化格式（即数据在传输时防止格式类型丢失,先进行打包即序列化,完成传输后解包即反序列化）<br><b style="color:yellow">反序列化原型：</b>string serialize ( mixed $value )<br><b style="color:pink">例子：</b><br>输入内容：<br><img src="/2021/03/10/fan/q1.png"><br>输出结果：<br><img src="/2021/03/10/fan/q2.png"><br>序列化对不同格式字符串结果不同，如下：</p>
+<ul>
+<li>
+string:s:size:value
+</li><li>
+integer:i:value
+</li><li>
+boolean:b:value(即0或1)
+</li><li>
+array:a:size:{key:value;key:value}
+</li><li>
+object:o:strlen(object name):object name:object size:{s:strlen(property name):property name:property definition;}
+</li></ul>
+
+<p>注：序列化对象时，不会保存常量的值。对于父类中的变量，则会保留。<br><b style="color:blue">反序列化函数：</b>mixed unserialize ( string $str )<br>unserialize()反序列化函数用于将单一的已序列化的变量转换回 PHP 的值。</p>
+<ul>
+<li>如果传递的字符串不可解序列化，则返回 FALSE，并产生一个E_NOTICE
+</li><li>返回的是转换之后的值，可为integer``float、string、array或object
+</li><li>若被反序列化的变量是一个对象，在成功重新构造对象之后，PHP会自动地试图去调用__wakeup()成员函数（如果存在的话）
+</li></ul>
+
+<p><b style="color:pink">例子：</b><br>输入内容：<br><img src="/2021/03/10/fan/q3.png"><br>输出结果：<br><img src="/2021/03/10/fan/q4.png"><br>__wakeup()函数在对象被构建以后执行，所以$this-&gt;username的值不为空(为空则会绕过此函数，或反序列化时数据被改动也会绕过）<br>会尽量将变量值进行匹配并复制给序列化后的对象<br><b style="color:yellow">&gt;常见的PHP魔术方法：</b></p>
+<ul>
+<li>__construct： 在创建对象时候初始化对象，一般用于对变量赋初值。
+</li><li>__destruct： 和构造函数相反，当对象所在函数调用完毕后执行。
+</li><li>__toString：当对象被当做一个字符串使用时调用。
+</li><li>__sleep:序列化对象之前就调用此方法(其返回需要一个数组)
+</li><li>__wakeup:反序列化恢复对象之前调用该方法
+</li><li>__call:当调用对象中不存在的方法会自动调用该方法。
+</li><li>__get:在调用私有属性的时候会自动执行
+</li><li>__isset()在不可访问的属性上调用isset()或empty()触发
+</li><li>__unset()在不可访问的属性上使用unset()时触发
+</li></ul>
+
+<p><b style="color:red">php反序列化漏洞：</b><br>php反序列化漏洞又称对象注入，可能会导致注入，远程代码执行等安全问题的发生。</p>
+<p>PHP反序列化漏洞产生的原因：</p>
+<p>如果一个php代码使用了unserialize函数去调用某一类，该类中会自动执行一些<br>自定义的magic method，这些magicmethod中如果包含了一些危险操作，或者这<br>些magic method会去调用类中其他危险操作的函数，如果这些危险操作是我们可<br>控的，那么久可以进行一些不可描述的操作了。</p>
+<p><b style="color:green">总结：</b><br>当存在php反序列化漏洞时，找一个可控的反序列化函数，通过这个函数去调用一些类，在这些类中可能存在一些魔法函数，在这些魔法函数中可能有一些我们可控的危险操作，我们利用这些危险操作，让程序执行反序列化函数时触发这些的危险操作。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/02/26/mz/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">sqli-labs靶场8-10</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="fan" data-title="反序列化知识点总结" data-url="http://example.com/2021/03/10/fan/"  data-images="/img/huahua.jpg" data-content="反序列化知识点总结">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2021 Jialu
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
