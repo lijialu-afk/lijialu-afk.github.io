@@ -169,6 +169,90 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-zj" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/03/18/zj/" class="article-date">
+  	<time datetime="2021-03-18T12:48:43.000Z" itemprop="datePublished">2021-03-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/18/zj/">
+        CSRF
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><b style="color:pink">##0、CSRF的简介</b><br>CSRF（Cross-site request forgery）跨站请求伪造，由于目标站无token/referer限制，导致攻击者可以用户的身份完成操作达到各种目的。根据HTTP请求方式，CSRF利用方式可分为两种。<br><b style="color:pink">##1、CSRF的攻击原理</b><br>CSRF 百度上的意思是跨站请求伪造，其实最简单的理解我们可以这么讲，假如一个微博关注用户的一个功能，存在CSRF漏洞，那么此时黑客只需要伪造一个页面让受害者间接或者直接触发，然后这个恶意页面就可以使用受害者的微博权限去关注其他的人微博账户。CSRF只要被批量化利用起来其危害还是比较大的。<br><img src="/2021/03/18/zj/1.png"><br>可以看到这里有个Referer的信息，Referer也就是请求来源地址，也就是说这个请求是从<a target="_blank" rel="noopener" href="http://www.sina.com.cn/">http://www.sina.com.cn</a>  这里发起的。然后去掉Referer，去执行这个请求，发现这个请求仍然可以进行正常的搜索，那么就说明这个请求没有判断请求来源也就是Referer，在请求头部也没有发现存在token的迹象，那么可以判断此处存在CSRF，这个CSRF是没有任何危害d的。<br><b style="color:pink">##2、CSRF漏洞成因及分析</b><br><b style="color:blue">GET类型的CSRF</b><br>请求直接是个GET请求，然后请求中没有token验证参数，然后还有一个固定的变量可以被控制。这种是比较常见的一种CSRF漏洞。这种漏洞的检测方法很简单：网页操作某功能，抓包后，如果发现满足上面条件，然后再去页面测试下，基本就可以确定存在不存在CSRF漏洞了。<br>这种类型的CSRF一般是由于程序员安全意识不强造成的。GET类型的CSRF利用非常简单，只需要一个HTTP请求，所以，一般会这样利用：<br><img src="/2021/03/18/zj/3.png"><br>在访问含有这个img的页面后，成功向<a target="_blank" rel="noopener" href="http://wooyun.org/csrf.php?xx=11">http://wooyun.org/csrf.php?xx=11</a>  发出了一次HTTP请求。所以，如果将该网址替换为存在GET型CSRF的地址，就能完成攻击了。<br><b style="color:blue">POST类型的CSRF</b><br>post请求中没有token参数，然后请求也没有验证referer信息。这种是存在CSRF情况最多的一种。这种漏洞的检测方法也很简单：网页操作某功能，抓包后，如果发现没有token等参数，然后就将referer信息设置为空，再次发包请求，如果请求成功了，就说明这里有CSRF漏洞。<br>这种类型的CSRF危害没有GET型的大，利用起来通常使用的是一个自动提交的表单，如：<br><img src="/2021/03/18/zj/2.png"></p>
+<p>访问该页面后，表单会自动提交，相当于模拟用户完成了一次POST操作<br><b style="color:blue">其他类型的CSRF</b><br>过基础认证的CSRF(常用于路由器):<br>POC:<br><img src="/2021/03/18/zj/4.png"><br>加载该图片后，路由器会给用户一个合法的SESSION，就可以进行下一步操作了。<br><b style="color:blue">##4、如何修复</b><br>针对CSRF的防范，有以下几点要注意：<br><b>关键操作只接受POST请求</b><br><b>验证码</b><br>CSRF攻击的过程，往往是在用户不知情的情况下构造网络请求。所以如果使用验证码，那么每次操作都需要用户进行互动，从而简单有效的防御了CSRF攻击。</p>
+<p>但是如果你在一个网站作出任何举动都要输入验证码会严重影响用户体验，所以验证码一般只出现在特殊操作里面，或者在注册时候使用</p>
+<p><b>检测refer</b><br>常见的互联网页面与页面之间是存在联系的，比如你在<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a>  应该是找不到通往<a target="_blank" rel="noopener" href="http://www.google.com/">www.google.com</a>  的链接的，再比如你在论坛留言，那么不管你留言后重定向到哪里去了，之前的那个网址一定会包含留言的输入框，这个之前的网址就会保留在新页面头文件的Referer中</p>
+<p>通过检查Referer的值，我们就可以判断这个请求是合法的还是非法的，但是问题出在服务器不是任何时候都能接受到Referer的值，所以Refere Check 一般用于监控CSRF攻击的发生，而不用来抵御攻击。</p>
+<p><b>Token</b><br>目前主流的做法是使用Token抵御CSRF攻击。下面通过分析CSRF 攻击来理解为什么Token能够有效</p>
+<p>CSRF攻击要成功的条件在于攻击者能够预测所有的参数从而构造出合法的请求。所以根据不可预测性原则，我们可以对参数进行加密从而防止CSRF攻击。</p>
+<p>另一个更通用的做法是保持原有参数不变，另外添加一个参数Token，其值是随机的。这样攻击者因为不知道Token而无法构造出合法的请求进行攻击。</p>
+<p>Token 使用原则</p>
+<ol>
+<li>Token要足够随机————只有这样才算不可预测
+</li><li>Token是一次性的，即每次请求成功后要更新Token————这样可以增加攻击难度，增加预测难度
+</li><li>Token要注意保密性————敏感操作使用post，防止Token出现在URL中
+</li><li>复制代码
+</li></ol>
+<b style="color:blue">##5、测试CSRF中注意的问题</b>
+如果同域下存在xss的话，除了验证码，其他的方式都无法防御这个问题。
+
+<p>有个程序后端可能是用REQUEST方式接受的，而程序默认是POST请求，其实改成GET方式请求也可以发送过去，存在很严重的隐患。</p>
+<p>当只采用refer防御时，可以把请求中的修改成如下试试能否绕过：</p>
+<p>原始refer：<a target="_blank" rel="noopener" href="http://test.com/index.php">http://test.com/index.php</a></p>
+<p>测试几种方式（以下方式可以通过的话即可能存在问题）：</p>
+<ul>
+<li>http://test.com.attack.com/index.php
+</li><li>http://attack.com/test.com/index.php
+</li><li>[空]
+</li><li>复制代码
+</li></ul>
+
+<p>refer为空构造的方法：<br><img src="/2021/03/18/zj/5.png"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-web" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1006,84 +1090,6 @@ HANDLER FlagHere OPEN;HANDLER FlagHere READ FIRST;HANDLER FlagHere CLOSE;#
 <p>c:\Program Files\Apache Group\Apache\conf\httpd.conf 或C:\apache\conf\httpd.conf  查看WINDOWS系统apache文件</p>
 <p>c:/Resin-3.0.14/conf/resin.conf   查看jsp开发的网站 resin文件配置信息.</p>
 </li>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-zip" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/02/07/zip/" class="article-date">
-  	<time datetime="2021-02-07T05:49:18.000Z" itemprop="datePublished">2021-02-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/07/zip/">
-        20-buu练习[极客大挑战 2019]PHP1
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2>知识点</h2>
-
-<p><b style="color:pink">1：用dirsearch扫描备份文件</b><br>安装及使用教程参见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43459870/article/details/102521386">https://blog.csdn.net/weixin_43459870/article/details/102521386</a><br><b style="color:pink">2：public、protected与private在序列化时的区别</b></p>
-<ul>
-<li>protected 声明的字段为保护字段，在所声明的类和该类的子类中可见，但在该类的对象实例中不可见。因此保护字段的字段名在序列化时，字段名前面会加上\0*\0的前缀。这里的 \0 表示 ASCII 码为 0 的字符(不可见字符)，而不是 \0 组合。这也许解释了，为什么如果直接在网址上，传递\0*\0username会报错，因为实际上并不是\0，只是用它来代替ASCII值为0的字符。必须用python传值才可以。
-</li><li>private 声明的字段为私有字段，只在所声明的类中可见，在该类的子类和该类的对象实例中均不可见。因此私有字段的字段名在序列化时，类名和字段名前面都会加上\0的前缀。字符串长度也包括所加前缀的长度。其中 \0 字符也是计算长度的。
-</li></ul>
-
-
-<p><b style="color:pink">3：__wakeup()方法绕过</b><br>一个经常被用来出题的函数<br>(CVE-2016-7124)<br>作用：与__sleep()函数相反，__sleep()函数，是在序序列化时被自动调用。__wakeup()函数，在反序列化时，被自动调用。绕过：当反序列化字符串，表示属性个数的值大于真实属性个数时，会跳过 __wakeup 函数的执行。</p>
-<h2>题目</h2>
-
-<p>打开靶场，界面如下：<br><img src="/2021/02/07/zip/zip0.png"><br>根据提示，可知他有一个备份网站的习惯，那我们用dirsearch扫描目录：<br>命令：python dirsearch.py -u URL -e extension<br><img src="/2021/02/07/zip/zip3.png"><br>扫描到一个<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a> 文件，我们直接在url上输入<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a> ，下载该zip文件<br><img src="/2021/02/07/zip/zip2.png"><br><img src="/2021/02/07/zip/zip1.png"><br>index.php包含如下代码:接收参数，进行序列化<br><img src="/2021/02/07/zip/zip4.png"><br>class.php文件源码入下：<br><img src="/2021/02/07/zip/zip5.png"><br>flag.php包含如下代码:<br><img src="/2021/02/07/zip/zip6.png"><br><b>声明一个Name类，包含username,password,且两个变量都是private修饰,整句话都有用。<br>然后根据判断句得知，username必须是admin,password必须是100所以，构造序列化</b></p>
-<ul>
-<li>O是对象，s是字符串，i是数字
-</li><li>因为是private修饰的所以要加%00充当空格
-</li><li>构造:O:4:"Name":2:{s:14:"%00Name%00username";s:5:"admin";s:14:"%00Name%00password";i:100;}
-</li><li>payload：url+?select=O:4:"Name":3:{s:14:"%00Name%00username";s:5:"admin";s:14:"%00Name%00password";i:100;}
-</li></ul>
-
-<p><img src="/2021/02/07/zip/zip7.png"><br>得到flag！</p>
-<h2>菜鸡求学之路</h2> 
-
-<p>看大佬的payload的时候，很疑惑为什么要写%00Name%00username这样的形式？<br>进行了三种修饰方式的测试:public,protected,private<br>只有public修饰的不用太多的修饰原生态构造就好，而private需要加%00Name%00，<br>protected则需要使用 %00*%00username这样的方式<br>——————<br><b>protected修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip8.png"><br><b>public修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip9.png"><br><b>private修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip10.png"></p>
-
       
     </div>
     

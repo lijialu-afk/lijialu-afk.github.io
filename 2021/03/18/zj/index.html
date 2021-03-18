@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSRF | baba童鞋的博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##0、CSRF的简介CSRF（Cross-site request forgery）跨站请求伪造，由于目标站无token&#x2F;referer限制，导致攻击者可以用户的身份完成操作达到各种目的。根据HTTP请求方式，CSRF利用方式可分为两种。##1、CSRF的攻击原理CSRF 百度上的意思是跨站请求伪造，其实最简单的理解我们可以这么讲，假如一个微博关注用户的一个功能，存在CSRF漏洞，那么此时黑客只">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSRF">
+<meta property="og:url" content="http://example.com/2021/03/18/zj/index.html">
+<meta property="og:site_name" content="baba童鞋的博客">
+<meta property="og:description" content="##0、CSRF的简介CSRF（Cross-site request forgery）跨站请求伪造，由于目标站无token&#x2F;referer限制，导致攻击者可以用户的身份完成操作达到各种目的。根据HTTP请求方式，CSRF利用方式可分为两种。##1、CSRF的攻击原理CSRF 百度上的意思是跨站请求伪造，其实最简单的理解我们可以这么讲，假如一个微博关注用户的一个功能，存在CSRF漏洞，那么此时黑客只">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/03/18/zj/1.png">
+<meta property="og:image" content="http://example.com/2021/03/18/zj/3.png">
+<meta property="og:image" content="http://example.com/2021/03/18/zj/2.png">
+<meta property="og:image" content="http://example.com/2021/03/18/zj/4.png">
+<meta property="og:image" content="http://example.com/2021/03/18/zj/5.png">
+<meta property="article:published_time" content="2021-03-18T12:48:43.000Z">
+<meta property="article:modified_time" content="2021-03-18T13:46:36.205Z">
+<meta property="article:author" content="Jialu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/03/18/zj/1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/huahua.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/"></a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/huahua.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-zj" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/03/18/zj/" class="article-date">
+  	<time datetime="2021-03-18T12:48:43.000Z" itemprop="datePublished">2021-03-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSRF
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><b style="color:pink">##0、CSRF的简介</b><br>CSRF（Cross-site request forgery）跨站请求伪造，由于目标站无token/referer限制，导致攻击者可以用户的身份完成操作达到各种目的。根据HTTP请求方式，CSRF利用方式可分为两种。<br><b style="color:pink">##1、CSRF的攻击原理</b><br>CSRF 百度上的意思是跨站请求伪造，其实最简单的理解我们可以这么讲，假如一个微博关注用户的一个功能，存在CSRF漏洞，那么此时黑客只需要伪造一个页面让受害者间接或者直接触发，然后这个恶意页面就可以使用受害者的微博权限去关注其他的人微博账户。CSRF只要被批量化利用起来其危害还是比较大的。<br><img src="/2021/03/18/zj/1.png"><br>可以看到这里有个Referer的信息，Referer也就是请求来源地址，也就是说这个请求是从<a target="_blank" rel="noopener" href="http://www.sina.com.cn/">http://www.sina.com.cn</a>  这里发起的。然后去掉Referer，去执行这个请求，发现这个请求仍然可以进行正常的搜索，那么就说明这个请求没有判断请求来源也就是Referer，在请求头部也没有发现存在token的迹象，那么可以判断此处存在CSRF，这个CSRF是没有任何危害d的。<br><b style="color:pink">##2、CSRF漏洞成因及分析</b><br><b style="color:blue">GET类型的CSRF</b><br>请求直接是个GET请求，然后请求中没有token验证参数，然后还有一个固定的变量可以被控制。这种是比较常见的一种CSRF漏洞。这种漏洞的检测方法很简单：网页操作某功能，抓包后，如果发现满足上面条件，然后再去页面测试下，基本就可以确定存在不存在CSRF漏洞了。<br>这种类型的CSRF一般是由于程序员安全意识不强造成的。GET类型的CSRF利用非常简单，只需要一个HTTP请求，所以，一般会这样利用：<br><img src="/2021/03/18/zj/3.png"><br>在访问含有这个img的页面后，成功向<a target="_blank" rel="noopener" href="http://wooyun.org/csrf.php?xx=11">http://wooyun.org/csrf.php?xx=11</a>  发出了一次HTTP请求。所以，如果将该网址替换为存在GET型CSRF的地址，就能完成攻击了。<br><b style="color:blue">POST类型的CSRF</b><br>post请求中没有token参数，然后请求也没有验证referer信息。这种是存在CSRF情况最多的一种。这种漏洞的检测方法也很简单：网页操作某功能，抓包后，如果发现没有token等参数，然后就将referer信息设置为空，再次发包请求，如果请求成功了，就说明这里有CSRF漏洞。<br>这种类型的CSRF危害没有GET型的大，利用起来通常使用的是一个自动提交的表单，如：<br><img src="/2021/03/18/zj/2.png"></p>
+<p>访问该页面后，表单会自动提交，相当于模拟用户完成了一次POST操作<br><b style="color:blue">其他类型的CSRF</b><br>过基础认证的CSRF(常用于路由器):<br>POC:<br><img src="/2021/03/18/zj/4.png"><br>加载该图片后，路由器会给用户一个合法的SESSION，就可以进行下一步操作了。<br><b style="color:blue">##4、如何修复</b><br>针对CSRF的防范，有以下几点要注意：<br><b>关键操作只接受POST请求</b><br><b>验证码</b><br>CSRF攻击的过程，往往是在用户不知情的情况下构造网络请求。所以如果使用验证码，那么每次操作都需要用户进行互动，从而简单有效的防御了CSRF攻击。</p>
+<p>但是如果你在一个网站作出任何举动都要输入验证码会严重影响用户体验，所以验证码一般只出现在特殊操作里面，或者在注册时候使用</p>
+<p><b>检测refer</b><br>常见的互联网页面与页面之间是存在联系的，比如你在<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a>  应该是找不到通往<a target="_blank" rel="noopener" href="http://www.google.com/">www.google.com</a>  的链接的，再比如你在论坛留言，那么不管你留言后重定向到哪里去了，之前的那个网址一定会包含留言的输入框，这个之前的网址就会保留在新页面头文件的Referer中</p>
+<p>通过检查Referer的值，我们就可以判断这个请求是合法的还是非法的，但是问题出在服务器不是任何时候都能接受到Referer的值，所以Refere Check 一般用于监控CSRF攻击的发生，而不用来抵御攻击。</p>
+<p><b>Token</b><br>目前主流的做法是使用Token抵御CSRF攻击。下面通过分析CSRF 攻击来理解为什么Token能够有效</p>
+<p>CSRF攻击要成功的条件在于攻击者能够预测所有的参数从而构造出合法的请求。所以根据不可预测性原则，我们可以对参数进行加密从而防止CSRF攻击。</p>
+<p>另一个更通用的做法是保持原有参数不变，另外添加一个参数Token，其值是随机的。这样攻击者因为不知道Token而无法构造出合法的请求进行攻击。</p>
+<p>Token 使用原则</p>
+<ol>
+<li>Token要足够随机————只有这样才算不可预测
+</li><li>Token是一次性的，即每次请求成功后要更新Token————这样可以增加攻击难度，增加预测难度
+</li><li>Token要注意保密性————敏感操作使用post，防止Token出现在URL中
+</li><li>复制代码
+</li></ol>
+<b style="color:blue">##5、测试CSRF中注意的问题</b>
+如果同域下存在xss的话，除了验证码，其他的方式都无法防御这个问题。
+
+<p>有个程序后端可能是用REQUEST方式接受的，而程序默认是POST请求，其实改成GET方式请求也可以发送过去，存在很严重的隐患。</p>
+<p>当只采用refer防御时，可以把请求中的修改成如下试试能否绕过：</p>
+<p>原始refer：<a target="_blank" rel="noopener" href="http://test.com/index.php">http://test.com/index.php</a></p>
+<p>测试几种方式（以下方式可以通过的话即可能存在问题）：</p>
+<ul>
+<li>http://test.com.attack.com/index.php
+</li><li>http://attack.com/test.com/index.php
+</li><li>[空]
+</li><li>复制代码
+</li></ul>
+
+<p>refer为空构造的方法：<br><img src="/2021/03/18/zj/5.png"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/13/web/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">攻防世界练习</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="zj" data-title="CSRF" data-url="http://example.com/2021/03/18/zj/"  data-images="/img/huahua.jpg" data-content="CSRF">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2021 Jialu
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
