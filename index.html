@@ -169,6 +169,84 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-fxl" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/03/25/fxl/" class="article-date">
+  	<time datetime="2021-03-25T08:03:50.000Z" itemprop="datePublished">2021-03-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/25/fxl/">
+        php反序列化---&gt;魔法函数
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这周，出了到web题，反序列化魔法函数，emmm题我是没做出来（别问，问就是我是废物wuwuwuwu~），但我总结了相关知识点，假以时日，但愿总结着终结着我就会了</p>
+<h3>正文</h3>
+
+<p><font size="4"><b style="color:pink">魔法函数实例</b></font><br>PHP类中有一种特殊函数体的存在叫魔法函数，magic函数命名是以符号__开头的，如：</p>
+<ul>
+<li>__construct()  具有构造函数的类会在每次创建新对象时先调用此方法 (构造函数)
+</li><li>__destruct() 会在到某个对象的所有引用都被删除或者当对象被显式销毁时执行。(析构函数)
+</li><li>__call() 在对象中调用一个不可访问方法时，__call() 会被调用
+</li><li>__callStatic() 在静态上下文中调用一个不可访问方法时，__callStatic() 会被调用。
+</li><li>__get() 读取不可访问属性的值时，__get() 会被调用。
+</li><li>__set() 在给不可访问属性赋值时，__set() 会被调用。
+</li><li>__isset() 当对不可访问属性调用 isset() 或 empty() 时，__isset() 会被调用。
+</li><li>__unset() 当对不可访问属性调用 unset() 时，__unset() 会被调用。
+</li><li>__sleep() 当对象被serialize() 函数处理前，调用
+</li><li>__wakeup() 当类被unserialize()时调用 __wakeup 方法，预先准备对象需要的资源。
+</li><li>__toString() 该方法用于一个类被当成字符串时应怎样回应
+</li><li>__invoke()  当尝试以调用函数的方式调用一个对象时，__invoke() 方法会被自动调用
+</li><li>__set_state()
+</li><li>__clone() 当复制完成时，如果定义了 __clone() 方法，则新创建的对象（复制生成的对象）中的 __clone() 方法会被调用，可用于修改属性的值
+</li><li>__debugInfo()  此方法由var_dump（）调用
+
+</li></ul>
+
+<p><b>这些函数在某些情况下会自动调用</b><br><font size="5"><b style="color:blue">①构造函数☞ __construct()</b></font><br><b>作用： </b>通常用于初始化对象的属性<br><b>自动调用与： </b>对象创建时自动调用<br><img src="/2021/03/25/fxl/1.png"><br><font size="5"><b style="color:blue">②析构函数☞ __destruct()</b></font><br>自动调用与： 当对象结束其生命周期时（例如对象所在的函数已调用完毕），系统自动执行析构函数。<br>析构函数无参数<br>eg：一个实列<br><img src="/2021/03/25/fxl/2.png"><br>当前对象的name属性为:is A<br>.<br>—-销毁对象后—-<br>当前对象已被销毁<br><font size="5"><b style="color:blue">③对对象的封装时的魔法函数</b></font><br>//__get() 外部访问不存在或者=私有属性时调用<br>//__set() 外部访问不存在或者=私有属性时调用<br>//__isset() 在外部检测是否存在某个属性时调用<br>//__unset() 外部销毁某个私有属性时调用时调用<br><font size="5"><b style="color:blue">④序列化和反序列化的魔法函数</b></font><br><b>__sleep()</b><br>自动调用时机：序列化时<br>作用：将允许序列化的对象放在一组数组中返回，序列化时只序列化指定的属性。<br><img src="/2021/03/25/fxl/3.png"><br><img src="/2021/03/25/fxl/4.png"><br><b>__wakeup()</b><br>自动调用时机：反序列化时<br>作用：反序列化时修改属性（对重新生成的对象的属性进行修改），或重新建立数据库连接，或执行其它初始化操作。<br>例1 ：<br><img src="/2021/03/25/fxl/5.png"><br><img src="/2021/03/25/fxl/6.png"><br>例2 重新建立数据库连接<br><img src="/2021/03/25/fxl/7.png"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-gj" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1043,72 +1121,6 @@ HANDLER FlagHere OPEN;HANDLER FlagHere READ FIRST;HANDLER FlagHere CLOSE;#
 </li></ul>
 
 <p><img src="/2021/02/12/list/q4.png"><br>得到flag~~</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-baby-1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/02/10/baby-1/" class="article-date">
-  	<time datetime="2021-02-10T12:19:54.000Z" itemprop="datePublished">2021-02-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/10/baby-1/">
-        22-buu练习[GXYCTF2019]BabySQli
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2>知识点</h2>
-
-<ul>
-<li>1、联合查询
-</li><li>2、base32+base64
-</li><li>3、通过联合注入向数据库中写数据
-</li></ul>
-
-<p><b style="color:pink">知识点详解：</b><br><b style="color:purple">1、利用联合注入向数据库里写东西的原因</b><br>答：在使用联合注入时，如果你查询的数据不存在，那么就会生成一个内容为null的虚拟数据，所以这是我们就可以在注入时添加我们需要的信息来完成我们的目的。<br><b style="color:purple">2、 base32和base64的区别</b><br>答：base32是全部由大写字母和数字构成，或者其结尾有三个等号<br>base64则是由大小写字母和数字一起构成。<br><b style="color:purple">3、联合查询</b><br>概述：<br>　　联合查询效率较高，举例子来说明联合查询：内联inner join 、左联left outer join 、右联right outer join 、全联full outer join 的好处及用法。<br>联合查询效率较高，以下例子来说明联合查询(内联、左联、右联、全联)的好处：<br><img src="/2021/02/10/baby-1/c1.png"><br><b style="color:blue">第一：内联(inner join)。</b><br>　　如果想把用户信息、积分、等级都列出来，那么一般会这样写：select * from T1 ,T3 where T1.userid = T3.userid(其实这样的结果等同于select * from T1 inner join T3 on T1.userid=T3.userid )。<br>　　把两个表中都存在userid的行拼成一行(即内联)，但后者的效率会比前者高很多，建议用后者(内联)的写法。<br>　　SQL语句：select * from T1 inner join T2 on T1.userid=T2.userid<br><img src="/2021/02/10/baby-1/c2.png"><br><b style="color:blue">第二：左联(left outer join)。</b><br>　　显示左表T1中的所有行，并把右表T2中符合条件加到左表T1中;右表T2中不符合条件，就不用加入结果表中，并且NULL表示。<br>　　SQL语句：select * from T1 left outer join T2 on T1.userid=T2.userid<br><img src="/2021/02/10/baby-1/a1.png"><br><b style="color:blue">第三：右联(right outer join)。</b><br>　　显示右表T2中的所有行，并把左表T1中符合条件加到右表T2中;左表T1中不符合条件，就不用加入结果表中，并且NULL表示。<br>　　SQL语句：select * from T1 right outer join T2 on T1.userid=T2.userid<br><img src="/2021/02/10/baby-1/a1.png"><br><b style="color:blue">第四：全联(full outer join)。</b><br>　　显示左表T1、右表T2两边中的所有行，即把左联结果表+右联结果表组合在一起，然后过滤掉重复的。<br>　　SQL语句：select * from T1 full outer join T2 on T1.userid=T2.userid<br><img src="/2021/02/10/baby-1/a3.png"><br>　　总结，关于联合查询，效率的确比较高，4种联合方式如果可以灵活使用，基本上复杂的语句结构也会简单起来。这4种方式是：1)Inner join 2)left outer join 3)right outer join 4)full outer join</p>
-<h2>题目：</h2>
-
-<p>打开靶场，又是一个登录界面emmm慌了<br><img src="/2021/02/10/baby-1/b1.png"><br>经过激烈心理斗争后，还是做叭=^=|||<br>试试万能密码，euuu半天没结果，决定盲猜用户名，经过几个月的经验，大概率是admin<br><img src="/2021/02/10/baby-1/b2.png"><br>果然，只是密码不对,用其他的用户名会出现wrong user 的界面，所以用户名是正确滴，那么尝试在用户名处添加一个’通过其回显<br><img src="/2021/02/10/baby-1/b4.png"><br>显示如下界面：<br><img src="/2021/02/10/baby-1/%E6%8A%8A.png"><br>可以得到用户名那里存在注入点<br>查看源码，如下：<br><img src="/2021/02/10/baby-1/b5.png"><br>这个编码成功引起我的注意，判断应该是base32编码（具体原因前面有介绍）<br><img src="/2021/02/10/baby-1/b6.png"><br>解密后出现base64编码：c2VsZWN0ICogZnJvbSB1c2VyIHdoZXJlIHVzZXJuYW1lID0gJyRuYW1lJw==<br>再次解密：<br><img src="/2021/02/10/baby-1/b7.png"><br>得到查询规则：select * from user where username = ‘$name’<br>接下来就很简单了，在用户名处，通过联合注入，写入我们想要的信息，我写的是1234按照我们的输入，sqli在数据库中写入数据，相当于伪造了一个身份，就可以用这个身份登录了<br>burp抓包发现是POST，利用sqli的特性：在联合查询并不存在的数据时，联合查询就会构造一个虚拟的数据。<br>那就post传参构造payload：<b style="color:red">name=1’ union select 0,’admin’,’81dc9bdb52d04dc20036dbd8313ed055’%23&amp;pw=1234</b><br>执行联合查询，其中81dc9bdb52d04dc20036dbd8313ed055是1234对应的MD5加密的值<br><img src="/2021/02/10/baby-1/b8.png"><br>呕吼<del>成功得到flag</del>！</p>
 
       
     </div>

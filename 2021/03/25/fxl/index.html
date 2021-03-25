@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>php反序列化---&gt;魔法函数 | baba童鞋的博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这周，出了到web题，反序列化魔法函数，emmm题我是没做出来（别问，问就是我是废物wuwuwuwu~），但我总结了相关知识点，假以时日，但愿总结着终结着我就会了 正文  魔法函数实例PHP类中有一种特殊函数体的存在叫魔法函数，magic函数命名是以符号__开头的，如：  __construct()  具有构造函数的类会在每次创建新对象时先调用此方法 (构造函数) __destruct() 会在到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php反序列化---&gt;魔法函数">
+<meta property="og:url" content="http://example.com/2021/03/25/fxl/index.html">
+<meta property="og:site_name" content="baba童鞋的博客">
+<meta property="og:description" content="这周，出了到web题，反序列化魔法函数，emmm题我是没做出来（别问，问就是我是废物wuwuwuwu~），但我总结了相关知识点，假以时日，但愿总结着终结着我就会了 正文  魔法函数实例PHP类中有一种特殊函数体的存在叫魔法函数，magic函数命名是以符号__开头的，如：  __construct()  具有构造函数的类会在每次创建新对象时先调用此方法 (构造函数) __destruct() 会在到">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/03/25/fxl/1.png">
+<meta property="og:image" content="http://example.com/2021/03/25/fxl/2.png">
+<meta property="og:image" content="http://example.com/2021/03/25/fxl/3.png">
+<meta property="og:image" content="http://example.com/2021/03/25/fxl/4.png">
+<meta property="og:image" content="http://example.com/2021/03/25/fxl/5.png">
+<meta property="og:image" content="http://example.com/2021/03/25/fxl/6.png">
+<meta property="og:image" content="http://example.com/2021/03/25/fxl/7.png">
+<meta property="article:published_time" content="2021-03-25T08:03:50.000Z">
+<meta property="article:modified_time" content="2021-03-25T08:42:57.347Z">
+<meta property="article:author" content="Jialu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/03/25/fxl/1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/huahua.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/"></a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/huahua.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-fxl" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/03/25/fxl/" class="article-date">
+  	<time datetime="2021-03-25T08:03:50.000Z" itemprop="datePublished">2021-03-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      php反序列化---&gt;魔法函数
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这周，出了到web题，反序列化魔法函数，emmm题我是没做出来（别问，问就是我是废物wuwuwuwu~），但我总结了相关知识点，假以时日，但愿总结着终结着我就会了</p>
+<h3>正文</h3>
+
+<p><font size="4"><b style="color:pink">魔法函数实例</b></font><br>PHP类中有一种特殊函数体的存在叫魔法函数，magic函数命名是以符号__开头的，如：</p>
+<ul>
+<li>__construct()  具有构造函数的类会在每次创建新对象时先调用此方法 (构造函数)
+</li><li>__destruct() 会在到某个对象的所有引用都被删除或者当对象被显式销毁时执行。(析构函数)
+</li><li>__call() 在对象中调用一个不可访问方法时，__call() 会被调用
+</li><li>__callStatic() 在静态上下文中调用一个不可访问方法时，__callStatic() 会被调用。
+</li><li>__get() 读取不可访问属性的值时，__get() 会被调用。
+</li><li>__set() 在给不可访问属性赋值时，__set() 会被调用。
+</li><li>__isset() 当对不可访问属性调用 isset() 或 empty() 时，__isset() 会被调用。
+</li><li>__unset() 当对不可访问属性调用 unset() 时，__unset() 会被调用。
+</li><li>__sleep() 当对象被serialize() 函数处理前，调用
+</li><li>__wakeup() 当类被unserialize()时调用 __wakeup 方法，预先准备对象需要的资源。
+</li><li>__toString() 该方法用于一个类被当成字符串时应怎样回应
+</li><li>__invoke()  当尝试以调用函数的方式调用一个对象时，__invoke() 方法会被自动调用
+</li><li>__set_state()
+</li><li>__clone() 当复制完成时，如果定义了 __clone() 方法，则新创建的对象（复制生成的对象）中的 __clone() 方法会被调用，可用于修改属性的值
+</li><li>__debugInfo()  此方法由var_dump（）调用
+
+</li></ul>
+
+<p><b>这些函数在某些情况下会自动调用</b><br><font size="5"><b style="color:blue">①构造函数☞ __construct()</b></font><br><b>作用： </b>通常用于初始化对象的属性<br><b>自动调用与： </b>对象创建时自动调用<br><img src="/2021/03/25/fxl/1.png"><br><font size="5"><b style="color:blue">②析构函数☞ __destruct()</b></font><br>自动调用与： 当对象结束其生命周期时（例如对象所在的函数已调用完毕），系统自动执行析构函数。<br>析构函数无参数<br>eg：一个实列<br><img src="/2021/03/25/fxl/2.png"><br>当前对象的name属性为:is A<br>.<br>—-销毁对象后—-<br>当前对象已被销毁<br><font size="5"><b style="color:blue">③对对象的封装时的魔法函数</b></font><br>//__get() 外部访问不存在或者=私有属性时调用<br>//__set() 外部访问不存在或者=私有属性时调用<br>//__isset() 在外部检测是否存在某个属性时调用<br>//__unset() 外部销毁某个私有属性时调用时调用<br><font size="5"><b style="color:blue">④序列化和反序列化的魔法函数</b></font><br><b>__sleep()</b><br>自动调用时机：序列化时<br>作用：将允许序列化的对象放在一组数组中返回，序列化时只序列化指定的属性。<br><img src="/2021/03/25/fxl/3.png"><br><img src="/2021/03/25/fxl/4.png"><br><b>__wakeup()</b><br>自动调用时机：反序列化时<br>作用：反序列化时修改属性（对重新生成的对象的属性进行修改），或重新建立数据库连接，或执行其它初始化操作。<br>例1 ：<br><img src="/2021/03/25/fxl/5.png"><br><img src="/2021/03/25/fxl/6.png"><br>例2 重新建立数据库连接<br><img src="/2021/03/25/fxl/7.png"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/20/gj/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">web步骤</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="fxl" data-title="php反序列化---&gt;魔法函数" data-url="http://example.com/2021/03/25/fxl/"  data-images="/img/huahua.jpg" data-content="php反序列化---&gt;魔法函数">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2021 Jialu
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
