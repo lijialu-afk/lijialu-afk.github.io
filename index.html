@@ -169,6 +169,136 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-b" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/04/01/b/" class="article-date">
+  	<time datetime="2021-04-01T05:15:46.000Z" itemprop="datePublished">2021-04-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/01/b/">
+        任意下载漏洞&amp;&amp;[RoarCTF 2019]Easy Java 1
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2>知识点(任意下载漏洞)<h2>
+
+
+<p><b style="color:pink">任意下载漏洞简介</b><br>由于业务需求，很多网站往往需要提供文件(附件)下载的功能块，但是如果对下载的文件没有做限制，直接通过绝对路径对其文件进行下载，那么，恶意用户就可以利用这种方式下载服务器的敏感文件，对服务器进行进一步的威胁和攻击。</p>
+<p><b style="color:pink">任意下载漏洞的危害</b><br>通过任意文件下载，可以下载服务器的任意文件，web业务的代码，服务器和系统的具体配置信息，也可以下载数据库的配置信息，以及对内网的信息探测等等。<br>通过上面的简单介绍，可以看出任意下载漏洞是很常见的，如果对用户查看或下载的文件不做限制，就又可能被利用，从而造成损害，接下来就来学习下任意下载漏洞是如何利用的。</p>
+<p><b style="color:pink">存在方式：</b><br>从链接上看，如下便有可能存在任意下载漏洞</p>
+<ol>
+<li>download.php?path=
+</li><li>download.php?file=
+</li><li>down.php?file=
+</li><li>data.php?file=
+</li><li>readfile.php?file=
+</li><li>read.php?filename=
+</li></ol>
+
+<p><b style="color:pink">WEB-INF常用的目录或文件</b></p>
+<ol>
+<li>/WEB-INF/web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。
+</li><li>/WEB-INF/classes/：含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中
+</li><li>/WEB-INF/lib/：存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的jar文件,如数据库驱动jar文件
+</li><li>/WEB-INF/src/：源码目录，按照包名结构放置各个java文件。
+</li><li>/WEB-INF/database.properties：数据库配置文件
+</li></ol>
+
+<p><b style="color:pink">漏洞总结</b><br>从参数名上看，大致有：</p>
+<ol>
+<li>&readpath=
+</li><li>&filepath=
+</li><li>&Path=
+</li><li>&inputfile=
+</li><li>&url=
+</li><li>&Lang=
+</li><li>&dis=
+</li><li>&data=
+</li><li>&readfile=
+</li><li>&menu=
+</li><li>META-INF=
+</li><li>WEB-INF
+</li></ol>
+
+<p>这些参数可能会出现漏洞<br><b>linux和Windows下载利用文件</b><br>windows:</p>
+<ol>
+<li>C:\boot.ini //查看系统版本
+</li><li>C:\Windows\System32\inetsrv\MetaBase.xml //IIS配置文件
+</li><li>C:\Windows\repair\sam //存储系统初次安装的密码
+</li><li>C:\Program Files\mysql\my.ini //Mysql配置
+</li><li>C:\Program Files\mysql\data\mysql\user.MYD //Mysql root
+</li><li>C:\Windows\php.ini //php配置信息
+</li><li>C:\Windows\my.ini //Mysql配置信息
+</li><li>C:\Windows\win.ini //Windows系统的一个基本系统配置文件
+</li></ol>
+
+<p>linux:</p>
+<ol>
+<li>root/.ssh/authorized_keys如需登录到远程主机，需要到.ssh目录下，新建authorized_keys文件，并将id_rsa.pub内容复制进去
+</li><li>/root/.ssh/id_rsa//ssh私钥,ssh公钥是id_rsa.pub
+</li><li>/root/.ssh/id_ras.keystore//记录每个访问计算机用户的公钥
+</li><li>/root/.ssh/known_hosts //记录每个访问计算机用户的公钥
+</li><li>/etc/passwd
+</li><li>/etc/shadow//账户密码文件
+</li><li>/etc/my.cnf //mysql配置文件
+</li><li>/etc/httpd/conf/httpd.conf //apache配置文件
+</li><li>/root/.bash_history //用户历史命令记录文件
+</li><li>/root/.mysql_history //mysql历史命令记录文件
+</li><li>/proc/mounts //记录系统挂载设备
+</li><li>/porc/config.gz //内核配置文件
+</li><li>/var/lib/mlocate/mlocate.db //全文件路径
+</li><li>/porc/self/cmdline //当前进程的cmdline参数
+</li></ol>
+
+<p><b style="color:pink">漏洞验证</b><br>xxx.php?f=../../../../../../etc/passwd<br>xxx.php?f=../index.php<br>xxx.php?f=ﬁle:///etc/passwd</p>
+<p>参数f的参数值为PHP文件时：<br>  1.件被解析，则是文件包含漏洞<br>  2.显示源代码，则是文件查看漏洞<br>  3.提示下载，则是文件下载漏洞</p>
+<p>最后附上大佬总结的资源：<a target="_blank" rel="noopener" href="https://github.com/tutorial0/payloads/blob/master/lfi.txt">是各种文件路径鸭</a></p>
+<h2>[RoarCTF 2019]Easy Java 1</h2>
+
+<p>emm这道题我直接想到的就是sql注入试了半天没有结果，作为web选手的我留下了不懂ctf的泪<br>直接看题目：<br><img src="/2021/04/01/b/1.png"><br>这样色儿的<br>一顿操作猛如虎admin admin888<br><img src="/2021/04/01/b/2.png"><br>euuuu我开始还觉得这个图片有猫腻，是我想多了=|=<br>又突然发现下方那小小的help，点击如下：<br><img src="/2021/04/01/b/3.png"><br>java fliename 难道java也有伪协议？百度搜索并没有<br>偷瞄一下别人wp，原来是java任意文件下载。<br><code>url/Download?filename=WEB-INF/web.xml</code><br><code>POST:filename=WEB-INF/web.xml</code><br><img src="/2021/04/01/b/4.png"><br>还要要post传参，怎么说呢，就很厉害（gou）<br>这样一来我们旧的到了一个文件打开后是这样色儿的：<br><img src="/2021/04/01/b/5.png"><br>有疑似flag的路径，我们来访问下，要在路径前面加上classes<br><code>url/Download?filename=WEB-INF/classes/com/wm/ctf/FlagController.class</code><br><code>POST:filename=WEB-INF/classes/com/wm/ctf/FlagController.class</code><br>通过记事本的方式大开<br><img src="/2021/04/01/b/6.png"><br>里面有段base64编码：ZmxhZ3s1ZjY5MjkxMi0yN2Q0LTRhN2EtYjdlMC04MjAyMTdlYzA2NjR9Cg==<br>解密后便是flag</p>
+</h2></h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-xxs" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1124,92 +1254,6 @@ object:o:strlen(object name):object name:object size:{s:strlen(property name):pr
 <li>select * from users where id=(('1')) union select 1,'hacker by xuxinhen',3 into outfile '/var/www/html/hacker.txt' -- (( '
 </li></ul>
 
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-hack" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/02/15/hack/" class="article-date">
-  	<time datetime="2021-02-15T11:56:57.000Z" itemprop="datePublished">2021-02-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/15/hack/">
-        25-buu练习[BJDCTF 2nd]old-hack 1
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2>知识点</h2>
-<h3>ThinkPHP</h3>
-
-<p><b>ThinkPHP是一个免费开源的，快速、简单的面向对象的轻量级PHP开发框架，是为了敏捷WEB应用开发和简化企 业应用开发而诞生的。由于其简单易用，国内用户众多。</b><br>2019年1月11日ThinkPHP团队发布了版本更新，本次更新包含了一个可能GetShell的安全更新，具体内容为改进Request类的method方法。<br><b style="color:pink">漏洞描述</b><br>Thinphp团队在实现框架中的核心类Requests的method方法实现了表单请求类型伪装，默认为$_POST[‘_method’]变量，却没有对$_POST[‘_method’]属性进行严格校验，可以通过变量覆盖掉Requets类的属性并结合框架特性实现对任意函数的调用达到任意代码执行的效果。<br><b style="color:pink">漏洞危害</b><br>在未经授权的情况下远程攻击者构造特殊的请求可以在PHP上下文环境中执行任意系统命令，甚至完全控制网站，造成数据泄露，网站内容被修改。<br><b style="color:pink">影响范围</b><br>受影响版本：ThinkPHP 5.0.x<br>不受影响版本：ThinkPHP 5.0.24<br>在修复前的文件526行中，当存在$_POST[‘_method’]变量是将会执行 $this-&gt;{$this-&gt;method}($_POST)，当$_POST[‘_method’]为__construct时及等价于调用$this-&gt;_construct($_POST)_construct函数实现如下：<br><b style="color:pink">漏洞分析</b><br>在该函数中，当传入的参数中的key为该Requests属性，将value赋值给该属性，由于key可控制，可以到达属性覆盖的效果。<br><b style="color:pink">漏洞复现</b><br>通过git 可以快速搭建环境</p>
-<ul>
-<li>git clone https://github.com/top-think/think
-</li><li>
-git checkout v5.0.23
-</li><li>
-cd think
-</li><li>
-git clone https://github.com/top-think/framework thinkphp
-</li><li>
-cd thinkphp
-</li><li>
-git checkout v5.0.23
-</li></ul>
-
-<p>通过覆盖filter属性即可达到调用任意函数的效果。<br>Payload如下</p>
-<ul>
-<li>_method=__construct&filter[]=system&server[REQUEST_METHOD]=whoami
-</li></ul>
-
-<p>在早期5.0的版本过滤器的调用有差别payload也会不同<br>更详细内容参见；<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yuzly/p/11460285.html">https://www.cnblogs.com/yuzly/p/11460285.html</a></p>
-<h2>题目</h2>
-
-<p>打开靶场<br><img src="/2021/02/15/hack/g0.png"><br>题目提示是thinkphp5<br>百度发现thinkphp5有原厂命令执行漏洞，详情在知识点中有多描述<br>构造payload：</p>
-<ul>
-<li>_method=__construct&filter[]=system&server[REQUEST_METHOD]=cat /flag
-</li></ul>
-
-<p><img src="/2021/02/15/hack/g.png"><br>得到flag~~</p>
 
       
     </div>
