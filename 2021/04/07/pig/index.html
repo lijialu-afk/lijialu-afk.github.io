@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>练习-[BJDCTF 2nd]假猪套天下第一 73 | baba童鞋的博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是一道非常简单又很狗的抓包题打开题目：admin登录：说我才不是admin那么随便输入账号密码，成功登录：查看源码并没有什么提示重新登陆下bp抓包：发现有个L0g1n.php文件，对其进行访问:总共要99年？再抓包试试，emm，要想抓到还必须登陆后再访问，更狗的是你就算没有重新登录也能抓到个L0g1n.php，害得我搞半天没搞出个结果，就很厉害（gou）：成功抓包后有个time值，将它改成99，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="练习-[BJDCTF 2nd]假猪套天下第一 73">
+<meta property="og:url" content="http://example.com/2021/04/07/pig/index.html">
+<meta property="og:site_name" content="baba童鞋的博客">
+<meta property="og:description" content="这是一道非常简单又很狗的抓包题打开题目：admin登录：说我才不是admin那么随便输入账号密码，成功登录：查看源码并没有什么提示重新登陆下bp抓包：发现有个L0g1n.php文件，对其进行访问:总共要99年？再抓包试试，emm，要想抓到还必须登陆后再访问，更狗的是你就算没有重新登录也能抓到个L0g1n.php，害得我搞半天没搞出个结果，就很厉害（gou）：成功抓包后有个time值，将它改成99，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/04/07/pig/1.png">
+<meta property="og:image" content="http://example.com/2021/04/07/pig/2.png">
+<meta property="og:image" content="http://example.com/2021/04/07/pig/3.png">
+<meta property="og:image" content="http://example.com/2021/04/07/pig/4.png">
+<meta property="og:image" content="http://example.com/2021/04/07/pig/5.png">
+<meta property="og:image" content="http://example.com/2021/04/07/pig/6.png">
+<meta property="og:image" content="http://example.com/2021/04/07/pig/7.png">
+<meta property="og:image" content="http://example.com/2021/04/07/pig/8.png">
+<meta property="og:image" content="http://example.com/2021/04/07/pig/9.png">
+<meta property="og:image" content="http://example.com/2021/04/07/pig/10.png">
+<meta property="og:image" content="http://example.com/2021/04/07/pig/11.png">
+<meta property="og:image" content="http://example.com/2021/04/07/pig/12.png">
+<meta property="article:published_time" content="2021-04-07T10:41:54.000Z">
+<meta property="article:modified_time" content="2021-04-07T11:45:23.815Z">
+<meta property="article:author" content="Jialu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/04/07/pig/1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/huahua.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/"></a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/huahua.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-pig" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/04/07/pig/" class="article-date">
+  	<time datetime="2021-04-07T10:41:54.000Z" itemprop="datePublished">2021-04-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      练习-[BJDCTF 2nd]假猪套天下第一 73
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是一道非常简单又很狗的抓包题<br>打开题目：<br><img src="/2021/04/07/pig/1.png"><br>admin登录：说我才不是admin<br>那么随便输入账号密码，成功登录：<br><img src="/2021/04/07/pig/2.png"><br>查看源码并没有什么提示<br>重新登陆下bp抓包：<br><img src="/2021/04/07/pig/3.png"><br>发现有个L0g1n.php文件，对其进行访问:<br><img src="/2021/04/07/pig/4.png"><br>总共要99年？再抓包试试，emm，要想抓到还必须登陆后再访问，更狗的是你就算没有重新登录也能抓到个L0g1n.php，害得我搞半天没搞出个结果，就很厉害（gou）：<br>成功抓包后<br><img src="/2021/04/07/pig/5.png"><br>有个time值，将它改成99，(⊙﹏⊙)没任何变化，那改大点<br><img src="/2021/04/07/pig/6.png"></p>
+<pre><code> Sorry, this site is only optimized for those who comes from localhost</code></pre>
+
+<p>那么先xff：<code>X-Forwarded-For: 127.0.0.1</code><br>发现不可以，嫖下大佬的wp，要用到Client-ip来登录：<code>Client-ip: 127.0.0.1</code>(又是一个伪造IP地址的方法)<br><img src="/2021/04/07/pig/7.png"></p>
+<pre><code> Sorry, this site is only optimized for those who come from gem-love.com</code></pre>
+<p>加下来<code>Referer: gem-love.com</code>:<br><img src="/2021/04/07/pig/8.png"></p>
+<pre><code>  Sorry, this site is only optimized for browsers that run on Commodo 64</code></pre>
+<p>浏览器必须来自Commodo 64，修改User-Agent：Commodo 64<br>emmmmm他说nonono不是真正个谷歌浏览器，半天才知道他的全称是Commodore 64，我直接好家伙<br><code>User-Agent：Commodore 64</code><br><img src="/2021/04/07/pig/9.png"></p>
+<pre><code>  Sorry, this site is only optimized for those whose email is root@gem-love.com</code></pre>
+<p>说邮箱不对，修改from：<code>From: <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#64;&#x67;&#101;&#x6d;&#45;&#x6c;&#x6f;&#x76;&#101;&#x2e;&#x63;&#111;&#109;">&#x72;&#x6f;&#x6f;&#x74;&#64;&#x67;&#101;&#x6d;&#45;&#x6c;&#x6f;&#x76;&#101;&#x2e;&#x63;&#111;&#109;</a></code><br><img src="/2021/04/07/pig/10.png"></p>
+<pre><code> Sorry, this site is only optimized for those who use the http proxy of y1ng.vip<br> if you dont have the proxy, pls contact us to buy, ￥100/Month</code></pre>
+<p>提示y1ng.vip代理才可以<br><code>Via: y1ng.vip</code>:<br><img src="/2021/04/07/pig/11.png"><br>发现base64编码，解码后得到flag<br><img src="/2021/04/07/pig/12.png"><br>啊终于出来了</p>
+<h4>知识点</h4>
+
+
+<p>下面是大佬总结的Header:请求头参数详解 快来白嫖o(<em>￣▽￣</em>)ブ</p>
+<table>
+<thead>
+<tr><th style="color:black">Header</th><th style="color:black">>解释</th><th style="color:black">>示例</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td>指定客户端能够接收的内容类型</td>
+<td>Accept: text/plain, text/html,application/json</td>
+</tr>
+<tr>
+<td>Accept-Charset</td>
+<td>浏览器可以接受的字符编码集。</td>
+<td>Accept-Charset: iso-8859-5</td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td>指定浏览器可以支持的web服务器返回内容压缩编码类型。</td>
+<td>Accept-Encoding: compress, gzip</td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td>浏览器可接受的语言</td>
+<td>Accept-Language: en,zh</td>
+</tr>
+<tr>
+<td>Accept-Ranges</td>
+<td>可以请求网页实体的一个或者多个子范围字段</td>
+<td>Accept-Ranges: bytes</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>HTTP授权的授权证书</td>
+<td>Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==</td>
+</tr>
+<tr>
+<td>Cache-Control</td>
+<td>指定请求和响应遵循的缓存机制</td>
+<td>Cache-Control: no-cache</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>表示是否需要持久连接。（HTTP 1.1默认进行持久连接）</td>
+<td>Connection: close</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。</td>
+<td>Cookie: $Version=1; Skin=new;</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>请求的内容长度</td>
+<td>Content-Length: 348</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>请求的与实体对应的MIME信息</td>
+<td>Content-Type: application/x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>请求发送的日期和时间</td>
+<td>Date: Tue, 15 Nov 2010 08:12:31 GMT</td>
+</tr>
+<tr>
+<td>Expect</td>
+<td>请求的特定的服务器行为</td>
+<td>Expect: 100-continue</td>
+</tr>
+<tr>
+<td>From</td>
+<td>发出请求的用户的Email</td>
+<td>From: user@email.com</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>指定请求的服务器的域名和端口号</td>
+<td>Host: www.zcmhi.com</td>
+</tr>
+<tr>
+<td>If-Match</td>
+<td>只有请求内容与实体相匹配才有效</td>
+<td>If-Match: “737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td>If-Modified-Since</td>
+<td>如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码</td>
+<td>If-Modified-Since: Sat, 29 Oct 2010 19:43:31 GMT</td>
+</tr>
+<tr>
+<td>If-None-Match</td>
+<td>如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变</td>
+<td>If-None-Match: “737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td>If-Range</td>
+<td>如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为Etag</td>
+<td>If-Range: “737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td>If-Unmodified-Since</td>
+<td>只在实体在指定时间之后未被修改才请求成功</td>
+<td>If-Unmodified-Since: Sat, 29 Oct 2010 19:43:31 GMT</td>
+</tr>
+<tr>
+<td>Max-Forwards</td>
+<td>限制信息通过代理和网关传送的时间</td>
+<td>Max-Forwards: 10</td>
+</tr>
+<tr>
+<td>Pragma</td>
+<td>用来包含实现特定的指令</td>
+<td>Pragma: no-cache</td>
+</tr>
+<tr>
+<td>Proxy-Authorization</td>
+<td>连接到代理的授权证书</td>
+<td>Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==</td>
+</tr>
+<tr>
+<td>Range</td>
+<td>只请求实体的一部分，指定范围</td>
+<td>Range: bytes=500-999</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>先前网页的地址，当前请求网页紧随其后,即来路</td>
+<td>Referer:&nbsp;<a href="http://www.zcmhi.com/archives/71.html" target="_blank">http://www.zcmhi.com/archives...</a></td>
+</tr>
+<tr>
+<td>TE</td>
+<td>客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息</td>
+<td>TE: trailers,deflate;q=0.5</td>
+</tr>
+<tr>
+<td>Upgrade</td>
+<td>向服务器指定某种传输协议以便服务器进行转换（如果支持）</td>
+<td>Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11</td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>User-Agent的内容包含发出请求的用户信息</td>
+<td>User-Agent: Mozilla/5.0 (Linux; X11)</td>
+</tr>
+<tr>
+<td>Via</td>
+<td>通知中间网关或代理服务器地址，通信协议</td>
+<td>Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)</td>
+</tr>
+<tr>
+<td>Warning</td>
+<td>关于消息实体的警告信息</td>
+<td>Warn: 199 Miscellaneous warning</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/04/06/ssti/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SSTI注入&amp;&amp;[BJDCTF2020]The mystery of ip 1</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="pig" data-title="练习-[BJDCTF 2nd]假猪套天下第一 73" data-url="http://example.com/2021/04/07/pig/"  data-images="/img/huahua.jpg" data-content="练习-[BJDCTF 2nd]假猪套天下第一 73">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2021 Jialu
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
