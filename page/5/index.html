@@ -2,12 +2,12 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
   
   <title>baba童鞋的博客</title>
-
-  <!-- keywords -->
-  
-
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="baba童鞋的博客">
@@ -20,161 +20,270 @@
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
   
-    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+    <link rel="icon" href="/img/ljl.jpg">
+  
+  
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
   
   
 <link rel="stylesheet" href="/css/style.css">
 
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+    
+    
   
   
-
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
-<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
-
-  
-<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-
-
-  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: true,
+          isPost: false,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
 <meta name="generator" content="Hexo 5.2.0"></head>
 <body>
   <div id="container">
-    <div id="particles-js"></div>
     <div class="left-col">
     <div class="overlay"></div>
 <div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="/img/huahua.jpg" class="js-avatar">
-			
-		</a>
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/"></a></h1>
-		</hgroup>
-
-		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						<li>友情链接</li>
-						
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-			</div>
-		</div>
-	</header>				
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/ljl.jpg" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder="搜索一下" autocomplete="off">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">玩转开发工具</a></li>
+                        
+                            <li><a  href="/categories/digital">玩转数码</a></li>
+                        
+                            <li><a  href="/categories/algorithm">算法学习</a></li>
+                        
+                            <li><a  href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="/xxxxx" title="github">github</a>
+                            
+                                <a class="fl weibo"  target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://blog.csdn.net/baidu_21483933">csdn</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://segmentfault.com/blog/maocg_web">segmentfault</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/eb37ef89c746/latest_articles">简书</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
 </div>
+
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide"></h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="/img/huahua.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author"></h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-				</div>
-			</nav>
-		</header>				
-	</div>
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/ljl.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">玩转开发工具</a></li>
+                
+                    <li><a href="/categories/digital">玩转数码</a></li>
+                
+                    <li><a href="/categories/algorithm">算法学习</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="/xxxxx" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
 </nav>
       <div class="body-wrap">
   
     <article id="post-php靶场" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/15/php%E9%9D%B6%E5%9C%BA/" class="article-date">
-  	<time datetime="2021-01-15T12:33:57.000Z" itemprop="datePublished">2021-01-15</time>
+      <a  href="/2021/01/15/php%E9%9D%B6%E5%9C%BA/" class="article-date">
+      <time datetime="2021-01-15T12:33:57.000Z" itemprop="datePublished">2021-01-15</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -186,18 +295,17 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/15/php%E9%9D%B6%E5%9C%BA/">
-        sqlilabs靶场的搭建
-        
-      </a>
+      <a  class="article-title" href="/2021/01/15/php%E9%9D%B6%E5%9C%BA/">sqlilabs靶场的搭建</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>下载PHPstudy（具体步骤见本霸霸上一篇博客）之后，配置如下环境<br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql0.png"><br><br>然后访问网址：（<a target="_blank" rel="noopener" href="https://github.com/Audi-1/sqli-labs%EF%BC%89">https://github.com/Audi-1/sqli-labs）</a> 如下图<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql3.png"><br><br>下载zip文件<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql4.png"><br><br>下载过后将文件复制到如下路径中，并将文件名修改为sql<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql5.png"><br><br>然后再浏览器上访问：（<a target="_blank" rel="noopener" href="https://localhost/sql/%EF%BC%89">https://localhost/sql/）</a> 会出现以下界面<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql1.png"><br><br>点击第一个出现以下界面<br><br><img src="/2021/01/15/php%E9%9D%B6%E5%9C%BA/sql2.png"><br><br>则sqlilabs靶场搭建成功<br></p>
 <h3>注：</h3>
 <p>sqli-labs靶场需要php环境。而且对php7不兼容，当初写这个靶场印度程序员使用的版本不是php7，当时的一些函数在php7中被删除了。所以，使用此靶场请下载5.5或之前的版本，如下图</p>
@@ -220,16 +328,19 @@
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
 </article>
+
+
+
+
 
 
 
@@ -241,9 +352,10 @@
     <article id="post-php" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/12/04/php/" class="article-date">
-  	<time datetime="2020-12-04T10:05:07.000Z" itemprop="datePublished">2020-12-04</time>
+      <a  href="/2020/12/04/php/" class="article-date">
+      <time datetime="2020-12-04T10:05:07.000Z" itemprop="datePublished">2020-12-04</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -255,18 +367,17 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/04/php/">
-        phpstudy的使用-站点的创建
-        
-      </a>
+      <a  class="article-title" href="/2020/12/04/php/">phpstudy的使用-站点的创建</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开软件首页，开启apache，FIP和MySQL<br><img src="/2020/12/04/php/phps1.png"><br>然后点击网站的创建网站，如图<br><img src="/2020/12/04/php/phps2.png"><br>然后建立网站的基本配置，创建FTP和数据库<br><img src="/2020/12/04/php/phps3.png"><br>点击确认创建成功后，点击网站-管理-打开网站<br><img src="/2020/12/04/php/phps4.png"><br>出现以下界面<br><img src="/2020/12/04/php/phps5.png"><br>站点建立成功，我们也可以通过输入网址：babatongxie来访问网站<br>然后点击管理-打开根目录，将已有的文件删除<br>然后打开sublime编辑器<br>如下图<br><img src="/2020/12/04/php/phps6.png"><br>然后找到安装目录，选择文件夹<br><img src="/2020/12/04/php/phps7.png"><br>然后创建一个php文件如下图<br><img src="/2020/12/04/php/phps8.png"><br>输入以下代码：<br><img src="/2020/12/04/php/phps9.png"><br>ctrl+s快捷键保存<br>刷新网址，便会看到以下界面<br><img src="/2020/12/04/php/phps10.png"><br>成功改变网站内容！<br>（又是正经的一天！giao！）</p>
 
       
@@ -275,12 +386,11 @@
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -292,13 +402,18 @@
 
 
 
+
+
+
+
   
     <article id="post-weixieyi" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/12/04/weixieyi/" class="article-date">
-  	<time datetime="2020-12-04T05:25:48.000Z" itemprop="datePublished">2020-12-04</time>
+      <a  href="/2020/12/04/weixieyi/" class="article-date">
+      <time datetime="2020-12-04T05:25:48.000Z" itemprop="datePublished">2020-12-04</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -310,18 +425,17 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/04/weixieyi/">
-        伪协议wp
-        
-      </a>
+      <a  class="article-title" href="/2020/12/04/weixieyi/">伪协议wp</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h1>伪协议1</h1>
 <p>伪协议1题目代码如下：</p>
 <img src="/2020/12/04/weixieyi/a.png">
@@ -352,12 +466,11 @@
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -369,13 +482,18 @@
 
 
 
+
+
+
+
   
     <article id="post-php伪协议" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/12/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/" class="article-date">
-  	<time datetime="2020-12-02T10:46:57.000Z" itemprop="datePublished">2020-12-02</time>
+      <a  href="/2020/12/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/" class="article-date">
+      <time datetime="2020-12-02T10:46:57.000Z" itemprop="datePublished">2020-12-02</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -387,18 +505,17 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/">
-        php伪协议笔记
-        
-      </a>
+      <a  class="article-title" href="/2020/12/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/">php伪协议笔记</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p><b>php中支持的协议:</b></p>
 <ul>
 <li>file:// — 访问本地文件系统
@@ -470,12 +587,11 @@ resource=upload.php，代表读取upload.php的内容
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -487,13 +603,18 @@ resource=upload.php，代表读取upload.php的内容
 
 
 
+
+
+
+
   
     <article id="post-bugku" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/30/bugku/" class="article-date">
-  	<time datetime="2020-11-30T13:01:25.000Z" itemprop="datePublished">2020-11-30</time>
+      <a  href="/2020/11/30/bugku/" class="article-date">
+      <time datetime="2020-11-30T13:01:25.000Z" itemprop="datePublished">2020-11-30</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -505,18 +626,17 @@ resource=upload.php，代表读取upload.php的内容
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/30/bugku/">
-        日常小练
-        
-      </a>
+      <a  class="article-title" href="/2020/11/30/bugku/">日常小练</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>  bughu1：<br>  我是在bugku上做的一道题 —— 快让他停下来。。。。<br>  具体wp如下<br>  我打开网址，发现它一直在加载，加载好又重新接着加载下一个页面，没完没了！<br>  <img src="/2020/11/30/bugku/ting2.png"><br>  灵机一动，bp抓包，点击send<br>  <img src="/2020/11/30/bugku/ting1.png"><br>  额，啥也没有。。根据情况，他应该有好几个页面，那就再多点几下send<br>  <img src="/2020/11/30/bugku/ting3.png"><br>  果然，flag出现了！<br>  bugku2：<br>  点击题目地址，看到了这样的画面<br>  <img src="/2020/11/30/bugku/ctf1.png"><br>  emmmm不停点，还是找不到flag，那直接f12，到调试器界面（火狐浏览器）<br>  <img src="/2020/11/30/bugku/ctf2.png"><br>  看到了极像flag的可疑编码，瞄准他。应该是个unicode编码，百度搜索解码器，开始解码。<br>  <img src="/2020/11/30/bugku/ctf3.png"><br>  成功拿到flag！biu~<br>  攻防世界backup：<br>  做过bugku的两道题后，我又做了攻防世界的几道题<br>  打开题目地址后，看到如下画面<br>  <img src="/2020/11/30/bugku/beifen.png"><br>  这道题目主要考察是否清楚index.php备份文件的文件名格式<br>  一般备份文件的格式后缀为.bak<br>  因此访问URL+/index.php.bak即可<br>  然后通过记事本打开文件<br>  <img src="/2020/11/30/bugku/beifen1.png"><br>  aha~成功得到flag<br>  攻防世界simple php<br>  打开题目地址，题目如下<br>  <img src="/2020/11/30/bugku/php.png"><br>  代码很简单，就是以GET方式获得两个参数a和b，如果a和b满足一定条件，则打印flag1和flag2，猜测将flag1和flag2拼接就能够得到完整flag<br>  接下来看代码，注意到：</p>
 <p>1、if($a==0 and $a){<br>2、    echo $flag1;<br>3、} </p>
 <p>  这是一段简单代码，对于a我们可以直接传入a，即？a=a<br>  另一段：</p>
@@ -529,12 +649,11 @@ resource=upload.php，代表读取upload.php的内容
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -546,13 +665,18 @@ resource=upload.php，代表读取upload.php的内容
 
 
 
+
+
+
+
   
     <article id="post-html" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/28/html/" class="article-date">
-  	<time datetime="2020-11-28T10:38:55.000Z" itemprop="datePublished">2020-11-28</time>
+      <a  href="/2020/11/28/html/" class="article-date">
+      <time datetime="2020-11-28T10:38:55.000Z" itemprop="datePublished">2020-11-28</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -564,18 +688,17 @@ resource=upload.php，代表读取upload.php的内容
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/28/html/">
-        html
-        
-      </a>
+      <a  class="article-title" href="/2020/11/28/html/">html</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>HTML 标题<br>HTML 标题（Heading）是通过 h1 标签来定义的。<br><img src="/2020/11/28/html/html%E6%A0%87%E9%A2%98.png"><br>HTML 段落<br>HTML 段落是通过标签 p 来定义的。<br><img src="/2020/11/28/html/html%E6%AE%B5%E8%90%BD.png"><br>HTML 链接<br>HTML 链接是通过标签 a 来定义的。<br><img src="/2020/11/28/html/html%E9%93%BE%E6%8E%A5.png"><br>提示:在 href=链接的地址，后面的文字是代替链接的文字。<br>HTML 图像<br>HTML 图像是通过标签 img 来定义的.<br><img src="/2020/11/28/html/html%E5%9B%BE%E5%83%8F.png"><br>提示： 图像的名称和尺寸是以属性的形式提供的。<br>       定义图像的语法是：<br>       《img src=”url” /》（使用英文字符，url可以是路径也可以是链接）<br>       具体内容详见（<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/html/html_images.asp%EF%BC%89">https://www.w3school.com.cn/html/html_images.asp）</a></p>
 <h2>插入本地图片方法</h2>
 <h5>绝对路径</h5>
@@ -593,12 +716,11 @@ html文件存放在D盘里的images文件里的css文件中，那么就使用父
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -610,13 +732,18 @@ html文件存放在D盘里的images文件里的css文件中，那么就使用父
 
 
 
+
+
+
+
   
     <article id="post-php变量覆盖2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" class="article-date">
-  	<time datetime="2020-11-27T11:13:59.000Z" itemprop="datePublished">2020-11-27</time>
+      <a  href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" class="article-date">
+      <time datetime="2020-11-27T11:13:59.000Z" itemprop="datePublished">2020-11-27</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -628,18 +755,17 @@ html文件存放在D盘里的images文件里的css文件中，那么就使用父
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/">
-        php变量覆盖2
-        
-      </a>
+      <a  class="article-title" href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/">php变量覆盖2</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>今天写了本周web小分队的最后一次web题，题目如下：<br><img src="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl1.png"><br>由题可知，这是一道$$导致的变量覆盖问题。</p>
 <h2>题目分析：</h2>
 源码包含了flag.php文件，并且需要满足3个if里的条件才能获取flag，题目中使用了两个foreach并且也使用了$$.两个foreach中对 $$key的处理是不一样的，满足条件后会将$flag里面的值打印出来，所以$flag是在flag.php文件文件中的。 
@@ -660,16 +786,19 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
 </article>
+
+
+
+
 
 
 
@@ -681,9 +810,10 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
     <article id="post-basic-rce2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/26/basic-rce2/" class="article-date">
-  	<time datetime="2020-11-26T14:14:08.000Z" itemprop="datePublished">2020-11-26</time>
+      <a  href="/2020/11/26/basic-rce2/" class="article-date">
+      <time datetime="2020-11-26T14:14:08.000Z" itemprop="datePublished">2020-11-26</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -695,18 +825,17 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/26/basic-rce2/">
-        basic.rce2
-        
-      </a>
+      <a  class="article-title" href="/2020/11/26/basic-rce2/">basic.rce2</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>  今天写了rce基础题，题目如下<br>  <img src="/2020/11/26/basic-rce2/rce1.png"><br>  根据内容可以知道这是一道preg match正则绕过题，命令执行函数的过滤，而且是cat等被过滤掉。<br>  那我们就要绕过cat等内容<br>  我们通过构造?Rem=?&gt;&lt;?=<code>ls</code>;查看目录文件，得到文件名<br>  <img src="/2020/11/26/basic-rce2/rce2.png"><br>  我们可通过编码绕过，输入以下get命令：index.php?Rem=system(“\x63\x61\x74\x20\x66\x6c\x61\x67”);<br>  <img src="/2020/11/26/basic-rce2/rce3.png"><br>  成功得到flag~<br>  注：<br>  命令执行的函数有很多，如下：<br>  system()<br>  passthru()<br>  exec()<br>  shell_exec()<br>  popen()<br>  proc_open()<br>  pcntl_exec()</p>
 <p>  反引号 同shell_exec()<br>  其中，只有system函数是有回显的，其他的函数可以通过echo等显示。<br>  </p><h1>其他的一些绕过</h1><br>  <h2>空格绕过：</h2><br>  1，&gt; &lt; &lt;&gt; 重定向符<br>  2，%09(需要php环境)<br>  3，${IFS}<br>  4，$IFS$9<br>  5，{cat,flag.php} //用逗号实现了空格功能<br>  6，%20<br>  7，%09<br>  <h2>cat被过滤：</h2><br>  1，more:一页一页的显示档案内容<br>  2，less:与 more 类似<br>  3，head:查看头几行<br>  4，tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>  5，tail:查看尾几行<br>  6，nl：显示的时候，顺便输出行号<br>  7，od:以二进制的方式读取档案内容<br>  8，vi:一种编辑器，这个也可以查看<br>  9，vim:一种编辑器，这个也可以查看<br>  10，sort:可以查看<br>  11，uniq:可以查看<br>  12，file -f:报错出具体内容<br>  （具体内容可访问：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/NPFS/p/13797436.html">https://www.cnblogs.com/NPFS/p/13797436.html</a> )<p></p>
 
@@ -716,16 +845,19 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
 </article>
+
+
+
+
 
 
 
@@ -737,9 +869,10 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
     <article id="post-php变量覆盖1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/" class="article-date">
-  	<time datetime="2020-11-24T08:29:30.000Z" itemprop="datePublished">2020-11-24</time>
+      <a  href="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/" class="article-date">
+      <time datetime="2020-11-24T08:29:30.000Z" itemprop="datePublished">2020-11-24</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -751,18 +884,17 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/">
-        被摧残的第二天
-        
-      </a>
+      <a  class="article-title" href="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/">被摧残的第二天</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>  今天做了学长给的一道php变量覆盖题。学长给的web题<br>  打开熟悉的henuctf网站，点开题目网址，你会看到以下内容。<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl1.png"><br>  emmm，一副看不懂的亚子。。那根据提示ctrl+u，果然出现了变化！<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl2.png"><br>  仔细一看，就，变整齐了？<br>  再一看，根据学长所说，这是一道php变量覆盖题，借助百度，了解一下，就是让两变量相等<br>  输入payload：【get】？liwu=&amp;content 开始执行<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl3.png"><br>  duang成功得到flag~<br>  注：extract()语法： extract(array,extract_rules,prefix)<br>  </p><h2>(一)</h2><br>  extract() 函数从数组中将变量导入到当前的符号表。<br>  该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。<br>  第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。<br>  该函数返回成功导入到符号表中的变量数目。<br>  如果变量liwu和变量content的值相同，就会输出flag<br>  所以构造  ?liwu=&amp;content flag就可以出来。<br>  <h2>(二）</h2><br>  题目使用了extract($_GET)接收了GET请求中的数据，并将键名和键值转换为变量名和变量的值，然后再进行两个if 的条件判断，所以可以使用GET提交参数和值，利用extract()对变量进行覆盖，从而满足各个条件。<br>  解题方法：<br>  GET请求 ?flag=&amp;gift=，extract()会将flag和flag和gift的值覆盖了，将变量的值设置为空或者不存在的文件就满足gift==gift==content。<br>  最终PAYLOAD：GET DATA： ?flag=&amp;gift=  也可以得到flag。<br>  （又是正经的一天~~）<p></p>
 
       
@@ -771,16 +903,19 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
 </article>
+
+
+
+
 
 
 
@@ -792,9 +927,10 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
     <article id="post-basic-rce1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/23/basic-rce1/" class="article-date">
-  	<time datetime="2020-11-23T09:27:50.000Z" itemprop="datePublished">2020-11-23</time>
+      <a  href="/2020/11/23/basic-rce1/" class="article-date">
+      <time datetime="2020-11-23T09:27:50.000Z" itemprop="datePublished">2020-11-23</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -806,18 +942,17 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/23/basic-rce1/">
-        baba童鞋的web第一天记录
-        
-      </a>
+      <a  class="article-title" href="/2020/11/23/basic-rce1/">baba童鞋的web第一天记录</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>  今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。<br>  具体wp如下<br>  首先打开网址，会看到以下内容<br>  <img src="/2020/11/23/basic-rce1/web1.png"><br>  根据内容，可以看出是一道php换行符绕过题（%0a），我们输入以下payload<br>  【GET】 /?a=system(%27%0acat%20f*%20|%20base64%27)；<br>  <img src="/2020/11/23/basic-rce1/web2.png"><br>  成功绕过！<br>  根据内容可以看出时base64编码，在百度上搜索base64在线解码器，进行在线解码<br>  <img src="/2020/11/23/basic-rce1/web3.png"><br>  dingdong!成功得到flag~<br>  注：<br>  exp1：php执行运算符<br>  GET /?a=echo <code>base64 flag.php</code></p>
 <p>  exp2：换行符绕过（%0a）<br>  GET /?a=system(%27%0acat%20f*%20|%20base64%27);</p>
 <p>  exp3：利用include函数加php伪协议<br>  GET /a=include%20%27php://filter/convert.base64-encode/resource=./flag.php%27;<br>  （baba童鞋还是可以正经滴）</p>
@@ -828,16 +963,19 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
 </article>
+
+
+
+
 
 
 
@@ -851,65 +989,136 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
     </nav>
   
+
 </div>
       <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2021 Jialu
-      </div>
-        <div class="footer-right">
-          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 Jialu
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
         </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
     </div>
-  </div>
 </footer>
+
     </div>
     
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 
-
-
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: true,
-		isPost: false,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
 
 <script src="/js/main.js"></script>
 
 
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 1;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
 
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
 </script>
 
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
 
 
   </div>
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
+<script type="text/javascript" src="/js/love.js"></script>
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<!-- 雪花特效 -->
+<script type="text/javascript" src="\js\snow.js"></script>

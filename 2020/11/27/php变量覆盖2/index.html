@@ -2,12 +2,12 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
   
   <title>php变量覆盖2 | baba童鞋的博客</title>
-
-  <!-- keywords -->
-  
-
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="今天写了本周web小分队的最后一次web题，题目如下：由题可知，这是一道$$导致的变量覆盖问题。 题目分析： 源码包含了flag.php文件，并且需要满足3个if里的条件才能获取flag，题目中使用了两个foreach并且也使用了$$.两个foreach中对 $$key的处理是不一样的，满足条件后会将$flag里面的值打印出来，所以$flag是在flag.php文件文件中的。  由于flag值被覆">
 <meta property="og:type" content="article">
@@ -27,159 +27,265 @@
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
   
-    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+    <link rel="icon" href="/img/ljl.jpg">
+  
+  
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
   
   
 <link rel="stylesheet" href="/css/style.css">
 
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   
-
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
-<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
-
-  
-<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-
-
-  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
 <meta name="generator" content="Hexo 5.2.0"></head>
 <body>
   <div id="container">
-    <div id="particles-js"></div>
     <div class="left-col">
     <div class="overlay"></div>
 <div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="/img/huahua.jpg" class="js-avatar">
-			
-		</a>
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/"></a></h1>
-		</hgroup>
-
-		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						<li>友情链接</li>
-						
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-			</div>
-		</div>
-	</header>				
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/ljl.jpg" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder="搜索一下" autocomplete="off">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">玩转开发工具</a></li>
+                        
+                            <li><a  href="/categories/digital">玩转数码</a></li>
+                        
+                            <li><a  href="/categories/algorithm">算法学习</a></li>
+                        
+                            <li><a  href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="/xxxxx" title="github">github</a>
+                            
+                                <a class="fl weibo"  target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://blog.csdn.net/baidu_21483933">csdn</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://segmentfault.com/blog/maocg_web">segmentfault</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/eb37ef89c746/latest_articles">简书</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
 </div>
+
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide"></h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="/img/huahua.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author"></h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-				</div>
-			</nav>
-		</header>				
-	</div>
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/ljl.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">玩转开发工具</a></li>
+                
+                    <li><a href="/categories/digital">玩转数码</a></li>
+                
+                    <li><a href="/categories/algorithm">算法学习</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="/xxxxx" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
 </nav>
       <div class="body-wrap"><article id="post-php变量覆盖2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" class="article-date">
-  	<time datetime="2020-11-27T11:13:59.000Z" itemprop="datePublished">2020-11-27</time>
+      <a  href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" class="article-date">
+      <time datetime="2020-11-27T11:13:59.000Z" itemprop="datePublished">2020-11-27</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -192,14 +298,13 @@
   
     <h1 class="article-title" itemprop="name">
       php变量覆盖2
-      
     </h1>
   
+
 
       </header>
       
       <div class="article-info article-info-post">
-        
         
 
         
@@ -209,6 +314,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>今天写了本周web小分队的最后一次web题，题目如下：<br><img src="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl1.png"><br>由题可知，这是一道$$导致的变量覆盖问题。</p>
 <h2>题目分析：</h2>
 源码包含了flag.php文件，并且需要满足3个if里的条件才能获取flag，题目中使用了两个foreach并且也使用了$$.两个foreach中对 $$key的处理是不一样的，满足条件后会将$flag里面的值打印出来，所以$flag是在flag.php文件文件中的。 
@@ -229,10 +335,26 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/">php变量覆盖2</a></p>
+        <p><span>文章作者:</span><a  href="/" title="访问  的个人博客"></a></p>
+        <p><span>发布时间:</span>2020年11月27日 - 19时13分</p>
+        <p><span>最后更新:</span>2020年11月28日 - 19时52分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" title="php变量覆盖2">http://example.com/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://example.com/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/　　作者: " title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
 <nav id="article-nav">
   
-    <a href="/2020/11/28/html/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
+    <a  href="/2020/11/28/html/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
           html
@@ -241,95 +363,263 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
     </a>
   
   
-    <a href="/2020/11/26/basic-rce2/" id="article-nav-older" class="article-nav-link-wrap">
+    <a  href="/2020/11/26/basic-rce2/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">basic.rce2</div>
-      <strong class="article-nav-caption">&gt;</strong>
+      <strong class="article-nav-caption">></strong>
     </a>
   
 </nav>
 
+
   
 </article>
 
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">题目分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">解题方法：</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
-<div class="ds-share share" data-thread-key="php变量覆盖2" data-title="php变量覆盖2" data-url="http://example.com/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/"  data-images="/img/huahua.jpg" data-content="php变量覆盖2">
-    <div class="ds-share-inline">
-      <ul  class="ds-share-icons-16">
-      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-      </ul>
-      <div class="ds-share-icons-more">
-      </div>
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section class="changyan" id="comments">
+  <!--<div id="uyan_frame"></div>-->
+  <div id="SOHUCS"></div>
+  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+      appid: 'xxxx',
+      conf: 'xxxxxxxxx'
+    });
+  </script>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/2020/11/28/html/" title="上一篇: html">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/2020/11/26/basic-rce2/" title="下一篇: basic.rce2">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
     </div>
- </div>
- 
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/04/08/ci/">buu练习[GKCTF2020]CheckIN</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/07/pig/">练习-[BJDCTF 2nd]假猪套天下第一 73</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/06/ssti/">SSTI注入&&[BJDCTF2020]The mystery of ip 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/05/daima/">buu练习[强网杯 2019]高明的黑客</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/01/b/">任意下载漏洞&&[RoarCTF 2019]Easy Java 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/31/xxs/">ctf xss利用_xss总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/30/pop/">pop链->[MRCTF2020]ezpop</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/25/fxl/">php反序列化--->魔法函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/20/gj/">web步骤</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/18/zj/">CSRF</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/13/web/">攻防世界练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/10/fan/">反序列化&web信息搜集知识点总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/26/mz/">sqli-labs靶场8-10</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/bc/">sqli-labs靶场6-7</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/15/hack/">25-buu练习[BJDCTF 2nd]old-hack 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/14/guge/">24-buu练习[BJDCTF 2nd]fake google 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/12/list/">23-buu练习[GYCTF2020]Blacklist</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/10/baby-1/">22-buu练习[GXYCTF2019]BabySQli</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/08/ssrf/">21-buu练习[网鼎杯 2018]Fakebook（ssrf漏洞）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/07/zip/">20-buu练习[极客大挑战 2019]PHP1</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/05/nizhuansiwei/">19-buu练习[ZJCTF 2019]NiZhuanSiWei</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/03/buy/">18-buu练习[极客大挑战 2019]BuyFlag</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/01/bachang/">sqlilabs靶场1-5</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/31/baby/">17-buu练习baby sql</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/30/suibianzhu/">16-buu练习[强网杯 2019]随便注</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/29/cat/">15-buu练习have fun</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/28/shell/">14-buu练习Knife</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/27/txt/">13-buu练习easy_tornado</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/26/clac/">12-buu练习Easy clac</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/25/love/">11-buu练习lovesql</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/24/sql/">10-buu练习EasySQL2</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/23/mdwu/">9-buu练习Easy MD5</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/bak/">8-buu练习[ACTF2020 新生赛]BackupFile</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/21/hhh/">7-buu练习[极客大挑战 2019]Http</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/20/exec/">6-buu练习[ACTF2020 新生赛]Exec</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/ping/">5-buu练习Ping Ping Ping</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/18/bu/">4-buu练习EasySQL1</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/17/buu/">3-buu练习Secret File</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/16/include1/">2-buu[ACTF2020 新生赛]Include</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/phpshenji/">1-php审计buu第一题</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/php%E9%9D%B6%E5%9C%BA/">sqlilabs靶场的搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/04/php/">phpstudy的使用-站点的创建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/04/weixieyi/">伪协议wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/">php伪协议笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/30/bugku/">日常小练</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/28/html/">html</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/">php变量覆盖2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/26/basic-rce2/">basic.rce2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/">被摧残的第二天</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/basic-rce1/">baba童鞋的web第一天记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/leetcode/">准霸霸的leetcode第一次提交</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/%E6%88%90%E4%B8%BA%E9%9C%B8%E9%9C%B8/">今天的菜鸟，明天的霸霸</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/17/hello-world/">Hello World</a></li></ul>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
 
 
 
 
+    <script>
+        
+    </script>
 
 </div>
       <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2021 Jialu
-      </div>
-        <div class="footer-right">
-          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 Jialu
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
         </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
     </div>
-  </div>
 </footer>
+
     </div>
     
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 
-
-
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
 
 <script src="/js/main.js"></script>
 
 
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 1;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
 
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
 </script>
 
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
 
 
   </div>
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
+<script type="text/javascript" src="/js/love.js"></script>
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<!-- 雪花特效 -->
+<script type="text/javascript" src="\js\snow.js"></script>

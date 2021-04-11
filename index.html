@@ -2,12 +2,12 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
   
   <title>baba童鞋的博客</title>
-
-  <!-- keywords -->
-  
-
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="baba童鞋的博客">
@@ -20,161 +20,270 @@
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
   
-    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+    <link rel="icon" href="/img/ljl.jpg">
+  
+  
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
   
   
 <link rel="stylesheet" href="/css/style.css">
 
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+    
+    
   
   
-
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
-<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
-
-  
-<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-
-
-  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: true,
+          isPost: false,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
 <meta name="generator" content="Hexo 5.2.0"></head>
 <body>
   <div id="container">
-    <div id="particles-js"></div>
     <div class="left-col">
     <div class="overlay"></div>
 <div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="/img/huahua.jpg" class="js-avatar">
-			
-		</a>
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/"></a></h1>
-		</hgroup>
-
-		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						<li>友情链接</li>
-						
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-			</div>
-		</div>
-	</header>				
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/ljl.jpg" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder="搜索一下" autocomplete="off">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">玩转开发工具</a></li>
+                        
+                            <li><a  href="/categories/digital">玩转数码</a></li>
+                        
+                            <li><a  href="/categories/algorithm">算法学习</a></li>
+                        
+                            <li><a  href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="/xxxxx" title="github">github</a>
+                            
+                                <a class="fl weibo"  target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://blog.csdn.net/baidu_21483933">csdn</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://segmentfault.com/blog/maocg_web">segmentfault</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/eb37ef89c746/latest_articles">简书</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
 </div>
+
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide"></h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="/img/huahua.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author"></h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-				</div>
-			</nav>
-		</header>				
-	</div>
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/ljl.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">玩转开发工具</a></li>
+                
+                    <li><a href="/categories/digital">玩转数码</a></li>
+                
+                    <li><a href="/categories/algorithm">算法学习</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="/xxxxx" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
 </nav>
       <div class="body-wrap">
   
     <article id="post-ci" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/04/08/ci/" class="article-date">
-  	<time datetime="2021-04-08T08:44:56.000Z" itemprop="datePublished">2021-04-08</time>
+      <a  href="/2021/04/08/ci/" class="article-date">
+      <time datetime="2021-04-08T08:44:56.000Z" itemprop="datePublished">2021-04-08</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -186,18 +295,17 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/08/ci/">
-        buu练习[GKCTF2020]CheckIN
-        
-      </a>
+      <a  class="article-title" href="/2021/04/08/ci/">buu练习[GKCTF2020]CheckIN</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开题目，代码如下：</p>
 <pre><code class="prism language-php"><span class="token operator">&lt;</span>title<span class="token operator">&gt;</span>Check_In<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">&gt;</span>
 <span class="token delimiter important">&lt;?php</span> 
@@ -234,12 +342,11 @@
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -251,13 +358,18 @@
 
 
 
+
+
+
+
   
     <article id="post-pig" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/04/07/pig/" class="article-date">
-  	<time datetime="2021-04-07T10:41:54.000Z" itemprop="datePublished">2021-04-07</time>
+      <a  href="/2021/04/07/pig/" class="article-date">
+      <time datetime="2021-04-07T10:41:54.000Z" itemprop="datePublished">2021-04-07</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -269,18 +381,17 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/07/pig/">
-        练习-[BJDCTF 2nd]假猪套天下第一 73
-        
-      </a>
+      <a  class="article-title" href="/2021/04/07/pig/">练习-[BJDCTF 2nd]假猪套天下第一 73</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>这是一道非常简单又很狗的抓包题<br>打开题目：<br><img src="/2021/04/07/pig/1.png"><br>admin登录：说我才不是admin<br>那么随便输入账号密码，成功登录：<br><img src="/2021/04/07/pig/2.png"><br>查看源码并没有什么提示<br>重新登陆下bp抓包：<br><img src="/2021/04/07/pig/3.png"><br>发现有个L0g1n.php文件，对其进行访问:<br><img src="/2021/04/07/pig/4.png"><br>总共要99年？再抓包试试，emm，要想抓到还必须登陆后再访问，更狗的是你就算没有重新登录也能抓到个L0g1n.php，害得我搞半天没搞出个结果，就很厉害（gou）：<br>成功抓包后<br><img src="/2021/04/07/pig/5.png"><br>有个time值，将它改成99，(⊙﹏⊙)没任何变化，那改大点<br><img src="/2021/04/07/pig/6.png"></p>
 <pre><code> Sorry, this site is only optimized for those who comes from localhost</code></pre>
 
@@ -290,7 +401,7 @@
 <pre><code>  Sorry, this site is only optimized for browsers that run on Commodo 64</code></pre>
 <p>浏览器必须来自Commodo 64，修改User-Agent：Commodo 64<br>emmmmm他说nonono不是真正个谷歌浏览器，半天才知道他的全称是Commodore 64，我直接好家伙<br><code>User-Agent：Commodore 64</code><br><img src="/2021/04/07/pig/9.png"></p>
 <pre><code>  Sorry, this site is only optimized for those whose email is root@gem-love.com</code></pre>
-<p>说邮箱不对，修改from：<code>From: <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#64;&#x67;&#101;&#x6d;&#45;&#x6c;&#x6f;&#x76;&#101;&#x2e;&#x63;&#111;&#109;">&#x72;&#x6f;&#x6f;&#x74;&#64;&#x67;&#101;&#x6d;&#45;&#x6c;&#x6f;&#x76;&#101;&#x2e;&#x63;&#111;&#109;</a></code><br><img src="/2021/04/07/pig/10.png"></p>
+<p>说邮箱不对，修改from：<code>From: <a href="mailto:&#x72;&#111;&#111;&#x74;&#64;&#103;&#101;&#x6d;&#x2d;&#108;&#111;&#x76;&#x65;&#46;&#99;&#x6f;&#109;">&#x72;&#111;&#111;&#x74;&#64;&#103;&#101;&#x6d;&#x2d;&#108;&#111;&#x76;&#x65;&#46;&#99;&#x6f;&#109;</a></code><br><img src="/2021/04/07/pig/10.png"></p>
 <pre><code> Sorry, this site is only optimized for those who use the http proxy of y1ng.vip<br> if you dont have the proxy, pls contact us to buy, ￥100/Month</code></pre>
 <p>提示y1ng.vip代理才可以<br><code>Via: y1ng.vip</code>:<br><img src="/2021/04/07/pig/11.png"><br>发现base64编码，解码后得到flag<br><img src="/2021/04/07/pig/12.png"><br>啊终于出来了</p>
 <h4>知识点</h4>
@@ -461,12 +572,11 @@
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -478,13 +588,18 @@
 
 
 
+
+
+
+
   
     <article id="post-ssti" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/04/06/ssti/" class="article-date">
-  	<time datetime="2021-04-06T07:53:13.000Z" itemprop="datePublished">2021-04-06</time>
+      <a  href="/2021/04/06/ssti/" class="article-date">
+      <time datetime="2021-04-06T07:53:13.000Z" itemprop="datePublished">2021-04-06</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -496,18 +611,17 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/06/ssti/">
-        SSTI注入&amp;&amp;[BJDCTF2020]The mystery of ip 1
-        
-      </a>
+      <a  class="article-title" href="/2021/04/06/ssti/">SSTI注入&amp;&amp;[BJDCTF2020]The mystery of ip 1</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h2 id="0x00-知识点">#知识点</h2>
 <p><strong>SSTI模板注入：</strong><br>
 
@@ -547,12 +661,11 @@ X-Forwarded-For: &#123;&#123;system("cat /flag")&#125;&#125;
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -564,13 +677,18 @@ X-Forwarded-For: &#123;&#123;system("cat /flag")&#125;&#125;
 
 
 
+
+
+
+
   
     <article id="post-daima" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/04/05/daima/" class="article-date">
-  	<time datetime="2021-04-05T07:08:52.000Z" itemprop="datePublished">2021-04-05</time>
+      <a  href="/2021/04/05/daima/" class="article-date">
+      <time datetime="2021-04-05T07:08:52.000Z" itemprop="datePublished">2021-04-05</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -582,18 +700,17 @@ X-Forwarded-For: &#123;&#123;system("cat /flag")&#125;&#125;
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/05/daima/">
-        buu练习[强网杯 2019]高明的黑客
-        
-      </a>
+      <a  class="article-title" href="/2021/04/05/daima/">buu练习[强网杯 2019]高明的黑客</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开题目链接，如下：<br><img src="/2021/04/05/daima/2.png"><br>下载文件：<br><img src="/2021/04/05/daima/1.png"><br>好家伙，这么多个文件，一个一个看完我代码审计应该也就没啥问题了=|=|| <img src="/2021/04/05/daima/3.jpg"><br>这么多的文件其实就是根据一句话木🐎的原理，在大批量的文件中找到你最中意的那个PHP预定义变量$_GET或者$_POST.<br>emmm我无能了，查看大佬的wp，人家是这样正则的：<br><code>get:$_GET[\‘(\w+)\‘]</code><br><code>post:$_POST[\‘(\w+)\‘]</code><br>flag.txt存对应的php和参数信息<br>人家的代码是这样的：</p>
 <pre><code class="prism language-python"><span class="token keyword">import</span> os
 <span class="token keyword">import</span> requests
@@ -730,12 +847,11 @@ if __name__ == ‘__main__‘:
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -747,13 +863,18 @@ if __name__ == ‘__main__‘:
 
 
 
+
+
+
+
   
     <article id="post-b" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/04/01/b/" class="article-date">
-  	<time datetime="2021-04-01T05:15:46.000Z" itemprop="datePublished">2021-04-01</time>
+      <a  href="/2021/04/01/b/" class="article-date">
+      <time datetime="2021-04-01T05:15:46.000Z" itemprop="datePublished">2021-04-01</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -765,18 +886,17 @@ if __name__ == ‘__main__‘:
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/01/b/">
-        任意下载漏洞&amp;&amp;[RoarCTF 2019]Easy Java 1
-        
-      </a>
+      <a  class="article-title" href="/2021/04/01/b/">任意下载漏洞&amp;&amp;[RoarCTF 2019]Easy Java 1</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h2>知识点(任意下载漏洞)<h2>
 
 
@@ -860,12 +980,11 @@ if __name__ == ‘__main__‘:
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -877,13 +996,18 @@ if __name__ == ‘__main__‘:
 
 
 
+
+
+
+
   
     <article id="post-xxs" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/03/31/xxs/" class="article-date">
-  	<time datetime="2021-03-31T12:14:19.000Z" itemprop="datePublished">2021-03-31</time>
+      <a  href="/2021/03/31/xxs/" class="article-date">
+      <time datetime="2021-03-31T12:14:19.000Z" itemprop="datePublished">2021-03-31</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -895,18 +1019,17 @@ if __name__ == ‘__main__‘:
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/31/xxs/">
-        ctf xss利用_xss总结
-        
-      </a>
+      <a  class="article-title" href="/2021/03/31/xxs/">ctf xss利用_xss总结</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h1>[CISCN2019 华东北赛区]Web2</h1>
 <h2>题目</h2>
 
@@ -945,12 +1068,11 @@ if __name__ == ‘__main__‘:
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -962,13 +1084,18 @@ if __name__ == ‘__main__‘:
 
 
 
+
+
+
+
   
     <article id="post-pop" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/03/30/pop/" class="article-date">
-  	<time datetime="2021-03-30T09:02:06.000Z" itemprop="datePublished">2021-03-30</time>
+      <a  href="/2021/03/30/pop/" class="article-date">
+      <time datetime="2021-03-30T09:02:06.000Z" itemprop="datePublished">2021-03-30</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -980,18 +1107,17 @@ if __name__ == ‘__main__‘:
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/30/pop/">
-        pop链-&gt;[MRCTF2020]ezpop
-        
-      </a>
+      <a  class="article-title" href="/2021/03/30/pop/">pop链-&gt;[MRCTF2020]ezpop</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开题目，给出如下代码:</p>
 <pre><code class="prism language-php"><span class="token delimiter important">&lt;?php</span>
 <span class="token comment">//flag is in flag.php</span>
@@ -1148,12 +1274,11 @@ if __name__ == ‘__main__‘:
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -1165,13 +1290,18 @@ if __name__ == ‘__main__‘:
 
 
 
+
+
+
+
   
     <article id="post-fxl" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/03/25/fxl/" class="article-date">
-  	<time datetime="2021-03-25T08:03:50.000Z" itemprop="datePublished">2021-03-25</time>
+      <a  href="/2021/03/25/fxl/" class="article-date">
+      <time datetime="2021-03-25T08:03:50.000Z" itemprop="datePublished">2021-03-25</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -1183,18 +1313,17 @@ if __name__ == ‘__main__‘:
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/25/fxl/">
-        php反序列化---&gt;魔法函数
-        
-      </a>
+      <a  class="article-title" href="/2021/03/25/fxl/">php反序列化---&gt;魔法函数</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>这周，出了到web题，反序列化魔法函数，emmm题我是没做出来（别问，问就是我是废物wuwuwuwu~），但我总结了相关知识点，假以时日，但愿总结着终结着我就会了</p>
 <h3>正文</h3>
 
@@ -1226,12 +1355,11 @@ if __name__ == ‘__main__‘:
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -1243,13 +1371,18 @@ if __name__ == ‘__main__‘:
 
 
 
+
+
+
+
   
     <article id="post-gj" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/03/20/gj/" class="article-date">
-  	<time datetime="2021-03-20T12:41:26.000Z" itemprop="datePublished">2021-03-20</time>
+      <a  href="/2021/03/20/gj/" class="article-date">
+      <time datetime="2021-03-20T12:41:26.000Z" itemprop="datePublished">2021-03-20</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -1261,18 +1394,17 @@ if __name__ == ‘__main__‘:
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/20/gj/">
-        web步骤
-        
-      </a>
+      <a  class="article-title" href="/2021/03/20/gj/">web步骤</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p><b style="color:pink">1. 看源码</b></p>
 <p>可以右键-&gt;【查看网页源代码】，也可以用火狐和谷歌浏览器的按F12键，按F12键可以修改html源代码方便构造一些值提交，但如果不需要的话直接右键查看源代码更直观，看网页里面的注释之类的都很方便。</p>
 <p><b style="color:pink">2. 抓包&lt;/b.&gt;</b></p>
@@ -1357,12 +1489,11 @@ if __name__ == ‘__main__‘:
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -1374,13 +1505,18 @@ if __name__ == ‘__main__‘:
 
 
 
+
+
+
+
   
     <article id="post-zj" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/03/18/zj/" class="article-date">
-  	<time datetime="2021-03-18T12:48:43.000Z" itemprop="datePublished">2021-03-18</time>
+      <a  href="/2021/03/18/zj/" class="article-date">
+      <time datetime="2021-03-18T12:48:43.000Z" itemprop="datePublished">2021-03-18</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -1392,18 +1528,17 @@ if __name__ == ‘__main__‘:
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/18/zj/">
-        CSRF
-        
-      </a>
+      <a  class="article-title" href="/2021/03/18/zj/">CSRF</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p><b style="color:pink">##0、CSRF的简介</b><br>CSRF（Cross-site request forgery）跨站请求伪造，由于目标站无token/referer限制，导致攻击者可以用户的身份完成操作达到各种目的。根据HTTP请求方式，CSRF利用方式可分为两种。<br><b style="color:pink">##1、CSRF的攻击原理</b><br>CSRF 百度上的意思是跨站请求伪造，其实最简单的理解我们可以这么讲，假如一个微博关注用户的一个功能，存在CSRF漏洞，那么此时黑客只需要伪造一个页面让受害者间接或者直接触发，然后这个恶意页面就可以使用受害者的微博权限去关注其他的人微博账户。CSRF只要被批量化利用起来其危害还是比较大的。<br><img src="/2021/03/18/zj/1.png"><br>可以看到这里有个Referer的信息，Referer也就是请求来源地址，也就是说这个请求是从<a target="_blank" rel="noopener" href="http://www.sina.com.cn/">http://www.sina.com.cn</a>  这里发起的。然后去掉Referer，去执行这个请求，发现这个请求仍然可以进行正常的搜索，那么就说明这个请求没有判断请求来源也就是Referer，在请求头部也没有发现存在token的迹象，那么可以判断此处存在CSRF，这个CSRF是没有任何危害d的。<br><b style="color:pink">##2、CSRF漏洞成因及分析</b><br><b style="color:blue">GET类型的CSRF</b><br>请求直接是个GET请求，然后请求中没有token验证参数，然后还有一个固定的变量可以被控制。这种是比较常见的一种CSRF漏洞。这种漏洞的检测方法很简单：网页操作某功能，抓包后，如果发现满足上面条件，然后再去页面测试下，基本就可以确定存在不存在CSRF漏洞了。<br>这种类型的CSRF一般是由于程序员安全意识不强造成的。GET类型的CSRF利用非常简单，只需要一个HTTP请求，所以，一般会这样利用：<br><img src="/2021/03/18/zj/3.png"><br>在访问含有这个img的页面后，成功向<a target="_blank" rel="noopener" href="http://wooyun.org/csrf.php?xx=11">http://wooyun.org/csrf.php?xx=11</a>  发出了一次HTTP请求。所以，如果将该网址替换为存在GET型CSRF的地址，就能完成攻击了。<br><b style="color:blue">POST类型的CSRF</b><br>post请求中没有token参数，然后请求也没有验证referer信息。这种是存在CSRF情况最多的一种。这种漏洞的检测方法也很简单：网页操作某功能，抓包后，如果发现没有token等参数，然后就将referer信息设置为空，再次发包请求，如果请求成功了，就说明这里有CSRF漏洞。<br>这种类型的CSRF危害没有GET型的大，利用起来通常使用的是一个自动提交的表单，如：<br><img src="/2021/03/18/zj/2.png"></p>
 <p>访问该页面后，表单会自动提交，相当于模拟用户完成了一次POST操作<br><b style="color:blue">其他类型的CSRF</b><br>过基础认证的CSRF(常用于路由器):<br>POC:<br><img src="/2021/03/18/zj/4.png"><br>加载该图片后，路由器会给用户一个合法的SESSION，就可以进行下一步操作了。<br><b style="color:blue">##4、如何修复</b><br>针对CSRF的防范，有以下几点要注意：<br><b>关键操作只接受POST请求</b><br><b>验证码</b><br>CSRF攻击的过程，往往是在用户不知情的情况下构造网络请求。所以如果使用验证码，那么每次操作都需要用户进行互动，从而简单有效的防御了CSRF攻击。</p>
 <p>但是如果你在一个网站作出任何举动都要输入验证码会严重影响用户体验，所以验证码一般只出现在特殊操作里面，或者在注册时候使用</p>
@@ -1441,16 +1576,19 @@ if __name__ == ‘__main__‘:
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
 </article>
+
+
+
+
 
 
 
@@ -1464,65 +1602,136 @@ if __name__ == ‘__main__‘:
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
+
 </div>
       <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2021 Jialu
-      </div>
-        <div class="footer-right">
-          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 Jialu
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
         </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
     </div>
-  </div>
 </footer>
+
     </div>
     
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 
-
-
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: true,
-		isPost: false,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
 
 <script src="/js/main.js"></script>
 
 
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 1;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
 
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
 </script>
 
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
 
 
   </div>
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
+<script type="text/javascript" src="/js/love.js"></script>
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<!-- 雪花特效 -->
+<script type="text/javascript" src="\js\snow.js"></script>

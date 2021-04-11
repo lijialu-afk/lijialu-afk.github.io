@@ -2,12 +2,12 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
   
   <title>baba童鞋的博客</title>
-
-  <!-- keywords -->
-  
-
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="baba童鞋的博客">
@@ -20,161 +20,270 @@
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
   
-    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+    <link rel="icon" href="/img/ljl.jpg">
+  
+  
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
   
   
 <link rel="stylesheet" href="/css/style.css">
 
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+    
+    
   
   
-
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
-<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
-
-  
-<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-
-
-  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: true,
+          isPost: false,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
 <meta name="generator" content="Hexo 5.2.0"></head>
 <body>
   <div id="container">
-    <div id="particles-js"></div>
     <div class="left-col">
     <div class="overlay"></div>
 <div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="/img/huahua.jpg" class="js-avatar">
-			
-		</a>
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/"></a></h1>
-		</hgroup>
-
-		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						<li>友情链接</li>
-						
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-			</div>
-		</div>
-	</header>				
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/ljl.jpg" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder="搜索一下" autocomplete="off">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">玩转开发工具</a></li>
+                        
+                            <li><a  href="/categories/digital">玩转数码</a></li>
+                        
+                            <li><a  href="/categories/algorithm">算法学习</a></li>
+                        
+                            <li><a  href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="/xxxxx" title="github">github</a>
+                            
+                                <a class="fl weibo"  target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://blog.csdn.net/baidu_21483933">csdn</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://segmentfault.com/blog/maocg_web">segmentfault</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/eb37ef89c746/latest_articles">简书</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
 </div>
+
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide"></h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="/img/huahua.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author"></h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-				</div>
-			</nav>
-		</header>				
-	</div>
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/ljl.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">玩转开发工具</a></li>
+                
+                    <li><a href="/categories/digital">玩转数码</a></li>
+                
+                    <li><a href="/categories/algorithm">算法学习</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="/xxxxx" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
 </nav>
       <div class="body-wrap">
   
     <article id="post-sql" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/24/sql/" class="article-date">
-  	<time datetime="2021-01-24T09:51:45.000Z" itemprop="datePublished">2021-01-24</time>
+      <a  href="/2021/01/24/sql/" class="article-date">
+      <time datetime="2021-01-24T09:51:45.000Z" itemprop="datePublished">2021-01-24</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -186,18 +295,17 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/24/sql/">
-        10-buu练习EasySQL2
-        
-      </a>
+      <a  class="article-title" href="/2021/01/24/sql/">10-buu练习EasySQL2</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开题目链接，如下：<br><img src="/2021/01/24/sql/sql2.png"><br>尝试万能密码：<br>用户名–&gt;admin；<br>密码–&gt;1’or’1’=’1<br><img src="/2021/01/24/sql/sql1.png"><br>竟然真的出来了<br>真是轻松的一天！（难得啊）</p>
 <h2>接下来总结一下万能密码：</h2>
 <h3>aspx万能密码</h3>
@@ -346,12 +454,11 @@
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -363,13 +470,18 @@
 
 
 
+
+
+
+
   
     <article id="post-mdwu" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/23/mdwu/" class="article-date">
-  	<time datetime="2021-01-23T05:10:12.000Z" itemprop="datePublished">2021-01-23</time>
+      <a  href="/2021/01/23/mdwu/" class="article-date">
+      <time datetime="2021-01-23T05:10:12.000Z" itemprop="datePublished">2021-01-23</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -381,18 +493,17 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/23/mdwu/">
-        9-buu练习Easy MD5
-        
-      </a>
+      <a  class="article-title" href="/2021/01/23/mdwu/">9-buu练习Easy MD5</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开题目地址，界面如下：<br><img src="/2021/01/23/mdwu/md1.png"><br>采用burp抓包，如下；<br><img src="/2021/01/23/mdwu/md2.png"><br>【select * from ‘admin’ where password=md5($pass,true)】，我们提交ffifdyop（下面会有详解）,并查看源代码，出现以下界面：<br><img src="/2021/01/23/mdwu/md3.png"><br>get传入：?a[]=1&amp;b[]=2<br>出现以下界面<br><img src="/2021/01/23/mdwu/md4.png"><br>post传入：?param1[]=1&amp;param2[]=2<br><img src="/2021/01/23/mdwu/md5.png"><br>得到flag~</p>
 <h2>知识点</h2>
 <h3>md5($pass,true)</h3>
@@ -421,12 +532,11 @@
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -438,13 +548,18 @@
 
 
 
+
+
+
+
   
     <article id="post-bak" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/22/bak/" class="article-date">
-  	<time datetime="2021-01-22T08:41:25.000Z" itemprop="datePublished">2021-01-22</time>
+      <a  href="/2021/01/22/bak/" class="article-date">
+      <time datetime="2021-01-22T08:41:25.000Z" itemprop="datePublished">2021-01-22</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -456,18 +571,17 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/22/bak/">
-        8-buu练习[ACTF2020 新生赛]BackupFile
-        
-      </a>
+      <a  class="article-title" href="/2021/01/22/bak/">8-buu练习[ACTF2020 新生赛]BackupFile</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开题目地址，如下：<br><img src="/2021/01/22/bak/bak1.png"></p>
 <ul>
 <li>f12查看源代码，代码不在里面。
@@ -494,12 +608,11 @@
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -511,13 +624,18 @@
 
 
 
+
+
+
+
   
     <article id="post-hhh" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/21/hhh/" class="article-date">
-  	<time datetime="2021-01-21T03:16:38.000Z" itemprop="datePublished">2021-01-21</time>
+      <a  href="/2021/01/21/hhh/" class="article-date">
+      <time datetime="2021-01-21T03:16:38.000Z" itemprop="datePublished">2021-01-21</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -529,18 +647,17 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/21/hhh/">
-        7-buu练习[极客大挑战 2019]Http
-        
-      </a>
+      <a  class="article-title" href="/2021/01/21/hhh/">7-buu练习[极客大挑战 2019]Http</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h1>知识点</h1>
 <h3>1.Referer</h3>
 HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器该网页是从哪个页面链接过来的，服务器因此可以获得一些信息用于处理。Referer 常用在防盗链和防恶意请求中。传输referer需要在页面内添加相关的代码。
@@ -576,16 +693,19 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
 </article>
+
+
+
+
 
 
 
@@ -597,9 +717,10 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     <article id="post-exec" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/20/exec/" class="article-date">
-  	<time datetime="2021-01-20T10:17:01.000Z" itemprop="datePublished">2021-01-20</time>
+      <a  href="/2021/01/20/exec/" class="article-date">
+      <time datetime="2021-01-20T10:17:01.000Z" itemprop="datePublished">2021-01-20</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -611,18 +732,17 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/20/exec/">
-        6-buu练习[ACTF2020 新生赛]Exec
-        
-      </a>
+      <a  class="article-title" href="/2021/01/20/exec/">6-buu练习[ACTF2020 新生赛]Exec</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开题目，发现是ping，和linux有关，首先查看文件：<b>127.0.0.1|ls</b><br><img src="/2021/01/20/exec/eee1.png"><br>存在index.php文件，那我们查看该文件：<b>127.0.0.1;cat index.php</b><br>再查看源代码，如下：<br><img src="/2021/01/20/exec/eee2.png"><br>没有flag文件，那么flag应该在父目录中，那我们：<b>127.0.0.1|ls ../</b> 直到<b>127.0.0.1|ls ../../../</b>可以看到flag文件<br><img src="/2021/01/20/exec/eee3.png"><br>那我们查看../../../flag文件：<b>127.0.0.1|cat ../../../flag</b><br><img src="/2021/01/20/exec/eee4.png"><br>得到flag！<br>（又是爱学习的一天！！）</p>
 
       
@@ -631,12 +751,11 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -648,13 +767,18 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
 
 
 
+
+
+
+
   
     <article id="post-ping" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/19/ping/" class="article-date">
-  	<time datetime="2021-01-19T11:06:17.000Z" itemprop="datePublished">2021-01-19</time>
+      <a  href="/2021/01/19/ping/" class="article-date">
+      <time datetime="2021-01-19T11:06:17.000Z" itemprop="datePublished">2021-01-19</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -666,18 +790,17 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/19/ping/">
-        5-buu练习Ping Ping Ping
-        
-      </a>
+      <a  class="article-title" href="/2021/01/19/ping/">5-buu练习Ping Ping Ping</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开题目，界面如下<br><img src="/2021/01/19/ping/ping1.png"><br>结合题目pingpingping，这应该是个提示且与与linux相关，于是在url后面加上：</p>
 <ul>
 <li>?/ip=127.0.0.1
@@ -730,12 +853,11 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
@@ -747,13 +869,18 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
 
 
 
+
+
+
+
   
     <article id="post-bu" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/18/bu/" class="article-date">
-  	<time datetime="2021-01-18T10:56:06.000Z" itemprop="datePublished">2021-01-18</time>
+      <a  href="/2021/01/18/bu/" class="article-date">
+      <time datetime="2021-01-18T10:56:06.000Z" itemprop="datePublished">2021-01-18</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -765,18 +892,17 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/18/bu/">
-        4-buu练习EasySQL1
-        
-      </a>
+      <a  class="article-title" href="/2021/01/18/bu/">4-buu练习EasySQL1</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开题目链接，界面如下：<br><img src="/2021/01/18/bu/bb1.png"><br>可以知道应该使用堆叠查询植入攻击<br>查看数据库：</p>
 <ul>
 <li>1;show dadabases;</li>
@@ -826,16 +952,19 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
 </article>
+
+
+
+
 
 
 
@@ -847,9 +976,10 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     <article id="post-buu" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/17/buu/" class="article-date">
-  	<time datetime="2021-01-17T08:52:10.000Z" itemprop="datePublished">2021-01-17</time>
+      <a  href="/2021/01/17/buu/" class="article-date">
+      <time datetime="2021-01-17T08:52:10.000Z" itemprop="datePublished">2021-01-17</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -861,18 +991,17 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/17/buu/">
-        3-buu练习Secret File
-        
-      </a>
+      <a  class="article-title" href="/2021/01/17/buu/">3-buu练习Secret File</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开题目链接，查看源代码，会看到以下界面：<br><img src="/2021/01/17/buu/buu1.png"></p>
 <p>如上图点击<b>Archive_room.php</b>，会看到以下代码<br><img src="/2021/01/17/buu/buu2.png"><br>根据提示访问action.php，会看到以下界面<br><img src="/2021/01/17/buu/buu3.png"><br>可以看出action.php访问的时间很短，直接跳到了end.php文件中，那我们就采用BurpSuite抓包，结果如下：<br><img src="/2021/01/17/buu/buu4.png"><br><b>secr3t.php</b>被着重强调，那我们访问该文件，得到的代码如下；<br><img src="/2021/01/17/buu/buu5.png"><br>通过查看代码发现并没有将flag写出来。根据提示我们可以肯定flag确实是在这里，但是前端却看不到，那么flag应该是写在了php代码里面，需要获得完整的flag.php文件。获取完整的flag.php文件的方法便是secr3t.php的文件包含漏洞，那我们就直接采用php://filer伪协议来绕过漏洞<br>使用经典payload：php://filter/convert.base64-encode/resource=flag.php<br><img src="/2021/01/17/buu/buu6.png"><br>得到base64编码，解码如下<br><img src="/2021/01/17/buu/buu7.png"><br>在代码中找到flag~<br>（duang！又是正经的一天）</p>
 
@@ -882,16 +1011,19 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
 </article>
+
+
+
+
 
 
 
@@ -903,9 +1035,10 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     <article id="post-include1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/16/include1/" class="article-date">
-  	<time datetime="2021-01-16T12:55:02.000Z" itemprop="datePublished">2021-01-16</time>
+      <a  href="/2021/01/16/include1/" class="article-date">
+      <time datetime="2021-01-16T12:55:02.000Z" itemprop="datePublished">2021-01-16</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -917,18 +1050,17 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/16/include1/">
-        2-buu[ACTF2020 新生赛]Include
-        
-      </a>
+      <a  class="article-title" href="/2021/01/16/include1/">2-buu[ACTF2020 新生赛]Include</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开题目点击tips进入以下界面<br><img src="/2021/01/16/include1/bbb0.png"><br>从url可以看出是文件包含的题型，考虑php伪协议（具体内容可见霸霸童鞋博客；php伪协议笔记）<br>首先使用 <b>“php://input”伪协议 + POST发送PHP代码</b> 经典套路<br><img src="/2021/01/16/include1/bbb1.png"><br>可知php://input伪协议被过滤了<br>那么用 <b>php://filter</b> 伪协议来进行包含。当它与包含函数结合时，php://filter流会被当作php文件执行，那么对其进行编码，阻止其不执行，从而读取任意文件。<br>经典payload：<b>?file=php://filter/read=convert.base64-encode/resource=flag.php</b>–&gt;（read=convert.base64-encode来对文件内容进行编码,发送请求读取base64编码后的flag.php文件源码）<br>结果如下：<br><img src="/2021/01/16/include1/bbb2.png"><br>对base64编码进行解码<br><img src="/2021/01/16/include1/bbb3.png"><br>得到flag~</p>
 
       
@@ -937,16 +1069,19 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
 </article>
+
+
+
+
 
 
 
@@ -958,9 +1093,10 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     <article id="post-phpshenji" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/01/15/phpshenji/" class="article-date">
-  	<time datetime="2021-01-15T13:48:54.000Z" itemprop="datePublished">2021-01-15</time>
+      <a  href="/2021/01/15/phpshenji/" class="article-date">
+      <time datetime="2021-01-15T13:48:54.000Z" itemprop="datePublished">2021-01-15</time>
 </a>
+
     </div>
   
   <div class="article-inner">
@@ -972,18 +1108,17 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/15/phpshenji/">
-        1-php审计buu第一题
-        
-      </a>
+      <a  class="article-title" href="/2021/01/15/phpshenji/">1-php审计buu第一题</a>
     </h1>
   
+
 
       </header>
       
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>打开题目链接，是一幅图片，我们查看源代码<br><img src="/2021/01/15/phpshenji/ppp2.png"><br>题目地址是source.php，输入地址后代码如下：<br><img src="/2021/01/15/phpshenji/ppp3.png"><br>由<br>$whitelist = [“source”=&gt;”source.php”,”hint”=&gt;”hint.php”];<br>得到另一个地址/hint.php，打开后看到如下界面<br><img src="/2021/01/15/phpshenji/ppp1.png"><br>继续查看source.php代码<br><img src="/2021/01/15/phpshenji/ppp4.png"><br>这段代码告诉们需要满足三个条件</p>
 <p>1.值为非空<br>2.值为字符串<br>3.能够通过checkFile()函数校验<br>否则打印滑稽<br>查看checkfile()函数–&gt;highlight_file()函数<br><img src="/2021/01/15/phpshenji/ppp5.png"><br>其中包含4个if语句：<br>1.第一个if语句对变量进行检验，要求$page为字符串，否则返回false<br>2.第二个if语句判断$page是否存在于$whitelist数组中，存在则返回true<br>3.第三个if语句判断截取后的$page是否存在于$whitelist数组中，截取$page中’?’前部分，存在则返回true<br>4.第四个if语句判断url解码并截取后的$page是否存在于$whitelist中，存在则返回true<br>————————<br>若以上四个if语句均未返回值，则返回false<br>有三个if语句可以返回true，第二个语句直接判断$page，不可用<br>第三个语句截取’?’前部分，由于?被后部分被解析为get方式提交的参数，也不可利用<br>第四个if语句中，先进行url解码再截取，因此我们可以将?经过两次url编码，在服务器端提取参数时解码一次，checkFile函数中解码一次，仍会解码为’?’，仍可通过第四个if语句校验。（’?’两次编码值为’%253f’）,构造url：<br><a target="_blank" rel="noopener" href="http://399fe153-1f62-43d5-a67f-e645a0e7ac66.node3.buuoj.cn/source.php?file=source.php%253f../../../../../ffffllllaaaagggg">http://399fe153-1f62-43d5-a67f-e645a0e7ac66.node3.buuoj.cn/source.php?file=source.php%253f../../../../../ffffllllaaaagggg</a><br>即可得到flag：<br><img src="/2021/01/15/phpshenji/ppp6.png"></p>
 
@@ -993,16 +1128,19 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
-      
     
   </div>
   
 </article>
+
+
+
+
 
 
 
@@ -1016,65 +1154,136 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
       <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
     </nav>
   
+
 </div>
       <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2021 Jialu
-      </div>
-        <div class="footer-right">
-          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 Jialu
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
         </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
     </div>
-  </div>
 </footer>
+
     </div>
     
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 
-
-
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: true,
-		isPost: false,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
 
 <script src="/js/main.js"></script>
 
 
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 1;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
 
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
 </script>
 
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
 
 
   </div>
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
+<script type="text/javascript" src="/js/love.js"></script>
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<!-- 雪花特效 -->
+<script type="text/javascript" src="\js\snow.js"></script>
