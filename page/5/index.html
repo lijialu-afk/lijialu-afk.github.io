@@ -272,6 +272,123 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-include1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/01/16/include1/" class="article-date">
+      <time datetime="2021-01-16T12:55:02.000Z" itemprop="datePublished">2021-01-16</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/01/16/include1/">2-buu[ACTF2020 新生赛]Include</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>打开题目点击tips进入以下界面<br><img src="/2021/01/16/include1/bbb0.png"><br>从url可以看出是文件包含的题型，考虑php伪协议（具体内容可见霸霸童鞋博客；php伪协议笔记）<br>首先使用 <b>“php://input”伪协议 + POST发送PHP代码</b> 经典套路<br><img src="/2021/01/16/include1/bbb1.png"><br>可知php://input伪协议被过滤了<br>那么用 <b>php://filter</b> 伪协议来进行包含。当它与包含函数结合时，php://filter流会被当作php文件执行，那么对其进行编码，阻止其不执行，从而读取任意文件。<br>经典payload：<b>?file=php://filter/read=convert.base64-encode/resource=flag.php</b>–&gt;（read=convert.base64-encode来对文件内容进行编码,发送请求读取base64编码后的flag.php文件源码）<br>结果如下：<br><img src="/2021/01/16/include1/bbb2.png"><br>对base64编码进行解码<br><img src="/2021/01/16/include1/bbb3.png"><br>得到flag~</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-phpshenji" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/01/15/phpshenji/" class="article-date">
+      <time datetime="2021-01-15T13:48:54.000Z" itemprop="datePublished">2021-01-15</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/01/15/phpshenji/">1-Php审计buu第一题</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>打开题目链接，是一幅图片，我们查看源代码<br><img src="/2021/01/15/phpshenji/ppp2.png"><br>题目地址是source.php，输入地址后代码如下：<br><img src="/2021/01/15/phpshenji/ppp3.png"><br>由<br>$whitelist = [“source”=&gt;”source.php”,”hint”=&gt;”hint.php”];<br>得到另一个地址/hint.php，打开后看到如下界面<br><img src="/2021/01/15/phpshenji/ppp1.png"><br>继续查看source.php代码<br><img src="/2021/01/15/phpshenji/ppp4.png"><br>这段代码告诉们需要满足三个条件</p>
+<p>1.值为非空<br>2.值为字符串<br>3.能够通过checkFile()函数校验<br>否则打印滑稽<br>查看checkfile()函数–&gt;highlight_file()函数<br><img src="/2021/01/15/phpshenji/ppp5.png"><br>其中包含4个if语句：<br>1.第一个if语句对变量进行检验，要求$page为字符串，否则返回false<br>2.第二个if语句判断$page是否存在于$whitelist数组中，存在则返回true<br>3.第三个if语句判断截取后的$page是否存在于$whitelist数组中，截取$page中’?’前部分，存在则返回true<br>4.第四个if语句判断url解码并截取后的$page是否存在于$whitelist中，存在则返回true<br>————————<br>若以上四个if语句均未返回值，则返回false<br>有三个if语句可以返回true，第二个语句直接判断$page，不可用<br>第三个语句截取’?’前部分，由于?被后部分被解析为get方式提交的参数，也不可利用<br>第四个if语句中，先进行url解码再截取，因此我们可以将?经过两次url编码，在服务器端提取参数时解码一次，checkFile函数中解码一次，仍会解码为’?’，仍可通过第四个if语句校验。（’?’两次编码值为’%253f’）,构造url：<br><a target="_blank" rel="noopener" href="http://399fe153-1f62-43d5-a67f-e645a0e7ac66.node3.buuoj.cn/source.php?file=source.php%253f../../../../../ffffllllaaaagggg">http://399fe153-1f62-43d5-a67f-e645a0e7ac66.node3.buuoj.cn/source.php?file=source.php%253f../../../../../ffffllllaaaagggg</a><br>即可得到flag：<br><img src="/2021/01/15/phpshenji/ppp6.png"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-php靶场" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -861,124 +978,6 @@ $$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出�
 
 
   
-    <article id="post-php变量覆盖1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/" class="article-date">
-      <time datetime="2020-11-24T08:29:30.000Z" itemprop="datePublished">2020-11-24</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/">被摧残的第二天</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>  今天做了学长给的一道php变量覆盖题。学长给的web题<br>  打开熟悉的henuctf网站，点开题目网址，你会看到以下内容。<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl1.png"><br>  emmm，一副看不懂的亚子。。那根据提示ctrl+u，果然出现了变化！<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl2.png"><br>  仔细一看，就，变整齐了？<br>  再一看，根据学长所说，这是一道php变量覆盖题，借助百度，了解一下，就是让两变量相等<br>  输入payload：【get】？liwu=&amp;content 开始执行<br>  <img src="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/bl3.png"><br>  duang成功得到flag~<br>  注：extract()语法： extract(array,extract_rules,prefix)<br>  </p><h2>(一)</h2><br>  extract() 函数从数组中将变量导入到当前的符号表。<br>  该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。<br>  第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。<br>  该函数返回成功导入到符号表中的变量数目。<br>  如果变量liwu和变量content的值相同，就会输出flag<br>  所以构造  ?liwu=&amp;content flag就可以出来。<br>  <h2>(二）</h2><br>  题目使用了extract($_GET)接收了GET请求中的数据，并将键名和键值转换为变量名和变量的值，然后再进行两个if 的条件判断，所以可以使用GET提交参数和值，利用extract()对变量进行覆盖，从而满足各个条件。<br>  解题方法：<br>  GET请求 ?flag=&amp;gift=，extract()会将flag和flag和gift的值覆盖了，将变量的值设置为空或者不存在的文件就满足gift==gift==content。<br>  最终PAYLOAD：GET DATA： ?flag=&amp;gift=  也可以得到flag。<br>  （又是正经的一天~~）<p></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-basic-rce1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2020/11/23/basic-rce1/" class="article-date">
-      <time datetime="2020-11-23T09:27:50.000Z" itemprop="datePublished">2020-11-23</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2020/11/23/basic-rce1/">Baba童鞋的web第一天记录</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>  今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。<br>  具体wp如下<br>  首先打开网址，会看到以下内容<br>  <img src="/2020/11/23/basic-rce1/web1.png"><br>  根据内容，可以看出是一道php换行符绕过题（%0a），我们输入以下payload<br>  【GET】 /?a=system(%27%0acat%20f*%20|%20base64%27)；<br>  <img src="/2020/11/23/basic-rce1/web2.png"><br>  成功绕过！<br>  根据内容可以看出时base64编码，在百度上搜索base64在线解码器，进行在线解码<br>  <img src="/2020/11/23/basic-rce1/web3.png"><br>  dingdong!成功得到flag~<br>  注：<br>  exp1：php执行运算符<br>  GET /?a=echo <code>base64 flag.php</code></p>
-<p>  exp2：换行符绕过（%0a）<br>  GET /?a=system(%27%0acat%20f*%20|%20base64%27);</p>
-<p>  exp3：利用include函数加php伪协议<br>  GET /a=include%20%27php://filter/convert.base64-encode/resource=./flag.php%27;<br>  （baba童鞋还是可以正经滴）</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1108,9 +1107,8 @@ ga('send', 'pageview');
 
 
   </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
-<script type="text/javascript" src="/js/love.js"></script>
 <!--动态线条背景-->
 <script type="text/javascript"
 color="0,0,0" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
@@ -1119,3 +1117,5 @@ color="0,0,0" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canva
 <script type="text/javascript" src="\js\snow.js"></script>
 <!--浏览器搞笑标题-->
 <script type="text/javascript" src="\js\FunnyTitle.js"></script>
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>

