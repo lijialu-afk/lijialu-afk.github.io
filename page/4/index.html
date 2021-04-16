@@ -54,7 +54,7 @@
           isArchive: false,
           isTag: false,
           isCategory: false,
-          open_in_new: true
+          open_in_new: false
       }
   </script>
 <meta name="generator" content="Hexo 5.2.0"></head>
@@ -225,6 +225,7 @@
         </div>
     </header>
 </div>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1817967046&auto=1&height=66"></iframe>
 
     </div>
     <div class="mid-col">
@@ -271,6 +272,118 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-txt" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/01/27/txt/" class="article-date">
+      <time datetime="2021-01-27T05:46:21.000Z" itemprop="datePublished">2021-01-27</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/01/27/txt/">13-Buu练习easy_tornado</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>打开题目地址，出现以下界面：<br><img src="/2021/01/27/txt/txt0.png"><br>分别访问txt文件如下：<br><img src="/2021/01/27/txt/txt1.png"><br>告诉我们flag位于系统得根目录<br><img src="/2021/01/27/txt/txt2.png"><br>发现render关键字<br>render是一个渲染函数，进行服务器渲染，实质就是生成template模板，也就是说可能存在ssti模板注入漏洞<br><img src="/2021/01/27/txt/txt3.png"><br>URL中的filehash参数的值为md5(cookie_secret+md5(filename))<br>接下来render()函数可以联想到模板注入，测试一下：</p>
+<ul>
+<li>url + /error?msg=1
+</li></ul>
+
+<p><img src="/2021/01/27/txt/txt4.png"></p>
+<p>可以显示</p>
+<ul>
+<li>url + /error?msg=1
+</li></ul>
+
+<p><img src="/2021/01/27/txt/txt5.png"><br>发现被过滤了<br>render是python中的一个渲染函数，也就是一种模板，通过调用的参数不同，生成不同的网页 render配合Tornado使用</p>
+<ul>
+<li>Tornado是一种 Web 服务器软件的开源版本。Tornado 和现在的主流 Web 服务器框架（包括大多数 Python 的框架）有着明显的区别：它是非阻塞式服务器，而且速度相当快。
+</li></ul>
+
+<p>然后就是这段代码md5(cookie_secret+md5(filename))  我们根据之前打开文件的url参数分析这个就是filehash的值 想获得flag只要我们在url中传入/fllllllllllllag文件和filehash 经过这段代码处理的值即可关键就在这cookie_secret这块 我们得想办法获得cookie_secret<br>构造：url + /error?msg=</p>
+<p><img src="/2021/01/27/txt/txt6.png"></p>
+<p>得到cookie_secret的值</p>
+<p style="color:yellow">该payload可以获得cookie_secret的原因：</p>
+在tornado模板中，存在一些可以访问的快速对象,这里用到的是handler.settings，handler 指向RequestHandler，而RequestHandler.settings又指向self.application.settings，所以handler.settings就指向RequestHandler.application.settings了，这里面就是我们的一些环境变量
+
+<p style="color:yellow">结合之前访问/flag.txt、/welcome.txt、/hints.txt页面时后头都带了md5值，和/hints.txt给的信息可知：</p>
+<ul>
+<li>cookie_secret为7c60754a-4491-4a1d-b2b9-fd6e679387ea
+</li><li>filename为/fllllllllllllag
+</li></ul>
+
+<p style="color:yellow">根据获得的cookie_secret用python脚本构造md5(cookie_secret+md5(filename))：</p>
+<ul>
+<li>import hashlib
+</li><li>filename='/fllllllllllllag'
+</li><li>cookie_secret='3edd4d3c-190e-415f-9a7b-c6e4520f8249'
+</li><li>m=hashlib.md5()
+</li><li>m.update(filename.encode("utf-8"))
+</li><li>n=m.hexdigest()
+</li><li>    
+</li><li>v=cookie_secret+n
+</li><li>m=hashlib.md5()
+</li><li>m.update(v.encode("utf-8"))
+</li><li>n=m.hexdigest()
+</li><li>print(n)
+</li></ul>
+
+<p><img src="/2021/01/27/txt/txt8.png"></p>
+<p>得到filehash的值<br>于是</p>
+<ul>
+<li>filename=“/fllllllllllllag”；
+</li><li>filehash=“6c58f259b42875c42c3bb9481c96c1bd”
+</li></ul>
+
+<p>构造payload：</p>
+<p style="color:red">url + /file?filename=/fllllllllllllag&filehash=6c58f259b42875c42c3bb9481c96c1bd</p>
+
+<p><img src="/2021/01/27/txt/txt7.png"><br>得到flag！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-clac" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1146,65 +1259,6 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
 </li><li>PIPES_AS_CONCAT：将”||”视为字符串的连接操作符而非或运算符，这和Oracle数据库是一样的，也和字符串的拼接函数Concat相类似
 </li><li>ANSI_QUOTES：启用ANSI_QUOTES后，不能用双引号来引用字符串，因为它被解释为识别符</li>
 </ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-buu" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/01/17/buu/" class="article-date">
-      <time datetime="2021-01-17T08:52:10.000Z" itemprop="datePublished">2021-01-17</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/01/17/buu/">3-buu练习Secret File</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>打开题目链接，查看源代码，会看到以下界面：<br><img src="/2021/01/17/buu/buu1.png"></p>
-<p>如上图点击<b>Archive_room.php</b>，会看到以下代码<br><img src="/2021/01/17/buu/buu2.png"><br>根据提示访问action.php，会看到以下界面<br><img src="/2021/01/17/buu/buu3.png"><br>可以看出action.php访问的时间很短，直接跳到了end.php文件中，那我们就采用BurpSuite抓包，结果如下：<br><img src="/2021/01/17/buu/buu4.png"><br><b>secr3t.php</b>被着重强调，那我们访问该文件，得到的代码如下；<br><img src="/2021/01/17/buu/buu5.png"><br>通过查看代码发现并没有将flag写出来。根据提示我们可以肯定flag确实是在这里，但是前端却看不到，那么flag应该是写在了php代码里面，需要获得完整的flag.php文件。获取完整的flag.php文件的方法便是secr3t.php的文件包含漏洞，那我们就直接采用php://filer伪协议来绕过漏洞<br>使用经典payload：php://filter/convert.base64-encode/resource=flag.php<br><img src="/2021/01/17/buu/buu6.png"><br>得到base64编码，解码如下<br><img src="/2021/01/17/buu/buu7.png"><br>在代码中找到flag~<br>（duang！又是正经的一天）</p>
 
       
     </div>

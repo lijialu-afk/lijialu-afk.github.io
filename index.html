@@ -54,7 +54,7 @@
           isArchive: false,
           isTag: false,
           isCategory: false,
-          open_in_new: true
+          open_in_new: false
       }
   </script>
 <meta name="generator" content="Hexo 5.2.0"></head>
@@ -225,6 +225,7 @@
         </div>
     </header>
 </div>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1817967046&auto=1&height=66"></iframe>
 
     </div>
     <div class="mid-col">
@@ -271,6 +272,70 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-p" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/04/16/p/" class="article-date">
+      <time datetime="2021-04-16T13:56:08.000Z" itemprop="datePublished">2021-04-16</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/04/16/p/">日常练习[MRCTF2020]Ez_bypass</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h1>题目描述：</h1>
+
+<p><img src="/2021/04/16/p/1.png"><br><img src="/2021/04/16/p/2.png"><br>这么混乱，f12试试叭！</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a   href="/2021/04/16/p/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-zhishidian" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -902,89 +967,6 @@
       
         <p class="article-more-link">
           <a   href="/2021/03/30/pop/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-fxl" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/03/25/fxl/" class="article-date">
-      <time datetime="2021-03-25T08:03:50.000Z" itemprop="datePublished">2021-03-25</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/03/25/fxl/">Php反序列化---&gt;魔法函数</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>这周，出了到web题，反序列化魔法函数，emmm题我是没做出来（别问，问就是我是废物wuwuwuwu~），但我总结了相关知识点，假以时日，但愿总结着终结着我就会了</p>
-<h3>正文</h3>
-
-<p><font size="4"><b style="color:pink">魔法函数实例</b></font><br>PHP类中有一种特殊函数体的存在叫魔法函数，magic函数命名是以符号__开头的，如：</p>
-<ul>
-<li>__construct()  具有构造函数的类会在每次创建新对象时先调用此方法 (构造函数)
-</li><li>__destruct() 会在到某个对象的所有引用都被删除或者当对象被显式销毁时执行。(析构函数)
-</li><li>__call() 在对象中调用一个不可访问方法时，__call() 会被调用
-</li><li>__callStatic() 在静态上下文中调用一个不可访问方法时，__callStatic() 会被调用。
-</li><li>__get() 读取不可访问属性的值时，__get() 会被调用。
-</li><li>__set() 在给不可访问属性赋值时，__set() 会被调用。
-</li><li>__isset() 当对不可访问属性调用 isset() 或 empty() 时，__isset() 会被调用。
-</li><li>__unset() 当对不可访问属性调用 unset() 时，__unset() 会被调用。
-</li><li>__sleep() 当对象被serialize() 函数处理前，调用
-</li><li>__wakeup() 当类被unserialize()时调用 __wakeup 方法，预先准备对象需要的资源。
-</li><li>__toString() 该方法用于一个类被当成字符串时应怎样回应
-</li><li>__invoke()  当尝试以调用函数的方式调用一个对象时，__invoke() 方法会被自动调用
-</li><li>__set_state()
-</li><li>__clone() 当复制完成时，如果定义了 __clone() 方法，则新创建的对象（复制生成的对象）中的 __clone() 方法会被调用，可用于修改属性的值
-</li><li>__debugInfo()  此方法由var_dump（）调用
-
-</li></ul>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-        <p class="article-more-link">
-          <a   href="/2021/03/25/fxl/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
         </p>
       
       <div class="clearfix"></div>
