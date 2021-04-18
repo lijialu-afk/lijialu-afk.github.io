@@ -277,6 +277,105 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-bu" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/01/18/bu/" class="article-date">
+      <time datetime="2021-01-18T10:56:06.000Z" itemprop="datePublished">2021-01-18</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/01/18/bu/">4-buu练习EasySQL1</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>打开题目链接，界面如下：<br><img src="/2021/01/18/bu/bb1.png"><br>可以知道应该使用堆叠查询植入攻击<br>查看数据库：</p>
+<ul>
+<li>1;show dadabases;</li>
+</ul>
+
+<p><img src="/2021/01/18/bu/bb2.png"></p>
+<p>没有什么发现<br>查看数据表：</p>
+<ul>
+<li>1;show tables;</li>
+</ul>
+
+<p><img src="/2021/01/18/bu/bb3.png"></p>
+<p>猜测flag是在flag表中的flag字段中</p>
+<ul>
+<li>1;select flag from flag;</li>
+</ul>
+
+<p><img src="/2021/01/18/bu/bb4.png"><br>发现flag被过滤了<br><img src="/2021/01/18/bu/bb5.png"><br>（本霸霸已经完全木有思路了，淦！查看别人wp）</p>
+<p><b>别人家的wp：</b></p>
+<p>这道题目需要我们去对后端语句进行猜测，有点矛盾的地方在于其描述的功能和实际的功能似乎并不相符，通过输入非零数字得到的回显1和输入其余字符得不到回显来判断出内部的查询语句可能存在有||，也就是select 输入的数据||内置的一个列名 from 表名，进一步进行猜测即为select post进去的数据||flag from Flag(含有数据的表名，通过堆叠注入可知)，需要注意的是，此时的||起到的作用是or的作用</p>
+<p>解法1：</p>
+<p>输入的内容为*,1</p>
+<p>内置的sql语句为sql=”select”.sql=”select”.post[‘query’].”||flag from Flag”;</p>
+<p>如果$post[‘query’]的数据为*,1，sql语句就变成了select *,1||flag from Flag，也就是select *,1 from Flag，也就是直接查询出了Flag表中的所有内容</p>
+<p>解法2：</p>
+<p>输入的内容为1;set sql_mode=pipes_as_concat;select 1</p>
+<p>其中set sql_mode=pipes_as_concat的作用是将||的作用由or变为拼接字符串</p>
+<p><img src="/2021/01/18/bu/bb6.png"></p>
+<p>duang!成功得到flag！</p>
+<p><b>几种常见的mode介绍:</b></p>
+<ul>
+<li>ONLY_FULL_GROUP_BY：出现在select语句、HAVING条件和ORDER BY语句中的列，必须是GROUP BY的列或者依赖于GROUP BY列的函数列。
+</li><li>NO_AUTO_VALUE_ON_ZERO：该值影响自增长列的插入。默认设置下，插入0或NULL代表生成下一个自增长值。如果用户希望插入的值为0，而该列又是自增长的，那么这个选项就有用了。
+</li><li>STRICT_TRANS_TABLES：在该模式下，如果一个值不能插入到一个事务表中，则中断当前的操作，对非事务表不做限制
+</li><li>NO_ZERO_IN_DATE：这个模式影响了是否允许日期中的月份和日包含0。如果开启此模式，2016-01-00是不允许的，但是0000-02-01是允许的。它实际的行为受到 strict mode是否开启的影响1。
+</li><li>NO_ZERO_DATE：设置该值，mysql数据库不允许插入零日期。它实际的行为受到 strictmode是否开启的影响2。
+</li><li>ERROR_FOR_DIVISION_BY_ZERO：在INSERT或UPDATE过程中，如果数据被零除，则产生错误而非警告。如果未给出该模式，那么数据被零除时MySQL返回NULL
+</li><li>NO_AUTO_CREATE_USER：禁止GRANT创建密码为空的用户
+</li><li>NO_ENGINE_SUBSTITUTION：如果需要的存储引擎被禁用或未编译，那么抛出错误。不设置此值时，用默认的存储引擎替代，并抛出一个异常
+</li><li>PIPES_AS_CONCAT：将”||”视为字符串的连接操作符而非或运算符，这和Oracle数据库是一样的，也和字符串的拼接函数Concat相类似
+</li><li>ANSI_QUOTES：启用ANSI_QUOTES后，不能用双引号来引用字符串，因为它被解释为识别符</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-buu" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -886,76 +985,6 @@ resource=upload.php，代表读取upload.php的内容
 <h5>父路径</h5>
 html文件存放在D盘里的images文件里的css文件中，那么就使用父路径了：../img.png，当然了，也可以../../images/img.png。<p></p>
 （又是沉迷学习的一天~）
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-php变量覆盖2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/" class="article-date">
-      <time datetime="2020-11-27T11:13:59.000Z" itemprop="datePublished">2020-11-27</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/">Php变量覆盖2</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>今天写了本周web小分队的最后一次web题，题目如下：<br><img src="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl1.png"><br>由题可知，这是一道$$导致的变量覆盖问题。</p>
-<h2>题目分析：</h2>
-源码包含了flag.php文件，并且需要满足3个if里的条件才能获取flag，题目中使用了两个foreach并且也使用了$$.两个foreach中对 $$key的处理是不一样的，满足条件后会将$flag里面的值打印出来，所以$flag是在flag.php文件文件中的。 
-由于flag值被覆盖掉了，所以要先将flag值赋给变量_200或变量_403,然后利用die（200）或die（403）将flag显示出来。
-<h2>解题方法：</h2>
-由于flag的值被覆盖掉，所以只能将$flag得知赋给$_200,通过die（_200）将flag输出来。
-<p>最终payload如下：</p>
-<p>GET：?_200=flag </p>
-<p>POST：flag=hahaha（flag=任意字符）</p>
-<img src="/2020/11/27/php%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%962/ljl2.png">
-<p>成功得到flag~</p>
-注；
-$$ 导致的变量覆盖问题在CTF代码审计题目中经常在foreach中出现，使用foreach来遍历数组中的值，然后再将获取到的数组键名作为变量，数组中的键值作为变量的值。因此就产生了变量覆盖漏洞。如：get ?name=test 会将$name的值覆盖，变为test。
-（aha~又是正经的一天~）
       
     </div>
     
