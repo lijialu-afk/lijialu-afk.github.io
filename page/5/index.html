@@ -277,6 +277,91 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-hhh" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/01/21/hhh/" class="article-date">
+      <time datetime="2021-01-21T03:16:38.000Z" itemprop="datePublished">2021-01-21</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/01/21/hhh/">7-Buu练习[极客大挑战 2019]Http</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1>知识点</h1>
+<h3>1.Referer</h3>
+HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器该网页是从哪个页面链接过来的，服务器因此可以获得一些信息用于处理。Referer 常用在防盗链和防恶意请求中。传输referer需要在页面内添加相关的代码。
+<h3>2.User-Agent</h3>
+用来传输用户使用的是什么样的浏览器。有些网站为了防止爬虫，会检验User-Agent，只有当是用户访问的时候才会传输数据。
+<h3>3.X-Forwaeded-For</h3>
+X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连接到Web服务器的客户端最原始的IP地址的HTTP请求头字段。当今多数缓存服务器的用户为大型ISP，为了通过缓存的方式来降低他们的外部带宽，他们常常通过鼓励或强制用户使用代理服务器来接入互联网。有些情况下，这些代理服务器是透明代理，用户甚至不知道自己正在使用代理上网。
+如果没有XFF或者另外一种相似的技术，所有通过代理服务器的连接只会显示代理服务器的IP地址，而非连接发起的原始IP地址，这样的代理服务器实际上充当了匿名服务提供者的角色，如果连接的原始IP地址不可得，恶意访问的检测与预防的难度将大大增加。
+如果你使用透明代理上网，那么在透明代理发送给服务器端的HTTP请求中会包含x-forward-for信息
+简单来说就是用来传输最原始ip地址的,阻止匿名请求的，但是可以通过抓包来修改。
+<h1>题目</h1>
+<br>打开题目链接，查看源代码，如下：<br>
+<img src="/2021/01/21/hhh/eeee1.png">
+<br>存在Secret.php文件，访问该文件如下：<br>
+
+<p><img src="/2021/01/21/hhh/eeee2.png"></p>
+<p><br>采用burp抓包，如下：<br><br><img src="/2021/01/21/hhh/eeee3.png"><br><br>根据提示可知，要来自<a target="_blank" rel="noopener" href="https://www.sycsecret.com/">https://www.Sycsecret.com</a><br><br>采用Referer头：</p>
+<ul>
+<li>Referer:https://www.Sycsecret.com
+</li></ul>
+<img src="/2021/01/21/hhh/eeee4.png">
+<br>根据提示，要使用Syclover浏览器，将User-Agent头中的Firefox改成Syclover，如下图：<br>
+<img src="/2021/01/21/hhh/eeee5.png">
+<br>发现到现在还是没有出来，我们只能在本地访问，那么意思就是要我们使用127.0.0.1来访问，那么我们来添加一行：
+<ul>
+<li>X-Forwarded-For:127.0.0.1
+ </li></ul>
+<img src="/2021/01/21/hhh/eeee6.png">
+<br>成功拿到flag~~
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-exec" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -894,127 +979,6 @@
 <img src="/2020/12/04/weixieyi/weixieyi2.png">
 <br>成功得到flag~giao*★,°*:.☆(￣▽￣)/$:*.°★* 。
 <s>又是正经的一天heihei~</s>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-php伪协议" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2020/12/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/" class="article-date">
-      <time datetime="2020-12-02T10:46:57.000Z" itemprop="datePublished">2020-12-02</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2020/12/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/">Php伪协议笔记</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><b>php中支持的协议:</b></p>
-<ul>
-<li>file:// — 访问本地文件系统
-</li><li>http:// — 访问 HTTP(s) 网址
-</li><li>ftp:// — 访问 FTP(s) URLs
-</li><li>php:// — 访问各个输入/输出流（I/O streams）
-</li><li>zlib:// — 压缩流
-</li><li>glob:// — 查找匹配的文件路径模式
-</li><li>phar:// — PHP 归档
-</li><li>ssh2:// — Secure Shell 2
-</li><li>rar:// — RAR
-</li><li>ogg:// — 音频流
-</li><li>expect:// — 处理交互式的流
-</li></ul>
-<p>今天着重研究php://
-</p><p>首先先把官方文档贴上来
-</p><p>http://php.net/manual/zh/wrappers.php.php
-</p><p>有两个比较重要的配置在php.ini中，allow_url_fopen和allow_url_include会影响到fopen等等和include等等函数对于伪协议的支持，而allow_url_include依赖allow_url_fopen，所以allow_url_fopen不开启的话，allow_url_include也是无法使用的。
-</p><p>php://是用来访问各个输入、输出流的，除了php://stdin, php://stdout 和 php://stderr
-
-</p><p><b>php://input:</b></p>
-<p>代表可以访问请求的原始数据，简单来说POST请求的情况下，php://input可以获取到post的数据。<br>比较特殊的一点，enctype=”multipart/form-data” 的时候 php://input 是无效的。</p>
-<p><b>php://output: </b></p>
-<p>是一个只写的数据流， 允许你以 print 和 echo 一样的方式 写入到输出缓冲区。</p>
-<p><strong>php://filter:</strong></p>
-<p>这篇文章的关键在于讨论php://filter,事实上，这也是我们常常使用的一个伪协议，在任意文件读取，甚至getshell的时候都有利用的机会。</p>
-<p>php://filter  是一种元封装器， 设计用于数据流打开时的筛选过滤应用。 这对于一体式（all-in-one）的文件函数非常有用，类似 readfile()、  file() 和 file_get_contents()， 在数据流内容读取之前没有机会应用其他过滤器。</p>
-<p>事实上，在include函数的使用上，经常会造成任意文件读取漏洞，而file_get_contents()和file_put_contents()这样函数下，常常会构成getshell等更严重的漏洞。<br>php://filter 目标使用以下的参数作为它路径的一部分。 复合过滤链能够在一个路径上指定。详细使用这些参数可以参考具体范例。</p>
-<p>文档里是这么写的:</p>
-<ol>
-<li>resource=<要过滤的数据流>       这个参数是必须的。它指定了你要筛选过滤的数据流。
-<li>read=<读链的筛选列表>           该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。
-<li>write=<写链的筛选列表>       该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。
-<li><；两个链的筛选列表>           任何没有以 read= 或 write= 作前缀 的筛选器列表会视情况应用于读或写链。
-</；两个链的筛选列表></li></写链的筛选列表></li></读链的筛选列表></li></要过滤的数据流></li></ol>
-<p>我们举一个例子，这是平时我们用来任意文件读取的payload:
-?php://filter/read=convert.base64-encode/resource=upload.php
-这里读的过滤器为convert.base64-encode，就和字面上的意思一样，把输入流base64-encode。
-resource=upload.php，代表读取upload.php的内容
-
-</p><p><b>过滤器</b><br>具体内容访问:<a target="_blank" rel="noopener" href="http://php.net/manual/zh/filters.php">http://php.net/manual/zh/filters.php</a></p>
-<p><b>转换过滤器</b><br>具体访问：<a target="_blank" rel="noopener" href="http://php.net/manual/zh/filters.convert.php">http://php.net/manual/zh/filters.convert.php</a></p>
-<p><b>base64</b><br>convert.base64-encode和convert.base64-decode使用这两个过滤器等同于分别用  base64_encode()和base64_decode()函数处理所有的流数据。  convert.base64-encode支持以一个关联数组给出的参数。如果给出了line-length，base64 输出将被用  line-length个字符为 长度而截成块。如果给出了line-break-chars，每块将被用给出的字符隔开。这些参数的效果和用  base64_encode()再加上chunk_split()相同。</p>
-<p><b>quoted-printable</b><br>convert.quoted-printable-encode和convert.quoted-printable-decode使用此过滤器的 decode 版本等同于用quoted_printable_decode()函数处理所有的流数据。<br>没有和convert.quoted-printable-encode相对应的函数。convert.quoted-printable-encode支持以一个关联数组给出的参数。<br>除了支持和convert.base64-encode一样的附加参数外， convert.quoted-printable-encode还支持布尔参数binary和 force-encode-first。<br>convert.base64-decode只支持line-break-chars参数作为从编码载荷中剥离的类型提示。<br>关于quoted_printable_decode()在php.net上的解释是将 quoted-printable 字符串转换为 8-bit 字符串，原谅我没怎么看懂</p>
-<p><b>字符串过滤器</b><br>string.*是用来处理各个字符串的，比较像python的string模块<br>例如：string.rot13；toupper；tolower；string.strip_tags等。</p>
-<p>PHP伪协议具体用法条件如下：<br><img src="/2020/12/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/hahaha.png"><br><b>php str_replace的替换漏洞</b><br>定义和用法<br>str_replace() 函数使用一个字符串替换字符串中的另一些字符。</p>
-<p>语法<br>str_replace(find,replace,string,count)</p>
-<p>参数 描述<br>find 必需。规定要查找的值。<br>replace 必需。规定替换 find 中的值的值。<br>string 必需。规定被搜索的字符串。<br>count 可选。一个变量，对替换数进行计数。</p>
-<p>提示和注释<br>注释：该函数对大小写敏感。请使用 str_ireplace() 执行对大小写不敏感的搜索。</p>
-<p>注释：该函数是二进制安全的。</p>
-<p>例子 1</p>
-<p>复制代码 代码如下:</p>
-<p>《?php<br>echo str_replace(“world”,”John”,”Hello world!”);<br>?》</p>
-<p>输出：</p>
-<p>Hello John!</p>
-<p>例子 2<br>在本例中，我们将演示带有数组和 count 变量的 str_replace() 函数：</p>
-<p>复制代码 代码如下:</p>
-<p>《?php<br>$arr = array(“blue”,”red”,”green”,”yellow”);<br>print_r(str_replace(“red”,”pink”,$arr,$i));<br>echo “Replacements: $i”;<br>?》</p>
-<p>输出：<br>Array<br>(<br>[0] =&gt; blue<br>[1] =&gt; pink<br>[2] =&gt; green<br>[3] =&gt; yellow<br>)<br>Replacements: 1</p>
-<p>例子 3</p>
-<p>复制代码 代码如下:</p>
-<p>《?php<br>$find = array(“Hello”,”world”);<br>$replace = array(“B”);<br>$arr = array(“Hello”,”world”,”!”);<br>print_r(str_replace($find,$replace,$arr));<br>?》</p>
-<p>输出：</p>
-<p>Array<br>(<br>[0] =&gt; B<br>[1] =&gt;<br>[2] =&gt; !<br>)<br><s>又是正经的一天！！hiahiahia(・ω・)~giao!</s></p>
 
       
     </div>

