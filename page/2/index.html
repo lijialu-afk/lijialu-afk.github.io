@@ -277,6 +277,68 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-pig" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/04/07/pig/" class="article-date">
+      <time datetime="2021-04-07T10:41:54.000Z" itemprop="datePublished">2021-04-07</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/04/07/pig/">练习-[BJDCTF 2nd]假猪套天下第一 73</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>这是一道非常简单又很狗的抓包题<br>打开题目：<br><img src="/2021/04/07/pig/1.png"><br>admin登录：说我才不是admin<br>那么随便输入账号密码，成功登录：<br><img src="/2021/04/07/pig/2.png"></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a   href="/2021/04/07/pig/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-ssti" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -930,121 +992,6 @@
 <h1>command_execution</h1>
 
 <p>打开题目：<br><img src="/2021/03/13/web/p1.png"><br>ping!!<br>连接本机127.0.0.1<br><img src="/2021/03/13/web/p2.png"><br>成功回显，试试其他命令127.0.0.1 &amp;&amp; ls<br>可以执行，那么我们直接<br><img src="/2021/03/13/web/1.png"><br>127.0.0.1 &amp;&amp; cat /home/flag.txt<br><img src="/2021/03/13/web/2.png"><br>得到flag</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-fan" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/03/10/fan/" class="article-date">
-      <time datetime="2021-03-10T11:59:14.000Z" itemprop="datePublished">2021-03-10</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/03/10/fan/">反序列化&amp;Web信息搜集知识点总结</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1>反序列化</h1>
-
-<p><b style="color:red">反序列化定义：</b><br>（反）序列化给我们传递对象提供了一种简单的方法。serialize()将一个对象转换成一个字符串，unserialize()将字符串还原为一个对象，在PHP应用中，序列化和反序列化一般用做缓存，比如session缓存，cookie等。在php序列化格式（即数据在传输时防止格式类型丢失,先进行打包即序列化,完成传输后解包即反序列化）<br><b style="color:yellow">反序列化原型：</b>string serialize ( mixed $value )<br><b style="color:pink">例子：</b><br>输入内容：<br><img src="/2021/03/10/fan/q1.png"><br>输出结果：<br><img src="/2021/03/10/fan/q2.png"><br>序列化对不同格式字符串结果不同，如下：</p>
-<ul>
-<li>
-string:s:size:value
-</li><li>
-integer:i:value
-</li><li>
-boolean:b:value(即0或1)
-</li><li>
-array:a:size:{key:value;key:value}
-</li><li>
-object:o:strlen(object name):object name:object size:{s:strlen(property name):property name:property definition;}
-</li></ul>
-
-<p>注：序列化对象时，不会保存常量的值。对于父类中的变量，则会保留。<br><b style="color:blue">反序列化函数：</b>mixed unserialize ( string $str )<br>unserialize()反序列化函数用于将单一的已序列化的变量转换回 PHP 的值。</p>
-<ul>
-<li>如果传递的字符串不可解序列化，则返回 FALSE，并产生一个E_NOTICE
-</li><li>返回的是转换之后的值，可为integer``float、string、array或object
-</li><li>若被反序列化的变量是一个对象，在成功重新构造对象之后，PHP会自动地试图去调用__wakeup()成员函数（如果存在的话）
-</li></ul>
-
-<p><b style="color:pink">例子：</b><br>输入内容：<br><img src="/2021/03/10/fan/q3.png"><br>输出结果：<br><img src="/2021/03/10/fan/q4.png"><br>__wakeup()函数在对象被构建以后执行，所以$this-&gt;username的值不为空(为空则会绕过此函数，或反序列化时数据被改动也会绕过）<br>会尽量将变量值进行匹配并复制给序列化后的对象<br><b style="color:yellow">&gt;常见的PHP魔术方法：</b></p>
-<ul>
-<li>__construct： 在创建对象时候初始化对象，一般用于对变量赋初值。
-</li><li>__destruct： 和构造函数相反，当对象所在函数调用完毕后执行。
-</li><li>__toString：当对象被当做一个字符串使用时调用。
-</li><li>__sleep:序列化对象之前就调用此方法(其返回需要一个数组)
-</li><li>__wakeup:反序列化恢复对象之前调用该方法
-</li><li>__call:当调用对象中不存在的方法会自动调用该方法。
-</li><li>__get:在调用私有属性的时候会自动执行
-</li><li>__isset()在不可访问的属性上调用isset()或empty()触发
-</li><li>__unset()在不可访问的属性上使用unset()时触发
-</li></ul>
-
-<p><b style="color:red">php反序列化漏洞：</b><br>php反序列化漏洞又称对象注入，可能会导致注入，远程代码执行等安全问题的发生。</p>
-<p>PHP反序列化漏洞产生的原因：</p>
-<p>如果一个php代码使用了unserialize函数去调用某一类，该类中会自动执行一些<br>自定义的magic method，这些magicmethod中如果包含了一些危险操作，或者这<br>些magic method会去调用类中其他危险操作的函数，如果这些危险操作是我们可<br>控的，那么久可以进行一些不可描述的操作了。</p>
-<p><b style="color:green">总结：</b><br>当存在php反序列化漏洞时，找一个可控的反序列化函数，通过这个函数去调用一些类，在这些类中可能存在一些魔法函数，在这些魔法函数中可能有一些我们可控的危险操作，我们利用这些危险操作，让程序执行反序列化函数时触发这些的危险操作。</p>
-<h1>web信息收集</h1>
-
-<p><b style="color:pink">敏感目录</b><br><b style="color:pink">git泄露</b><br>Git是一个开源的分布式版本控制系统，在执行git init初始化目录的时候，会在当前目录下自动创建一个.git目录，用来记录代码的变更记录等。发布代码的时候，如果没有把.git这个目录删除，就直接发布到了服务器上，攻击者就可以通过它来恢复源代码。</p>
-<p>1、常规git泄露</p>
-<p>使用scrabble或者其他工具读出源码即可<br>./scrabble <a href="http://example.com/">http://example.com/</a></p>
-<p>2、git回滚<br>git会记录每次的提交的修改，在比赛中拿到的flag文件有可能是被删除或者覆盖过的，这时可以利用git reset –hard HEAD^来恢复到以前的版本<br>也可以用git log –stat查看commit修改了哪些文件，再用git diff HEAD commit-id</p>
-<p>3、git分支<br>每次提交git都会将她们串为一条时间线，这条时间线就是一条分支，git允许有多条分支，则需要的flag文件有可能不在主分支即master上，而 git log只能看到当前分支的。<br>对于获取其他的分支、tag，都可以从/.git/refs/heads、/.git/refs/tag里面拿到最新的commit对象id，然后就是顺着这个可以爬到parent commit<br>假设获取master，最新的commit的object id可以在/.git/refs/heads/master获取到</p>
-<p>4、其他利用方式<br>从.git/config可能有access_token信息， 从而访问这个用户的其他的仓库<br>在访问.git的时候有可能会返回403，此时可以试着访问.git/config，若有文件返回则有可能存在泄露。</p>
-<p><b style="color:pink">SVN泄露</b><br>SVN是一个开放源代码的版本控制系统。在使用SVN管理本地代码过程中，会自动生成一个名为.svn的隐藏文件夹，其中包含重要的源代码信息。网站管理员在发布代码时，没有使用‘导出’功能，而是直接复制代码文件夹到WEB服务器上，这就使.svn隐藏文件夹被暴露于外网环境，可以利用.svn/entries文件，获取到服务器源码。<br>可以用seay-svn或者dvcs-ripper工具获取</p>
-<p><b style="color:pink">HG泄露</b><br>Mercurial 是一种轻量级分布式版本控制系统，使用hg init的时候会生成.hg。<br>漏洞利用工具： dvcs-ripper</p>
-<p><b style="color:pink">敏感备份文件</b><br>通过敏感备份文件，有可能能获得一些源码</p>
-<p>1、gedit</p>
-<p>Linux下用gedit编写文件并保存后会生成一个文件名格式为：”原文件名~“的备份文件</p>
-<p>2、vim</p>
-<p>当使用vim编辑文件第一次意外退出时会生成一个文件名格式为：“.文件名.swp”的备份文件，可使用vim -r 文件名来恢复</p>
-<p>第二次意外退出*.swo，第三次为*.swn</p>
-<p>3、常规文件</p>
-<p>【1】robots.txt:敏感目录和CMS版本信息<br>【2】readme.md:CMS版本信息，github地址<br>【3】格式如<a target="_blank" rel="noopener" href="http://www.zip/rar/tar.gz:%E7%BD%91%E7%AB%99%E5%A4%87%E4%BB%BD%E6%BA%90%E7%A0%81">www.zip/rar/tar.gz:网站备份源码</a><br><b style="color:pink">Banner识别</b><br>1、利用CMS指纹库<br>2、在线识别<br>3、利用已有工具wappalyer，可以通过python安装库，也可以在浏览器装插件<br>4、还可以通过报错404和302来查看错误信息</p>
 
       
     </div>
