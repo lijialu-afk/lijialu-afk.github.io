@@ -277,6 +277,90 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ci" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/04/08/ci/" class="article-date">
+      <time datetime="2021-04-08T08:44:56.000Z" itemprop="datePublished">2021-04-08</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/04/08/ci/">buu练习[GKCTF2020]CheckIN</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>打开题目，代码如下：</p>
+<pre><code class="prism language-php"><span class="token operator">&lt;</span>title<span class="token operator">&gt;</span>Check_In<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">&gt;</span>
+<span class="token delimiter important">&lt;?php</span> 
+<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">ClassName</span>
+<span class="token punctuation">&#123;<!-- --></span>
+        <span class="token keyword">public</span> <span class="token variable">$code</span> <span class="token operator">&#61;</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">public</span> <span class="token variable">$decode</span> <span class="token operator">&#61;</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;<!-- --></span>
+                <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">code</span> <span class="token operator">&#61;</span> &#64;<span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">x</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token single-quoted-string string">&#39;Ginkgo&#39;</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//可以传参</span>
+                <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">decode</span> <span class="token operator">&#61;</span> &#64;<span class="token function">base64_decode</span><span class="token punctuation">(</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">code</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//basae64解密一下传入内容</span>
+                &#64;<span class="token function">Eval</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">decode</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">x</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;<!-- --></span>
+                <span class="token keyword">return</span> <span class="token variable">$_REQUEST</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">new</span> <span class="token class-name">ClassName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> 
+<p>看起来像是魔法函数，不过这道题没有序列化函数，可以通过传参来直接作答:</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a   href="/2021/04/08/ci/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-pig" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -920,78 +1004,6 @@
 </li></ul>
 
 <p>refer为空构造的方法：<br><img src="/2021/03/18/zj/5.png"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-web" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/03/13/web/" class="article-date">
-      <time datetime="2021-03-13T07:59:05.000Z" itemprop="datePublished">2021-03-13</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/03/13/web/">攻防世界练习</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1>simp_php</h1>
-
-<p>题目如下：<br><img src="/2021/03/13/web/q1.png"><br>根据题目可知，flag1==0且a不为0；想得到flag2，b不为数字或字符串，is_numeric() 函数用于检测变量是否为数字或数字字符串。<br>最终<br>payload:?a=0a&amp;b=123456%00;<br><img src="/2021/03/13/web/q2.png"><br>得到flag！</p>
-<h1>Get Post</h1>
-
-<p>题目：<br><img src="/2021/03/13/web/a1.png"><br>根据提示，get传入?a=1<br>在根据提示post传入b=2<br><img src="/2021/03/13/web/a2.png"><br>euuuu好简单，是我的打开方式不对/??</p>
-<h1>xff_referer</h1>
-
-<p>题目显示ip地址必须为123.123.123<br>采用bp抓包：<br>X-Forwarded-For: 123.123.123.123<br>提示说必须来自<a target="_blank" rel="noopener" href="https://www.google.com/">https://www.google.com</a><br>Referer: <a target="_blank" rel="noopener" href="https://www.google.com/">https://www.google.com</a><br>得到flag！</p>
-<h1>webshell</h1>
-
-<p>打开题目，一句话木马，才一年采用蚁剑<br><img src="/2021/03/13/web/11.png"><br>点击添加的地址，进入之后<br><img src="/2021/03/13/web/222.png"><br>得到flag！</p>
-<h1>command_execution</h1>
-
-<p>打开题目：<br><img src="/2021/03/13/web/p1.png"><br>ping!!<br>连接本机127.0.0.1<br><img src="/2021/03/13/web/p2.png"><br>成功回显，试试其他命令127.0.0.1 &amp;&amp; ls<br>可以执行，那么我们直接<br><img src="/2021/03/13/web/1.png"><br>127.0.0.1 &amp;&amp; cat /home/flag.txt<br><img src="/2021/03/13/web/2.png"><br>得到flag</p>
 
       
     </div>

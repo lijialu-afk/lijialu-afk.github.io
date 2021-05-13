@@ -277,6 +277,75 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-anxun" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/05/13/anxun/" class="article-date">
+      <time datetime="2021-05-13T10:26:13.000Z" itemprop="datePublished">2021-05-13</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/05/13/anxun/">安洵杯 2019 Easy_web</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2>知识点-->md5强类型碰撞</h2>
+
+<p>555.png<br>真实md5碰撞，此时不能输入数组了，只能输入字符串</p>
+<pre><code>1、%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2
+2、%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2
+</code></pre>
+
+<p>附上大佬链接：<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c9089fd5b1ba">https://www.jianshu.com/p/c9089fd5b1ba</a><br><a target="_blank" rel="noopener" href="https://crypto.stackexchange.com/questions/1434/are-there-two-known-strings-which-have-the-same-md5-hash-value">https://crypto.stackexchange.com/questions/1434/are-there-two-known-strings-which-have-the-same-md5-hash-value</a></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a   href="/2021/05/13/anxun/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-is22" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -845,90 +914,6 @@
       
         <p class="article-more-link">
           <a   href="/2021/04/15/tuzi/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ci" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/04/08/ci/" class="article-date">
-      <time datetime="2021-04-08T08:44:56.000Z" itemprop="datePublished">2021-04-08</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/04/08/ci/">buu练习[GKCTF2020]CheckIN</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>打开题目，代码如下：</p>
-<pre><code class="prism language-php"><span class="token operator">&lt;</span>title<span class="token operator">&gt;</span>Check_In<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">&gt;</span>
-<span class="token delimiter important">&lt;?php</span> 
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">class</span> <span class="token class-name">ClassName</span>
-<span class="token punctuation">&#123;<!-- --></span>
-        <span class="token keyword">public</span> <span class="token variable">$code</span> <span class="token operator">&#61;</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        <span class="token keyword">public</span> <span class="token variable">$decode</span> <span class="token operator">&#61;</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;<!-- --></span>
-                <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">code</span> <span class="token operator">&#61;</span> &#64;<span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">x</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token single-quoted-string string">&#39;Ginkgo&#39;</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//可以传参</span>
-                <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">decode</span> <span class="token operator">&#61;</span> &#64;<span class="token function">base64_decode</span><span class="token punctuation">(</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">code</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//basae64解密一下传入内容</span>
-                &#64;<span class="token function">Eval</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">decode</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-
-        <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">x</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;<!-- --></span>
-                <span class="token keyword">return</span> <span class="token variable">$_REQUEST</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">new</span> <span class="token class-name">ClassName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre> 
-<p>看起来像是魔法函数，不过这道题没有序列化函数，可以通过传参来直接作答:</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-        <p class="article-more-link">
-          <a   href="/2021/04/08/ci/#more">不给你看。哎，就是玩儿!--哼(ˉ(∞)ˉ)唧--(还是来康康吧叭~) >></a>
         </p>
       
       <div class="clearfix"></div>
