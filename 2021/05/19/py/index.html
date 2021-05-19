@@ -7,23 +7,25 @@
   
   
   
-  <title>网络安全实验室基础篇 | baba童鞋的博客</title>
+  <title>MRCTF2020*PYWebsite | baba童鞋的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="key在哪里？  查看源码得到key： &lt;html&gt;     &lt;head&gt;         &lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html;charset&#x3D;utf-8&quot;&gt;     &lt;&#x2F;head&gt;     &lt;body&gt;     key就在这里中，你">
+  <meta name="description" content="题目描述  就蛮简单的啊吧啊吧啊吧啊吧吧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络安全实验室基础篇">
-<meta property="og:url" content="http://example.com/2021/05/02/key/index.html">
+<meta property="og:title" content="MRCTF2020*PYWebsite">
+<meta property="og:url" content="http://example.com/2021/05/19/py/index.html">
 <meta property="og:site_name" content="baba童鞋的博客">
-<meta property="og:description" content="key在哪里？  查看源码得到key： &lt;html&gt;     &lt;head&gt;         &lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html;charset&#x3D;utf-8&quot;&gt;     &lt;&#x2F;head&gt;     &lt;body&gt;     key就在这里中，你">
+<meta property="og:description" content="题目描述  就蛮简单的啊吧啊吧啊吧啊吧吧">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/05/02/key/1.png">
-<meta property="og:image" content="http://example.com/2021/05/02/key/2.png">
-<meta property="article:published_time" content="2021-05-02T12:14:57.000Z">
-<meta property="article:modified_time" content="2021-05-02T12:54:12.883Z">
+<meta property="og:image" content="http://example.com/2021/05/19/py/0.png">
+<meta property="og:image" content="http://example.com/2021/05/19/py/1.png">
+<meta property="og:image" content="http://example.com/2021/05/19/py/2.png">
+<meta property="og:image" content="http://example.com/2021/05/19/py/3.png">
+<meta property="article:published_time" content="2021-05-19T12:02:57.000Z">
+<meta property="article:modified_time" content="2021-05-19T12:21:09.405Z">
 <meta property="article:author" content="Jialu">
 <meta property="article:tag" content="ctf web 霸霸">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/05/02/key/1.png">
+<meta name="twitter:image" content="http://example.com/2021/05/19/py/0.png">
   
     <link rel="alternative" href="/atom.xml" title="baba童鞋的博客" type="application/atom+xml">
   
@@ -277,11 +279,11 @@
         </header>
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-key" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-py" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a  href="/2021/05/02/key/" class="article-date">
-      <time datetime="2021-05-02T12:14:57.000Z" itemprop="datePublished">2021-05-02</time>
+      <a  href="/2021/05/19/py/" class="article-date">
+      <time datetime="2021-05-19T12:02:57.000Z" itemprop="datePublished">2021-05-19</time>
 </a>
 
     </div>
@@ -295,7 +297,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      网络安全实验室基础篇
+      MRCTF2020*PYWebsite
     </h1>
   
 
@@ -313,49 +315,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2>key在哪里？</h2>
+        <h2>题目描述</h2>
 
-<p>查看源码得到key：</p>
-<pre><code>&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-    key就在这里中，你能找到他吗？
-        &lt;!--key is jflsjklejflkdsjfklds--&gt;
-    &lt;/body&gt;
-</code></pre>
+<p><img src="/2021/05/19/py/0.png"><br>就蛮简单的啊吧啊吧啊吧啊吧吧</p>
 <a id="more"></a>
-<h2>再加密一次你就得到key啦~</h2>
+<h2>题解</h2>
 
-<p>根据提示可以知道是ROT13密码</p>
-<h3>ROT13密码</h3>
-
-<p>ROT13（回转13位，rotate by 13 places，有时中间加了个连字符称作ROT-13）是一种简易的替换式密码。它是一种在英文网络论坛用作隐藏八卦（spoiler）、妙句、谜题解答以及某些脏话的工具，目的是逃过版主或管理员的匆匆一瞥。ROT13被描述成“杂志字谜上下颠倒解答的Usenet点对点体”。ROT13 也是过去在古罗马开发的凯撒加密的一种变体。<br>将该题通过rot13加密得到<code>keyis23ksdjfkfds</code></p>
-<h2>猜猜这是经过了多少次加密？</h2>
-
-<p>将加密后的字符串进行20次base64解码<br>python脚本：</p>
-<pre><code class="prism language-python"><span class="token keyword">import</span> base64
-<span class="token builtin">str</span> <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">'输入base64 str'</span><span class="token punctuation">)</span>
-times <span class="token operator">=</span> <span class="token number">0</span>
-run_time <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">'输出解码次数'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token keyword">def</span> <span class="token function">decode</span><span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">,</span>time<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token builtin">str</span> <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span>
-    time <span class="token operator">+=</span> <span class="token number">1</span>
-    <span class="token keyword">return</span> <span class="token builtin">str</span><span class="token punctuation">,</span>time
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">&quot;__main__&quot;</span><span class="token punctuation">:</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>run_time<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token builtin">str</span><span class="token punctuation">,</span>times <span class="token operator">=</span> decode<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">,</span>times<span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">,</span><span class="token string">'\n'</span><span class="token punctuation">,</span>times<span class="token punctuation">)</span>
-</code></pre>
-
-<p>emmmm就很厉害（gou）得到key：<code>key is jkljdkl232jkljkdl2389</code></p>
-<h2>据说MD5加密很安全，真的是么？</h2>
-
-<p>将加密后的密文md5解密就可以 bighp就是key<br>附上MD5解密链接：<a target="_blank" rel="noopener" href="https://www.cmd5.com/">https://www.cmd5.com/</a></p>
-<h2>种族歧视</h2>
-
-<p>打开地址：<code>only for Foreigner</code><br>只允许外国人访问，bp抓包<br>将与zh有关的删除，就可以得到key<br><img src="/2021/05/02/key/1.png"><br><img src="/2021/05/02/key/2.png"><br><code>key is: <em>(TU687jksf6&</em></code></p>
+<p>果断f12，发现如下代码：<br><img src="/2021/05/19/py/1.png"><br><code>flag.php</code>，访问访问–&gt;<br><img src="/2021/05/19/py/2.png"><br>emmmmm ip地址？购买者的ip已经被记录，本地可以看到flag，那么使用xff或者client-ip伪造一下ip,果断抓包–&gt;<br><code>X-Forwarded-For: 127.0.0.1</code><br><img src="/2021/05/19/py/3.png"><br>得到flag</p>
 
       
     </div>
@@ -364,13 +330,13 @@ run_time <span class="token operator">=</span> <span class="token builtin">int</
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a  href="/2021/05/02/key/">网络安全实验室基础篇</a></p>
+        <p><span>本文标题:</span><a  href="/2021/05/19/py/">MRCTF2020*PYWebsite</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问  的个人博客"></a></p>
-        <p><span>发布时间:</span>2021年05月02日 - 20时14分</p>
-        <p><span>最后更新:</span>2021年05月02日 - 20时54分</p>
+        <p><span>发布时间:</span>2021年05月19日 - 20时02分</p>
+        <p><span>最后更新:</span>2021年05月19日 - 20时21分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2021/05/02/key/" title="网络安全实验室基础篇">http://example.com/2021/05/02/key/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://example.com/2021/05/02/key/　　作者: " title=""></span>
+            <span>原始链接:</span><a class="post-url" href="/2021/05/19/py/" title="MRCTF2020*PYWebsite">http://example.com/2021/05/19/py/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://example.com/2021/05/19/py/　　作者: " title=""></span>
         </p>
         <p>
             <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -381,18 +347,9 @@ run_time <span class="token operator">=</span> <span class="token builtin">int</
 
 <nav id="article-nav">
   
-    <a  href="/2021/05/04/is2c/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Iscc部分wp1--&gt;
-        
-      </div>
-    </a>
   
-  
-    <a  href="/2021/04/28/math/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Love Math</div>
+    <a  href="/2021/05/15/pushi/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">WUSTCTF2020 朴实无华</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -404,7 +361,7 @@ run_time <span class="token operator">=</span> <span class="token builtin">int</
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">key在哪里？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">再加密一次你就得到key啦~</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">ROT13密码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">猜猜这是经过了多少次加密？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">据说MD5加密很安全，真的是么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">种族歧视</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">题解</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -477,13 +434,11 @@ run_time <span class="token operator">=</span> <span class="token builtin">int</
 
     <div class="scroll" id="post-nav-button">
         
-            <a  href="/2021/05/04/is2c/" title="上一篇: Iscc部分wp1--&gt;">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a  href="/2021/04/28/math/" title="下一篇: Love Math">
+            <a  href="/2021/05/15/pushi/" title="下一篇: WUSTCTF2020 朴实无华">
                 <i class="fa fa-angle-right"></i>
             </a>
         

@@ -277,6 +277,104 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-clac" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2021/01/26/clac/" class="article-date">
+      <time datetime="2021-01-26T03:05:13.000Z" itemprop="datePublished">2021-01-26</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2021/01/26/clac/">12-buu练习Easy Clac</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2>知识点</h2>
+<h3>PHP的字符串解析特性</h3>
+<br>这是别人对PHP字符串解析漏洞的理解，PHP将查询字符串（在URL或正文中）转换为内部$_GET或的关联数组$_POST。例如：/?foo=bar变成Array([foo] => “bar”)。值得注意的是，查询字符串在解析的过程中会将某些字符删除或用下划线代替。例如，/?%20news[id%00=42会转换为Array([news_id] => 42)。如果一个IDS/IPS或WAF中有一条规则是当news_id参数的值是一个非数字的值则拦截，那么我们就可以用以下语句绕过：
+<br><b>/news.php?%20news[id%00=42"+AND+1=0–</b>
+<br>上述PHP语句的参数%20news[id%00的值将存储到$_GET[“news_id”]中。
+<br>HP需要将所有参数转换为有效的变量名，因此在解析查询字符串时，它会做两件事：
+<ul>
+<li>1.删除空白符
+</li><li>2.将某些字符转换为下划线（包括空格）
+</li></ul>
+例如：
+<br>假如waf不允许num变量传递字母：
+<ul>
+<li>http://www.xxx.com/index.php?num = aaaa   //显示非法输入的话
+</li></ul>
+可以在num前加个空格：
+<ul>
+<li>http://www.xxx.com/index.php? num = aaaa
+</li></ul>
+这样waf就找不到num这个变量了，因为现在的变量叫“ num”，而不是“num”。但php在解析的时候，会先把空格给去掉，这样我们的代码还能正常运行，还上传了非法字符。
+<h3>waf</h3>
+原来waf我们是看不见的，并且，waf并不是说，题目是用php写的，那么waf就一定是用php写的。也正因如此，这题的waf才会无法识别“ num”和“num”其实是一样的。
+<h3>scandir()</h3>
+这个函数可以列出参数目录中的文件和目录，帮助我们找到flag。
+<h2>题目</h2>
+<br>打开题目链接，查看源代码，获得以下信息：<br>
+<img src="/2021/01/26/clac/clac1.png">
+<br><b>$("#content").val() 是什么意思：</b>
+<br>获取id为content的HTML标签元素的值,是JQuery,     $("#content")相当于document.getElementById("content");       $("#content").val()相当于 document.getElementById("content").value;
+<br>无论怎么注入都是400,403和500，这里用的是一个PHP的字符串解析特性
+<h3>步骤</h3>
+<br>扫描一下根目录：
+<ul>
+<li>clac.php? num=1;var_dump(scandir(chr(47)))
+</li></ul>
+<img src="/2021/01/26/clac/clac2.png">
+<br>得到flag文件，然后读取flag文件：
+<ul>
+<li>calc.php? num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))
+</li></ul>
+<img src="/2021/01/26/clac/clac3.png">
+<br>得到flag！
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-love" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1112,64 +1210,6 @@ X-Forwarded-For（XFF）是用来识别通过HTTP代理或负载均衡方式连�
           
         <p>打开题目链接，查看源代码，会看到以下界面：<br><img src="/2021/01/17/buu/buu1.png"></p>
 <p>如上图点击<b>Archive_room.php</b>，会看到以下代码<br><img src="/2021/01/17/buu/buu2.png"><br>根据提示访问action.php，会看到以下界面<br><img src="/2021/01/17/buu/buu3.png"><br>可以看出action.php访问的时间很短，直接跳到了end.php文件中，那我们就采用BurpSuite抓包，结果如下：<br><img src="/2021/01/17/buu/buu4.png"><br><b>secr3t.php</b>被着重强调，那我们访问该文件，得到的代码如下；<br><img src="/2021/01/17/buu/buu5.png"><br>通过查看代码发现并没有将flag写出来。根据提示我们可以肯定flag确实是在这里，但是前端却看不到，那么flag应该是写在了php代码里面，需要获得完整的flag.php文件。获取完整的flag.php文件的方法便是secr3t.php的文件包含漏洞，那我们就直接采用php://filer伪协议来绕过漏洞<br>使用经典payload：php://filter/convert.base64-encode/resource=flag.php<br><img src="/2021/01/17/buu/buu6.png"><br>得到base64编码，解码如下<br><img src="/2021/01/17/buu/buu7.png"><br>在代码中找到flag~<br>（duang！又是正经的一天）</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-include1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2021/01/16/include1/" class="article-date">
-      <time datetime="2021-01-16T12:55:02.000Z" itemprop="datePublished">2021-01-16</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2021/01/16/include1/">2-buu[ACTF2020 新生赛]Include</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>打开题目点击tips进入以下界面<br><img src="/2021/01/16/include1/bbb0.png"><br>从url可以看出是文件包含的题型，考虑php伪协议（具体内容可见霸霸童鞋博客；php伪协议笔记）<br>首先使用 <b>“php://input”伪协议 + POST发送PHP代码</b> 经典套路<br><img src="/2021/01/16/include1/bbb1.png"><br>可知php://input伪协议被过滤了<br>那么用 <b>php://filter</b> 伪协议来进行包含。当它与包含函数结合时，php://filter流会被当作php文件执行，那么对其进行编码，阻止其不执行，从而读取任意文件。<br>经典payload：<b>?file=php://filter/read=convert.base64-encode/resource=flag.php</b>–&gt;（read=convert.base64-encode来对文件内容进行编码,发送请求读取base64编码后的flag.php文件源码）<br>结果如下：<br><img src="/2021/01/16/include1/bbb2.png"><br>对base64编码进行解码<br><img src="/2021/01/16/include1/bbb3.png"><br>得到flag~</p>
 
       
     </div>
